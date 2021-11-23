@@ -1,0 +1,32 @@
+@mixin mediaMax($width) {
+    @media only screen and (max-width: $width) {
+      @content;
+    }
+}
+
+@mixin mediaMin($width) {
+    @media only screen and (min-width: $width) {
+      @content;
+    }
+}
+  
+//LESS THAN 480px
+@include mediaMax($mobileWidth){
+
+}
+
+//LESS THAN 768px
+@include mediaMax($tabletWidth){
+
+}
+
+//LESS THAN 1024px
+@include mediaMax($pcWidth){
+
+}
+
+//MORE THAN 1024px
+@include mediaMin($pcWidth+1){
+
+}
+

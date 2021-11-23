@@ -1,0 +1,44 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+}
+
+h1{font-size: clamp(1.602em, 8vw, 2.441em )}
+h2{font-size: clamp(1.424em, 6vw, 1.953em )}
+h3{font-size: clamp(1.266em, 5vw, 1.563em )}
+
+html, body, #root, #App{
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+//SCHEME
+$mainColor: black;
+$minorColor1: white;
+$minorColor2: #707070;
+
+$mobileWidth: 480px;
+$tabletWidth: 768px;
+$pcWidth: 1024px;
+
+//IMPORTS
+@import './modificationClasses';
+@import './Transition/PageTranstition';
+@import './Pages/Home';
+@import './Pages/Crossroad';
+@import './Pages/Fitness';
+@import './Pages/Coach';
+@import './Pages/NotFound';
+
+@import './responsivity';
+
+//test
+html{
+    background: grey;
+}

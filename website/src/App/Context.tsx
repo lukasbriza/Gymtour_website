@@ -1,25 +1,49 @@
-import {createContext, useState} from 'react'
+import { createContext, useState } from 'react'
+
 
 //CONTEXTS//
 const AppContext = createContext({})
 const AnimationContext = createContext({})
 
-const AppContextProvider = (props:any) => {
+const AppContextProvider = (props: any) => {
+    const [width, setWidth] = useState<number|undefined>(undefined)
     
-    let appState = {}
+    //LISTENERS//
+        window.addEventListener('load', () => {
+            setWidth(window.innerWidth)
+        })
+        window.addEventListener('resize', () => {
+            setWidth(window.innerWidth)
+        })
 
-    return(
+
+
+    let appState = {
+        width: width,
+
+        fn: {
+
+        }
+    }
+
+    return (
         <AppContext.Provider value={appState}>
             {props.children}
         </AppContext.Provider>
     )
 }
 
-const AnimationContextProvider = (props:any) => {
-    
-    let animationState = {}
+const AnimationContextProvider = (props: any) => {
 
-    return(
+
+    let animationState = {
+
+        fn: {
+
+        }
+    }
+
+    return (
         <AnimationContext.Provider value={animationState}>
             {props.children}
         </AnimationContext.Provider>
