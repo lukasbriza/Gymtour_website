@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App/App';
-import './Styles/index.css'
+
+//CSS IMPORT//
+import './Styles/Root/normalize.css'
+import './Styles/Root/index.css'
 
 import reportWebVitals from './reportWebVitals';
 

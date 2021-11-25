@@ -1,0 +1,16 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+    box-sizing: border-box;
+    font-family: $primaryFont, $secondaryFont;
+    font-size: $basicFontSize;
+}
+
+h1{font-size: clamp(1.602em, 8vw, 2.441em )}
+h2{font-size: clamp(1.424em, 6vw, 1.953em )}
+h3{font-size: clamp(1.266em, 5vw, 1.563em )}
+
+html, body, #root, #App{
+    @include stretchBasePages;
+}

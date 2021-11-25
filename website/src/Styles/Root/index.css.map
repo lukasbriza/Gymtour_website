@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "mappings": "AAAA,kBAAkB;AAGlB,gFAAgF;AAIhF,2CAA2C;AKP3C,AAAA,CAAC,CAAA;EACG,MAAM,EAAE,GAAG;EACX,OAAO,EAAE,GAAG;EACZ,OAAO,EAAE,IAAI;EACb,UAAU,EAAE,UAAU;EACtB,WAAW,EFEF,WAAW,EAAE,UAAU,EACpB,iBAAiB;EEF7B,SAAS,EFGG,GAAG;CEFlB;;AAED,AAAA,EAAE,CAAA;EAAC,SAAS,EAAE,4BAA6B;CAAE;;AAC7C,AAAA,EAAE,CAAA;EAAC,SAAS,EAAE,4BAA6B;CAAE;;AAC7C,AAAA,EAAE,CAAA;EAAC,SAAS,EAAE,4BAA6B;CAAE;;AAE7C,AAAA,IAAI,EAAE,IAAI,EAAE,KAAK,EAAE,IAAI,CAAA;EHZnB,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,UAAU,EAAE,KAAK;EACjB,SAAS,EAAE,KAAK;CGWnB;;ACfD,AAAA,OAAO,CAAC;EACN,GAAG,EAAE,GAAG;EACR,IAAI,EAAE,GAAG;EACT,SAAS,EAAE,qBAAqB;CACjC;;AACD,AAAA,QAAQ,CAAC;EACP,IAAI,EAAE,GAAG;EACT,SAAS,EAAE,gBAAgB;CAC5B;;AACD,AAAA,QAAQ,CAAC;EACP,GAAG,EAAE,GAAG;EACR,SAAS,EAAE,gBAAgB;CAC5B;;AACD,AAAA,QAAQ,CAAC;EACP,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;CACb;;AACD,AAAA,SAAS,CAAC;EACR,KAAK,EAAE,IAAI;CACZ;;AACD,AAAA,SAAS,CAAC;EACR,MAAM,EAAE,IAAI;CACb;;AACD,AAAA,SAAS,CAAC;EACR,QAAQ,EAAE,QAAQ;CACnB;;AACD,AAAA,SAAS,CAAC;EACR,QAAQ,EAAE,QAAQ;CACnB;;AACD,AAAA,IAAI,CAAC;EACH,GAAG,EAAE,GAAG;CACT;;ANlBD,sCAAsC",
+    "sources": [
+        "index.scss",
+        "../Framework/_mq.scss",
+        "../Base/_mixins.scss",
+        "../Base/_variables.scss",
+        "../Framework/_mediaQueries.scss",
+        "../Framework/_layout.scss",
+        "../Framework/_modificationClasses.scss",
+        "../Framework/_PageTranstition.scss",
+        "../Modules/Pages/_Home.scss",
+        "../Modules/Pages/_Crossroad.scss",
+        "../Modules/Pages/_Fitness.scss",
+        "../Modules/Pages/_Coach.scss",
+        "../Modules/Pages/_NotFound.scss"
+    ],
+    "names": [],
+    "file": "index.css"
+}
