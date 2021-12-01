@@ -9,7 +9,5 @@ $primaryFont:'Open Sans', sans-serif;
 $secondaryFont: "Times New Roman";
 $basicFontSize: 1em;
 
-//BREAKPOINTS VARIABLE//
-$mobileWidth: 480px;
-$tabletWidth: 768px;
-$pcWidth: 1024px;
+//LAYOUT MAX WIDTH//
+$maxWidth: 1500px;

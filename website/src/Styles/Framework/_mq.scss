@@ -38,8 +38,8 @@ $mq-responsive: true !default;
 /// @type Map
 /// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint Full documentation and examples
 $mq-breakpoints: (
-    mobile:  320px,
-    tablet:  740px,
+    mobile:  360px,
+    tablet:  760px,
     desktop: 980px,
     wide:    1300px
 ) !default;
@@ -75,7 +75,7 @@ $mq-static-breakpoint: desktop !default;
 ///   @import 'path/to/mq';
 ///
 /// @type map
-$mq-show-breakpoints: () !default;
+$mq-show-breakpoints: (mobile, tablet, desktop, wide) !default;
 
 /// Customize the media type (for example: `@media screen` or `@media print`)
 /// By default sass-mq uses an "all" media type (`@media all and …`)

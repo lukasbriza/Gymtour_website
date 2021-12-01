@@ -1,0 +1,20 @@
+//SMALL LOGO//
+.logo-wrapper{
+    cursor:pointer;
+    display: flex;
+}
+#smallLogo{
+    cursor: pointer;
+    overflow: visible;
+    margin-right: 10px;
+    .logoPath{
+        fill:white;
+    }
+}
+
+#smallText{
+    cursor: pointer;
+    overflow: visible;
+}
+
+//BIG LOGO//

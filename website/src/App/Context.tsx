@@ -1,5 +1,5 @@
-import { createContext, useState } from 'react'
-
+import {createContext, useState, useEffect} from 'react'
+import {useLocation} from 'react-router-dom'
 
 //CONTEXTS//
 const AppContext = createContext({})
@@ -7,22 +7,21 @@ const AnimationContext = createContext({})
 
 const AppContextProvider = (props: any) => {
     const [width, setWidth] = useState<number|undefined>(undefined)
+    const [actualLocation, setActualLocation] = useState<string>("/")
     
     //LISTENERS//
-        window.addEventListener('load', () => {
-            setWidth(window.innerWidth)
-        })
-        window.addEventListener('resize', () => {
-            setWidth(window.innerWidth)
-        })
-
-
+    useEffect(() => {
+        setWidth(window.innerWidth)
+    }, [])
+    window.addEventListener('resize', () => {
+        setWidth(window.innerWidth)
+    })
 
     let appState = {
         width: width,
-
+        actualLocation: actualLocation,
         fn: {
-
+            setActualLocation: setActualLocation,
         }
     }
 

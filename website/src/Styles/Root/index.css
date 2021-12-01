@@ -1,4 +1,43 @@
+@charset "UTF-8";
 /*SASS-MQ import*/
+body:before {
+  background-color: #FCF8E3;
+  border-bottom: 1px solid #FBEED5;
+  border-left: 1px solid #FBEED5;
+  color: #C09853;
+  font: small-caption;
+  padding: 3px 6px;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+@media (min-width: 22.5em) {
+  body:before {
+    content: "mobile ≥ 360px (22.5em)";
+  }
+}
+
+@media (min-width: 47.5em) {
+  body:before {
+    content: "tablet ≥ 760px (47.5em)";
+  }
+}
+
+@media (min-width: 61.25em) {
+  body:before {
+    content: "desktop ≥ 980px (61.25em)";
+  }
+}
+
+@media (min-width: 81.25em) {
+  body:before {
+    content: "wide ≥ 1300px (81.25em)";
+  }
+}
+
 /*BASE - Base Variable file along with starting point Mixins and Placeholders.*/
 /*FRAMEWORK - Structure and layout files.*/
 * {
@@ -28,6 +67,44 @@ html, body, #root, #App {
   height: 100vh;
   min-height: 100vh;
   min-width: 100vw;
+}
+
+.menu {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 15px 1fr min-content 1fr 15px;
+      grid-template-columns: 15px 1fr -webkit-min-content 1fr 15px;
+      grid-template-columns: 15px 1fr min-content 1fr 15px;
+      grid-template-areas: '. . logo hamburger .';
+}
+
+@media (min-width: 47.5em) {
+  .menu {
+    -ms-grid-columns: 15px min-content 1fr min-content 15px;
+        grid-template-columns: 15px -webkit-min-content 1fr -webkit-min-content 15px;
+        grid-template-columns: 15px min-content 1fr min-content 15px;
+        grid-template-areas: '. logo . menuOffer .';
+  }
+}
+
+.logoGrid {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: logo;
+}
+
+.menuOfferGrid {
+  grid-area: menuOffer;
+}
+
+.hamburgerGrid {
+  -ms-grid-row: 1;
+  -ms-grid-column: 4;
+  grid-area: hamburger;
+}
+
+.menuOfferGrid {
+  grid-area: menuOffer;
 }
 
 .center {
@@ -74,5 +151,134 @@ html, body, #root, #App {
   top: 0px;
 }
 
+.topZ {
+  z-index: +10;
+}
+
+.mainColor {
+  background-color: black;
+}
+
+.minorColor1 {
+  background-color: white;
+}
+
+.minorColor2 {
+  background-color: #707070;
+}
+
+.gridCenterX {
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.gridRightX {
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.gridCenterY {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 /*MODULES - Re-usable site elements.*/
+.menu {
+  height: 60px;
+  background-color: black;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(21%, black), to(rgba(0, 0, 0, 0.24)));
+  background: linear-gradient(180deg, black 21%, rgba(0, 0, 0, 0.24) 100%);
+}
+
+#hamburger-wrapper {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 10px 10px 10px;
+      grid-template-rows: 10px 10px 10px;
+      grid-template-areas: "slice1" "slice2" "slice3";
+}
+
+#hamburger-wrapper .slice {
+  height: 5px;
+  border-radius: 5px;
+}
+
+#hamburger-wrapper .slice:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: slice1;
+}
+
+#hamburger-wrapper .slice:nth-child(2) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: slice2;
+}
+
+#hamburger-wrapper .slice:nth-child(3) {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: slice3;
+}
+
+#menuOffer {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.offerItem {
+  cursor: pointer;
+  white-space: nowrap;
+  display: -ms-grid;
+  display: grid;
+  padding: 0 15px;
+  -webkit-transition: background-color 0.5s ease-out;
+  transition: background-color 0.5s ease-out;
+}
+
+.offerItem a {
+  text-decoration: none;
+  color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.offerItem:hover {
+  background-color: rgba(114, 114, 114, 0.733);
+}
+
+/*
+#menu-mob{
+
+}
+
+#menu-pc{
+
+}*/
+.logo-wrapper {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#smallLogo {
+  cursor: pointer;
+  overflow: visible;
+  margin-right: 10px;
+}
+
+#smallLogo .logoPath {
+  fill: white;
+}
+
+#smallText {
+  cursor: pointer;
+  overflow: visible;
+}
 /*# sourceMappingURL=index.css.map */

@@ -2,19 +2,22 @@
 import {Menu} from '../Components/Menu'
 //CONTEXT//
 import {AnimationContextProvider, AppContextProvider} from './Context'
+//ANIMATIONS//
+import '../config/animationRegistration.js';
 //ROUTER//
 import {Router} from 'react-router-dom'
 import {createBrowserHistory} from 'history'
 import {PageRoutes} from './PageRoutes'
 //BROWSER HISTORY//
-export const history = createBrowserHistory()
+const history = createBrowserHistory()
+
 
 function App() {
 
   return (
     <AppContextProvider>
       <AnimationContextProvider>
-        <div className="App">
+        <div id="App">
           <Router history={history}>
             <Menu/>
             

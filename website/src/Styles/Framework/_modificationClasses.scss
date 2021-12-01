@@ -30,3 +30,29 @@
 .top {
   top: 0px;
 }
+.topZ{
+  z-index: +10;
+}
+
+//BASE COLOR CLASSES//
+.mainColor{
+  background-color: $mainColor;
+}
+.minorColor1{
+  background-color: $minorColor1;
+}
+.minorColor2{
+  background-color: $minorColor2;
+}
+
+//GRID//
+.gridCenterX{
+  justify-self: center;
+}
+
+.gridRightX{
+  justify-self: end;
+}
+.gridCenterY{
+  align-self: center;
+}
