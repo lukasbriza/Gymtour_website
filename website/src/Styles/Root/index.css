@@ -1,5 +1,6 @@
 @charset "UTF-8";
-/*SASS-MQ import*/
+/*BASE - Base Variable file along with starting point Mixins and Placeholders.*/
+/*FRAMEWORK - Structure and layout files.*/
 body:before {
   background-color: #FCF8E3;
   border-bottom: 1px solid #FBEED5;
@@ -38,8 +39,6 @@ body:before {
   }
 }
 
-/*BASE - Base Variable file along with starting point Mixins and Placeholders.*/
-/*FRAMEWORK - Structure and layout files.*/
 * {
   margin: 0px;
   padding: 0px;
@@ -62,11 +61,15 @@ h3 {
   font-size: clamp(1.266em, 5vw, 1.563em);
 }
 
-html, body, #root, #App {
+html,
+body,
+#root,
+#App {
   width: 100vw;
   height: 100vh;
   min-height: 100vh;
   min-width: 100vw;
+  overflow: hidden;
 }
 
 .menu {
@@ -75,7 +78,7 @@ html, body, #root, #App {
   -ms-grid-columns: 15px 1fr min-content 1fr 15px;
       grid-template-columns: 15px 1fr -webkit-min-content 1fr 15px;
       grid-template-columns: 15px 1fr min-content 1fr 15px;
-      grid-template-areas: '. . logo hamburger .';
+      grid-template-areas: ". . logo hamburger .";
 }
 
 @media (min-width: 47.5em) {
@@ -83,7 +86,7 @@ html, body, #root, #App {
     -ms-grid-columns: 15px min-content 1fr min-content 15px;
         grid-template-columns: 15px -webkit-min-content 1fr -webkit-min-content 15px;
         grid-template-columns: 15px min-content 1fr min-content 15px;
-        grid-template-areas: '. logo . menuOffer .';
+        grid-template-areas: ". logo . menuOffer .";
   }
 }
 
@@ -105,6 +108,77 @@ html, body, #root, #App {
 
 .menuOfferGrid {
   grid-area: menuOffer;
+}
+
+#Home {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 50px 1fr 4fr 1fr;
+      grid-template-rows: 50px 1fr 4fr 1fr;
+      grid-template-areas: "." "pageHeader" "mainHeader" "button";
+}
+
+#pageHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: pageHeader;
+}
+
+#bigLogoWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: mainHeader;
+}
+
+#homeHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: mainHeader;
+}
+
+#homeHeader div {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  justify-items: start;
+}
+
+#homeButton {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: button;
 }
 
 .center {
@@ -139,6 +213,14 @@ html, body, #root, #App {
   height: 100%;
 }
 
+.stretchVW {
+  width: 100vw;
+}
+
+.stretchVH {
+  height: 100vh;
+}
+
 .absolute {
   position: absolute;
 }
@@ -151,20 +233,60 @@ html, body, #root, #App {
   top: 0px;
 }
 
+.left {
+  left: 0px;
+}
+
 .topZ {
   z-index: +10;
+}
+
+.top5-margin {
+  margin-top: 5%;
+}
+
+.top10-margin {
+  margin-top: 10%;
+}
+
+.top20-margin {
+  margin-top: 20%;
+}
+
+.top30-margin {
+  margin-top: 30%;
+}
+
+.top40-margin {
+  margin-top: 40%;
+}
+
+.top50-margin {
+  margin-top: 50%;
 }
 
 .mainColor {
   background-color: black;
 }
 
+.mainColorText {
+  color: black;
+}
+
 .minorColor1 {
   background-color: white;
 }
 
+.minorColor1Text {
+  color: white;
+}
+
 .minorColor2 {
   background-color: #707070;
+}
+
+.minorColor2Text {
+  color: #707070;
 }
 
 .gridCenterX {
@@ -183,7 +305,38 @@ html, body, #root, #App {
       align-self: center;
 }
 
+.link {
+  text-decoration: none;
+  color: white;
+}
+
 /*MODULES - Re-usable site elements.*/
+#Home #pageHeader {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+#Home #homeButton {
+  width: auto;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+#Home #homeButton:hover {
+  text-decoration: underline;
+}
+
+#Home #bigLogo {
+  margin-top: 35px;
+}
+
+#Home #bigText {
+  margin-top: 15px;
+}
+
 .menu {
   height: 60px;
   background-color: black;
@@ -195,6 +348,7 @@ html, body, #root, #App {
   width: 30px;
   height: 30px;
   cursor: pointer;
+  z-index: +1;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 10px 10px 10px;
@@ -237,6 +391,8 @@ html, body, #root, #App {
   display: -ms-grid;
   display: grid;
   padding: 0 15px;
+  opacity: 0;
+  text-decoration: none;
   -webkit-transition: background-color 0.5s ease-out;
   transition: background-color 0.5s ease-out;
 }
@@ -248,23 +404,58 @@ html, body, #root, #App {
   margin-bottom: auto;
 }
 
+.offerItem p {
+  text-decoration: none;
+  color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .offerItem:hover {
   background-color: rgba(114, 114, 114, 0.733);
 }
 
-/*
-#menu-mob{
-
+#menuLayer {
+  z-index: 0;
+  left: 100vw;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 60px 1fr 60px;
+      grid-template-rows: 60px 1fr 60px;
+      grid-template-areas: "." "layerItems" ".";
 }
 
-#menu-pc{
+#menuLayer #menuOfferItems-wrapper {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: layerItems;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
 
-}*/
+#menuLayer #menuOfferItems-wrapper .offerItem-layer {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+  width: 80vw;
+  border-top: white 1px solid;
+}
+
+#menuLayer #menuOfferItems-wrapper .offerItem-layer:last-child {
+  border-bottom: white 1px solid;
+}
+
 .logo-wrapper {
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  z-index: +1;
 }
 
 #smallLogo {
@@ -275,10 +466,15 @@ html, body, #root, #App {
 
 #smallLogo .logoPath {
   fill: white;
+  opacity: 0;
 }
 
 #smallText {
   cursor: pointer;
   overflow: visible;
+}
+
+#smallText .logoText {
+  opacity: 0;
 }
 /*# sourceMappingURL=index.css.map */

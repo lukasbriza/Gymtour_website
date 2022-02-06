@@ -1,194 +1,261 @@
-import {useContext, useEffect, useState, useRef} from 'react'
-import {Link} from 'react-router-dom'
-import {gsap} from 'gsap'
+import React, { useContext, useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
 //COMPONENTS//
-import {SmallLogo} from './SVG/SmallLogo'
-import {SmallText} from './SVG/SmallText'
+import { SmallLogo } from "./SVG/SmallLogo";
+import { SmallText } from "./SVG/SmallText";
 
 //FUNCTUION//
-import {classListMaker} from '../Functions/classListMaker'
+import { classListMaker } from "../Functions/classListMaker";
 //CONFIG//
-import {config} from '../config/mainConfiguration'
+import { config, animationStore } from "../config/mainConfiguration";
 //CONTEXT//
-import {AppContext, AnimationContext} from '../App/Context'
+import { AppContext, AnimationContext } from "../App/Context";
 
 ///////////////////////////////////////////////////////////////////////////////////////
 const Menu = () => {
-    //////////////////////////////////////////////////
-    //STATE//
-    const [background, setBackground] = useState<undefined | 'transparent'>(undefined)
-    const [hamburger, setHamburger] = useState<boolean>(false)
-    const [showOffer, setShowOffer] = useState<boolean>(false)
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const appContext:any = useContext(AppContext)
-    const anContext:any = useContext(AnimationContext)
+  //////////////////////////////////////////////////
+  //STATE//
+  const [background, setBackground] = useState<undefined | "transparent">(
+    undefined
+  );
+  const [hamburger, setHamburger] = useState<boolean>(false);
+  const [showOffer, setShowOffer] = useState<boolean | undefined>();
+  const [showHamburger, setShowHamburger] = useState<boolean>(false);
+  //////////////////////////////////////////////////
+  //VARIABLES//
+  const appContext: any = useContext(AppContext);
+  const anContext: any = useContext(AnimationContext);
 
-    let logoScale:number = 0.10;
-    let textScale:number = 0.15;
+  let logoScale: number = 0.1;
+  let textScale: number = 0.15;
 
-    const logoWrapperClass = classListMaker(["logo-wrapper","logoGrid"])
-    const smallLogoClass = classListMaker(["relative","centerY"])
-    const smallTextClass = classListMaker(["relative","centerY"])
-    const hamburgerClass = classListMaker(["hamburgerGrid", "gridRightX", "gridCenterY"])
-    const menuOfferClass = classListMaker(["menuOfferGrid"])
+  const logoWrapperClass = classListMaker(["logo-wrapper", "logoGrid"]);
+  const smallLogoClass = classListMaker(["relative", "centerY"]);
+  const smallTextClass = classListMaker(["relative", "centerY"]);
+  const hamburgerClass = classListMaker([
+    "hamburgerGrid",
+    "gridRightX",
+    "gridCenterY",
+  ]);
+  const menuOfferClass = classListMaker(["menuOfferGrid"]);
 
-    const routesArray = Object.values(config.menuItems)
-    //////////////////////////////////////////////////
-    //MENU LOGO ANIMATION DISPLAY//
-    useEffect(() =>{console.log(hamburger)},[hamburger])
-    useEffect(() =>{
-        let logoText = gsap.utils.toArray('.logoText')
-        logoText.reverse()
+  const routesArray = Object.values(config.menuItems);
+  //////////////////////////////////////////////////
+  //MENU LOGO ANIMATION DISPLAY//
+  useEffect(() => {
+    animationStore.menu.logo.logoIn();
+    setTimeout(() => {
+      animationStore.menu.logo.logoTextIn();
+    }, 200);
+  }, []);
 
-        //some ifs based on situation
-        gsap.effects.fadeIn('.logoPath',{stagger: 0})
-        gsap.effects.fadeIn(logoText)
-    },[])
-
-    //MENU BACKGROUND//
-    useEffect(() =>{
-        let actualLocation = appContext.actualLocation
-        if(actualLocation === "/" && background === undefined){
-            setBackground('transparent')
-        }
-        if(actualLocation !== "/" && background === 'transparent'){
-            setBackground(undefined)
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[appContext.actualLocation])
-
-    //DISPLAY MENU AND HAMBURGER//
-    useEffect(() =>{
-        if( appContext.actualLocation === "/" && 
-            appContext.width > config.breakpoints.tablet &&
-            showOffer === true
-        ){
-            setShowOffer(false)
-        }
-        if( appContext.actualLocation !== "/" && 
-            appContext.width > config.breakpoints.tablet &&
-            showOffer === false
-        ){
-            setShowOffer(true)
-            setHamburger(false)
-        }
-        if( appContext.actualLocation !== "/" && appContext.width > config.breakpoints.tablet){
-            setHamburger(false)
-        }
-        if(appContext.actualLocation === "/"){
-            setHamburger(false)
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[appContext.actualLocation,appContext.width])
-    //////////////////////////////////////////////////    
-
-    if(appContext.width <= config.breakpoints.tablet){     
-        const menuMobileClassList = classListMaker(["absolute","topZ","stretchX","menu"])
-
-        return(
-            <nav 
-                id="menu-mob" 
-                className={menuMobileClassList} 
-                style={{backgroundColor: background, background: background}}
-            >
-                <div className={logoWrapperClass}>
-                    <SmallLogo scale={logoScale} className={smallLogoClass}/>
-                    <SmallText scale={textScale} className={smallTextClass}/>
-                </div>
-                <Hamburger 
-                    className={hamburgerClass} 
-                    isActive={()=>{setHamburger(!hamburger)}}
-                    hamburger={hamburger}
-                />
-                <MenuLayer offer={routesArray} show={hamburger}/>
-            </nav>
-        )
-    } else {
-        const menuPcClassList = classListMaker(["absolute","topZ","stretchX","menu"])
-
-        return(
-            <nav 
-                id="menu-pc" 
-                className={menuPcClassList} 
-                style={{backgroundColor: background, background: background}}
-            >
-                <div className={logoWrapperClass}>
-                    <SmallLogo scale={logoScale} className={smallLogoClass}/>
-                    <SmallText scale={textScale} className={smallTextClass}/>
-                </div>
-                <MenuOffer className={menuOfferClass} offer={routesArray} show={showOffer}/>
-            </nav>
-        )
+  //MENU BACKGROUND//
+  useEffect(() => {
+    let actualLocation = appContext.actualLocation;
+    if (actualLocation === "/" && background === undefined) {
+      setBackground("transparent");
     }
-}
+    if (actualLocation !== "/" && background === "transparent") {
+      setBackground(undefined);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appContext.actualLocation]);
+  //DISPLAY MENU AND HAMBURGER LOGIC//
+  useEffect(() => {
+    if (
+      appContext.actualLocation !== "/" &&
+      appContext.width > config.breakpoints.tablet
+    ) {
+      setShowOffer(true);
+      setShowHamburger(false);
+      setHamburger(false);
+    }
+    if (
+      appContext.actualLocation !== "/" &&
+      appContext.width <= config.breakpoints.tablet
+    ) {
+      setShowOffer(false);
+      setShowHamburger(true);
+    }
+    if (appContext.actualLocation === "/") {
+      setHamburger(false);
+      setShowHamburger(false);
+      setShowOffer(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appContext.actualLocation, appContext.width]);
+  //////////////////////////////////////////////////
+  //MOBILE SETUP//
+  if (appContext.width <= config.breakpoints.tablet) {
+    const menuMobileClassList = classListMaker([
+      "absolute",
+      "topZ",
+      "stretchX",
+      "menu",
+    ]);
+
+    return (
+      <nav
+        id="menu-mob"
+        className={menuMobileClassList}
+        style={{ backgroundColor: background, background: background }}
+      >
+        <div className={logoWrapperClass}>
+          <SmallLogo scale={logoScale} className={smallLogoClass} />
+          <SmallText scale={textScale} className={smallTextClass} />
+        </div>
+        <Hamburger
+          className={hamburgerClass}
+          isActive={() => {
+            setHamburger(!hamburger);
+          }}
+          show={showHamburger}
+          hamburger={hamburger}
+        />
+        <MenuLayer offer={routesArray} show={hamburger} />
+      </nav>
+    );
+    //////////////////////////////////////////////////
+    //PC SETUP//
+  } else {
+    const menuPcClassList = classListMaker([
+      "absolute",
+      "topZ",
+      "stretchX",
+      "menu",
+    ]);
+
+    return (
+      <nav
+        id="menu-pc"
+        className={menuPcClassList}
+        style={{ backgroundColor: background, background: background }}
+      >
+        <div className={logoWrapperClass}>
+          <SmallLogo scale={logoScale} className={smallLogoClass} />
+          <SmallText scale={textScale} className={smallTextClass} />
+        </div>
+        <MenuOffer
+          className={menuOfferClass}
+          offer={routesArray}
+          show={showOffer}
+        />
+      </nav>
+    );
+  }
+};
 ///////////////////////////////////////////////////////////////////////////////////////
-const MenuOffer = (props:MenuOffer) => {
-    const [show, setShow] = useState('none')
-    const menuItemsClass = classListMaker(["stretchX","relative","offerItem"])
-    const menuOffer:any = useRef()
-    /////////////////////////////////////////
-    //OFFER SHOW LOGIC//
-    useEffect(() =>{
-        if(props.show === true){setShow('grid')}
-        if(props.show === false){setShow('none')}
-    },[props.show])
-    /////////////////////////////////////////
-    let  menuItems = props.offer.map((obj:{name:string, path:string, component:void},index)=>{
-        return(<div className={menuItemsClass} key={index}><Link to={obj.path}>{obj.name}</Link></div>)
-    })
-
-    return(
-        <div id="menuOffer" className={props.className} ref={menuOffer} style={{display:show}}>
-            {menuItems}
+const MenuOffer = (props: MenuOffer) => {
+  const [show, setShow] = useState("none");
+  const menuItemsClass = classListMaker(["stretchX", "relative", "offerItem"]);
+  const menuOffer: any = useRef();
+  /////////////////////////////////////////
+  //OFFER SHOW LOGIC//
+  useEffect(() => {
+    if (props.show === true) {
+      setShow("grid");
+      animationStore.menu.menuOffer.show();
+    }
+    if (props.show === false) {
+      setShow("none");
+    }
+  }, [props.show]);
+  /////////////////////////////////////////
+  let menuItems = props.offer.map(
+    (obj: { name: string; path: string; component: void }, index) => {
+      return (
+        <div className={menuItemsClass} key={index}>
+          <Link to={obj.path}>{obj.name}</Link>
         </div>
-    )
-}
+      );
+    }
+  );
 
-const MenuLayer = (props:MenuLayer) => {
-    const [show, setShow] = useState('none')
-    const menuItemsClass = classListMaker(["stretchX","relative","offerItem"])
-    const menuLayerClass = classListMaker([])
-    const menuLayer:any = useRef()
-    /////////////////////////////////////////
-    //LAYER ANIMATION//
-    useEffect(() =>{
+  return (
+    <div
+      id="menuOffer"
+      className={props.className}
+      ref={menuOffer}
+      style={{ display: show }}
+    >
+      {menuItems}
+    </div>
+  );
+};
 
-    },[props.show])
-    /////////////////////////////////////////
-    let  menuItems = props.offer.map((obj:{name:string, path:string, component:void},index)=>{
-        return(<div className={menuItemsClass} key={index}><Link to={obj.path}>{obj.name}</Link></div>)
-    })
-    return(
-        <div id="menuLayer" className={menuLayerClass}>
-            <section id="menuOfferItems-wrapper">
-                {menuItems}
-            </section>
-        </div>
-    )
-}
+const MenuLayer = (props: MenuLayer) => {
 
-const Hamburger = (props:Hamburger) => {
-    const slice1:any = useRef();
-    const slice2:any = useRef();
-    const slice3:any = useRef();
+  const menuItemsClass = classListMaker(["relative", "offerItem", "offerItem-layer"]);
+  const menuLayerClass = classListMaker(["stretchVW", "stretchVH", "absolute", "top", "left", "mainColor"]);
 
-    useEffect(()=>{
-        if(props.hamburger === true){
-            gsap.effects.crossOn(slice1.current, slice2.current, slice3.current)
-        }
-        if(props.hamburger === false){
-            gsap.effects.crossOff(slice1.current, slice2.current, slice3.current)
-        }
-    },[props.hamburger])
+  const menuLayer: any = useRef();
+  /////////////////////////////////////////
+  //LAYER ANIMATION//
+  useEffect(() => {
+    if (props.show === true) { animationStore.menu.layer.show(menuLayer.current) }
+    if (props.show === false) { animationStore.menu.layer.hide(menuLayer.current) }
+  }, [props.show]);
+  /////////////////////////////////////////
+  let menuItems = props.offer.map(
+    (obj: { name: string; path: string; component: void }, index) => {
+      return (
+        <Link to={obj.path} className={menuItemsClass} key={index}>
+          <p>{obj.name}</p>
+        </Link>
+      );
+    }
+  );
+  return (
+    <div id="menuLayer" className={menuLayerClass} ref={menuLayer}>
+      <section id="menuOfferItems-wrapper">{menuItems}</section>
+    </div>
+  );
+};
 
-    return(
-        <div id="hamburger-wrapper" className={props.className} onClick={()=>{props.isActive()}}>
-            <div className={"slice minorColor1 stretchX"} ref={slice1}></div>
-            <div className={"slice minorColor1 stretchX"} ref={slice2}></div>
-            <div className={"slice minorColor1 stretchX"} ref={slice3}></div>
-        </div>
-    )
-}
+const Hamburger = (props: Hamburger) => {
+
+  const slice1: any = useRef()
+  const slice2: any = useRef()
+  const slice3: any = useRef()
+  const wrapperRef: any = useRef()
+
+  /////////////////////////////////////////
+  //CROSS ANIMATION//
+  useEffect(() => {
+    let slices = [slice1.current, slice2.current, slice3.current]
+    if (props.hamburger === true) {
+      animationStore.menu.hamburger.crossOn(slices)
+    }
+    if (props.hamburger === false) {
+      animationStore.menu.hamburger.crossOff(slices)
+    }
+  }, [props.hamburger])
+  //SHOW LOGIC//
+  useEffect(() => {
+    let wrapper = wrapperRef.current
+    if (props.show === true) {
+      animationStore.menu.hamburger.show(wrapper)
+    }
+    if (props.show === false) {
+      animationStore.menu.hamburger.hide(wrapper)
+    }
+  }, [props.show])
+  /////////////////////////////////////////
+  return (
+    <div
+      id="hamburger-wrapper"
+      className={props.className}
+      ref={wrapperRef}
+      onClick={() => {
+        props.isActive()
+      }}
+    >
+      <div className={"slice minorColor1 stretchX"} ref={slice1}></div>
+      <div className={"slice minorColor1 stretchX"} ref={slice2}></div>
+      <div className={"slice minorColor1 stretchX"} ref={slice3}></div>
+    </div>
+  );
+};
 ///////////////////////////////////////////////////////////////////////////////////////
-export {Menu}
+export { Menu };

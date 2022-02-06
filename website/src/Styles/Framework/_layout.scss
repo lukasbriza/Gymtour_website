@@ -1,43 +1,98 @@
-@import '../Base/mixins';
-*{
-    margin: 0px;
-    padding: 0px;
-    outline: none;
-    box-sizing: border-box;
-    font-family: $primaryFont, $secondaryFont;
-    font-size: $basicFontSize;
+@import "../Framework/mq";
+
+* {
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: $primaryFont, $secondaryFont;
+  font-size: $basicFontSize;
 }
 
-h1{font-size: clamp(1.602em, 8vw, 2.441em )}
-h2{font-size: clamp(1.424em, 6vw, 1.953em )}
-h3{font-size: clamp(1.266em, 5vw, 1.563em )}
+h1 {
+  font-size: clamp(1.602em, 8vw, 2.441em);
+}
+h2 {
+  font-size: clamp(1.424em, 6vw, 1.953em);
+}
+h3 {
+  font-size: clamp(1.266em, 5vw, 1.563em);
+}
 
-html, body, #root, #App{
-    @include stretchBasePages;
+html,
+body,
+#root,
+#App {
+  @include stretchBasePages;
+  overflow: hidden; // ?? poladit
 }
 
 ////////////////////////////////////////////////////////
 //MENU LAYOUT//
-.menu{
-    display: grid;
-    grid-template-columns: 15px 1fr min-content 1fr 15px;
-    grid-template-areas: '. . logo hamburger .';
+.menu {
+  display: grid;
+  grid-template-columns: 15px 1fr min-content 1fr 15px;
+  grid-template-areas: ". . logo hamburger .";
 
-    @include mq($from:tablet){
-        grid-template-columns: 15px min-content 1fr min-content 15px;
-        grid-template-areas: '. logo . menuOffer .';
-    }
+  @include mq($from: tablet) {
+    grid-template-columns: 15px min-content 1fr min-content 15px;
+    grid-template-areas: ". logo . menuOffer .";
+  }
 }
-.logoGrid{
-    grid-area: logo;
+.logoGrid {
+  grid-area: logo;
 }
-.menuOfferGrid{
-    grid-area: menuOffer;
+.menuOfferGrid {
+  grid-area: menuOffer;
 }
-.hamburgerGrid{
-    grid-area: hamburger;
+.hamburgerGrid {
+  grid-area: hamburger;
 }
-.menuOfferGrid{
-    grid-area: menuOffer;
+.menuOfferGrid {
+  grid-area: menuOffer;
 }
 ////////////////////////////////////////////////////////
+//HOME LAYOUT//
+#Home {
+  display: grid;
+  grid-template-rows: 50px 1fr 4fr 1fr;
+  grid-template-areas:
+    "."
+    "pageHeader"
+    "mainHeader"
+    "button";
+}
+
+#pageHeader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  grid-area: pageHeader;
+}
+
+#bigLogoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  grid-area: mainHeader;
+}
+
+#homeHeader {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+
+  div {
+    display: grid;
+    justify-content: center;
+    justify-items: start;
+  }
+  grid-area: mainHeader;
+}
+
+#homeButton {
+  grid-area: button;
+}

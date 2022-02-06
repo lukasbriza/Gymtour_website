@@ -1,13 +1,13 @@
 //COMPONENTS//
-import {Menu} from '../Components/Menu'
+import { Menu } from '../Components/Menu'
 //CONTEXT//
-import {AnimationContextProvider, AppContextProvider} from './Context'
+import { AnimationContextProvider, AppContextProvider } from './Context'
 //ANIMATIONS//
 import '../config/animationRegistration.js';
 //ROUTER//
-import {Router} from 'react-router-dom'
-import {createBrowserHistory} from 'history'
-import {PageRoutes} from './PageRoutes'
+import { Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+import { PageRoutes } from './PageRoutes'
 //BROWSER HISTORY//
 const history = createBrowserHistory()
 
@@ -19,10 +19,10 @@ function App() {
       <AnimationContextProvider>
         <div id="App">
           <Router history={history}>
-            <Menu/>
-            
-                <PageRoutes/>
-  
+            <Menu />
+
+            <PageRoutes />
+
           </Router>
         </div>
       </AnimationContextProvider>
@@ -31,3 +31,11 @@ function App() {
 }
 
 export default App;
+
+/*
+TO-DO
+- uvítací animace
+- unikátnost uvítací animace
+- synchronnost malého a velkého loga
+- button optimalizace pro mobily
+*/

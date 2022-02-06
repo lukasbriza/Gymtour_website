@@ -1,65 +1,98 @@
-.menu{
-    height: 60px;
-    background-color: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,1) 21%, rgba(0, 0, 0, 0.24) 100%);
+.menu {
+  height: 60px;
+  background-color: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 21%,
+    rgba(0, 0, 0, 0.24) 100%
+  );
 }
 
-#hamburger-wrapper{
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+#hamburger-wrapper {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: +1;
 
-    display:grid;
-    grid-template-rows: 10px 10px 10px;
-    grid-template-areas: "slice1" "slice2" "slice3";
+  display: grid;
+  grid-template-rows: 10px 10px 10px;
+  grid-template-areas: "slice1" "slice2" "slice3";
 
-    .slice{
-        height: 5px;
-        border-radius: 5px;
-    }
+  .slice {
+    height: 5px;
+    border-radius: 5px;
+  }
 
-    .slice:nth-child(1){
-        grid-area: slice1;
-    }
-    .slice:nth-child(2){
-        grid-area: slice2;
-    }
-    .slice:nth-child(3){
-        grid-area: slice3;
-    }
+  .slice:nth-child(1) {
+    grid-area: slice1;
+  }
+  .slice:nth-child(2) {
+    grid-area: slice2;
+  }
+  .slice:nth-child(3) {
+    grid-area: slice3;
+  }
 }
 
-#menuOffer{
+#menuOffer {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.offerItem {
+  cursor: pointer;
+  white-space: nowrap;
+  display: grid;
+  padding: 0 15px;
+  opacity: 0;
+  text-decoration: none;
+
+  transition: background-color 0.5s ease-out;
+
+  a {
+    text-decoration: none;
+    color: white;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  p {
+    text-decoration: none;
+    color: white;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.offerItem:hover {
+  background-color: rgba(114, 114, 114, 0.733);
+}
+
+#menuLayer {
+  z-index: 0;
+  left: 100vw;
+  display: grid;
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-areas: "." "layerItems" ".";
+
+  #menuOfferItems-wrapper {
+    grid-area: layerItems;
     display: grid;
-    grid-auto-flow: column;
-}
 
-.offerItem{
-    cursor: pointer;
-    white-space: nowrap;
-    display: grid;
-    padding: 0 15px;
-    
-    a{
-        text-decoration: none;
-        color: white;
-        margin-top: auto;
-        margin-bottom: auto;
+    align-content: center;
+    justify-content: center;
+
+    .offerItem-layer {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      text-align: center;
+      width: 80vw;
+
+      border-top: $minorColor1 1px solid;
     }
 
-    transition: background-color 0.5s ease-out;
+    .offerItem-layer:last-child {
+      border-bottom: $minorColor1 1px solid;
+    }
+  }
 }
-
-.offerItem:hover{
-    background-color: rgba(114, 114, 114, 0.733);
-}
-
-
-/*
-#menu-mob{
-
-}
-
-#menu-pc{
-
-}*/

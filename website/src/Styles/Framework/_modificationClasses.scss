@@ -1,3 +1,4 @@
+//POSITION CLASSES//
 .center {
   top: 50%;
   left: 50%;
@@ -21,6 +22,12 @@
 .stretchY {
   height: 100%;
 }
+.stretchVW {
+  width: 100vw;
+}
+.stretchVH {
+  height: 100vh;
+}
 .absolute {
   position: absolute;
 }
@@ -30,29 +37,67 @@
 .top {
   top: 0px;
 }
-.topZ{
+.left {
+  left: 0px;
+}
+.topZ {
   z-index: +10;
 }
 
+//MARGIN CLASSES//
+.top5-margin {
+  margin-top: 5%;
+}
+.top10-margin {
+  margin-top: 10%;
+}
+.top20-margin {
+  margin-top: 20%;
+}
+.top30-margin {
+  margin-top: 30%;
+}
+.top40-margin {
+  margin-top: 40%;
+}
+.top50-margin {
+  margin-top: 50%;
+}
 //BASE COLOR CLASSES//
-.mainColor{
+.mainColor {
   background-color: $mainColor;
 }
-.minorColor1{
-  background-color: $minorColor1;
-}
-.minorColor2{
-  background-color: $minorColor2;
+.mainColorText {
+  color: $mainColor;
 }
 
+.minorColor1 {
+  background-color: $minorColor1;
+}
+.minorColor1Text {
+  color: $minorColor1;
+}
+
+.minorColor2 {
+  background-color: $minorColor2;
+}
+.minorColor2Text {
+  color: $minorColor2;
+}
 //GRID//
-.gridCenterX{
+.gridCenterX {
   justify-self: center;
 }
 
-.gridRightX{
+.gridRightX {
   justify-self: end;
 }
-.gridCenterY{
+.gridCenterY {
   align-self: center;
+}
+
+//LINK STYLE//
+.link {
+  text-decoration: none;
+  color: white;
 }

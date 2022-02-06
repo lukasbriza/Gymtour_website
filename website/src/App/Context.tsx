@@ -1,25 +1,33 @@
-import {createContext, useState, useEffect} from 'react'
-import {useLocation} from 'react-router-dom'
+import { createContext, useState, useEffect } from 'react'
+//FUNCTIONS//
+import { setContextBreakpoint } from '../Functions/setContextBreakpoint'
 
 //CONTEXTS//
 const AppContext = createContext({})
 const AnimationContext = createContext({})
 
+//APP CONTEXT//
 const AppContextProvider = (props: any) => {
-    const [width, setWidth] = useState<number|undefined>(undefined)
+    const [width, setWidth] = useState<number | undefined>(undefined)
     const [actualLocation, setActualLocation] = useState<string>("/")
-    
+    const [breakPoint, setBreakPoint] = useState<"toMobile" | "fromMobile" | "fromTablet" | "fromDesktop" | "fromWide">("toMobile")
+
+    //////////////////////////////////////////////////////////////////
     //LISTENERS//
     useEffect(() => {
         setWidth(window.innerWidth)
+        setContextBreakpoint(width, setBreakPoint)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    window.addEventListener('resize', () => {
-        setWidth(window.innerWidth)
-    })
+    useEffect(() => { setContextBreakpoint(width, setBreakPoint) }, [width])
+
+    window.addEventListener('resize', () => { setWidth(window.innerWidth) })
+    //////////////////////////////////////////////////////////////////
 
     let appState = {
         width: width,
         actualLocation: actualLocation,
+        breakPoint: breakPoint,
         fn: {
             setActualLocation: setActualLocation,
         }
@@ -32,13 +40,15 @@ const AppContextProvider = (props: any) => {
     )
 }
 
+//ANIMATION CONTEXT//
 const AnimationContextProvider = (props: any) => {
+    const [bigLogoPlayed, setBigLogoPlayed] = useState(undefined)
 
 
     let animationState = {
-
+        bigLogoPlayed: bigLogoPlayed,
         fn: {
-
+            setBigLogoPlayed: setBigLogoPlayed,
         }
     }
 

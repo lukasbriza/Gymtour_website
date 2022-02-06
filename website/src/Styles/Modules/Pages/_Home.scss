@@ -1,0 +1,26 @@
+#Home {
+  #pageHeader {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  #homeHeader {
+  }
+
+  #homeButton {
+    width: auto;
+    height: min-content;
+
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  #homeButton:hover {
+    text-decoration: underline;
+  }
+
+  #bigLogo {
+    margin-top: 35px;
+  }
+  #bigText {
+    margin-top: 15px;
+  }
+}

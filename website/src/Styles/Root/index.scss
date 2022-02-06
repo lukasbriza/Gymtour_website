@@ -1,27 +1,20 @@
-/*SASS-MQ import*/
-    @import '../Framework/mq';
-
 /*BASE - Base Variable file along with starting point Mixins and Placeholders.*/
-    @import '../Base/mixins';
-    @import '../Base/variables';
+@import "../Base/mixins";
+@import "../Base/variables";
 
 /*FRAMEWORK - Structure and layout files.*/
-    @import '../Framework/mediaQueries';
-    @import '../Framework/layout';
-    @import '../Framework/modificationClasses';
-    @import '../Framework/PageTranstition';
+@import "../Framework/mediaQueries";
+@import "../Framework/layout";
+@import "../Framework/modificationClasses";
+@import "../Framework/PageTranstition";
 
 /*MODULES - Re-usable site elements.*/
 
-    @import '../Modules/Pages/Home';
-    @import '../Modules/Pages/Crossroad';
-    @import '../Modules/Pages/Fitness';
-    @import '../Modules/Pages/Coach';
-    @import '../Modules/Pages/NotFound';
+@import "../Modules/Pages/Home";
+@import "../Modules/Pages/Crossroad";
+@import "../Modules/Pages/Fitness";
+@import "../Modules/Pages/Coach";
+@import "../Modules/Pages/NotFound";
 
-    @import '../Modules/menu';
-    @import '../Modules/logo';
-
-   
-
-    
+@import "../Modules/menu";
+@import "../Modules/logo";
