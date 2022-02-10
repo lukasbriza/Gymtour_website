@@ -5,6 +5,22 @@ import { gsap, Sine, Power2, Power3 } from "gsap";
 ////////////////////////////////////////////////////////////////////////////
 //STROKE//
 gsap.registerEffect({
+  name: "displayPrepare",
+  effect: (targets, config) => {
+    return gsap.fromTo(
+      targets,
+      { display: config.from },
+      { display: config.to, duration: 0, ease: "none" }
+    );
+  },
+  defaults: {
+    from: "none",
+    to: "initial",
+  },
+  extendTimeline: true,
+});
+//STROKE//
+gsap.registerEffect({
   name: "stroke",
   effect: (targets, config) => {
     return gsap.fromTo(
@@ -193,7 +209,7 @@ gsap.registerEffect({
   name: "layerOn",
   effect: (target, config) => {
     let animation = gsap.to(target, {
-      left: "0vw",
+      width: "100%",
       duration: config.duration,
       ease: Power2.easeOut,
     });
@@ -209,7 +225,7 @@ gsap.registerEffect({
   name: "layerOff",
   effect: (target, config) => {
     let animation = gsap.to(target, {
-      left: "100vw",
+      width: "0%",
       duration: config.duration,
       delay: config.delay,
       ease: Power2.easeOut,

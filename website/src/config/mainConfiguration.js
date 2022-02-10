@@ -13,7 +13,7 @@ import { classListMaker } from "../Functions/classListMaker";
 import { text } from "./textSource";
 
 const config = {
-  transitionTimeout: 2000,
+  transitionTimeout: 500,
   breakpoints: {
     mobile: 360,
     tablet: 760,
@@ -107,15 +107,44 @@ const animationStore = {
   },
   home: {
     logo: {
-      show: (logoPath, textArray, callback) => {
+      show: (
+        bigLogoWrapper,
+        logoPath,
+        textArray,
+        showLogoCallback,
+        bigLogoPlayedCallback
+      ) => {
         let tl = gsap.timeline();
         tl.addLabel("fill", 2)
+          .displayPrepare(bigLogoWrapper, { from: "none", to: "flex" })
           .stroke(logoPath, {})
           .fill(logoPath, { duration: 1.5 }, "fill")
           .fadeIn(textArray, { delay: 2, duration: 1 });
         tl.then(() =>
-          gsap.effects.fadeOff("#bigLogoWrapper", { delay: 1.5, duration: 0.7 })
-        );
+          gsap.effects.fadeOff(bigLogoWrapper, { delay: 1.5, duration: 0.7 })
+        ).then(() => {
+          setTimeout(() => {
+            showLogoCallback(false);
+            bigLogoPlayedCallback(true);
+          }, 2000);
+        });
+      },
+    },
+    mainHeader: {
+      show: () => {
+        let homeheader = gsap.utils.toArray(".homeHeader");
+        let tl = gsap.timeline();
+        tl.fadeIn(homeheader, {
+          stagger: 0.3,
+          delay: 0.5,
+          duration: 1,
+        })
+          .fadeIn("#pageHeader", {
+            delay: 1.5,
+            duration: 1,
+            displayAfter: "flex",
+          })
+          .fadeIn("#homeButton", { delay: 1.5, duration: 1 });
       },
     },
   },

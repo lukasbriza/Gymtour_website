@@ -3,11 +3,17 @@ $mainColor: black;
 $minorColor1: white;
 $minorColor2: #707070;
 
-
 //LAYOUT FONTS//
-$primaryFont:'Open Sans', sans-serif;
+$primaryFont: "Open Sans", sans-serif;
 $secondaryFont: "Times New Roman";
 $basicFontSize: 1em;
 
 //LAYOUT MAX WIDTH//
 $maxWidth: 1500px;
+//LAYOUT MIN HEIGHT//
+$minHeight: 667px;
+//LAYOUT MIN WIDTH//
+$minWidth: 375px;
+
+//BOX HEIGHT %//
+$boxHeightPercent: "( (100vw - 2em) / 100 / 16 * 9 )";

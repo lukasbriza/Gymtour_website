@@ -43,17 +43,20 @@
   cursor: pointer;
   white-space: nowrap;
   display: grid;
-  padding: 0 15px;
+
   opacity: 0;
   text-decoration: none;
 
   transition: background-color 0.5s ease-out;
 
   a {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
     text-decoration: none;
+    align-self: center;
+    justify-self: center;
     color: white;
-    margin-top: auto;
-    margin-bottom: auto;
   }
 
   p {
@@ -70,7 +73,6 @@
 
 #menuLayer {
   z-index: 0;
-  left: 100vw;
   display: grid;
   grid-template-rows: 60px 1fr 60px;
   grid-template-areas: "." "layerItems" ".";

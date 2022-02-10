@@ -1,5 +1,4 @@
 import { useEffect, useContext, useState, useRef, createRef } from 'react'
-import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { BigLogo } from '../Components/SVG/BigLogo'
 import { BigText } from '../Components/SVG/BigText'
@@ -8,25 +7,15 @@ import main from '../Images/main.webp'
 import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
 //CONTEXT//
-import { AppContext, AnimationContext } from "../App/Context"
+import { AnimationContext } from "../App/Context"
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 
 ///////////////////////////////////////////////////////////////////////////////////////
 const Home = ({ history, location }: any) => {
     //////////////////////////////////////////////////
-    //STATE//
-
-    //////////////////////////////////////////////////
     //VARIABLES//
-    const appContext: any = useContext(AppContext);
-    const anContext: any = useContext(AnimationContext);
-
     const buttonClasses = classListMaker(["link", "absolute", "centerX"])
-    //////////////////////////////////////////////////
-    //ANIMATIONS//
-
-    //////////////////////////////////////////////////
     //SETUP//
     return (
         <div
@@ -60,20 +49,20 @@ const PageHeader = () => {
     )
 }
 
-const MainSection = (props: any) => {
+const MainSection = () => {
     //////////////////////////////////////////////////
     //STATE//
-    const [showHeader, setShowHeader] = useState<boolean>(false)
     const [showLogo, setShowLogo] = useState<boolean>(true)
     //////////////////////////////////////////////////
     //VARIABLES//
-    const appContext: any = useContext(AppContext);
     const anContext: any = useContext(AnimationContext);
 
     const bigLogoWrapperClass = classListMaker(["relative", "stretchX"])
     const bigLogoClasses = classListMaker(["relative"])
     const bigTextClasses = classListMaker(["relative"])
     const headerClasses = classListMaker(["relative", "minorColor1Text"])
+    const homeHeaderClasses = classListMaker(["homeHeader"])
+    const homeHeaderWrapperClasses = classListMaker(["headerWrapper"])
 
     const bigLogoWrapper: any = useRef()
     const pathRef: any = createRef()
@@ -85,15 +74,20 @@ const MainSection = (props: any) => {
     const uRef: any = useRef()
     const rRef: any = useRef()
     const textRef: any = useRef({ gRef, yRef, mRef, tRef, oRef, uRef, rRef })
+
     const header: any = useRef()
+
     //////////////////////////////////////////////////
     //ANIMATIONS//
     //////////////////////////////////////////////////
     //BIG LOGO ANIMATION LOGIC//
+    //MAIN HEADER ANIMATION LOGIC//
+    //SMALL LOGO ANIMATION LOGIC//
     useEffect(() => {
-        if (anContext.bigLogoPlayed === undefined) {
-            //play animation logo
+        if (anContext.bigLogoPlayed === false) {
+
             animationStore.home.logo.show(
+                bigLogoWrapper.current,
                 pathRef.current,
                 [
                     gRef.current,
@@ -104,25 +98,39 @@ const MainSection = (props: any) => {
                     uRef.current,
                     rRef.current
                 ],
-                setShowHeader
+                setShowLogo,
+                anContext.fn.setBigLogoPlayed
             )
-            //show small logo
         }
-        if (anContext.bigLogoPlayed === true) {
-
+        else if (anContext.bigLogoPlayed === true && anContext.smallLogoPlayed === false) {
+            animationStore.menu.logo.logoIn();
+            setTimeout(() => {
+                animationStore.menu.logo.logoTextIn();
+            }, 200);
+            animationStore.home.mainHeader.show()
+            anContext.fn.setSmallLogoPlayed(true)
+        }
+        else if (anContext.bigLogoPlayed === true && anContext.smallLogoPlayed === true) {
+            animationStore.home.mainHeader.show()
+            anContext.fn.setSmallLogoPlayed(true)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    //////////////////////////////////////////////////
+    //MAIN HEADER AND SMALL LOGO LOGIC//
+    useEffect(() => {
+        if (showLogo === false) {
+            if (anContext.smallLogoPlayed === false) {
+                animationStore.menu.logo.logoIn();
+                setTimeout(() => {
+                    animationStore.menu.logo.logoTextIn();
+                }, 200);
+                anContext.fn.setSmallLogoPlayed(true)
+            }
+            animationStore.home.mainHeader.show()
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [showLogo])
-    //////////////////////////////////////////////////
-    //MAIN HEADER ANIMATION LOGIC//
-    useEffect(() => {
-        if (showHeader === true) {
-            //show naimation of header
-        }
-        if (showHeader === false) {
-            //hide animation of header
-        }
-    }, [showHeader])
     //////////////////////////////////////////////////
     return (
         <>
@@ -152,9 +160,15 @@ const MainSection = (props: any) => {
                 ref={header}
             >
                 <div>
-                    <div id="part1">{text.home.Header.part1.cz}</div>
-                    <div id="part2">{text.home.Header.part2.cz}</div>
-                    <div id="part3">{text.home.Header.part3.cz}</div>
+                    <div className={homeHeaderWrapperClasses}>
+                        <h1 className={homeHeaderClasses}>{text.home.Header.part1.cz}</h1>
+                    </div>
+                    <div className={homeHeaderWrapperClasses}>
+                        <h1 className={homeHeaderClasses}>{text.home.Header.part2.cz}</h1>
+                    </div>
+                    <div className={homeHeaderWrapperClasses}>
+                        <h1 className={homeHeaderClasses}>{text.home.Header.part3.cz}</h1>
+                    </div>
                 </div>
             </div>
         </>

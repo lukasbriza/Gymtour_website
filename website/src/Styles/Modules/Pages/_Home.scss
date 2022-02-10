@@ -1,26 +1,62 @@
 #Home {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
   #pageHeader {
-    font-size: 1.3rem;
+    font-size: clamp(18px, 3vw, 30px);
     font-weight: bold;
+    cursor: default;
+
+    //default state
+    opacity: 0;
   }
-  #homeHeader {
+
+  .homeHeader {
+    font-size: clamp(35px, 7vmin, 75px);
+    margin: clamp(15px, 5vh, 100px);
+    text-transform: uppercase;
+    cursor: pointer;
+    //default state
+    opacity: 0;
+
+    transition-property: text-shadow;
+    transition-duration: 1s;
+    transition-timing-function: "ease-out";
+  }
+
+  .homeHeader:hover {
+    text-shadow: 5.5rem 0px 0px rgba(255, 255, 255, 0.3);
+    transform-origin: center;
   }
 
   #homeButton {
     width: auto;
     height: min-content;
 
-    font-size: 1.3rem;
+    //default state
+    opacity: 0;
+
+    font-size: clamp(15px, 2vw, 25px);
     font-weight: bold;
   }
   #homeButton:hover {
     text-decoration: underline;
   }
 
-  #bigLogo {
-    margin-top: 35px;
-  }
   #bigText {
     margin-top: 15px;
   }
+}
+
+#Home::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "";
+  background: linear-gradient(
+    157deg,
+    rgba(0, 0, 0, 0.753) 13%,
+    rgba(0, 0, 0, 0.109) 100%
+  );
 }

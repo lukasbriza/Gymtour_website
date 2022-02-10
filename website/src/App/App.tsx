@@ -34,8 +34,6 @@ export default App;
 
 /*
 TO-DO
-- uvítací animace
-- unikátnost uvítací animace
-- synchronnost malého a velkého loga
+- menu glitch při změně velikosti na tablet verzi
 - button optimalizace pro mobily
 */

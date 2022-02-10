@@ -22,6 +22,7 @@ const Menu = () => {
   const [hamburger, setHamburger] = useState<boolean>(false);
   const [showOffer, setShowOffer] = useState<boolean | undefined>();
   const [showHamburger, setShowHamburger] = useState<boolean>(false);
+  //const [smallLogoAnimationPlayed, setSmallLogoAnimationPlayed] = useState<boolean>(false)
   //////////////////////////////////////////////////
   //VARIABLES//
   const appContext: any = useContext(AppContext);
@@ -42,14 +43,18 @@ const Menu = () => {
 
   const routesArray = Object.values(config.menuItems);
   //////////////////////////////////////////////////
+  /*
   //MENU LOGO ANIMATION DISPLAY//
   useEffect(() => {
-    animationStore.menu.logo.logoIn();
-    setTimeout(() => {
-      animationStore.menu.logo.logoTextIn();
-    }, 200);
+    if (appContext.actualLocation !== "/" && smallLogoAnimationPlayed === false) {
+      animationStore.menu.logo.logoIn();
+      setTimeout(() => {
+        animationStore.menu.logo.logoTextIn();
+      }, 200);
+      setSmallLogoAnimationPlayed(true)
+    }
   }, []);
-
+*/
   //MENU BACKGROUND//
   useEffect(() => {
     let actualLocation = appContext.actualLocation;
@@ -187,7 +192,7 @@ const MenuOffer = (props: MenuOffer) => {
 const MenuLayer = (props: MenuLayer) => {
 
   const menuItemsClass = classListMaker(["relative", "offerItem", "offerItem-layer"]);
-  const menuLayerClass = classListMaker(["stretchVW", "stretchVH", "absolute", "top", "left", "mainColor"]);
+  const menuLayerClass = classListMaker(["stretchVH", "absolute", "top", "right", "mainColor"]);
 
   const menuLayer: any = useRef();
   /////////////////////////////////////////

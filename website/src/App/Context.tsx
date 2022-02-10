@@ -42,13 +42,16 @@ const AppContextProvider = (props: any) => {
 
 //ANIMATION CONTEXT//
 const AnimationContextProvider = (props: any) => {
-    const [bigLogoPlayed, setBigLogoPlayed] = useState(undefined)
+    const [bigLogoPlayed, setBigLogoPlayed] = useState<boolean>(false)
+    const [smallLogoPlayed, setSmallLogoPlayed] = useState<boolean>(false)
 
 
     let animationState = {
         bigLogoPlayed: bigLogoPlayed,
+        smallLogoPlayed: smallLogoPlayed,
         fn: {
             setBigLogoPlayed: setBigLogoPlayed,
+            setSmallLogoPlayed: setSmallLogoPlayed
         }
     }
 

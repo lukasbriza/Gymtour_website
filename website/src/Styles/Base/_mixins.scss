@@ -1,6 +1,15 @@
+@mixin minHeightWidth {
+  min-height: $minHeight;
+  min-width: $minWidth;
+}
+
 @mixin stretchBasePages {
-    width: 100vw;
-    height: 100vh;
-    min-height: 100vh;
-    min-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  @include minHeightWidth;
+}
+
+@mixin maxHeightWidth {
+  width: 100%;
+  height: 100%;
 }
