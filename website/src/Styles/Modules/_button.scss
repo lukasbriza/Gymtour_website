@@ -1,0 +1,21 @@
+.buttonInitial {
+  width: 180px;
+  color: $minorColor1;
+  background-color: $buttonColor;
+
+  font-weight: 600;
+  font-size: 17px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 19px 0px;
+
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+.buttonHover {
+  background-color: black;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}

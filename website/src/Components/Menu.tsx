@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { gsap } from "gsap";
 //COMPONENTS//
 import { SmallLogo } from "./SVG/SmallLogo";
 import { SmallText } from "./SVG/SmallText";
@@ -10,7 +9,7 @@ import { classListMaker } from "../Functions/classListMaker";
 //CONFIG//
 import { config, animationStore } from "../config/mainConfiguration";
 //CONTEXT//
-import { AppContext, AnimationContext } from "../App/Context";
+import { AppContext } from "../App/Context";
 
 ///////////////////////////////////////////////////////////////////////////////////////
 const Menu = () => {
@@ -26,7 +25,6 @@ const Menu = () => {
   //////////////////////////////////////////////////
   //VARIABLES//
   const appContext: any = useContext(AppContext);
-  const anContext: any = useContext(AnimationContext);
 
   let logoScale: number = 0.1;
   let textScale: number = 0.15;
@@ -43,18 +41,6 @@ const Menu = () => {
 
   const routesArray = Object.values(config.menuItems);
   //////////////////////////////////////////////////
-  /*
-  //MENU LOGO ANIMATION DISPLAY//
-  useEffect(() => {
-    if (appContext.actualLocation !== "/" && smallLogoAnimationPlayed === false) {
-      animationStore.menu.logo.logoIn();
-      setTimeout(() => {
-        animationStore.menu.logo.logoTextIn();
-      }, 200);
-      setSmallLogoAnimationPlayed(true)
-    }
-  }, []);
-*/
   //MENU BACKGROUND//
   useEffect(() => {
     let actualLocation = appContext.actualLocation;
@@ -106,10 +92,10 @@ const Menu = () => {
         className={menuMobileClassList}
         style={{ backgroundColor: background, background: background }}
       >
-        <div className={logoWrapperClass}>
+        <Link className={logoWrapperClass} to={config.routes.mainPage.path}>
           <SmallLogo scale={logoScale} className={smallLogoClass} />
           <SmallText scale={textScale} className={smallTextClass} />
-        </div>
+        </Link>
         <Hamburger
           className={hamburgerClass}
           isActive={() => {
@@ -137,10 +123,10 @@ const Menu = () => {
         className={menuPcClassList}
         style={{ backgroundColor: background, background: background }}
       >
-        <div className={logoWrapperClass}>
+        <Link className={logoWrapperClass} to={config.routes.mainPage.path}>
           <SmallLogo scale={logoScale} className={smallLogoClass} />
           <SmallText scale={textScale} className={smallTextClass} />
-        </div>
+        </Link>
         <MenuOffer
           className={menuOfferClass}
           offer={routesArray}

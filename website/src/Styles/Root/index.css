@@ -61,14 +61,36 @@ h3 {
   font-size: clamp(1.266em, 5vw, 1.563em);
 }
 
-html,
-body,
-#root {
+a {
+  text-decoration: none;
+}
+
+html {
+  overflow: auto;
+  overflow-x: hidden;
   width: 100vw;
   height: 100vh;
   min-height: 667px;
   min-width: 375px;
+}
+
+@media screen and (max-width: 360px) {
+  html {
+    overflow-x: auto;
+  }
+}
+
+body {
   overflow: auto;
+  width: 100vw;
+  min-height: 667px;
+  min-width: 375px;
+}
+
+#root {
+  width: 100%;
+  min-height: 667px;
+  min-width: 375px;
 }
 
 #App {
@@ -80,8 +102,10 @@ body,
 }
 
 .menu {
+  max-width: 1500px;
   display: -ms-grid;
   display: grid;
+  min-width: 360px;
   -ms-grid-columns: 15px 1fr min-content 1fr 15px;
       grid-template-columns: 15px 1fr -webkit-min-content 1fr 15px;
       grid-template-columns: 15px 1fr min-content 1fr 15px;
@@ -118,6 +142,7 @@ body,
 }
 
 #Home {
+  max-width: 1500px;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 50px 1fr 4fr 1fr;
@@ -231,6 +256,55 @@ body,
   -ms-grid-row: 4;
   -ms-grid-column: 1;
   grid-area: button;
+}
+
+#Crossroad {
+  max-width: 1500px;
+}
+
+@media (min-width: 61.25em) {
+  #Crossroad #crossroadSectionWrapper {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 10px 1fr;
+        grid-template-columns: 1fr 10px 1fr;
+        grid-template-areas: "fitnessSection divider coachSection";
+  }
+}
+
+@media (min-width: 61.25em) {
+  #FitnessSection {
+    grid-area: fitnessSection;
+  }
+}
+
+#FitnessSection .layer {
+  -ms-grid-rows: 90px 1fr 3fr 1fr 90px;
+      grid-template-rows: 90px 1fr 3fr 1fr 90px;
+      grid-template-areas: "." "header" "paragraph" "button" ".";
+}
+
+#divider {
+  display: none;
+}
+
+@media (min-width: 61.25em) {
+  #divider {
+    grid-area: divider;
+    display: initial;
+  }
+}
+
+#CoachSection .layer {
+  -ms-grid-rows: 90px 1fr 3fr 1fr 90px;
+      grid-template-rows: 90px 1fr 3fr 1fr 90px;
+      grid-template-areas: "." "header" "paragraph" "button" ".";
+}
+
+#ContactSection {
+  max-width: 1500px;
+  min-height: 667px;
+  min-width: 375px;
 }
 
 .center {
@@ -366,6 +440,11 @@ body,
   color: white;
 }
 
+.minHeightWidth {
+  min-height: 667px;
+  min-width: 375px;
+}
+
 /*MODULES - Re-usable site elements.*/
 #Home {
   background-repeat: no-repeat;
@@ -426,20 +505,149 @@ body,
   background: linear-gradient(157deg, rgba(0, 0, 0, 0.753) 13%, rgba(0, 0, 0, 0.109) 100%);
 }
 
+#Crossroad {
+  overflow: auto;
+}
+
+.FitnessSection {
+  color: white;
+  background: #707070;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.FitnessSection .layer {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+}
+
+.FitnessSection .layer .fitnessSectionHeader {
+  text-transform: uppercase;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: header;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.FitnessSection .layer .fitnessSectionParagraph {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: paragraph;
+  white-space: pre-wrap;
+  line-height: 1.1;
+  text-align: center;
+  font-size: 17px;
+  padding: 0px 10vw;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+@media (min-width: 61.25em) {
+  .FitnessSection .layer .fitnessSectionParagraph {
+    padding: 0px 7vw;
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 81.25em) {
+  .FitnessSection .layer .fitnessSectionParagraph {
+    padding: 0px 100px;
+  }
+}
+
+.FitnessSection .layer .crossroadButton {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: button;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.divider {
+  background: #4b4b4b;
+}
+
+.CoachSection {
+  color: white;
+  background: #707070;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.CoachSection .layer {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+}
+
+.CoachSection .layer .coachSectionHeader {
+  text-transform: uppercase;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: header;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.CoachSection .layer .coachSectionParagraph {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: paragraph;
+  white-space: pre-wrap;
+  line-height: 1.1;
+  text-align: center;
+  font-size: 17px;
+  padding: 0px 10vw;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+@media (min-width: 61.25em) {
+  .CoachSection .layer .coachSectionParagraph {
+    padding: 0px 7vw;
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 81.25em) {
+  .CoachSection .layer .coachSectionParagraph {
+    padding: 0px 100px;
+  }
+}
+
+.CoachSection .layer .crossroadButton {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: button;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 .menu {
   height: 60px;
   background-color: black;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(21%, black), to(rgba(0, 0, 0, 0.24)));
   background: linear-gradient(180deg, black 21%, rgba(0, 0, 0, 0.24) 100%);
+  position: fixed;
 }
 
 #hamburger-wrapper {
+  opacity: 0;
   width: 30px;
   height: 30px;
   cursor: pointer;
   z-index: +1;
-  display: -ms-grid;
-  display: grid;
+  display: none;
   -ms-grid-rows: 10px 10px 10px;
       grid-template-rows: 10px 10px 10px;
       grid-template-areas: "slice1" "slice2" "slice3";
@@ -511,6 +719,7 @@ body,
 
 #menuLayer {
   z-index: 0;
+  width: 0%;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 60px 1fr 60px;
@@ -569,5 +778,39 @@ body,
 
 #smallText .logoText {
   opacity: 0;
+}
+
+.buttonInitial {
+  width: 180px;
+  color: white;
+  background-color: #292727;
+  font-weight: 600;
+  font-size: 17px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 19px 0px;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+}
+
+.buttonHover {
+  background-color: black;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+}
+
+.layer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.623);
 }
 /*# sourceMappingURL=index.css.map */

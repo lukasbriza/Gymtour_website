@@ -1,15 +1,38 @@
+import { useEffect, useContext } from 'react'
 //CONFIG//
-import {config} from '../config/mainConfiguration'
+import { config, animationStore } from '../config/mainConfiguration'
+import { text } from '../config/textSource'
+//CONTEXT//
+import { AppContext, AnimationContext } from "../App/Context"
 //FUNCTUION//
-import {classListMaker} from '../Functions/classListMaker'
+import { classListMaker } from '../Functions/classListMaker'
 
 const Fitness = () => {
+    //////////////////////////////////////////////////
+    //STATE//
 
-    return(
-        <div id="Crossroad" className={config.basePageClassList}>
+    //////////////////////////////////////////////////
+    //VARIABLES//
+    const appContext: any = useContext(AppContext);
+    const anContext: any = useContext(AnimationContext);
+
+    //////////////////////////////////////////////////
+    //ANIMATIONS//
+    useEffect(() => {
+        anContext.fn.setBigLogoPlayed(true)
+        animationStore.menu.logo.logoIn();
+        setTimeout(() => {
+            animationStore.menu.logo.logoTextIn();
+        }, 200);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    //////////////////////////////////////////////////
+    //SETUP//
+    return (
+        <div id="Fitness" className={config.basePageClassList}>
 
         </div>
     )
 }
 
-export {Fitness}
+export { Fitness }

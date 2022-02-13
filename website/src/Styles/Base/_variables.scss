@@ -2,6 +2,7 @@
 $mainColor: black;
 $minorColor1: white;
 $minorColor2: #707070;
+$buttonColor: #292727;
 
 //LAYOUT FONTS//
 $primaryFont: "Open Sans", sans-serif;
@@ -14,6 +15,3 @@ $maxWidth: 1500px;
 $minHeight: 667px;
 //LAYOUT MIN WIDTH//
 $minWidth: 375px;
-
-//BOX HEIGHT %//
-$boxHeightPercent: "( (100vw - 2em) / 100 / 16 * 9 )";

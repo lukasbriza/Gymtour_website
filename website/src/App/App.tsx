@@ -34,6 +34,6 @@ export default App;
 
 /*
 TO-DO
-- menu glitch při změně velikosti na tablet verzi
 - button optimalizace pro mobily
+- crossroad stránka
 */

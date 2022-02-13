@@ -1,0 +1,94 @@
+#Crossroad {
+  overflow: auto;
+  div {
+  }
+}
+
+.FitnessSection {
+  color: $minorColor1;
+  background: $minorColor2;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .layer {
+    display: grid;
+    justify-items: center;
+
+    .fitnessSectionHeader {
+      text-transform: uppercase;
+      grid-area: header;
+      align-self: center;
+    }
+    .fitnessSectionParagraph {
+      grid-area: paragraph;
+      white-space: pre-wrap;
+      line-height: 1.1;
+      text-align: center;
+      font-size: 17px;
+      padding: 0px 10vw;
+
+      @include mq($from: desktop) {
+        padding: 0px 7vw;
+        font-size: 19px;
+      }
+      @include mq($from: wide) {
+        padding: 0px 100px;
+      }
+
+      align-self: center;
+    }
+    .crossroadButton {
+      grid-area: button;
+      align-self: center;
+    }
+  }
+}
+
+.divider {
+  background: rgb(75, 75, 75);
+}
+
+.CoachSection {
+  color: $minorColor1;
+  background: $minorColor2;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  .layer {
+    display: grid;
+    justify-items: center;
+
+    .coachSectionHeader {
+      text-transform: uppercase;
+      grid-area: header;
+      align-self: center;
+    }
+    .coachSectionParagraph {
+      grid-area: paragraph;
+      white-space: pre-wrap;
+      line-height: 1.1;
+      text-align: center;
+      font-size: 17px;
+      padding: 0px 10vw;
+
+      @include mq($from: desktop) {
+        padding: 0px 7vw;
+        font-size: 19px;
+      }
+
+      @include mq($from: wide) {
+        padding: 0px 100px;
+      }
+
+      align-self: center;
+    }
+    .crossroadButton {
+      grid-area: button;
+      align-self: center;
+    }
+  }
+}
+
+.ContactSection {
+}

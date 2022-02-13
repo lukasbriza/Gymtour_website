@@ -6,15 +6,17 @@
     rgba(0, 0, 0, 1) 21%,
     rgba(0, 0, 0, 0.24) 100%
   );
+  position: fixed;
 }
 
 #hamburger-wrapper {
+  opacity: 0;
   width: 30px;
   height: 30px;
   cursor: pointer;
   z-index: +1;
 
-  display: grid;
+  display: none;
   grid-template-rows: 10px 10px 10px;
   grid-template-areas: "slice1" "slice2" "slice3";
 
@@ -73,6 +75,7 @@
 
 #menuLayer {
   z-index: 0;
+  width: 0%;
   display: grid;
   grid-template-rows: 60px 1fr 60px;
   grid-template-areas: "." "layerItems" ".";

@@ -16,11 +16,12 @@ const Home = ({ history, location }: any) => {
     //////////////////////////////////////////////////
     //VARIABLES//
     const buttonClasses = classListMaker(["link", "absolute", "centerX"])
+    const homeClasses = classListMaker(["stretchVH", "minHeightWidth"])
     //SETUP//
     return (
         <div
             id="Home"
-            className={config.basePageClassList}
+            className={config.basePageClassList + " " + homeClasses}
             style={{ backgroundImage: `url(${main})` }}
         >
             <PageHeader />

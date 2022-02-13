@@ -36,7 +36,7 @@ const config = {
     coOp: { name: text.menu.cz[2], path: "/coop", component: CoOp },
     contact: { name: text.menu.cz[3], path: "/contact", component: Contact },
   },
-  basePageClassList: classListMaker(["absolute", "stretch", "minorColor2"]),
+  basePageClassList: classListMaker(["relative", "stretch", "minorColor2"]),
 };
 
 const animationStore = {
@@ -70,7 +70,7 @@ const animationStore = {
         });
       },
       hide: (wrapper) => {
-        gsap.effects.fadeOff(wrapper, {
+        gsap.effects.fadeOffto(wrapper, {
           displayInitial: "grid",
           displayAfter: "none",
           displayDuration: 0.5,
@@ -84,7 +84,9 @@ const animationStore = {
           displayAfter: "grid",
         });
       },
-      hide: () => {},
+      hide: () => {
+        console.log("offer hide");
+      },
     },
     layer: {
       show: (layer) => {
@@ -121,7 +123,7 @@ const animationStore = {
           .fill(logoPath, { duration: 1.5 }, "fill")
           .fadeIn(textArray, { delay: 2, duration: 1 });
         tl.then(() =>
-          gsap.effects.fadeOff(bigLogoWrapper, { delay: 1.5, duration: 0.7 })
+          gsap.effects.fadeOff(bigLogoWrapper, { delay: 0.5, duration: 0.7 })
         ).then(() => {
           setTimeout(() => {
             showLogoCallback(false);

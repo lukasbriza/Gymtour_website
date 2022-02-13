@@ -3,7 +3,7 @@ import { gsap, Sine, Power2, Power3 } from "gsap";
 ////////////////////////////////////////////////////////////////////////////
 //REGISTER ANIMATIONS//
 ////////////////////////////////////////////////////////////////////////////
-//STROKE//
+//DISPLAYPREPARE//
 gsap.registerEffect({
   name: "displayPrepare",
   effect: (targets, config) => {
@@ -124,6 +124,7 @@ gsap.registerEffect({
           },
           {
             opacity: 0,
+            delay: config.delay,
             duration: config.duration,
             stagger: config.stagger,
             ease: Power3.easeIn,
@@ -149,7 +150,35 @@ gsap.registerEffect({
     delay: 0,
     displayInitial: "initial",
     displayAfter: "none",
+    fromOpacity: 1,
     stagger: 0,
+    duration: 0.2,
+  },
+  extendTimeline: true,
+});
+gsap.registerEffect({
+  name: "fadeOffto",
+  effect: (targets, config) => {
+    gsap
+      .to(targets, {
+        opacity: 0,
+        delay: config.delay,
+        stagger: config.stagger,
+        duration: config.duration,
+        ease: Power3.easeIn,
+      })
+      .then(() => {
+        gsap.to(targets, {
+          display: config.displayAfter,
+          duration: 0.02,
+          ease: "none",
+        });
+      });
+  },
+  defaults: {
+    displayAfter: "none",
+    stagger: 0,
+    delay: 0,
     duration: 0.2,
   },
   extendTimeline: true,
