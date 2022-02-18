@@ -36,6 +36,13 @@ const config = {
     coOp: { name: text.menu.cz[2], path: "/coop", component: CoOp },
     contact: { name: text.menu.cz[3], path: "/contact", component: Contact },
   },
+  footerLinks: [
+    { name: text.footer.Section2.link1.cz, path: "/" },
+    { name: text.footer.Section2.link2.cz, path: "/coop" },
+    { name: text.footer.Section2.link3.cz, path: "/about" },
+    { name: text.footer.Section2.link4.cz, path: "/coach" },
+    { name: text.footer.Section2.link5.cz, path: "/fitness" },
+  ],
   basePageClassList: classListMaker(["relative", "stretch", "minorColor2"]),
 };
 
@@ -150,6 +157,7 @@ const animationStore = {
       },
     },
   },
+  crossroad: {},
 };
 
 export { config, animationStore };

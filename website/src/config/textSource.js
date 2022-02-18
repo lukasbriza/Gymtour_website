@@ -28,7 +28,44 @@ const text = {
       },
       Button: { cz: "Vyhledat" },
     },
-    ContactPage: {},
+    RegisterPage: {
+      Header: { cz: "Zaregistrovat se" },
+      Paragraph: {
+        cz: 'Pro "lajkování" příspěvků a vkládání hodnocení je třeba si u nás založit účet.',
+      },
+      Form: {
+        input1: {
+          placeholder: { cz: "Jméno" },
+          errorMessage: {
+            cz: "Nepovolený znak, nebo jméno je příliš krátké. Minimální délka je 5 znaků.",
+          },
+        },
+        input2: {
+          placeholder: { cz: "Heslo" },
+          errorMessage: {
+            cz: "Minimální délka hesla je 9 znaků, nebo používáte nepovolené znaky.",
+          },
+        },
+        input3: {
+          placeholder: { cz: "Email" },
+          errorMessage: { cz: "Nespávný tvar emailové adresy." },
+        },
+        button: { cz: "Registrovat" },
+      },
+    },
+  },
+  footer: {
+    Section1: {
+      header: { cz: "Sledujte nás" },
+    },
+    Section2: {
+      header: { cz: "Gymtour" },
+      link1: { cz: "Hlavní stránka" },
+      link2: { cz: "Spolupráce" },
+      link3: { cz: "O nás" },
+      link4: { cz: "Trenéři" },
+      link5: { cz: "Fitness" },
+    },
   },
 };
 

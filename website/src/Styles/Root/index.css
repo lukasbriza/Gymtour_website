@@ -89,6 +89,13 @@ body {
 
 #root {
   width: 100%;
+  background: #2f2f2f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   min-height: 667px;
   min-width: 375px;
 }
@@ -99,17 +106,25 @@ body {
   min-height: 667px;
   min-width: 375px;
   position: relative;
+  max-width: 2500px;
 }
 
 .menu {
-  max-width: 1500px;
+  max-width: 2500px;
   display: -ms-grid;
   display: grid;
+  width: 100%;
   min-width: 360px;
-  -ms-grid-columns: 15px 1fr min-content 1fr 15px;
-      grid-template-columns: 15px 1fr -webkit-min-content 1fr 15px;
-      grid-template-columns: 15px 1fr min-content 1fr 15px;
+  -ms-grid-columns: 15px 1fr min-content 1fr 25px;
+      grid-template-columns: 15px 1fr -webkit-min-content 1fr 25px;
+      grid-template-columns: 15px 1fr min-content 1fr 25px;
       grid-template-areas: ". . logo hamburger .";
+}
+
+@media (max-width: 156.25em) {
+  .menu {
+    width: 100vw;
+  }
 }
 
 @media (min-width: 47.5em) {
@@ -142,7 +157,7 @@ body {
 }
 
 #Home {
-  max-width: 1500px;
+  max-width: 2500px;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 50px 1fr 4fr 1fr;
@@ -259,7 +274,7 @@ body {
 }
 
 #Crossroad {
-  max-width: 1500px;
+  max-width: 2500px;
 }
 
 @media (min-width: 61.25em) {
@@ -301,10 +316,135 @@ body {
       grid-template-areas: "." "header" "paragraph" "button" ".";
 }
 
-#ContactSection {
-  max-width: 1500px;
+#RegisterSection {
+  max-width: 2500px;
   min-height: 667px;
   min-width: 375px;
+}
+
+#RegisterSection .layer {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 55px min-content min-content 1fr;
+      grid-template-rows: 1fr 55px -webkit-min-content -webkit-min-content 1fr;
+      grid-template-rows: 1fr 55px min-content min-content 1fr;
+      grid-template-areas: "." "header" "paragraph" "form" ".";
+}
+
+.registerHeaderWrapper {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: header;
+}
+
+.registerHeaderWrapper h2 {
+  font-size: clamp(18px, 7vw, 40px);
+}
+
+.registerParagraph {
+  font-size: clamp(15px, 3vw, 17px);
+  margin-bottom: 50px;
+  padding-top: 20px;
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: paragraph;
+}
+
+.registerFormWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 70%;
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: form;
+}
+
+@media (min-width: 47.5em) {
+  .registerFormWrapper {
+    width: 85%;
+    max-width: 900px;
+  }
+  .registerFormWrapper #registerForm {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "input1 input2" "input3 input3" "button button";
+  }
+}
+
+@media (min-width: 47.5em) {
+  .inputWrapper:nth-child(1) {
+    padding-right: 10px;
+    grid-area: input1;
+  }
+}
+
+@media (min-width: 47.5em) {
+  .inputWrapper:nth-child(2) {
+    padding-left: 10px;
+    grid-area: input2;
+  }
+}
+
+@media (min-width: 47.5em) {
+  .inputWrapper:nth-child(3) {
+    grid-area: input3;
+  }
+}
+
+@media (min-width: 47.5em) {
+  .registerFormButton {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    grid-area: button;
+  }
+}
+
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.followUs .logoWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.gymtour {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .center {
@@ -569,8 +709,32 @@ body {
       align-self: center;
 }
 
+@media (min-width: 61.25em) {
+  .FitnessSection::before {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: "";
+    background: black;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(5%, black), color-stop(20%, rgba(0, 0, 0, 0)));
+    background: linear-gradient(0deg, black 5%, rgba(0, 0, 0, 0) 20%);
+  }
+}
+
 .divider {
-  background: #4b4b4b;
+  background: white;
+}
+
+@media (min-width: 61.25em) {
+  .divider::before {
+    width: 30px;
+    height: 100vh;
+    position: absolute;
+    content: "";
+    background: black;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(5%, black), color-stop(20%, rgba(0, 0, 0, 0)));
+    background: linear-gradient(0deg, black 5%, rgba(0, 0, 0, 0) 20%);
+  }
 }
 
 .CoachSection {
@@ -633,12 +797,57 @@ body {
       align-self: center;
 }
 
+.CoachSection::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "";
+  background: black;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(5%, black), color-stop(20%, rgba(0, 0, 0, 0)));
+  background: linear-gradient(0deg, black 5%, rgba(0, 0, 0, 0) 20%);
+}
+
+.RegisterSection {
+  color: white;
+  background: #707070;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.RegisterSection::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "";
+  background: black;
+  background: -webkit-gradient(linear, left top, left bottom, from(black), color-stop(50%, rgba(255, 255, 255, 0)), to(black));
+  background: linear-gradient(180deg, black 0%, rgba(255, 255, 255, 0) 50%, black 100%);
+}
+
+.registerHeaderWrapper {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.registerHeaderWrapper h2 {
+  text-transform: uppercase;
+}
+
+.registerParagraph {
+  margin-top: 20px;
+  width: 70%;
+  text-align: center;
+}
+
 .menu {
   height: 60px;
   background-color: black;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(21%, black), to(rgba(0, 0, 0, 0.24)));
   background: linear-gradient(180deg, black 21%, rgba(0, 0, 0, 0.24) 100%);
   position: fixed;
+  top: 0px;
 }
 
 #hamburger-wrapper {
@@ -812,5 +1021,166 @@ body {
   top: 0px;
   left: 0px;
   background-color: rgba(0, 0, 0, 0.623);
+}
+
+.footer {
+  border: none;
+}
+
+.followUs {
+  margin-top: 25px;
+}
+
+.followUs h3 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.followUs .underliner {
+  margin-top: 5px;
+}
+
+.followUs .logoWrapper {
+  width: auto;
+}
+
+.gymtour {
+  margin-top: 25px;
+}
+
+.gymtour h3 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.gymtour .underliner {
+  margin-top: 5px;
+}
+
+.gymtour .link {
+  margin: 2px 0px;
+  font-size: 0.9rem;
+}
+
+.gymtour .footerLinkWrapper .underliner {
+  margin-top: 0px;
+  height: 1px;
+}
+
+.gymtour .footerLinkWrapper:hover .underliner {
+  width: 90% !important;
+  -webkit-transition-property: width;
+  transition-property: width;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+}
+
+.copyRight {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.icon {
+  margin: 15px 5px;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.icon:nth-child(1) {
+  width: 23px;
+  height: 23px;
+  border-radius: 6px;
+}
+
+.icon:hover {
+  background: white;
+}
+
+.underliner {
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  position: relative;
+  margin: 10px auto;
+}
+
+.inputWrapper {
+  width: 100%;
+}
+
+.formInput {
+  height: 50px;
+  width: inherit;
+  padding-left: 10px;
+  background-color: rgba(192, 192, 192, 0.274);
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 5px;
+}
+
+.formInput::-webkit-input-placeholder {
+  opacity: 1;
+  color: #e2e2e2;
+}
+
+.formInput:-ms-input-placeholder {
+  opacity: 1;
+  color: #e2e2e2;
+}
+
+.formInput::-ms-input-placeholder {
+  opacity: 1;
+  color: #e2e2e2;
+}
+
+.formInput::placeholder {
+  opacity: 1;
+  color: #e2e2e2;
+}
+
+.errorMessage {
+  color: red;
+  margin: 5px 5px;
+  font-size: 10px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 20px 0px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #263e69;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+button[type="submit"]:hover {
+  background: #0a1558;
+  -webkit-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+}
+
+button[type="submit"]:active {
+  background: #263e69;
+  -webkit-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: 0.1s;
+          transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
 }
 /*# sourceMappingURL=index.css.map */

@@ -1,0 +1,79 @@
+.footer {
+  border: none;
+}
+
+.followUs {
+  margin-top: 25px;
+  h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: default;
+  }
+  .underliner {
+    margin-top: 5px;
+  }
+  .logoWrapper {
+    width: auto;
+  }
+}
+.gymtour {
+  margin-top: 25px;
+
+  h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: default;
+  }
+
+  .underliner {
+    margin-top: 5px;
+  }
+
+  .link {
+    margin: 2px 0px;
+    font-size: 0.9rem;
+  }
+
+  .footerLinkWrapper {
+    .underliner {
+      margin-top: 0px;
+      height: 1px;
+    }
+  }
+  .footerLinkWrapper:hover {
+    .underliner {
+      width: 90% !important;
+      transition-property: width;
+      transition-duration: 0.5s;
+      transform-origin: center;
+      transition-timing-function: ease-out;
+    }
+  }
+}
+.copyRight {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.icon {
+  margin: 15px 5px;
+  cursor: pointer;
+  overflow: visible;
+}
+
+//FB
+.icon:nth-child(1) {
+  width: 23px;
+  height: 23px;
+  border-radius: 6px;
+}
+//YB
+.icon:nth-child(1) {
+}
+//ING
+.icon:nth-child(1) {
+}
+
+.icon:hover {
+  background: white;
+}

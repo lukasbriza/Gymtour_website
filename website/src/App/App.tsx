@@ -34,6 +34,13 @@ export default App;
 
 /*
 TO-DO
-- button optimalizace pro mobily
-- crossroad stránka
+
+-crossroad stránka
+-lazy load routes viz documentation
+-footer
+-server data collection preparation
+-log in preparation
+-register form sucess message
+-scrollbar styling
+-form data processing
 */

@@ -1,0 +1,24 @@
+.inputWrapper {
+  width: 100%;
+}
+
+.formInput {
+  height: 50px;
+  width: inherit;
+  padding-left: 10px;
+  background-color: rgba(192, 192, 192, 0.274);
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 5px;
+}
+
+.formInput::placeholder {
+  opacity: 1;
+  color: rgb(226, 226, 226);
+}
+
+.errorMessage {
+  color: red;
+  margin: 5px 5px;
+  font-size: 10px;
+}

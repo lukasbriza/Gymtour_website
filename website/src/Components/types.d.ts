@@ -40,3 +40,8 @@ type BigText = {
   scale: number;
   ref: any;
 };
+
+type Underliner = {
+  id?: string;
+  width: string;
+};

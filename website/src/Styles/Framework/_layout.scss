@@ -41,6 +41,9 @@ body {
 
 #root {
   width: 100%;
+  background: rgb(47, 47, 47);
+  display: flex;
+  justify-content: center;
   @include minHeightWidth;
 }
 
@@ -48,6 +51,7 @@ body {
   @include maxHeightWidth;
   @include minHeightWidth;
   position: relative;
+  max-width: $maxWidth;
 }
 
 ////////////////////////////////////////////////////////
@@ -55,10 +59,14 @@ body {
 .menu {
   max-width: $maxWidth;
   display: grid;
+  width: 100%;
   min-width: 360px;
-  grid-template-columns: 15px 1fr min-content 1fr 15px;
+  grid-template-columns: 15px 1fr min-content 1fr 25px;
   grid-template-areas: ". . logo hamburger .";
 
+  @include mq($until: $maxWidth) {
+    width: 100vw;
+  }
   @include mq($from: tablet) {
     grid-template-columns: 15px min-content 1fr min-content 15px;
     grid-template-areas: ". logo . menuOffer .";
@@ -215,7 +223,99 @@ body {
   }
 }
 
-#ContactSection {
+#RegisterSection {
   max-width: $maxWidth;
   @include minHeightWidth;
+
+  .layer {
+    display: grid;
+    grid-template-rows: 1fr 55px min-content min-content 1fr;
+    grid-template-areas:
+      "."
+      "header"
+      "paragraph"
+      "form"
+      ".";
+  }
+}
+
+.registerHeaderWrapper {
+  h2 {
+    font-size: clamp(18px, 7vw, 40px);
+  }
+  grid-area: header;
+}
+.registerParagraph {
+  font-size: clamp(15px, 3vw, 17px);
+  margin-bottom: 50px;
+  padding-top: 20px;
+  grid-area: paragraph;
+}
+.registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-self: center;
+
+  width: 70%;
+  grid-area: form;
+
+  @include mq($from: tablet) {
+    #registerForm {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "input1 input2"
+        "input3 input3"
+        "button button";
+    }
+    width: 85%;
+    max-width: 900px;
+  }
+}
+
+.inputWrapper:nth-child(1) {
+  @include mq($from: tablet) {
+    padding-right: 10px;
+    grid-area: input1;
+  }
+}
+.inputWrapper:nth-child(2) {
+  @include mq($from: tablet) {
+    padding-left: 10px;
+    grid-area: input2;
+  }
+}
+.inputWrapper:nth-child(3) {
+  @include mq($from: tablet) {
+    grid-area: input3;
+  }
+}
+
+.registerFormButton {
+  @include mq($from: tablet) {
+    grid-area: button;
+  }
+}
+
+////////////////////////////////////////////////////////
+//FOOTER//
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.followUs {
+  .logoWrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+.gymtour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.copyRight {
 }

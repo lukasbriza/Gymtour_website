@@ -1,0 +1,28 @@
+button[type="submit"] {
+  width: 100%;
+  padding: 20px 0px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: $submitButton;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+button[type="submit"]:hover {
+  background: rgb(10, 21, 88);
+
+  transition-property: background;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+}
+
+button[type="submit"]:active {
+  background: $submitButton;
+  transition-property: background;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}

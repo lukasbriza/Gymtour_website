@@ -82,7 +82,6 @@ const Menu = () => {
     const menuMobileClassList = classListMaker([
       "absolute",
       "topZ",
-      "stretchX",
       "menu",
     ]);
 
@@ -113,7 +112,6 @@ const Menu = () => {
     const menuPcClassList = classListMaker([
       "absolute",
       "topZ",
-      "stretchX",
       "menu",
     ]);
 

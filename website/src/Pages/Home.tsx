@@ -7,7 +7,7 @@ import main from '../Images/main.webp'
 import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
 //CONTEXT//
-import { AnimationContext } from "../App/Context"
+import { AnimationContext, AppContext } from "../App/Context"
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 
@@ -54,9 +54,12 @@ const MainSection = () => {
     //////////////////////////////////////////////////
     //STATE//
     const [showLogo, setShowLogo] = useState<boolean>(true)
+    const [logoScale, setLogoScale] = useState<number>(0.7)
+    const [textScale, setTextScale] = useState<number>(0.5)
     //////////////////////////////////////////////////
     //VARIABLES//
     const anContext: any = useContext(AnimationContext);
+    const appContext: any = useContext(AppContext)
 
     const bigLogoWrapperClass = classListMaker(["relative", "stretchX"])
     const bigLogoClasses = classListMaker(["relative"])
@@ -133,6 +136,19 @@ const MainSection = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [showLogo])
     //////////////////////////////////////////////////
+    //LOGO SCALE LOGIC//
+    useEffect(() => {
+        switch (appContext.breakPoint) {
+            case "fromMobile":
+                setLogoScale(0.5)
+                setTextScale(0.3)
+                break;
+            default:
+                setLogoScale(0.7)
+                setTextScale(0.5)
+        }
+    }, [appContext.breakPoint])
+    //////////////////////////////////////////////////
     return (
         <>
             <div
@@ -143,14 +159,14 @@ const MainSection = () => {
                 <div className={bigLogoClasses}>
                     <BigLogo
                         id="bigLogo"
-                        scale={0.7}
+                        scale={logoScale}
                         ref={pathRef}
                     />
                 </div>
                 <div className={bigTextClasses}>
                     <BigText
                         id="bigText"
-                        scale={0.5}
+                        scale={textScale}
                         ref={textRef}
                     />
                 </div>
