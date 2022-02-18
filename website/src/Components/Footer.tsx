@@ -54,7 +54,7 @@ const Footer = () => {
                 </div>
                 {gymtourLinks}
             </section>
-            <section className={copyRightClasses}><a href="https://github.com/lukasbriza" rel="noreferrer" target="_blank">© {new Date().getFullYear()} Lukáš Bříza</a></section>
+            <section className={copyRightClasses}><a href="https://github.com/lukasbriza" rel="noreferrer" target="_blank">© {new Date().getFullYear()} Lukáš Bříza Web Development</a></section>
         </footer>
     )
 }

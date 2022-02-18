@@ -425,6 +425,21 @@ body {
           align-items: center;
 }
 
+@media (min-width: 47.5em) {
+  .footer {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: 1fr 60px;
+        grid-template-rows: 1fr 60px;
+        grid-template-areas: "section1 section2" "copyright copyright";
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: start;
+  }
+}
+
 .followUs .logoWrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -432,6 +447,22 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+@media (min-width: 47.5em) {
+  .followUs {
+    grid-area: section1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
 }
 
 .gymtour {
@@ -445,6 +476,20 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media (min-width: 47.5em) {
+  .gymtour {
+    grid-area: section2;
+  }
+}
+
+@media (min-width: 47.5em) {
+  .copyRight {
+    grid-area: copyright;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .center {
@@ -1084,6 +1129,12 @@ body {
 .copyRight {
   margin-top: 25px;
   margin-bottom: 10px;
+}
+
+.copyRight a {
+  font-size: 0.7rem;
+  text-decoration: none;
+  color: white;
 }
 
 .icon {
