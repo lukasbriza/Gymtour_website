@@ -20,8 +20,9 @@ router
   })
   .get((req, res) => {
     //some ABL -functions
+  })
+  .delete((req, res) => {
+    //some ABL -functions
   });
-
-router.route("/remove").post((req, res) => {});
 ////////////////////////////////////////////////////////////////
 module.exports = router;

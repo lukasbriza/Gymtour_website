@@ -11,7 +11,7 @@ const controllSchema = require("../Schemas/schemaExampleAjv");
 ////////////////////////////////////////////////////////////////
 //ROUTES//
 router
-  .route("/fitness")
+  .route("/login")
   .post((req, res) => {
     //some ABL -functions
   })

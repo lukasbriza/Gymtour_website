@@ -14,16 +14,19 @@ router
   .route("/user")
   .post((req, res) => {
     //some ABL -functions
+    res.send("post");
   })
   .put((req, res) => {
     //some ABL -functions
+    res.send("put");
   })
   .get((req, res) => {
     //some ABL -functions
+    res.send("get");
+  })
+  .delete((req, res) => {
+    //some ABL -functions
+    res.send("delete");
   });
-
-router.route("/remove").post((req, res) => {
-  //some ABL -functions
-});
 ////////////////////////////////////////////////////////////////
 module.exports = router;
