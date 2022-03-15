@@ -1,20 +1,39 @@
+const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-let objectId = new mongoose.Types.ObjectId().toString();
-
 const userSchema = new Schema({
-  _id: objectId,
-  userName: { type: String, required: true },
+  _id: { type: ObjectId },
+  username: { type: String, required: true },
   password: { type: String, required: true },
+  email: { type: String, required: true },
   fitnessOwned: [
-    { fitnessId: { type: String, required: false, default: null } },
+    {
+      _id: false,
+      required: false,
+      fitnessId: { type: String, required: false },
+    },
   ],
-  coachOwnded: [{ coachId: { type: String, required: false, default: null } }],
-  token: { type: String, required: false, default: null },
-  isAdmin: { type: Boolean, required: false, default: false },
+  coachOwned: [
+    {
+      _id: false,
+      required: false,
+      coachId: { type: String, required: false },
+    },
+  ],
+  isAdmin: { type: Boolean, required: true, default: false },
+  agreement: {
+    terms: {
+      status: { type: Boolean, required: true },
+      awarded: { type: Date, default: Date.now().toLocaleString() },
+    },
+    dataProcessinfForPropagation: {
+      status: { type: Boolean, required: true },
+      awarded: { type: Date, default: Date.now().toLocaleString() },
+    },
+  },
 });
 
-const UserModel = mongoose.model("User", userSchema);
+const UserModel = mongoose.model("User", userSchema, "users");
 
 module.exports = { userSchema, UserModel };

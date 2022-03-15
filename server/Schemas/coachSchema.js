@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
-let objectId = new mongoose.Types.ObjectId().toString();
+const { ObjectId } = require("mongodb");
 
 const contactSchema = new Schema({
   tel: { type: Number, required: false, default: null },
-  mobile: { type: Number, required: true, default: null },
-  email: { type: String, required: true, default: null },
-  web: { type: String, required: true, default: null },
+  mobile: { type: Number, required: false, default: null },
+  email: { type: String, required: true },
+  web: { type: String, required: false, default: null },
   facebook: { type: String, required: false, default: null },
   twitter: { type: String, required: false, default: null },
   google: { type: String, required: false, default: null },
@@ -15,16 +14,23 @@ const contactSchema = new Schema({
   youtube: { type: String, required: false, default: null },
 });
 
-const filters = new Schema({});
+const filters = new Schema({
+  gender: { type: Number, required: true },
+  specialization: [{ type: Number, required: true }],
+  others: [{ type: Number, required: false }],
+});
 
 const coachSchema = new mongoose.Schema({
-  _id: objectId,
-  name: { type: String, required: true, default: null },
+  _id: { type: ObjectId },
+  name: { type: String, required: true },
   alias: { type: String, required: false, default: null },
-  workPlace: { type: String, required: true, default: null },
-  town: { type: String, required: true, default: null },
-  street: { type: String, required: true, default: null },
+  workPlace: { type: String, required: true },
+  town: { type: Number, required: true },
+  region: { type: Number, required: true },
+  street: { type: String, required: true },
+  priceLevel: { type: Number, required: true },
   contact: contactSchema,
+  filters: filters,
   descriptionBasic: {
     type: String,
     required: true,
@@ -38,16 +44,21 @@ const coachSchema = new mongoose.Schema({
   agreement: {
     terms: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: Date.now() },
+      awarded: { type: Date, default: Date.now().toLocaleString() },
     },
     dataProcessinfForPropagation: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: Date.now() },
+      awarded: { type: Date, default: Date.now().toLocaleString() },
     },
   },
   owner: { type: String, required: true },
+  topped: {
+    value: { type: Boolean, reguired: true, default: false },
+    toDate: { type: Date, required: false, default: null },
+  },
+  approved: { type: Boolean, required: true, default: false },
 });
 
-const CoachModel = mongoose.model("Coach", coachSchema);
+const CoachModel = mongoose.model("Coach", coachSchema, "coaches");
 
 module.exports = { coachSchema, CoachModel };
