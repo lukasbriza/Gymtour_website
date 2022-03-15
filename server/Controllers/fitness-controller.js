@@ -3,26 +3,43 @@ const express = require("express");
 const router = express.Router();
 ////////////////////////////////////////////////////////////////
 //ABL - import//
-
+const FitnessAbl = require("../Abl/fitness-abl");
 ////////////////////////////////////////////////////////////////
-//SCHEMA TEMPLATE - import//
-//Ajv schema pro kontrolu vstupu - lze použít při vkládání do db
-const controllSchema = require("../Schemas/schemaExampleAjv");
+//FUNCTIONS//
+const checkAuth = require("../Functions/checkAuth");
+const isAdmin = require("../Functions/isAdmin");
+const {
+  fitnessRemoveValidation,
+  fitnessAddValidation,
+  fitnessUpdateValidation,
+  fitnessGetValidation,
+} = require("../Functions/validator");
 ////////////////////////////////////////////////////////////////
 //ROUTES//
 router
   .route("/fitness")
-  .post((req, res) => {
-    //some ABL -functions
+  //ADD FITNESS / WELNESS//
+  .post(checkAuth, fitnessAddValidation, async (req, res) => {
+    const result = await FitnessAbl.create(req, res);
+    res.status(200).send(result);
   })
-  .put((req, res) => {
-    //some ABL -functions
+
+  //UPDATE FITNESS//
+  .put(checkAuth, fitnessUpdateValidation, async (req, res) => {
+    const result = await FitnessAbl.update(req, res);
+    res.status(200).send(result);
   })
-  .get((req, res) => {
-    //some ABL -functions
+
+  //GET WELLNESS//
+  .get(fitnessGetValidation, async (req, res) => {
+    const result = await FitnessAbl.get(req, res);
+    res.status(200).send(result);
   })
-  .delete((req, res) => {
-    //some ABL -functions
+
+  //DELETE WELNESS// + isadmin
+  .delete(checkAuth, isAdmin, fitnessRemoveValidation, async (req, res) => {
+    const result = await FitnessAbl.delete(req, res);
+    res.status(200).send(result);
   });
 ////////////////////////////////////////////////////////////////
 module.exports = router;

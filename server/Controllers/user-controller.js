@@ -3,30 +3,28 @@ const express = require("express");
 const router = express.Router();
 ////////////////////////////////////////////////////////////////
 //ABL - import//
-
+const UserAbl = require("../Abl/user-abl");
 ////////////////////////////////////////////////////////////////
-//SCHEMA TEMPLATE - import//
-//Ajv schema pro kontrolu vstupu - lze použít při vkládání do db
-const controllSchema = require("../Schemas/schemaExampleAjv");
+//FUNCTIONS//
+const checkAuth = require("../Functions/checkAuth");
+const isAdmin = require("../Functions/isAdmin");
+const {
+  updateUservalidation,
+  deleteUservalidation,
+} = require("../Functions/validator");
 ////////////////////////////////////////////////////////////////
 //ROUTES//
 router
   .route("/user")
-  .post((req, res) => {
-    //some ABL -functions
-    res.send("post");
+  //UPDATE USER//
+  .put(checkAuth, updateUservalidation, async (req, res) => {
+    const result = await UserAbl.update(req, res);
+    res.status(200).send(result);
   })
-  .put((req, res) => {
-    //some ABL -functions
-    res.send("put");
-  })
-  .get((req, res) => {
-    //some ABL -functions
-    res.send("get");
-  })
-  .delete((req, res) => {
-    //some ABL -functions
-    res.send("delete");
+  //DELETE USER// - remove owned objects on call not implemented
+  .delete(checkAuth, isAdmin, deleteUservalidation, async (req, res) => {
+    const result = await UserAbl.delete(req, res);
+    res.status(200).send(result);
   });
 ////////////////////////////////////////////////////////////////
 module.exports = router;

@@ -3,26 +3,43 @@ const express = require("express");
 const router = express.Router();
 ////////////////////////////////////////////////////////////////
 //ABL - import//
-
+const CoachAbl = require("../Abl/coach-abl");
 ////////////////////////////////////////////////////////////////
-//SCHEMA TEMPLATE - import//
-//Ajv schema pro kontrolu vstupu - lze použít při vkládání do db
-const controllSchema = require("../Schemas/schemaExampleAjv");
+//FUNCTIONS//
+const checkAuth = require("../Functions/checkAuth");
+const isAdmin = require("../Functions/isAdmin");
+const {
+  coachAddValidation,
+  coachUpdateValidation,
+  coachGetValidation,
+  coachDeleteValidation,
+} = require("../Functions/validator");
 ////////////////////////////////////////////////////////////////
 //ROUTES//
 router
   .route("/coach")
-  .post((req, res) => {
-    //some ABL -functions
+  //ADD COACH//
+  .post(checkAuth, coachAddValidation, async (req, res) => {
+    const result = await CoachAbl.create(req, res);
+    res.status(200).send(result);
   })
-  .put((req, res) => {
-    //some ABL -functions
+
+  //UPDATE COACH//
+  .put(checkAuth, coachUpdateValidation, async (req, res) => {
+    const result = await CoachAbl.update(req, res);
+    res.status(200).send(result);
   })
-  .get((req, res) => {
-    //some ABL -functions
+
+  //GET COACH//
+  .get(coachGetValidation, async (req, res) => {
+    const result = await CoachAbl.get(req, res);
+    res.status(200).send(result);
   })
-  .delete((req, res) => {
-    //some ABL -functions
+
+  //DELETE COACH// + isadmin
+  .delete(checkAuth, isAdmin, coachDeleteValidation, async (req, res) => {
+    const result = await CoachAbl.delete(req, res);
+    res.status(200).send(result);
   });
 ////////////////////////////////////////////////////////////////
 module.exports = router;
