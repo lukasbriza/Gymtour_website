@@ -51,33 +51,49 @@ app.use(
     message: config.rateLimit.message,
   })
 );
+app.use(
+  "/api-admin",
+  rateLimit({
+    max: config.rateLimit.maxRequests,
+    windowMs: config.rateLimit.windowMS,
+    message: config.rateLimit.message,
+  })
+);
+app.use(
+  "/api-notification",
+  rateLimit({
+    max: config.rateLimit.maxRequests,
+    windowMs: config.rateLimit.windowMS,
+    message: config.rateLimit.message,
+  })
+);
 ////////////////////////////////////////////////////////////////
 //MIDDLEWARE//
 app.use(express.urlencoded({ extended: true })); //encode incoming requests
 app.use(express.static(path.join(__dirname, "./Public/build"))); //build location
-
 ////////////////////////////////////////////////////////////////
 //ROUTE-CONTROLL//
 const fitness = require("./Controllers/fitness-controller.js");
 const coach = require("./Controllers/coach-controller.js");
 const user = require("./Controllers/user-controller.js");
 const login = require("./Controllers/login-controller.js");
+const admin = require("./Controllers/admin-controller.js");
 
 app.use("/api-fitness", fitness);
 app.use("/api-coach", coach);
 app.use("/api-user", user);
 app.use("/api-login", login);
+app.use("/api-admin", admin);
 
 ////////////////////////////////////////////////////////////////
 //DATABASE CONNECTION//
 mongoose.connect(
-  process.env.DB_CONNECTION, //přístup do .env => nutno upravit
+  process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Database connected!");
   }
 );
-
 ////////////////////////////////////////////////////////////////
 //RESOLVE DEVELOPMENT STATE//
 app.get("*", (req, res) => {
