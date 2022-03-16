@@ -8,6 +8,11 @@ const notificationSchema = new Schema({
     id: { type: ObjectId, required: true },
     type: { type: String, required: true },
     message: { type: String, required: true },
+    created: {
+      type: Date,
+      required: true,
+      default: new Date(),
+    },
   },
 });
 

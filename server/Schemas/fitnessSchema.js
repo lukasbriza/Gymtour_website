@@ -75,11 +75,11 @@ const fitnessSchema = new Schema({
   agreement: {
     terms: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: Date.now().toLocaleString() },
+      awarded: { type: Date, default: new Date() },
     },
     dataProcessinfForPropagation: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: Date.now().toLocaleString() },
+      awarded: { type: Date, default: new Date() },
     },
   },
   owner: { type: String, required: true },
