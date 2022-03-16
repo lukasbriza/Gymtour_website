@@ -45,6 +45,21 @@ class CoachAbl {
       );
       return;
     }
+    //VALIDATION OF OWNER EXISTENCE//
+    try {
+      const ownerRes = await UserModel.find({ _id: createData.owner });
+      if (ownerRes.length == 0 || ownerRes.length > 1) {
+        throw new Error();
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        new DatabaseError(
+          "Validation of owner existence failed. Please contact administrator.",
+          res,
+          response
+        );
+      }
+    }
     //ADD TO DB//
     let coach;
     try {

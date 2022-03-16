@@ -73,6 +73,36 @@ class NotificationAbl {
     //BUILD RESPONSE//
     return response;
   }
+  async get(req, res) {
+    let response = resBuild();
+    ///////////////////////////////////////////////////////////
+    //INPUT//
+    let query = req.body.get.query;
+    let projection = req.body.get.projection ? req.body.get.projection : null;
+    let options = req.body.get.options ? req.body.get.options : null;
+    let limit = req.body.get.limit ? req.body.get.limit : 50;
+    ///////////////////////////////////////////////////////////
+    //DB CALL//
+    let getRes;
+    try {
+      getRes = await NotificationModel.find(query, projection, options)
+        .limit(limit)
+        .exec();
+      response.data = getRes;
+    } catch (err) {
+      if (err instanceof Error) {
+        new DatabaseError(
+          "Get operation failed. Please contact administrator.",
+          res,
+          response
+        );
+      }
+      throw err;
+    }
+    ///////////////////////////////////////////////////////////
+    //BUILD RESPONSE//
+    return response;
+  }
 }
 
 module.exports = new NotificationAbl();
