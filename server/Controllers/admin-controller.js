@@ -26,13 +26,22 @@ router
 router
   .route("/notification")
   //CREATE NOTIFICATION//
-  .post(checkAuth, notificationCreateValidation, async (req, res) => {
+  .post(notificationCreateValidation, async (req, res) => {
     const result = await NotificationAbl.create(req, res);
     res.status(200).send(result);
   })
   //DELETE NOTIFICATION// + isadmin
-  .delete(checkAuth, notificationDeleteValidation, async (req, res) => {
-    const result = await NotificationAbl.delete(req, res);
+  .delete(
+    checkAuth,
+    isAdmin,
+    notificationDeleteValidation,
+    async (req, res) => {
+      const result = await NotificationAbl.delete(req, res);
+      res.status(200).send(result);
+    }
+  )
+  .get(checkAuth, isAdmin, async (req, res) => {
+    const result = await NotificationAbl.get(req, res);
     res.status(200).send(result);
   });
 ////////////////////////////////////////////////////////////////

@@ -85,7 +85,7 @@ const fitnessSchema = new Schema({
   owner: { type: String, required: true },
   topped: {
     value: { type: Boolean, reguired: true, default: false },
-    toDate: { type: Date || null, required: true, default: null },
+    toDate: { type: Date, required: false, default: null },
   },
   approved: { type: Boolean, required: true, default: false },
 });
