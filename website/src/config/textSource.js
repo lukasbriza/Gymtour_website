@@ -50,7 +50,24 @@ const text = {
           placeholder: { cz: "Email" },
           errorMessage: { cz: "Nespávný tvar emailové adresy." },
         },
+        checkbox1: {
+          label: { cz: "Souhlas s obchodními podmínkami" },
+        },
+        checkbox2: {
+          label: { cz: "Souhlas se zpracováním osobních údajů" },
+        },
         button: { cz: "Registrovat" },
+        modal: {
+          invalidInputs: {
+            cz: "Do formuláře byly zadány nevalidní údaje. Přkontorlujte si je dle nápovědy, nebo kontaktujte administrátora.",
+          },
+          invalidTerms: {
+            cz: "Bez souhlasu s obchodními podmínkami a souhlase se zpracováním údajů se nelze registrovat.",
+          },
+          sucessMsg: {
+            cz: "Váš účet byl úspěšně registrován! Nyní se můžete přihlásit.",
+          },
+        },
       },
     },
   },
@@ -59,6 +76,11 @@ const text = {
       header: { cz: "Sledujte nás" },
     },
     Section2: {
+      header: { cz: "Ostatní" },
+      link1: { cz: "Obchodní podmínky" },
+      link2: { cz: "Zpracování údajů" },
+    },
+    Section3: {
       header: { cz: "Gymtour" },
       link1: { cz: "Hlavní stránka" },
       link2: { cz: "Spolupráce" },

@@ -267,3 +267,65 @@ gsap.registerEffect({
   },
   extendTimeline: true,
 });
+
+//CIRCLE LOADING ANIMATION COMPLETE CIRCLE//
+gsap.registerEffect({
+  name: "loadingComplete",
+  effect: (target, config) => {
+    let tl = gsap.timeline();
+    tl.to(
+      target,
+
+      {
+        borderTopColor: config.colorEnd,
+        borderTopWidth: config.borderWidth,
+        borderRightColor: config.colorEnd,
+        borderRightWidth: config.borderWidth,
+        borderBottomColor: config.colorEnd,
+        borderBottomWidth: config.borderWidth,
+        borderLeftColor: config.colorEnd,
+        borderLeftWidth: config.borderWidth,
+
+        delay: config.delay,
+        duration: config.duration,
+        ease: Power3.easeOut,
+      }
+    );
+    return tl;
+  },
+  defaults: {
+    colorStart: "rgb(38,62,105)",
+    colorEnd: "red",
+    borderWidth: "5px",
+    duration: 2,
+    delay: 1,
+  },
+  extendTimeline: true,
+});
+
+//CIRCLE INFINITE ROTATION//
+gsap.registerEffect({
+  name: "infiniteRotation",
+  effect: (target, config) => {
+    let animation = gsap.fromTo(
+      target,
+      {
+        rotation: config.startRotation,
+      },
+      {
+        rotation: config.endRotation,
+        duration: config.duration,
+        repeat: config.repeat,
+        ease: "linear",
+      }
+    );
+    return animation;
+  },
+  defaults: {
+    startRotation: 0,
+    endRotation: 360,
+    duration: 2,
+    repeat: -1,
+  },
+  extendTimeline: true,
+});

@@ -1,16 +1,19 @@
-import { gsap } from "gsap";
-
-import { Home } from "../Pages/Home";
-import { Crossroad } from "../Pages/Crossroad";
-import { Fitness } from "../Pages/Fitness";
-import { Coach } from "../Pages/Coach";
-import { NotFound } from "../Pages/NotFound";
-import { About } from "../Pages/About";
-import { CoOp } from "../Pages/CoOp";
-import { Contact } from "../Pages/Contact";
+import { gsap, Power2, Power3 } from "gsap";
+import { lazy } from "react";
 import { classListMaker } from "../Functions/classListMaker";
 
 import { text } from "./textSource";
+
+const Home = lazy(() => import("../Pages/Home"));
+const Crossroad = lazy(() => import("../Pages/Crossroad"));
+const Fitness = lazy(() => import("../Pages/Fitness"));
+const Coach = lazy(() => import("../Pages/Coach"));
+const NotFound = lazy(() => import("../Pages/NotFound"));
+const About = lazy(() => import("../Pages/About"));
+const CoOp = lazy(() => import("../Pages/CoOp"));
+const Contact = lazy(() => import("../Pages/Contact"));
+const BusinessConditions = lazy(() => import("../Pages/BusinessConditions"));
+const DataProcessing = lazy(() => import("../Pages/DataProcessing"));
 
 const config = {
   transitionTimeout: 500,
@@ -28,6 +31,16 @@ const config = {
     aboutUs: { name: "O nás", path: "/about", component: About },
     coOp: { name: "Spolupráce", path: "/coop", component: CoOp },
     contact: { name: "Kontakt", path: "/contact", component: Contact },
+    businessConditions: {
+      name: "Obchodní podmínky",
+      path: "/businessconditions",
+      component: BusinessConditions,
+    },
+    dataProcessing: {
+      name: "Zpracování údajů",
+      path: "/dataprocessing",
+      component: DataProcessing,
+    },
     notFound: { name: "404", path: "*", component: NotFound },
   },
   menuItems: {
@@ -36,12 +49,16 @@ const config = {
     coOp: { name: text.menu.cz[2], path: "/coop", component: CoOp },
     contact: { name: text.menu.cz[3], path: "/contact", component: Contact },
   },
-  footerLinks: [
-    { name: text.footer.Section2.link1.cz, path: "/" },
-    { name: text.footer.Section2.link2.cz, path: "/coop" },
-    { name: text.footer.Section2.link3.cz, path: "/about" },
-    { name: text.footer.Section2.link4.cz, path: "/coach" },
-    { name: text.footer.Section2.link5.cz, path: "/fitness" },
+  footerLinks1: [
+    { name: text.footer.Section2.link1.cz, path: "/businessconditions" },
+    { name: text.footer.Section2.link2.cz, path: "/dataprocessing" },
+  ],
+  footerLinks2: [
+    { name: text.footer.Section3.link1.cz, path: "/" },
+    { name: text.footer.Section3.link2.cz, path: "/coop" },
+    { name: text.footer.Section3.link3.cz, path: "/about" },
+    { name: text.footer.Section3.link4.cz, path: "/coach" },
+    { name: text.footer.Section3.link5.cz, path: "/fitness" },
   ],
   basePageClassList: classListMaker(["relative", "stretch", "minorColor2"]),
 };
@@ -157,7 +174,54 @@ const animationStore = {
       },
     },
   },
-  crossroad: {},
+  crossroad: {
+    modal: {
+      infiniteRotation: (circle) => {
+        let tl = gsap.timeline();
+        tl.infiniteRotation(circle, {
+          startRotation: 0,
+          endRotation: 360,
+          duration: 1,
+        });
+        return tl;
+      },
+      loadingCompleteError: (circle, colorStart, colorEnd, cross) => {
+        gsap.getTweensOf(circle).map((tween) => {
+          return tween.repeat(1);
+        });
+        let tl = gsap.timeline();
+        tl.loadingComplete(circle, {
+          colorStart: colorStart,
+          colorEnd: colorEnd,
+          borderWidth: "5px",
+          duration: 0.5,
+          delay: 0,
+        })
+          .addLabel("crossStart")
+          .to(
+            "#Line_1",
+            {
+              strokeDashoffset: 0,
+              duration: 1,
+              ease: Power3.easeOut,
+            },
+            "crossStart"
+          )
+          .to(
+            "#Line_2",
+            {
+              strokeDashoffset: 0,
+              duration: 1,
+              delay: 0.25,
+              ease: Power3.easeOut,
+            },
+            "crossStart"
+          );
+        return tl;
+      },
+      showMsg: () => {},
+    },
+  },
 };
 
 export { config, animationStore };
