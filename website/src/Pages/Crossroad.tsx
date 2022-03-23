@@ -1,8 +1,10 @@
 import { useEffect, useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button } from '../Components/Button'
 import { Layer } from '../Components/Layer'
 import { Underliner } from '../Components/Underliner'
 import { FormStringInput } from '../Components/FormStringInput'
+import { FormModal } from '../Components/FormModal'
 import { Footer } from '../Components/Footer'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
@@ -11,6 +13,7 @@ import { text } from '../config/textSource'
 import { AnimationContext } from "../App/Context"
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
+import fetchAgent from '../Functions/fetchAgent'
 //IMAGES//
 import fitness from '../Images/fitness.webp'
 import trainer from '../Images/trainer.webp'
@@ -20,7 +23,6 @@ import register from '../Images/register.webp'
 const Crossroad = () => {
     //////////////////////////////////////////////////
     //STATE//
-
     //////////////////////////////////////////////////
     //VARIABLES//
     const anContext: any = useContext(AnimationContext);
@@ -131,6 +133,10 @@ const RegisterPage = () => {
     const [name, setName] = useState({ canSubmit: false, value: "" })
     const [password, setPassword] = useState({ canSubmit: false, value: "" })
     const [email, setEmail] = useState({ canSubmit: false, value: "" })
+    const [terms, setTerms] = useState(false)
+    const [dataProcessing, setDataProcessing] = useState(false)
+
+    const [modal, showModal] = useState<modalType>({ loading: false, sucess: undefined, msg: undefined })
     //////////////////////////////////////////////////
     //VARIABLES//
     const contactPageClasses = classListMaker(["stretchX", "stretchVH", "relative", "RegisterSection"])
@@ -138,7 +144,9 @@ const RegisterPage = () => {
     const registerHeaderWrapper = classListMaker(["centerX", "relative", "registerHeaderWrapper"])
     const registerParagraphClasses = classListMaker(["registerParagraph", "relative", "centerX"])
     const registerFormWrapperClasses = classListMaker(["registerFormWrapper", "centerX", "relative"])
-    const formInputClassName = classListMaker(["formInput"])
+    const formInputClasses = classListMaker(["formInput"])
+    const formTermsClasses = classListMaker(["formTerms relative centerX"])
+    const formCheckboxLinkClasses = classListMaker(["link"])
 
     const errorStyle = {
         borderColor: "red",
@@ -150,8 +158,75 @@ const RegisterPage = () => {
     }
     //////////////////////////////////////////////////
     //FUNCTIONS//
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
+
+        let inputErrorHtml = (
+            <div className="modalErrorObj">
+                <p className="modalErrorHeader">{"409- InputError"}</p>
+                <p className="modalErrorContent">{text.crossroad.RegisterPage.Form.modal.invalidInputs.cz}</p>
+            </div>
+        )
+        let termErrorHtml = (
+            <div className="modalErrorObj">
+                <p className="modalErrorHeader">{"409- InputError"}</p>
+                <p className="modalErrorContent">{text.crossroad.RegisterPage.Form.modal.invalidTerms.cz}</p>
+            </div>
+        )
+
+        //START LOADING ANIMATION//
+        showModal({ loading: true, sucess: undefined, msg: undefined })
+
+        //CONTROL IF INPUTS ARE VALID//
+        if (
+            name.canSubmit === false ||
+            password.canSubmit === false ||
+            email.canSubmit === false
+        ) {
+            //SHOW MODAL, STOP LOADING ANIMATION, SHOW MESSAGES//
+            showModal({ loading: false, sucess: false, msg: inputErrorHtml })
+            console.log(modal)
+            return
+        }
+        if (terms === false || dataProcessing === false) {
+            //SHOW MODAL, STOP LOADING ANIMATION, SHOW MESSAGES//
+            showModal({ loading: false, sucess: false, msg: termErrorHtml })
+            console.log(modal)
+            return
+        }
+        //FETCH DATA AND WAIT FOR RESULT//
+        const fetchResult: any = await fetchAgent.registerUser({
+            username: name.value,
+            password: password.value,
+            email: email.value,
+            terms: terms,
+            dataProcessing: dataProcessing
+        })
+        //HANDLE FETCH ERROR MAP ARRAY//
+        if (fetchResult.errorMap.length > 0) {
+            let msgText = fetchResult.errorMap.map((obj: errorMapObj, index: number) => {
+                let errorHtml = (
+                    <div className="modalErrorObj" key={index}>
+                        <p className="modalErrorHeader" key={index + "a"}>{obj.Error.code + "- " + obj.Error.name}</p>
+                        <p className="modalErrorContent" key={index + "b"}>{obj.Error.message}</p>
+                    </div>
+                )
+                return errorHtml;
+            })
+            showModal({ loading: false, sucess: false, msg: msgText })
+            return
+        }
+        //HANDLE FETCH DATA//
+        if (fetchResult.errorMap.length === 0 && fetchResult.data !== null) {
+            let msgHtml = (
+                [<div className="modalSucessObj" key="1">
+                    <p className="modalSucessContent" key="2">{text.crossroad.RegisterPage.Form.modal.sucessMsg.cz}</p>
+                </div>]
+            )
+            showModal({ loading: false, sucess: true, msg: msgHtml })
+            return
+        }
+
     }
     const handleChange = (input: { canSubmit: boolean, value: string, name: string }) => {
         switch (input.name) {
@@ -181,14 +256,14 @@ const RegisterPage = () => {
                 <div className={registerFormWrapperClasses}>
                     <form action="#RegisterSection" id="registerForm" onSubmit={handleSubmit}>
                         <FormStringInput
-                            className={formInputClassName}
+                            className={formInputClasses}
                             type={"text"}
                             name={"nameInput"}
                             formId={"registerForm"}
                             placeholder={text.crossroad.RegisterPage.Form.input1.placeholder.cz}
                             onChange={(canSubmit: any) => { handleChange(canSubmit) }}
                             required={true}
-                            pattern={'[@+-<>$#"|%!()*]'}
+                            pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
                             errorMessage={text.crossroad.RegisterPage.Form.input1.errorMessage.cz}
                             errorStyle={errorStyle}
                             sucessStyle={sucessStyle}
@@ -196,7 +271,7 @@ const RegisterPage = () => {
                             minLength={5}
                         />
                         <FormStringInput
-                            className={formInputClassName}
+                            className={formInputClasses}
                             type={"password"}
                             name={"passwordInput"}
                             formId={"registerForm"}
@@ -209,7 +284,7 @@ const RegisterPage = () => {
                             minLength={9}
                         />
                         <FormStringInput
-                            className={formInputClassName}
+                            className={formInputClasses}
                             type={"email"}
                             name={"emailInput"}
                             formId={"registerForm"}
@@ -220,12 +295,43 @@ const RegisterPage = () => {
                             errorStyle={errorStyle}
                             sucessStyle={sucessStyle}
                         />
-                        <button className="registerFormButton" type="submit">{text.crossroad.RegisterPage.Form.button.cz}</button>
+                        <div className={formTermsClasses}>
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    className="checkbox"
+                                    id="termsRegistration"
+                                    name="termsRegistration"
+                                    onClick={() => setTerms(!terms)}
+                                />
+                                <label htmlFor="termsRegistration">
+                                    <Link to={config.routes.businessConditions.path} className={formCheckboxLinkClasses}>
+                                        {text.crossroad.RegisterPage.Form.checkbox1.label.cz}
+                                    </Link>
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    className="checkbox"
+                                    id="dataprocessingRegistration"
+                                    name="dataprocessingRegistration"
+                                    onClick={() => setDataProcessing(!dataProcessing)}
+                                />
+                                <label htmlFor="dataprocessingRegistration">
+                                    <Link to={config.routes.dataProcessing.path} className={formCheckboxLinkClasses}>
+                                        {text.crossroad.RegisterPage.Form.checkbox2.label.cz}
+                                    </Link>
+                                </label>
+                            </div>
+                        </div>
+                        <button className="registerFormButton" type="submit" onClick={handleSubmit}>{text.crossroad.RegisterPage.Form.button.cz}</button>
                     </form>
                 </div>
-            </Layer>
-        </section>
+                <FormModal loading={modal.loading} sucess={modal.sucess} msg={modal.msg} />
+            </Layer >
+        </section >
     )
-    //jméno heslo email
 }
-export { Crossroad }
+
+export default Crossroad

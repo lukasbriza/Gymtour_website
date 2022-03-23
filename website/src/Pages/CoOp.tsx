@@ -35,4 +35,4 @@ const CoOp = () => {
     )
 }
 
-export { CoOp }
+export default CoOp

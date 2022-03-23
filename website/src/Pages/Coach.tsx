@@ -34,4 +34,4 @@ const Coach = () => {
     )
 }
 
-export { Coach }
+export default Coach

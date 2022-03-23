@@ -193,4 +193,4 @@ const MainSection = () => {
 
 }
 
-export { Home }
+export default Home

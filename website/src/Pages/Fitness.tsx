@@ -35,4 +35,4 @@ const Fitness = () => {
     )
 }
 
-export { Fitness }
+export default Fitness
