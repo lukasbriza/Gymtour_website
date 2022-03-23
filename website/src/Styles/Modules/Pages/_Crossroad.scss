@@ -155,3 +155,21 @@
   width: 70%;
   text-align: center;
 }
+
+.formTerms {
+  div {
+    input {
+      cursor: pointer;
+    }
+    label {
+      margin-left: 10px;
+    }
+    label:hover {
+      text-decoration: underline;
+    }
+  }
+
+  div:nth-child(1) {
+    margin-bottom: 10px;
+  }
+}

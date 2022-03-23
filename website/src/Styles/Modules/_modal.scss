@@ -1,0 +1,58 @@
+.modalWrapper {
+  background: rgba(253, 251, 241, 0);
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 1fr min-content min-content min-content 1fr;
+  grid-template-areas: "." "anSection" "msgSection" "button" ".";
+}
+
+.animaitonWrapper {
+  grid-area: anSection;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circleContainer {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  .circle {
+    display: block;
+    border-radius: 50%;
+  }
+}
+
+.svgCross {
+  display: initial;
+  $number: 55;
+
+  line:nth-child(1) {
+    stroke-dasharray: $number;
+    stroke-dashoffset: $number;
+  }
+  line:nth-child(2) {
+    stroke-dasharray: $number;
+    stroke-dashoffset: -55;
+  }
+}
+
+.msgWrapper {
+  grid-area: msgSection;
+
+  .modalSucessObj {
+    .modalSucessContent {
+    }
+  }
+
+  .modalErrorObj {
+    .modalErrorHeader {
+    }
+    .modalErrorContent {
+    }
+  }
+}
+
+.modalButton {
+  grid-area: button;
+}

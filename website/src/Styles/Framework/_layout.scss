@@ -263,11 +263,12 @@ body {
   @include mq($from: tablet) {
     #registerForm {
       display: grid;
-      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr min-content 1fr;
       grid-template-columns: 1fr 1fr;
       grid-template-areas:
         "input1 input2"
         "input3 input3"
+        "formTerms formTerms"
         "button button";
     }
     width: 85%;
@@ -293,6 +294,20 @@ body {
   }
 }
 
+.formTerms {
+  grid-area: formTerms;
+  font-size: 12px;
+  div {
+    display: flex;
+    align-items: center;
+    height: 18px;
+  }
+  @include mq($from: tablet) {
+    width: 320px;
+    font-size: 15px;
+  }
+}
+
 .registerFormButton {
   @include mq($from: tablet) {
     grid-area: button;
@@ -306,13 +321,19 @@ body {
   flex-direction: column;
   align-items: center;
 
+  @include mq($until: tablet) {
+    section {
+      left: unset;
+      transform: unset;
+    }
+  }
   @include mq($from: tablet) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 60px;
     grid-template-areas:
-      "section1 section2"
-      "copyright copyright";
+      "section1 section2 section3"
+      "copyright copyright copyright";
     align-items: start;
   }
 }
@@ -329,9 +350,18 @@ body {
     align-items: center;
   }
 }
-.gymtour {
+
+.other {
   @include mq($from: tablet) {
     grid-area: section2;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gymtour {
+  @include mq($from: tablet) {
+    grid-area: section3;
   }
 
   display: flex;

@@ -2,10 +2,10 @@
 /*BASE - Base Variable file along with starting point Mixins and Placeholders.*/
 /*FRAMEWORK - Structure and layout files.*/
 body:before {
-  background-color: #FCF8E3;
-  border-bottom: 1px solid #FBEED5;
-  border-left: 1px solid #FBEED5;
-  color: #C09853;
+  background-color: #fcf8e3;
+  border-bottom: 1px solid #fbeed5;
+  border-left: 1px solid #fbeed5;
+  color: #c09853;
   font: small-caption;
   padding: 3px 6px;
   pointer-events: none;
@@ -376,11 +376,12 @@ body {
   .registerFormWrapper #registerForm {
     display: -ms-grid;
     display: grid;
-    -ms-grid-rows: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr min-content 1fr;
+        grid-template-rows: 1fr 1fr -webkit-min-content 1fr;
+        grid-template-rows: 1fr 1fr min-content 1fr;
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
-        grid-template-areas: "input1 input2" "input3 input3" "button button";
+        grid-template-areas: "input1 input2" "input3 input3" "formTerms formTerms" "button button";
   }
 }
 
@@ -401,6 +402,28 @@ body {
 @media (min-width: 47.5em) {
   .inputWrapper:nth-child(3) {
     grid-area: input3;
+  }
+}
+
+.formTerms {
+  grid-area: formTerms;
+  font-size: 12px;
+}
+
+.formTerms div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 18px;
+}
+
+@media (min-width: 47.5em) {
+  .formTerms {
+    width: 320px;
+    font-size: 15px;
   }
 }
 
@@ -425,15 +448,23 @@ body {
           align-items: center;
 }
 
+@media (max-width: 47.49em) {
+  .footer section {
+    left: unset;
+    -webkit-transform: unset;
+            transform: unset;
+  }
+}
+
 @media (min-width: 47.5em) {
   .footer {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
     -ms-grid-rows: 1fr 60px;
         grid-template-rows: 1fr 60px;
-        grid-template-areas: "section1 section2" "copyright copyright";
+        grid-template-areas: "section1 section2 section3" "copyright copyright copyright";
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: start;
@@ -465,6 +496,25 @@ body {
   }
 }
 
+.other {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (min-width: 47.5em) {
+  .other {
+    grid-area: section2;
+  }
+}
+
 .gymtour {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -480,7 +530,7 @@ body {
 
 @media (min-width: 47.5em) {
   .gymtour {
-    grid-area: section2;
+    grid-area: section3;
   }
 }
 
@@ -625,6 +675,10 @@ body {
   color: white;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .minHeightWidth {
   min-height: 667px;
   min-width: 375px;
@@ -750,7 +804,6 @@ body {
   -ms-grid-column: 1;
   grid-area: button;
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
       align-self: center;
 }
 
@@ -838,7 +891,6 @@ body {
   -ms-grid-column: 1;
   grid-area: button;
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
       align-self: center;
 }
 
@@ -884,6 +936,22 @@ body {
   margin-top: 20px;
   width: 70%;
   text-align: center;
+}
+
+.formTerms div input {
+  cursor: pointer;
+}
+
+.formTerms div label {
+  margin-left: 10px;
+}
+
+.formTerms div label:hover {
+  text-decoration: underline;
+}
+
+.formTerms div:nth-child(1) {
+  margin-bottom: 10px;
 }
 
 .menu {
@@ -1090,31 +1158,31 @@ body {
   width: auto;
 }
 
-.gymtour {
+.linkCol {
   margin-top: 25px;
 }
 
-.gymtour h3 {
+.linkCol h3 {
   font-size: 1.2rem;
   text-transform: uppercase;
   cursor: default;
 }
 
-.gymtour .underliner {
+.linkCol .underliner {
   margin-top: 5px;
 }
 
-.gymtour .link {
+.linkCol .link {
   margin: 2px 0px;
   font-size: 0.9rem;
 }
 
-.gymtour .footerLinkWrapper .underliner {
+.linkCol .footerLinkWrapper .underliner {
   margin-top: 0px;
   height: 1px;
 }
 
-.gymtour .footerLinkWrapper:hover .underliner {
+.linkCol .footerLinkWrapper:hover .underliner {
   width: 90% !important;
   -webkit-transition-property: width;
   transition-property: width;
@@ -1124,6 +1192,12 @@ body {
           transform-origin: center;
   -webkit-transition-timing-function: ease-out;
           transition-timing-function: ease-out;
+}
+
+@media (min-width: 81.25em) {
+  .linkCol {
+    margin-right: auto;
+  }
 }
 
 .copyRight {
@@ -1233,5 +1307,68 @@ button[type="submit"]:active {
           transition-duration: 0.1s;
   -webkit-transition-timing-function: ease-out;
           transition-timing-function: ease-out;
+}
+
+.modalWrapper {
+  background: rgba(253, 251, 241, 0);
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  -ms-grid-rows: 1fr min-content min-content min-content 1fr;
+      grid-template-rows: 1fr -webkit-min-content -webkit-min-content -webkit-min-content 1fr;
+      grid-template-rows: 1fr min-content min-content min-content 1fr;
+      grid-template-areas: "." "anSection" "msgSection" "button" ".";
+}
+
+.animaitonWrapper {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: anSection;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.circleContainer {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.circleContainer .circle {
+  display: block;
+  border-radius: 50%;
+}
+
+.svgCross {
+  display: initial;
+}
+
+.svgCross line:nth-child(1) {
+  stroke-dasharray: 55;
+  stroke-dashoffset: 55;
+}
+
+.svgCross line:nth-child(2) {
+  stroke-dasharray: 55;
+  stroke-dashoffset: -55;
+}
+
+.msgWrapper {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: msgSection;
+}
+
+.modalButton {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: button;
 }
 /*# sourceMappingURL=index.css.map */

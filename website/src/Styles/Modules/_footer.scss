@@ -16,7 +16,7 @@
     width: auto;
   }
 }
-.gymtour {
+.linkCol {
   margin-top: 25px;
 
   h3 {
@@ -48,6 +48,10 @@
       transform-origin: center;
       transition-timing-function: ease-out;
     }
+  }
+
+  @include mq($from: wide) {
+    margin-right: auto;
   }
 }
 .copyRight {
