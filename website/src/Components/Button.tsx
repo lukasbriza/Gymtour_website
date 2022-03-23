@@ -7,7 +7,7 @@ type ButtonProps = {
     initialClass: string,
     hoverClass: string,
     transitionClass?: string,
-    path: string,
+    path?: string,
     text: string
 }
 
@@ -41,24 +41,45 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActive])
-    return (
-        <Link
-            to={props.path}
-            onClick={handleClick}
-            className={`${modificationClass ? modificationClass : ''}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
 
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-        >
-            <div
-                className={`${buttonClass} ${transitionClass ? transitionClass : ''}`}
+    if (props.path !== undefined) {
+        return (
+            <Link
+                to={props.path}
+                onClick={handleClick}
+                className={`${modificationClass ? modificationClass : ''}`}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
             >
-                {text}
+                <div
+                    className={`${buttonClass} ${transitionClass ? transitionClass : ''}`}
+                >
+                    {text}
+                </div>
+            </Link>
+        )
+    } else {
+        return (
+            <div
+                onClick={handleClick}
+                className={`${modificationClass ? modificationClass : ''}`}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+            >
+                <div
+                    className={`${buttonClass} ${transitionClass ? transitionClass : ''}`}
+                >
+                    {text}
+                </div>
             </div>
-        </Link>
-    )
+        )
+    }
 }
 
 export { Button }

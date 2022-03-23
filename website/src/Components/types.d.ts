@@ -41,7 +41,42 @@ type BigText = {
   ref: any;
 };
 
+type Circle = {
+  scale: number;
+  strokecolor: string;
+  strokewidth: number;
+};
+
 type Underliner = {
   id?: string;
   width: string;
+};
+
+type registerUserData = {
+  username: string;
+  password: string;
+  email: string;
+  terms: boolean;
+  dataProcessing: boolean;
+};
+
+type modalType = {
+  loading: boolean;
+  sucess: boolean | undefined;
+  msg: ReactElement<any, any> | undefined;
+};
+
+type registerFetchResult = {
+  data: object | null;
+  errorMap: object[] | [];
+};
+
+type errorMapObj = {
+  Error: {
+    code: number;
+    name: string;
+    message: string;
+    trace: string;
+    date: string;
+  };
 };

@@ -16,12 +16,13 @@ const Footer = () => {
     //////////////////////////////////////////////////
     //VARIABLES//
     const footerClasses = classListMaker(["footer", "stretchX", "relative", "minorColor1Text", "mainColor"])
-    const followUsClasses = classListMaker(["followUs"])
-    const gymtourClasses = classListMaker(["gymtour"])
+    const followUsClasses = classListMaker(["followUs", "relative", "centerX"])
+    const otherClasses = classListMaker(["other", "linkCol", "centerX", "relative"])
+    const gymtourClasses = classListMaker(["gymtour", "linkCol", "centerX", "relative"])
     const copyRightClasses = classListMaker(["copyRight"])
     const logoWrapperClasses = classListMaker(["logoWrapper"])
 
-    const gymtourLinks = config.footerLinks.map((obj, index) => {
+    const gymtourLinks = config.footerLinks2.map((obj, index) => {
         return (
             <div
                 className="footerLinkWrapper"
@@ -30,6 +31,18 @@ const Footer = () => {
                 <Link to={obj.path} className="link">{obj.name}</Link>
                 <Underliner width={"0%"} />
             </div>)
+    })
+
+    const otherLinks = config.footerLinks1.map((obj, index) => {
+        return (
+            <div
+                className="footerLinkWrapper"
+                key={index}
+            >
+                <Link to={obj.path} className="link">{obj.name}</Link>
+                <Underliner width={"0"} />
+            </div>
+        )
     })
     //////////////////////////////////////////////////
     //FUNCTIONS//
@@ -47,9 +60,16 @@ const Footer = () => {
                     <InstagramLogo id="ig" className="icon" fill={"white"} scale={1} />
                 </div>
             </section>
-            <section className={gymtourClasses}>
+            <section className={otherClasses}>
                 <div className="headerWrapper">
                     <h3>{text.footer.Section2.header.cz}</h3>
+                    <Underliner width={"80%"} />
+                </div>
+                {otherLinks}
+            </section>
+            <section className={gymtourClasses}>
+                <div className="headerWrapper">
+                    <h3>{text.footer.Section3.header.cz}</h3>
                     <Underliner width={"80%"} />
                 </div>
                 {gymtourLinks}
