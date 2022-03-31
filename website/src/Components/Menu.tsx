@@ -121,7 +121,12 @@ const Menu = () => {
         className={menuPcClassList}
         style={{ backgroundColor: background, background: background }}
       >
-        <Link className={logoWrapperClass} to={config.routes.mainPage.path}>
+        <Link
+          className={logoWrapperClass}
+          to={config.routes.mainPage.path}
+          onMouseEnter={() => { config.routes.mainPage.component.preload() }}
+          onTouchStart={() => { config.routes.mainPage.component.prleoad() }}
+        >
           <SmallLogo scale={logoScale} className={smallLogoClass} />
           <SmallText scale={textScale} className={smallTextClass} />
         </Link>
@@ -139,24 +144,43 @@ const MenuOffer = (props: MenuOffer) => {
   const [show, setShow] = useState("none");
   const menuItemsClass = classListMaker(["stretchX", "relative", "offerItem"]);
   const menuOffer: any = useRef();
+  const appContext: any = useContext(AppContext)
   /////////////////////////////////////////
   //OFFER SHOW LOGIC//
   useEffect(() => {
     if (props.show === true) {
       setShow("grid");
       animationStore.menu.menuOffer.show();
+      appContext.fn.preloadMenuImg(2000);
     }
     if (props.show === false) {
       setShow("none");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.show]);
+
+  /////////////////////////////////////////
+  //FUNCTIONS//
+  const fetchPages = () => {
+    Object.values(config.routes).forEach((value) => {
+      if (
+        value.path !== "/crossroad" &&
+        value.path !== "/coach" &&
+        value.path !== "/fitness" &&
+        value.path !== "/businessconditions" &&
+        value.path !== "/dataprocessing" &&
+        value.name !== "404"
+      )
+        value.component.preload()
+    })
+  }
   /////////////////////////////////////////
   let menuItems = props.offer.map(
     (obj: { name: string; path: string; component: void }, index) => {
       return (
-        <div className={menuItemsClass} key={index}>
-          <Link to={obj.path}>{obj.name}</Link>
-        </div>
+
+        <Link to={obj.path} className={menuItemsClass} key={index}>{obj.name}</Link>
+
       );
     }
   );
@@ -167,6 +191,8 @@ const MenuOffer = (props: MenuOffer) => {
       className={props.className}
       ref={menuOffer}
       style={{ display: show }}
+      onMouseEnter={() => { fetchPages() }}
+      onTouchStart={() => { fetchPages() }}
     >
       {menuItems}
     </div>
@@ -174,7 +200,7 @@ const MenuOffer = (props: MenuOffer) => {
 };
 
 const MenuLayer = (props: MenuLayer) => {
-
+  const appContext: any = useContext(AppContext)
   const menuItemsClass = classListMaker(["relative", "offerItem", "offerItem-layer"]);
   const menuLayerClass = classListMaker(["stretchVH", "absolute", "top", "right", "mainColor"]);
 
@@ -182,9 +208,28 @@ const MenuLayer = (props: MenuLayer) => {
   /////////////////////////////////////////
   //LAYER ANIMATION//
   useEffect(() => {
-    if (props.show === true) { animationStore.menu.layer.show(menuLayer.current) }
+    if (props.show === true) {
+      fetchPages()
+      animationStore.menu.layer.show(menuLayer.current)
+      appContext.fn.preloadMenuImg();
+    }
     if (props.show === false) { animationStore.menu.layer.hide(menuLayer.current) }
   }, [props.show]);
+  /////////////////////////////////////////
+  //FUNCTIONS//
+  const fetchPages = async () => {
+    Object.values(config.routes).forEach((value) => {
+      if (
+        value.path !== "/crossroad" &&
+        value.path !== "/coach" &&
+        value.path !== "/fitness" &&
+        value.path !== "/businessconditions" &&
+        value.path !== "/dataprocessing" &&
+        value.name !== "404"
+      )
+        value.component.preload()
+    })
+  }
   /////////////////////////////////////////
   let menuItems = props.offer.map(
     (obj: { name: string; path: string; component: void }, index) => {
@@ -195,6 +240,7 @@ const MenuLayer = (props: MenuLayer) => {
       );
     }
   );
+  /////////////////////////////////////////
   return (
     <div id="menuLayer" className={menuLayerClass} ref={menuLayer}>
       <section id="menuOfferItems-wrapper">{menuItems}</section>

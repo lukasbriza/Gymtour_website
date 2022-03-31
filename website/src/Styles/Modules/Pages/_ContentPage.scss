@@ -1,0 +1,21 @@
+.contentPage {
+  position: relative;
+  min-height: 100vh;
+}
+
+.headerSection {
+  h1 {
+    cursor: default;
+    text-transform: uppercase;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

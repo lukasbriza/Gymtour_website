@@ -8,6 +8,7 @@ import { AppContext, AnimationContext } from "../App/Context"
 import { classListMaker } from '../Functions/classListMaker'
 
 const Coach = () => {
+    console.log("loaded")
     //////////////////////////////////////////////////
     //STATE//
 

@@ -1,9 +1,11 @@
 .modalWrapper {
-  background: rgba(253, 251, 241, 0);
-  display: grid;
+  background: rgb(42, 42, 42);
+  display: none;
   justify-items: center;
   grid-template-rows: 1fr min-content min-content min-content 1fr;
   grid-template-areas: "." "anSection" "msgSection" "button" ".";
+  z-index: +1000;
+  position: fixed;
 }
 
 .animaitonWrapper {
@@ -37,22 +39,56 @@
   }
 }
 
+.svgSucess {
+  path {
+    stroke-dasharray: 92;
+    stroke-dashoffset: 92;
+  }
+}
+
 .msgWrapper {
   grid-area: msgSection;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 
   .modalSucessObj {
+    width: 100%;
+    opacity: 0;
     .modalSucessContent {
+      margin: 20px 10px;
+      color: rgb(3, 117, 3);
+      font-weight: 600;
+      text-align: center;
     }
   }
 
   .modalErrorObj {
+    width: 100%;
+    opacity: 0;
     .modalErrorHeader {
+      color: #ff2c2c;
+      text-align: center;
+      font-weight: 600;
     }
     .modalErrorContent {
+      color: #ff2c2c;
+      text-align: center;
     }
   }
 }
 
 .modalButton {
+  margin-top: 30px;
   grid-area: button;
+  opacity: 0;
+  cursor: pointer;
+  .buttonInitial {
+    background-color: #263e69;
+  }
+  .buttonHover {
+    background-color: rgb(10, 21, 88);
+  }
 }

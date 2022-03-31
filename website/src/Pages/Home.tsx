@@ -2,6 +2,7 @@ import { useEffect, useContext, useState, useRef, createRef } from 'react'
 import { Link } from 'react-router-dom'
 import { BigLogo } from '../Components/SVG/BigLogo'
 import { BigText } from '../Components/SVG/BigText'
+
 import main from '../Images/main.webp'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
@@ -12,24 +13,40 @@ import { AnimationContext, AppContext } from "../App/Context"
 import { classListMaker } from '../Functions/classListMaker'
 
 ///////////////////////////////////////////////////////////////////////////////////////
-const Home = ({ history, location }: any) => {
+const Home = () => {
+    const appContext: any = useContext(AppContext)
     //////////////////////////////////////////////////
     //VARIABLES//
     const buttonClasses = classListMaker(["link", "absolute", "centerX"])
     const homeClasses = classListMaker(["stretchVH", "minHeightWidth"])
+    //////////////////////////////////////////////////
+    //FUNCTION//
+    const fetchPages = async () => {
+        config.routes.crossroad.component.preload()
+    }
+    //////////////////////////////////////////////////
+    //PRELOAD - FETCH//
+    useEffect(() => {
+        fetchPages().then(() => {
+            console.log('Crossroad preloaded...')
+        })
+        appContext.fn.preloadCrossroadImg(1000)
+    }, [])
+    //////////////////////////////////////////////////
     //SETUP//
     return (
         <div
             id="Home"
             className={config.basePageClassList + " " + homeClasses}
-            style={{ backgroundImage: `url(${main})` }}
         >
+            <img src={main} alt="homepageImage" />
             <PageHeader />
             <MainSection />
             <Link
                 to={config.routes.crossroad.path}
                 id="homeButton"
                 className={buttonClasses}
+                onMouseEnter={() => { config.routes.crossroad.component.preload() }}
             >
                 {text.home.Button.cz}
             </Link>

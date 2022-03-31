@@ -67,9 +67,19 @@ const text = {
           sucessMsg: {
             cz: "Váš účet byl úspěšně registrován! Nyní se můžete přihlásit.",
           },
+          button: {
+            cz: "Pokračovat",
+          },
         },
       },
     },
+  },
+  fitness: {
+    PageHeader: { cz: "Fitness" },
+    HeaderBackButton: { cz: "Zpět" },
+  },
+  coach: {
+    PageHeader: { cz: "Trenéři" },
   },
   footer: {
     Section1: {

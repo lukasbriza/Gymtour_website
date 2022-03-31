@@ -1,0 +1,37 @@
+.filterSectionWrapper {
+  background-color: $minorColor1;
+  border: 1px solid $minorColor2;
+  height: 100%;
+  padding-top: 15px;
+}
+
+.filterSection {
+}
+
+.filterHeaderWrapper {
+  h2 {
+    font-size: 20px;
+  }
+  .filterArrowWrapper {
+    position: relative;
+    height: 100%;
+    .filterArrowLine {
+      position: relative;
+      background-color: $mainColor;
+      margin: 0px;
+      height: 3px;
+      width: 25px;
+      bottom: 0px;
+    }
+    .filterArrowLine:nth-child(1) {
+      transform-origin: center;
+      transform: rotate(45deg);
+    }
+    .filterArrowLine:nth-child(2) {
+      transform-origin: center;
+      transform: rotate(-45deg);
+    }
+  }
+  .underliner {
+  }
+}

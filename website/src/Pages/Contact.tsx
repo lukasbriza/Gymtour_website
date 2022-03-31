@@ -8,6 +8,7 @@ import { AppContext, AnimationContext } from "../App/Context"
 import { classListMaker } from '../Functions/classListMaker'
 
 const Contact = () => {
+    console.log("loaded")
     //////////////////////////////////////////////////
     //STATE//
 

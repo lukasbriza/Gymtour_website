@@ -52,15 +52,14 @@
 
   transition: background-color 0.5s ease-out;
 
-  a {
-    display: inline-block;
-    padding-left: 15px;
-    padding-right: 15px;
-    text-decoration: none;
-    align-self: center;
-    justify-self: center;
-    color: white;
-  }
+  padding-left: 15px;
+  padding-right: 15px;
+  text-decoration: none;
+  align-self: center;
+  justify-self: center;
+  color: white;
+  height: 100%;
+  align-items: center;
 
   p {
     text-decoration: none;

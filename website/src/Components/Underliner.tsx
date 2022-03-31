@@ -1,6 +1,7 @@
-const Underliner = ({ id, width }: Underliner) => {
+const Underliner = ({ id, width, color }: Underliner) => {
+
     return (
-        <div className="underliner" id={id} style={{ width: width }}></div>
+        <div className="underliner" id={id} style={{ width: width, background: color ? color : "white" }}></div>
     )
 }
 

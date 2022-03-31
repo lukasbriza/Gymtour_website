@@ -34,11 +34,9 @@ export default App;
 
 /*
 TO-DO
+- setup cors policy
+- prepare user login on server Auth0 
 
--crossroad stránka
--lazy load routes viz documentation
--footer
--server data collection preparation
 -log in preparation
 -register form sucess message
 -scrollbar styling

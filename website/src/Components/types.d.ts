@@ -50,6 +50,7 @@ type Circle = {
 type Underliner = {
   id?: string;
   width: string;
+  color?: string;
 };
 
 type registerUserData = {

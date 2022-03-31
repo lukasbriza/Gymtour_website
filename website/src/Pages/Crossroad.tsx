@@ -1,4 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
+import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { Button } from '../Components/Button'
 import { Layer } from '../Components/Layer'
@@ -10,7 +11,7 @@ import { Footer } from '../Components/Footer'
 import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
 //CONTEXT//
-import { AnimationContext } from "../App/Context"
+import { AnimationContext, AppContext } from "../App/Context"
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 import fetchAgent from '../Functions/fetchAgent'
@@ -65,12 +66,19 @@ const FitnessPage = () => {
     const buttonClasses = classListMaker(["crossroadButton"])
     const layerClasses = classListMaker(["stretchY", "stretchX"])
     //////////////////////////////////////////////////
+    //PRELOAD-FETCH//
+    const fetchFitness = async () => {
+        config.routes.fitness.component.preload()
+    }
+    //////////////////////////////////////////////////
     return (
         <section
             id="FitnessSection"
-            style={{ backgroundImage: `url(${fitness})` }}
             className={fitnessPageClasses}
+            onMouseEnter={() => { fetchFitness() }}
+            onTouchStart={() => { fetchFitness() }}
         >
+            <img src={fitness} alt="FitnesBckgImg" />
             <Layer className={layerClasses}>
 
                 <h1 className={fitnessHeaderClasses}>
@@ -102,12 +110,19 @@ const CoachPage = () => {
     const buttonClasses = classListMaker(["crossroadButton"])
     const layerClasses = classListMaker(["stretchY", "stretchX"])
     //////////////////////////////////////////////////
+    //PRELOAD-FETCH//
+    const fetchCoach = async () => {
+        config.routes.coach.component.preload()
+    }
+    //////////////////////////////////////////////////
     return (
         <section
             id="CoachSection"
-            style={{ backgroundImage: `url(${trainer})` }}
             className={coachPageClasses}
+            onMouseEnter={() => { fetchCoach() }}
+            onTouchStart={() => { fetchCoach() }}
         >
+            <img src={trainer} alt="TrainerBckgImg" />
             <Layer className={layerClasses}>
                 <h1 className={coachHeaderClasses}>{text.crossroad.CoachPage.Header.cz}</h1>
                 <div className={coachParagraphClasses}>
@@ -156,6 +171,7 @@ const RegisterPage = () => {
         borderColor: "rgb(0, 180, 0)",
         borderWidth: "3px"
     }
+
     //////////////////////////////////////////////////
     //FUNCTIONS//
     const handleSubmit = async (e: any) => {
@@ -242,9 +258,20 @@ const RegisterPage = () => {
         }
 
     }
+    const handleModalDefault = () => {
+        showModal({ loading: false, sucess: undefined, msg: undefined })
+    }
+    const clearForm = () => {
+        gsap.set(".formInput", { value: "", border: "2px solid transparent" })
+        gsap.set(".checkbox", { checked: false })
+    }
     //////////////////////////////////////////////////
     return (
-        <section id="RegisterSection" className={contactPageClasses} style={{ backgroundImage: `url(${register})` }}>
+        <section
+            id="RegisterSection"
+            className={contactPageClasses}
+        >
+            <img src={register} alt="RegisterBckgImg" />
             <Layer className={layerClasses}>
                 <div className={registerHeaderWrapper}>
                     <h2>{text.crossroad.RegisterPage.Header.cz}</h2>
@@ -328,7 +355,13 @@ const RegisterPage = () => {
                         <button className="registerFormButton" type="submit" onClick={handleSubmit}>{text.crossroad.RegisterPage.Form.button.cz}</button>
                     </form>
                 </div>
-                <FormModal loading={modal.loading} sucess={modal.sucess} msg={modal.msg} />
+                <FormModal
+                    loading={modal.loading}
+                    sucess={modal.sucess}
+                    msg={modal.msg}
+                    callback={handleModalDefault}
+                    clearForm={clearForm}
+                />
             </Layer >
         </section >
     )

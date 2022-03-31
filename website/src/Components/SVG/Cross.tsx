@@ -7,10 +7,10 @@ const Cross = React.forwardRef((
     let vievBox = "0 0 " + (45.422 * props.scale) + " " + (42.03 * props.scale)
     const [show, setShow] = useState("none")
     useEffect(() => {
-        if (props.show === "none") {
+        if (props.show === false) {
             setShow("none");
         }
-        if (props.show === "initial") {
+        if (props.show === true) {
             setShow("initial");
         }
     }, [props.show])
@@ -33,6 +33,7 @@ const Cross = React.forwardRef((
                 y2={41.295 * props.scale}
                 transform="translate(0.339 0.367)"
                 fill="none"
+                strokeLinecap="round"
                 stroke={props.strokecolor}
                 strokeWidth={props.strokewidth}
             />
@@ -43,6 +44,7 @@ const Cross = React.forwardRef((
                 x2={44.744 * props.scale}
                 transform="translate(0.339 0.367)"
                 fill="none"
+                strokeLinecap="round"
                 stroke={props.strokecolor}
                 strokeWidth={props.strokewidth}
             />
@@ -51,8 +53,3 @@ const Cross = React.forwardRef((
 })
 
 export { Cross }
-
-<svg xmlns="http://www.w3.org/2000/svg" width="45.422" height="42.03" viewBox="0 0 45.422 42.03">
-    <line id="Line_1" data-name="Line 1" x2="44.744" y2="41.295" transform="translate(0.339 0.367)" fill="none" stroke="#707070" stroke-width="1" />
-    <line id="Line_2" data-name="Line 2" y1="41.295" x2="44.744" transform="translate(0.339 0.367)" fill="none" stroke="#707070" stroke-width="1" />
-</svg>

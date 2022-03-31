@@ -1,4 +1,28 @@
 @charset "UTF-8";
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 8px;
+}
+
 /*BASE - Base Variable file along with starting point Mixins and Placeholders.*/
 /*FRAMEWORK - Structure and layout files.*/
 body:before {
@@ -105,7 +129,6 @@ body {
   height: 100%;
   min-height: 667px;
   min-width: 375px;
-  position: relative;
   max-width: 2500px;
 }
 
@@ -332,8 +355,8 @@ body {
 }
 
 .registerHeaderWrapper {
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: header;
 }
 
@@ -433,6 +456,85 @@ body {
     -ms-grid-column: 1;
     grid-area: button;
   }
+}
+
+.headerSection {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 70px min-content 15px;
+      grid-template-rows: 70px -webkit-min-content 15px;
+      grid-template-rows: 70px min-content 15px;
+  -ms-grid-columns: 100px 1fr 100px;
+      grid-template-columns: 100px 1fr 100px;
+      grid-template-areas: ". . ." "filter header backButton" ". . .";
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+}
+
+.headerSection .filterIconWrapper {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: filter;
+}
+
+.headerSection h1 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: header;
+  margin: 0px;
+}
+
+.headerSection a {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: backButton;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  margin-bottom: 7px;
+}
+
+.filterSectionWrapper {
+  position: fixed;
+}
+
+.filterHeaderWrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 5% 1fr 30px 5%;
+      grid-template-columns: 5% 1fr 30px 5%;
+  -ms-grid-rows: 30px min-content;
+      grid-template-rows: 30px -webkit-min-content;
+      grid-template-rows: 30px min-content;
+      grid-template-areas: ". header arrow ." ". underliner underliner .";
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+
+.filterHeaderWrapper h2 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: header;
+}
+
+.filterHeaderWrapper .filterArrowWrapper {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: arrow;
+}
+
+.filterHeaderWrapper .underliner {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-area: underliner;
+  margin: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4px;
 }
 
 .footer {
@@ -684,11 +786,24 @@ body {
   min-width: 375px;
 }
 
+.hideScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.hideScrollBar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /*MODULES - Re-usable site elements.*/
-#Home {
-  background-repeat: no-repeat;
+#Home img {
   background-position: center;
-  background-size: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 100%;
+  height: 100vh;
 }
 
 #Home #pageHeader {
@@ -748,6 +863,20 @@ body {
   overflow: auto;
 }
 
+.layer {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+}
+
+.crossroadButton {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: button;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
 .FitnessSection {
   color: white;
   background: #707070;
@@ -756,23 +885,27 @@ body {
   background-size: cover;
 }
 
-.FitnessSection .layer {
-  display: -ms-grid;
-  display: grid;
-  justify-items: center;
+.FitnessSection img {
+  background-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 100%;
+  height: 100vh;
 }
 
-.FitnessSection .layer .fitnessSectionHeader {
+.fitnessSectionHeader {
   text-transform: uppercase;
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: header;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
 }
 
-.FitnessSection .layer .fitnessSectionParagraph {
+.fitnessSectionParagraph {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   grid-area: paragraph;
@@ -787,24 +920,16 @@ body {
 }
 
 @media (min-width: 61.25em) {
-  .FitnessSection .layer .fitnessSectionParagraph {
+  .fitnessSectionParagraph {
     padding: 0px 7vw;
     font-size: 19px;
   }
 }
 
 @media (min-width: 81.25em) {
-  .FitnessSection .layer .fitnessSectionParagraph {
+  .fitnessSectionParagraph {
     padding: 0px 100px;
   }
-}
-
-.FitnessSection .layer .crossroadButton {
-  -ms-grid-row: 4;
-  -ms-grid-column: 1;
-  grid-area: button;
-  -ms-flex-item-align: center;
-      align-self: center;
 }
 
 @media (min-width: 61.25em) {
@@ -843,23 +968,27 @@ body {
   background-size: cover;
 }
 
-.CoachSection .layer {
-  display: -ms-grid;
-  display: grid;
-  justify-items: center;
+.CoachSection img {
+  background-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 100%;
+  height: 100vh;
 }
 
-.CoachSection .layer .coachSectionHeader {
+.coachSectionHeader {
   text-transform: uppercase;
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: header;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
 }
 
-.CoachSection .layer .coachSectionParagraph {
+.coachSectionParagraph {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   grid-area: paragraph;
@@ -874,24 +1003,16 @@ body {
 }
 
 @media (min-width: 61.25em) {
-  .CoachSection .layer .coachSectionParagraph {
+  .coachSectionParagraph {
     padding: 0px 7vw;
     font-size: 19px;
   }
 }
 
 @media (min-width: 81.25em) {
-  .CoachSection .layer .coachSectionParagraph {
+  .coachSectionParagraph {
     padding: 0px 100px;
   }
-}
-
-.CoachSection .layer .crossroadButton {
-  -ms-grid-row: 4;
-  -ms-grid-column: 1;
-  grid-area: button;
-  -ms-flex-item-align: center;
-      align-self: center;
 }
 
 .CoachSection::before {
@@ -910,6 +1031,20 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.RegisterSection img {
+  background-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.RegisterSection .layer {
+  justify-items: unset;
 }
 
 .RegisterSection::before {
@@ -1013,19 +1148,18 @@ body {
   text-decoration: none;
   -webkit-transition: background-color 0.5s ease-out;
   transition: background-color 0.5s ease-out;
-}
-
-.offerItem a {
-  display: inline-block;
   padding-left: 15px;
   padding-right: 15px;
   text-decoration: none;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
+  -ms-grid-row-align: center;
       align-self: center;
   -ms-grid-column-align: center;
       justify-self: center;
   color: white;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .offerItem p {
@@ -1310,14 +1444,15 @@ button[type="submit"]:active {
 }
 
 .modalWrapper {
-  background: rgba(253, 251, 241, 0);
-  display: -ms-grid;
-  display: grid;
+  background: #2a2a2a;
+  display: none;
   justify-items: center;
   -ms-grid-rows: 1fr min-content min-content min-content 1fr;
       grid-template-rows: 1fr -webkit-min-content -webkit-min-content -webkit-min-content 1fr;
       grid-template-rows: 1fr min-content min-content min-content 1fr;
       grid-template-areas: "." "anSection" "msgSection" "button" ".";
+  z-index: +1000;
+  position: fixed;
 }
 
 .animaitonWrapper {
@@ -1360,15 +1495,188 @@ button[type="submit"]:active {
   stroke-dashoffset: -55;
 }
 
+.svgSucess path {
+  stroke-dasharray: 92;
+  stroke-dashoffset: 92;
+}
+
 .msgWrapper {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   grid-area: msgSection;
+  min-height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.msgWrapper .modalSucessObj {
+  width: 100%;
+  opacity: 0;
+}
+
+.msgWrapper .modalSucessObj .modalSucessContent {
+  margin: 20px 10px;
+  color: #037503;
+  font-weight: 600;
+  text-align: center;
+}
+
+.msgWrapper .modalErrorObj {
+  width: 100%;
+  opacity: 0;
+}
+
+.msgWrapper .modalErrorObj .modalErrorHeader {
+  color: #ff2c2c;
+  text-align: center;
+  font-weight: 600;
+}
+
+.msgWrapper .modalErrorObj .modalErrorContent {
+  color: #ff2c2c;
+  text-align: center;
 }
 
 .modalButton {
+  margin-top: 30px;
   -ms-grid-row: 4;
   -ms-grid-column: 1;
   grid-area: button;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.modalButton .buttonInitial {
+  background-color: #263e69;
+}
+
+.modalButton .buttonHover {
+  background-color: #0a1558;
+}
+
+.loadingWrapper {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: #111111;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.loadingCircle {
+  width: 2vw;
+  height: 2vw;
+  margin: 5px;
+  border-radius: 50%;
+  background: white;
+}
+
+.filterIconWrapper {
+  display: inline-block;
+  position: relative;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.filterLine {
+  position: absolute;
+  height: 5px;
+  border-radius: 8px;
+  background: black;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.filterLine:nth-child(1) {
+  top: 3px;
+  width: 100%;
+}
+
+.filterLine:nth-child(2) {
+  top: 11px;
+  width: 70%;
+}
+
+.filterLine:nth-child(3) {
+  top: 19.5px;
+  width: 50%;
+}
+
+.contentPage {
+  position: relative;
+  min-height: 100vh;
+}
+
+.headerSection h1 {
+  cursor: default;
+  text-transform: uppercase;
+}
+
+.headerSection a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+.headerSection a:hover {
+  text-decoration: underline;
+}
+
+.filterSectionWrapper {
+  background-color: white;
+  border: 1px solid #707070;
+  height: 100%;
+  padding-top: 15px;
+}
+
+.filterHeaderWrapper h2 {
+  font-size: 20px;
+}
+
+.filterHeaderWrapper .filterArrowWrapper {
+  position: relative;
+  height: 100%;
+}
+
+.filterHeaderWrapper .filterArrowWrapper .filterArrowLine {
+  position: relative;
+  background-color: black;
+  margin: 0px;
+  height: 3px;
+  width: 25px;
+  bottom: 0px;
+}
+
+.filterHeaderWrapper .filterArrowWrapper .filterArrowLine:nth-child(1) {
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.filterHeaderWrapper .filterArrowWrapper .filterArrowLine:nth-child(2) {
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 /*# sourceMappingURL=index.css.map */

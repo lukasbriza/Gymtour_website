@@ -1,0 +1,15 @@
+prefetch:
+    menu: done
+    home: done
+    crossroad: done
+    coop: x
+    aobut: x
+    businessconditions: x
+    coach: x
+    constact: x
+    dataprocessing: x
+    fitness: x
+
+preloadImg:
+    home: x
+    crossroad: done

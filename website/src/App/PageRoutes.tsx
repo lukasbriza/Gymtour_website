@@ -1,5 +1,6 @@
-import { useEffect, useContext, lazy, Suspense } from 'react'
+import { useEffect, useContext, Suspense } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
+import { Loading } from "../Components/Loading"
 //TRANSITION//
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 //CONFIG//
@@ -7,11 +8,13 @@ import { config } from '../config/mainConfiguration'
 //CONTEXT//
 import { AppContext } from './Context'
 
-const Home = lazy(() => import('../Pages/LazyPages'))
+
 
 const PageRoutes = () => {
+
     const appContext: any = useContext(AppContext)
     const location = useLocation()
+
 
     useEffect(() => {
         appContext.fn.setActualLocation(location.pathname)
@@ -27,15 +30,18 @@ const PageRoutes = () => {
                 key={location.key}
                 classNames={"contextclasses"}
             >
-                <Suspense fallback={<div className="suspense">Loading...</div>}>
+                <Suspense fallback={<Loading />}>
                     <Switch location={location}>
-                        <Route exact path={config.routes.mainPage.path} component={Home} />
+                        <Route exact path={config.routes.mainPage.path} component={config.routes.mainPage.component} />
                         <Route path={config.routes.crossroad.path} component={config.routes.crossroad.component} />
                         <Route path={config.routes.fitness.path} component={config.routes.fitness.component} />
                         <Route path={config.routes.coach.path} component={config.routes.coach.component} />
+                        <Route path={config.routes.businessConditions.path} component={config.routes.businessConditions.component} />
+                        <Route path={config.routes.dataProcessing.path} component={config.routes.dataProcessing.component} />
                         <Route path={config.routes.notFound.path} component={config.routes.notFound.component} />
                     </Switch>
                 </Suspense>
+
             </CSSTransition>
         </TransitionGroup>
     )

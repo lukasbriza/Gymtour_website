@@ -1,19 +1,25 @@
 import { gsap, Power2, Power3 } from "gsap";
-import { lazy } from "react";
 import { classListMaker } from "../Functions/classListMaker";
-
+import { ReactLazyPreload } from "../Functions/ReactLazyPreload.ts";
 import { text } from "./textSource";
 
-const Home = lazy(() => import("../Pages/Home"));
-const Crossroad = lazy(() => import("../Pages/Crossroad"));
-const Fitness = lazy(() => import("../Pages/Fitness"));
-const Coach = lazy(() => import("../Pages/Coach"));
-const NotFound = lazy(() => import("../Pages/NotFound"));
-const About = lazy(() => import("../Pages/About"));
-const CoOp = lazy(() => import("../Pages/CoOp"));
-const Contact = lazy(() => import("../Pages/Contact"));
-const BusinessConditions = lazy(() => import("../Pages/BusinessConditions"));
-const DataProcessing = lazy(() => import("../Pages/DataProcessing"));
+///////////////////////////////////////////////////////////////////
+//CODE PSLIT ON ROUTES//
+const Home = ReactLazyPreload(() => import("../Pages/Home"));
+const Crossroad = ReactLazyPreload(() => import("../Pages/Crossroad"));
+const Fitness = ReactLazyPreload(() => import("../Pages/Fitness"));
+const Coach = ReactLazyPreload(() => import("../Pages/Coach"));
+const NotFound = ReactLazyPreload(() => import("../Pages/NotFound"));
+const About = ReactLazyPreload(() => import("../Pages/About"));
+const CoOp = ReactLazyPreload(() => import("../Pages/CoOp"));
+const Contact = ReactLazyPreload(() => import("../Pages/Contact"));
+const BusinessConditions = ReactLazyPreload(() =>
+  import("../Pages/BusinessConditions")
+);
+const DataProcessing = ReactLazyPreload(() =>
+  import("../Pages/DataProcessing")
+);
+///////////////////////////////////////////////////////////////////
 
 const config = {
   transitionTimeout: 500,
@@ -24,7 +30,11 @@ const config = {
     wide: 1300,
   },
   routes: {
-    mainPage: { name: "Hlavní stránka", path: "/", component: Home },
+    mainPage: {
+      name: "Hlavní stránka",
+      path: "/",
+      component: Home,
+    },
     crossroad: { name: "Rozcestí", path: "/crossroad", component: Crossroad },
     fitness: { name: "Fitness", path: "/fitness", component: Fitness },
     coach: { name: "Trenéři", path: "/coach", component: Coach },
@@ -176,18 +186,40 @@ const animationStore = {
   },
   crossroad: {
     modal: {
+      show: (modal) => {
+        let tl = gsap.timeline();
+        tl.fadeIn(modal, {
+          stagger: 0,
+          delay: 0,
+          displayInitial: "none",
+          displayAfter: "grid",
+          duration: 0.5,
+        });
+        return tl;
+      },
+      hide: (modal) => {
+        let tl = gsap.timeline();
+        tl.fadeOff(modal, {
+          delay: 0,
+          stagger: 0,
+          duration: 0.3,
+          displayInitial: "grid",
+          displayAfter: "none",
+        });
+        return tl;
+      },
       infiniteRotation: (circle) => {
         let tl = gsap.timeline();
         tl.infiniteRotation(circle, {
           startRotation: 0,
           endRotation: 360,
-          duration: 1,
+          duration: 0.5,
         });
         return tl;
       },
-      loadingCompleteError: (circle, colorStart, colorEnd, cross) => {
+      loadingCompleteError: (circle, colorStart, colorEnd, callback) => {
         gsap.getTweensOf(circle).map((tween) => {
-          return tween.repeat(1);
+          return tween.repeat(2);
         });
         let tl = gsap.timeline();
         tl.loadingComplete(circle, {
@@ -195,7 +227,7 @@ const animationStore = {
           colorEnd: colorEnd,
           borderWidth: "5px",
           duration: 0.5,
-          delay: 0,
+          delay: 1.25,
         })
           .addLabel("crossStart")
           .to(
@@ -203,7 +235,11 @@ const animationStore = {
             {
               strokeDashoffset: 0,
               duration: 1,
+              delay: -0.5,
               ease: Power3.easeOut,
+              onComplete: () => {
+                callback();
+              },
             },
             "crossStart"
           )
@@ -212,14 +248,76 @@ const animationStore = {
             {
               strokeDashoffset: 0,
               duration: 1,
-              delay: 0.25,
+              delay: -0.25,
               ease: Power3.easeOut,
             },
             "crossStart"
           );
+      },
+      loadingCompleteSucess: (
+        circle,
+        colorStart,
+        colorEnd,
+        sucess,
+        callback
+      ) => {
+        gsap.getTweensOf(circle).map((tween) => {
+          return tween.repeat(3);
+        });
+        let tl = gsap.timeline();
+        tl.loadingComplete(circle, {
+          colorStart: colorStart,
+          colorEnd: colorEnd,
+          borderWidth: "5px",
+          duration: 0.5,
+          delay: 1.25,
+        })
+          .addLabel("sucessStart")
+          .to(sucess, {
+            strokeDashoffset: 0,
+            duration: 1,
+            ease: Power3.easeOut,
+          })
+          .then(() => {
+            callback();
+          });
+      },
+      showMsgBtn: (messageSection, button) => {
+        let tl = gsap.timeline();
+        tl.fadeIn(messageSection.children, {
+          stagger: 0.3,
+          duration: 0.5,
+          displayInitial: "initial",
+          displayAfter: "initial",
+        }).fadeIn(button, {
+          duration: 0.5,
+          delay: 0.25,
+          displayInitial: "initial",
+          displayAfter: "initial",
+        });
+      },
+    },
+  },
+  fitness: {
+    filter: {
+      show: (wrapper) => {
+        let tl = gsap.timeline();
+        tl.filterOn(wrapper, {
+          widthFrom: "0%",
+          widthTo: "100%",
+          widthDuration: 2,
+        });
         return tl;
       },
-      showMsg: () => {},
+      hide: (wrapper) => {
+        let tl = gsap.timeline();
+        tl.filterOff(wrapper, {
+          widthFrom: "100%",
+          widthTo: "0%",
+          widthDuration: 1.5,
+        });
+        return tl;
+      },
     },
   },
 };

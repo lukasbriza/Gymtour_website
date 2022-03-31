@@ -1,4 +1,5 @@
 const DataProcessing = () => {
+    console.log("loaded")
     return (<></>)
 }
 

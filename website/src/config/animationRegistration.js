@@ -329,3 +329,55 @@ gsap.registerEffect({
   },
   extendTimeline: true,
 });
+
+//FILTER ON//
+gsap.registerEffect({
+  name: "filterOn",
+  effect: (filterWrapper, config) => {
+    let tl = gsap.timeline();
+    tl.addLabel("start").fromTo(
+      filterWrapper,
+      {
+        width: config.widthFrom,
+      },
+      {
+        width: config.widthTo,
+        duration: config.widthDuration,
+        ease: Power2.easeOut,
+      },
+      "start"
+    );
+    return tl;
+  },
+  defaults: {
+    widthFrom: "0%",
+    widthTo: "100%",
+    widthDuration: 1,
+  },
+  extendTimeline: true,
+});
+
+//FILTER ON//
+gsap.registerEffect({
+  name: "filterOff",
+  effect: (filterWrapper, config) => {
+    let tl = gsap.timeline();
+    tl.addLabel("start").fromTo(
+      filterWrapper,
+      {
+        width: config.widthFrom,
+      },
+      {
+        width: config.widthTo,
+        duration: config.widthDuration,
+        ease: Power2.easeOut,
+      }
+    );
+  },
+  defaults: {
+    widthFrom: "100%",
+    widthTo: "0%",
+    widthDuration: 1,
+  },
+  extendTimeline: true,
+});
