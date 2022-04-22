@@ -48,10 +48,10 @@ class UserAbl {
     }
     try {
       update = await UserModel.updateOne({ _id: id }, updateData);
-      if (update.ok) {
+      if (update.modifiedCount == 1 && update.matchedCount == 1) {
         response.data = { updated: true };
       } else {
-        response.data = update;
+        response.data = { updated: false };
         new DatabaseError("Update of object failed.", res, response);
         return;
       }

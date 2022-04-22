@@ -1,8 +1,7 @@
 //DEPENDENCIES//
 const { resBuild } = require("../Functions/responseBuilder");
 const mongoose = require("mongoose");
-const config = require("../Config/securityOptions");
-const validator = require("validator");
+const ImagesAbl = require("./images-abl");
 //SCHEMA//
 const { FitnessModel } = require("../Schemas/fitnessSchema");
 const { UserModel } = require("../Schemas/userSchema");
@@ -75,7 +74,46 @@ class FitnessAbl {
           res,
           response
         );
+        return;
       }
+      throw err;
+    }
+
+    //VALIDATION OF PICTURES ID EXISTENCE//
+    let card = createData.pictures.card;
+    let main = createData.pictures.detail.main;
+    let otherArr = createData.pictures.detail.others;
+
+    const cardResult = await ImagesAbl.getMeta(card, req, res);
+    cardResult.data._id
+      ? null
+      : new DatabaseError(
+          "There is no linked picture in card key. You must add picture first. Contact administrator!",
+          res,
+          response
+        );
+
+    const mainResult = await ImagesAbl.getMeta(main, req, res);
+    mainResult.data._id
+      ? null
+      : new DatabaseError(
+          "There is no linked picture in main key. You must add picture first. Contact administrator!",
+          res,
+          response
+        );
+
+    if (otherArr.length > 0) {
+      await otherArr.forEach(async (id) => {
+        let result = await ImagesAbl.getMeta(id, req, res);
+        if (result.data._id == undefined) {
+          new DatabaseError(
+            "There is no linked picture in others Array. You must add picture first. Contact administrator!",
+            res,
+            response
+          );
+          return;
+        }
+      });
     }
 
     //ADD TO DB//
@@ -87,6 +125,7 @@ class FitnessAbl {
     } catch (err) {
       if (err instanceof Error) {
         new DatabaseError("Fitness saving failed.", res, response);
+        return;
       }
       throw err;
     }
@@ -122,10 +161,71 @@ class FitnessAbl {
     let inputObj = req.body.update;
     let updateRes;
     ///////////////////////////////////////////////////////////
+    //VERIFY UPDATE IMAGES EXISTANCE//
+    let picturesObj = inputObj.pictures;
+    let card = picturesObj.card;
+    let main = picturesObj.detail.main;
+    let others = picturesObj.detail.others;
+
+    if (card == main) {
+      const cardResult = await ImagesAbl.getMeta(card, req, res);
+      cardResult.data._id
+        ? null
+        : new DatabaseError(
+            "There is no linked picture in card key. You have to upload image first!",
+            res,
+            response
+          );
+
+      if (others.length > 0) {
+        await others.forEach(async (id) => {
+          let result = await ImagesAbl.getMeta(id, req, res);
+          result.data._id
+            ? null
+            : new DatabaseError(
+                "There is no linked picture in others key. You have to upload image first!",
+                req,
+                response
+              );
+        });
+      }
+    } else {
+      const cardResult = await ImagesAbl.getMeta(card, req, res);
+      const mainResult = await ImagesAbl.getMeta(main, req, res);
+
+      if (others.length > 0) {
+        await others.forEach(async (id) => {
+          let result = await ImagesAbl.getMeta(id, req, res);
+          result.data._id
+            ? null
+            : new DatabaseError(
+                "There is no linked picture in others key. You have to upload image first!",
+                req,
+                response
+              );
+        });
+      }
+
+      cardResult.data._id
+        ? null
+        : new DatabaseError(
+            "There is no linked picture in card key. You have to upload image first!",
+            res,
+            response
+          );
+      mainResult.data._id
+        ? null
+        : new DatabaseError(
+            "There is no linked picture in main key. You have to upload image first!",
+            res,
+            response
+          );
+    }
+    ///////////////////////////////////////////////////////////
     //DB CALL//
     try {
       updateRes = await FitnessModel.updateOne({ _id: inputObj._id }, inputObj);
-      if (updateRes.nModified === 1 && updateRes.ok === 1) {
+      if (updateRes.modifiedCount == 1 && updateRes.matchedCount == 1) {
         response.data.id = inputObj._id;
         response.data.updated = true;
       } else {
@@ -182,9 +282,63 @@ class FitnessAbl {
     response.data = [];
     ///////////////////////////////////////////////////////////
     //INPUT//
-    const ids = req.body.delete;
+    const ids = req.body.delete._id;
     ///////////////////////////////////////////////////////////
     //DB CALL//
+    //REMOVE PICTURES LINKED TO FITNESS FROM DB//
+    req.body.remove = { _id: [] };
+    console.log(req.body.remove);
+    try {
+      for (let i = 0; ids.length > i; i++) {
+        const pictureObj = await FitnessModel.findOne(
+          { _id: ids[i] },
+          "pictures"
+        );
+        console.log(pictureObj);
+
+        let removeCall = async (req, res) => {
+          return await ImagesAbl.remove(req, res);
+        };
+
+        if (pictureObj.pictures.card == pictureObj.pictures.detail.main) {
+          //CARD AND MAIN PICTURES ARE SAME//
+          req.body.remove._id.push(pictureObj.pictures.card);
+          pictureObj.pictures.detail.others.forEach((id) => {
+            req.body.remove._id.push(id);
+          });
+          let result = await removeCall(req, res);
+          //VALIDATION//
+          if (result.data.filesDeleted == 0) {
+            throw new Error("Files deleted: " + result.data.filesDeleted);
+          }
+        } else {
+          //CARD AND MAIN PICTURES ARE NOT SAME//
+          req.body.remove._id.push(pictureObj.pictures.card);
+          req.body.remove._id.push(pictureObj.pictures.detail.main);
+          pictureObj.pictures.detail.others.forEach((id) => {
+            req.body.remove._id.push(id);
+          });
+
+          let result = await removeCall(req, res);
+          //VALIDATION//
+          if (result.data.filesDeleted == 0) {
+            throw new Error("Files deleted: " + result.data.filesDeleted);
+          }
+        }
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        new DatabaseError(
+          "File database call threw ERROR. " +
+            err.message +
+            "... Please contact administrator.",
+          res,
+          response
+        );
+        return;
+      }
+      throw err;
+    }
     //REMOVE FROM USER ARRAY//
     try {
       for (let i = 0; ids.length > i; i++) {

@@ -38,7 +38,7 @@ const registerValidation = (req, res, next) => {
   const registerSchema = Joi.object({
     username: Joi.string()
       .min(5)
-      .pattern(/^[a-zA-Z0-9@+-<>$#|%$ěščřžýáíéůúĚŠČŘŽÝÁÍÉ]+$/)
+      .pattern(/^[a-zA-Z0-9@+-<>$#%$ěščřžýáíéůúĚŠČŘŽÝÁÍÉ]+$/)
       .required(),
     password: Joi.string().min(9).required(),
     email: Joi.string().email().required(),
@@ -73,9 +73,9 @@ const loginValidation = (req, res, next) => {
 const fitnessRemoveValidation = (req, res, next) => {
   let response = resBuild();
   const removeSchema = Joi.object({
-    delete: Joi.array().items(Joi.string().min(10).required()),
+    _id: Joi.array().items(Joi.string().min(10)),
   });
-  const value = removeSchema.validate(req.body, { render: false });
+  const value = removeSchema.validate(req.body.delete, { render: false });
   if (value.error) {
     new ValidationError(value.error.details[0].message, res, response);
   } else {
@@ -143,6 +143,13 @@ const fitnessAddValidation = (req, res, next) => {
     }),
     descriptionBasic: Joi.string().required(),
     descriptionFull: Joi.string(),
+    pistures: Joi.object({
+      card: Joi.string().required(),
+      detail: Joi.object({
+        main: Joi.string().required(),
+        others: Joi.array().items(Joi.string()),
+      }),
+    }),
     agreement: Joi.object({
       terms: Joi.object({
         status: Joi.boolean().required(),
@@ -226,6 +233,13 @@ const fitnessUpdateValidation = (req, res, next) => {
     }),
     descriptionBasic: Joi.string().required(),
     descriptionFull: Joi.string(),
+    pistures: Joi.object({
+      card: Joi.string().required(),
+      detail: Joi.object({
+        main: Joi.string().required(),
+        others: Joi.array().items(Joi.string()),
+      }),
+    }),
   });
   const value = updateSchema.validate(req.body.add, { render: false });
   if (value.error) {
@@ -285,6 +299,13 @@ const coachAddValidation = (req, res, next) => {
     }),
     descriptionBasic: Joi.string().required(),
     descriptionFull: Joi.string(),
+    pistures: Joi.object({
+      card: Joi.string().required(),
+      detail: Joi.object({
+        main: Joi.string().required(),
+        others: Joi.array().items(Joi.string()),
+      }),
+    }),
     agreement: Joi.object({
       terms: Joi.object({
         status: Joi.boolean().required(),
@@ -340,6 +361,13 @@ const coachUpdateValidation = (req, res, next) => {
     }),
     descriptionBasic: Joi.string().required(),
     descriptionFull: Joi.string(),
+    pistures: Joi.object({
+      card: Joi.string().required(),
+      detail: Joi.object({
+        main: Joi.string().required(),
+        others: Joi.array().items(Joi.string()),
+      }),
+    }),
     owner: Joi.string().min(10).required(),
   });
   const value = updateSchema.validate(req.body.update, { render: false });

@@ -20,6 +20,13 @@ const filters = new Schema({
   others: [{ type: Number, required: false }],
 });
 
+const picturesIds = {
+  card: { type: String, required: true },
+  detail: {
+    main: { type: String, required: true },
+    others: { type: String, required: true, default: [] },
+  },
+};
 const coachSchema = new mongoose.Schema({
   _id: { type: ObjectId },
   name: { type: String, required: true },
@@ -41,6 +48,7 @@ const coachSchema = new mongoose.Schema({
     required: false,
     default: null,
   },
+  pictures: picturesIds,
   agreement: {
     terms: {
       status: { type: Boolean, required: true },

@@ -51,7 +51,14 @@ const filters = new Schema({
   others: [{ type: Number, required: false }],
 });
 
-//chybí fotografie - binary data
+const picturesIds = {
+  card: { type: String, required: true },
+  detail: {
+    main: { type: String, required: true },
+    others: { type: [String], required: true, default: [] },
+  },
+};
+
 const fitnessSchema = new Schema({
   _id: { type: ObjectId },
   name: { type: String, required: true },
@@ -72,6 +79,7 @@ const fitnessSchema = new Schema({
     required: false,
     default: null,
   },
+  pictures: picturesIds,
   agreement: {
     terms: {
       status: { type: Boolean, required: true },

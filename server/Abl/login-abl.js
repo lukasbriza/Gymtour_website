@@ -63,7 +63,10 @@ class LoginAbl {
         },
       });
       await user.save();
-      response.data = user;
+      response.data = {
+        registered: true,
+        email: user.email,
+      };
     } catch (err) {
       //DB CALL VALIDATION//
       if (err instanceof Error) {
