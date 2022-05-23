@@ -14,7 +14,7 @@ import { classListMaker } from '../Functions/classListMaker'
 
 ///////////////////////////////////////////////////////////////////////////////////////
 const Home = () => {
-    const appContext: any = useContext(AppContext)
+    const appContext = useContext(AppContext)
     //////////////////////////////////////////////////
     //VARIABLES//
     const buttonClasses = classListMaker(["link", "absolute", "centerX"])
@@ -30,7 +30,7 @@ const Home = () => {
         fetchPages().then(() => {
             console.log('Crossroad preloaded...')
         })
-        appContext.fn.preloadCrossroadImg(1000)
+        appContext?.fn.preloadCrossroadImg(1000)
     }, [])
     //////////////////////////////////////////////////
     //SETUP//
@@ -75,8 +75,8 @@ const MainSection = () => {
     const [textScale, setTextScale] = useState<number>(0.5)
     //////////////////////////////////////////////////
     //VARIABLES//
-    const anContext: any = useContext(AnimationContext);
-    const appContext: any = useContext(AppContext)
+    const anContext = useContext(AnimationContext);
+    const appContext = useContext(AppContext)
 
     const bigLogoWrapperClass = classListMaker(["relative", "stretchX"])
     const bigLogoClasses = classListMaker(["relative"])
@@ -85,18 +85,18 @@ const MainSection = () => {
     const homeHeaderClasses = classListMaker(["homeHeader"])
     const homeHeaderWrapperClasses = classListMaker(["headerWrapper"])
 
-    const bigLogoWrapper: any = useRef()
-    const pathRef: any = createRef()
-    const gRef: any = useRef()
-    const yRef: any = useRef()
-    const mRef: any = useRef()
-    const tRef: any = useRef()
-    const oRef: any = useRef()
-    const uRef: any = useRef()
-    const rRef: any = useRef()
+    const bigLogoWrapper = useRef<HTMLDivElement>(null)
+    const pathRef = useRef<SVGPathElement>(null)
+    const gRef = useRef<SVGPathElement>(null)
+    const yRef = useRef<SVGPathElement>(null)
+    const mRef = useRef<SVGPathElement>(null)
+    const tRef = useRef<SVGPathElement>(null)
+    const oRef = useRef<SVGPathElement>(null)
+    const uRef = useRef<SVGPathElement>(null)
+    const rRef = useRef<SVGPathElement>(null)
     const textRef: any = useRef({ gRef, yRef, mRef, tRef, oRef, uRef, rRef })
 
-    const header: any = useRef()
+    const header = useRef<HTMLDivElement>(null)
 
     //////////////////////////////////////////////////
     //ANIMATIONS//
@@ -105,7 +105,7 @@ const MainSection = () => {
     //MAIN HEADER ANIMATION LOGIC//
     //SMALL LOGO ANIMATION LOGIC//
     useEffect(() => {
-        if (anContext.bigLogoPlayed === false) {
+        if (anContext?.bigLogoPlayed === false) {
 
             animationStore.home.logo.show(
                 bigLogoWrapper.current,
@@ -123,7 +123,7 @@ const MainSection = () => {
                 anContext.fn.setBigLogoPlayed
             )
         }
-        else if (anContext.bigLogoPlayed === true && anContext.smallLogoPlayed === false) {
+        else if (anContext?.bigLogoPlayed === true && anContext.smallLogoPlayed === false) {
             animationStore.menu.logo.logoIn();
             setTimeout(() => {
                 animationStore.menu.logo.logoTextIn();
@@ -131,7 +131,7 @@ const MainSection = () => {
             animationStore.home.mainHeader.show()
             anContext.fn.setSmallLogoPlayed(true)
         }
-        else if (anContext.bigLogoPlayed === true && anContext.smallLogoPlayed === true) {
+        else if (anContext?.bigLogoPlayed === true && anContext.smallLogoPlayed === true) {
             animationStore.home.mainHeader.show()
             anContext.fn.setSmallLogoPlayed(true)
         }
@@ -141,7 +141,7 @@ const MainSection = () => {
     //MAIN HEADER AND SMALL LOGO LOGIC//
     useEffect(() => {
         if (showLogo === false) {
-            if (anContext.smallLogoPlayed === false) {
+            if (anContext?.smallLogoPlayed === false) {
                 animationStore.menu.logo.logoIn();
                 setTimeout(() => {
                     animationStore.menu.logo.logoTextIn();
@@ -155,7 +155,7 @@ const MainSection = () => {
     //////////////////////////////////////////////////
     //LOGO SCALE LOGIC//
     useEffect(() => {
-        switch (appContext.breakPoint) {
+        switch (appContext?.breakPoint) {
             case "fromMobile":
                 setLogoScale(0.5)
                 setTextScale(0.3)
@@ -164,7 +164,7 @@ const MainSection = () => {
                 setLogoScale(0.7)
                 setTextScale(0.5)
         }
-    }, [appContext.breakPoint])
+    }, [appContext?.breakPoint])
     //////////////////////////////////////////////////
     return (
         <>

@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { Button } from '../Components/Button'
@@ -174,7 +174,7 @@ const RegisterPage = () => {
 
     //////////////////////////////////////////////////
     //FUNCTIONS//
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
         let inputErrorHtml = (
@@ -288,7 +288,7 @@ const RegisterPage = () => {
                             name={"nameInput"}
                             formId={"registerForm"}
                             placeholder={text.crossroad.RegisterPage.Form.input1.placeholder.cz}
-                            onChange={(canSubmit: any) => { handleChange(canSubmit) }}
+                            onChange={(canSubmit: { canSubmit: boolean, value: string, name: string }) => { handleChange(canSubmit) }}
                             required={true}
                             pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
                             errorMessage={text.crossroad.RegisterPage.Form.input1.errorMessage.cz}
@@ -303,7 +303,7 @@ const RegisterPage = () => {
                             name={"passwordInput"}
                             formId={"registerForm"}
                             placeholder={text.crossroad.RegisterPage.Form.input2.placeholder.cz}
-                            onChange={(canSubmit: any) => { handleChange(canSubmit) }}
+                            onChange={(canSubmit: { canSubmit: boolean, value: string, name: string }) => { handleChange(canSubmit) }}
                             required={true}
                             errorMessage={text.crossroad.RegisterPage.Form.input2.errorMessage.cz}
                             errorStyle={errorStyle}
@@ -316,7 +316,7 @@ const RegisterPage = () => {
                             name={"emailInput"}
                             formId={"registerForm"}
                             placeholder={text.crossroad.RegisterPage.Form.input3.placeholder.cz}
-                            onChange={(canSubmit: any) => { handleChange(canSubmit) }}
+                            onChange={(canSubmit: { canSubmit: boolean, value: string, name: string }) => { handleChange(canSubmit) }}
                             required={true}
                             errorMessage={text.crossroad.RegisterPage.Form.input3.errorMessage.cz}
                             errorStyle={errorStyle}

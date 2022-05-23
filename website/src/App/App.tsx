@@ -41,4 +41,6 @@ TO-DO
 -register form sucess message
 -scrollbar styling
 -form data processing
+
+-update eventlistener logic > cleaner function
 */

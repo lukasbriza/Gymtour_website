@@ -12,14 +12,13 @@ import { AppContext } from './Context'
 
 const PageRoutes = () => {
 
-    const appContext: any = useContext(AppContext)
+    const appContext = useContext(AppContext)
     const location = useLocation()
 
 
     useEffect(() => {
-        appContext.fn.setActualLocation(location.pathname)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [location])
+        appContext?.fn.setActualLocation(location.pathname)
+    }, [appContext?.fn, location])
 
     return (
         <TransitionGroup

@@ -11,7 +11,7 @@ import { text } from '../config/textSource'
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 
-const FormModal = (props: any) => {
+const FormModal = (props: formModalProps) => {
     //////////////////////////////////////////////////
     //STATE//
     const [showCross, setShowCross] = useState(false)
@@ -25,11 +25,11 @@ const FormModal = (props: any) => {
     const msgSectionClasses = classListMaker(["msgWrapper"])
     const buttonClasses = classListMaker(["modalButton"])
 
-    const circleRef: any = useRef();
-    const crossRef = useRef();
-    const sucessRef: any = useRef();
-    const modalRef: any = useRef();
-    const msgSectionRef: any = useRef();
+    const circleRef = useRef<HTMLSpanElement>(null);
+    const crossRef = useRef<SVGSVGElement>(null);
+    const sucessRef = useRef<SVGPathElement>(null);
+    const modalRef = useRef<HTMLElement>(null);
+    const msgSectionRef = useRef<HTMLDivElement>(null);
 
     let basicColor = "#263e69"
     let colorEndError = "#ff2c2c"
@@ -114,7 +114,7 @@ const FormModal = (props: any) => {
                 strokeDashoffset: -55
             })
             //MSG DEFAULT//
-            gsap.set(msgSectionRef.current.children, {
+            gsap.set(msgSectionRef.current!.children, {
                 opacity: 0
             })
             //MODAL BUTTON DEFAULT//

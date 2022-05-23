@@ -1,21 +1,21 @@
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, pattern, onChange, ...props }: any) => {
     //////////////////////////////////////////////////
     //STATE//
     const [style, setStyle] = useState(undefined)
-    const [correctValue, setCorrectValue] = useState(true)
-    const [showError, setShowError] = useState(false)
-    const [errorOpacity, setErrorOpacity] = useState(0)
+    const [correctValue, setCorrectValue] = useState<boolean>(true)
+    const [showError, setShowError] = useState<boolean>(false)
+    const [errorOpacity, setErrorOpacity] = useState<number>(0)
 
     //////////////////////////////////////////////////
     //VARIBLES//
-    const inputRef: any = useRef()
+    const inputRef = useRef<HTMLInputElement>(null)
     const globalRegExp = new RegExp(pattern, 'gi',);
     const emailRegexp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}$/gi
     //////////////////////////////////////////////////
     //FUNCTIONS//
-    const verification = (e: any) => {
+    const verification = (e: React.BaseSyntheticEvent) => {
         let value = e.target.value
         let result = globalRegExp.test(value)
         let emailResult = emailRegexp.test(value)
@@ -68,16 +68,16 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
     }
 
     useEffect(() => {
-        if (correctValue === true && inputRef.current.value.length > 0) {
+        if (correctValue === true && inputRef.current!.value.length > 0) {
             setStyle(sucessStyle)
             setShowError(false)
-        } else if (correctValue === true && inputRef.current.value.length === 0) {
+        } else if (correctValue === true && inputRef.current!.value.length === 0) {
             setStyle(undefined)
         }
-        if (correctValue === false && inputRef.current.value.length > 0) {
+        if (correctValue === false && inputRef.current!.value.length > 0) {
             setStyle(errorStyle)
             setShowError(true)
-        } else if (correctValue === false && inputRef.current.value.length === 0) {
+        } else if (correctValue === false && inputRef.current!.value.length === 0) {
             setStyle(undefined)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

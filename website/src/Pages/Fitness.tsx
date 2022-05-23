@@ -1,7 +1,8 @@
 import { useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FilterIcon } from '../Components/FilterIcon'
-import { ContentFilter } from '../Components/ContentFilter'
+import { ContentFilter } from '../Components/Filter/ContentFilter'
+import { SearchItem } from '../Components/SearchItem'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
@@ -19,9 +20,9 @@ const Fitness = () => {
     const appContext: any = useContext(AppContext);
     const anContext: any = useContext(AnimationContext);
 
-    const fitnessClasses = classListMaker(["contentPage"])
+    const fitnessClasses = classListMaker(["contentPage", "relative"])
     const headerSectionClasses = classListMaker(["headerSection", "minorColor1"])
-    const searchContentClasses = classListMaker(["searchContent"])
+    const searchContentClasses = classListMaker(["searchContent", "absolute", "stretch", "top"])
     const linkClasses = classListMaker(["mainColorText"])
     //////////////////////////////////////////////////
     //ANIMATIONS//
@@ -55,7 +56,11 @@ const Fitness = () => {
             <section
                 className={searchContentClasses}
             >
-
+                <SearchItem data={{
+                    header: "Header",
+                    popularityCount: "1",
+                    topped: false,
+                }} />
             </section>
         </div>
     )

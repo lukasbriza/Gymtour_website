@@ -13,9 +13,9 @@ const FilterIcon = React.memo((props: { onClick: () => void }) => {
     const filterIconWrapperClasses = classListMaker(["filterIconWrapper"])
     const lineClasses = classListMaker(["filterLine"])
 
-    const ref1: any = useRef()
-    const ref2: any = useRef()
-    const ref3: any = useRef()
+    const ref1 = useRef<HTMLDivElement>(null)
+    const ref2 = useRef<HTMLDivElement>(null)
+    const ref3 = useRef<HTMLDivElement>(null)
     //////////////////////////////////////////////////
     //ANIMATIONS//
     const hoverInAnimation = () => {

@@ -81,3 +81,67 @@ type errorMapObj = {
     date: string;
   };
 };
+
+type contentFilter = {
+  open: boolean;
+  avoidFilterType?: string[
+    | "regions"
+    | "equipment"
+    | "general"
+    | "others"
+    | "gender"
+    | "specialization"
+    | "order"];
+};
+type filterHeader = {
+  title: string;
+  onClick: () => void;
+};
+type filterType = {
+  type:
+    | "regions"
+    | "equipment"
+    | "general"
+    | "others"
+    | "gender"
+    | "specialization"
+    | "order";
+  data: any;
+};
+
+type filterSection = {
+  filterType:
+    | "regions"
+    | "equipment"
+    | "general"
+    | "others"
+    | "gender"
+    | "specialization"
+    | "order";
+  header: string;
+  data: any;
+  key?: number;
+};
+
+type dataTypeSearch = {
+  type: string;
+  region?: string;
+  code?: string;
+  town?: { code: string; checked: boolean };
+  checked?: boolean;
+};
+type searchData = {
+  order: number;
+  general?: any[];
+  equipment?: any[];
+  others?: any[];
+  regions: any[];
+};
+
+type formModalProps = {
+  loading: boolean;
+  sucess: boolean | undefined;
+  msg: undefined | SetStateAction<Element>;
+  callback: () => void;
+  clearForm: () => void;
+};

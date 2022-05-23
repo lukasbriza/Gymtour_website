@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 //FUNCTIONS//
 import { setContextBreakpoint } from '../Functions/setContextBreakpoint'
 
@@ -8,25 +8,66 @@ import fitness from '../Images/fitness.webp'
 import trainer from '../Images/trainer.webp'
 import register from '../Images/register.webp'
 
+//CONTEXT TYPES//
+interface ContextProviderProps {
+    children: React.ReactNode
+}
+export interface AppStateContext {
+    width: number,
+    actualLocation: string,
+    breakPoint: "toMobile" | "fromMobile" | "fromTablet" | "fromDesktop" | "fromWide",
+    fitnessSearch: any,
+    coachSearch: any,
+    fn: {
+        setActualLocation: React.Dispatch<React.SetStateAction<string>>,
+        preloadCrossroadImg: (timeout: number) => Promise<void>,
+        preloadHomeImg: (timeout: number) => Promise<void>,
+        preloadMenuImg: (timeout: number) => Promise<void>,
+        handleSearchData: (data: dataTypeSearch) => void
+    }
+}
+export interface AnStateContext {
+    bigLogoPlayed: boolean,
+    smallLogoPlayed: boolean,
+    filterOpen: boolean,
+    fn: {
+        setBigLogoPlayed: React.Dispatch<React.SetStateAction<boolean>>,
+        setSmallLogoPlayed: React.Dispatch<React.SetStateAction<boolean>>,
+        setFilterOpen: React.Dispatch<React.SetStateAction<boolean>>
+    }
+}
 //CONTEXTS//
-const AppContext = createContext({})
-const AnimationContext = createContext({})
+const AppContext = createContext<AppStateContext | null>(null)
+const AnimationContext = createContext<AnStateContext | null>(null)
 
 //APP CONTEXT//
-const AppContextProvider = (props: any) => {
-    const [width, setWidth] = useState<number | undefined>(undefined)
+const AppContextProvider = (props: ContextProviderProps) => {
+    const [width, setWidth] = useState<number>(1)
     const [actualLocation, setActualLocation] = useState<string>("/")
     const [breakPoint, setBreakPoint] = useState<"toMobile" | "fromMobile" | "fromTablet" | "fromDesktop" | "fromWide">("toMobile")
+    const [fitnessSearch, setFitnessSearch] = useState<searchData>(
+        {
+            order: 1,
+            equipment: [],
+            general: [],
+            others: [],
+            regions: []
+        }
+    )
+    const [coachSearch, setCoachSearch] = useState<any>({
+        order: 1,
+        regions: []
+    })
 
-    let crossroadArr = [
+    const crossroadArr = [
         { name: "fitness", img: fitness },
         { name: "trainer", img: trainer },
         { name: "register", img: register }
     ]
-    let homeArr = [
+    const homeArr = [
         { name: "home", img: main }
     ]
-    let menuArr = [
+    const menuArr = [
         { name: "home", img: main },
         //about , coop, contact
     ]
@@ -35,7 +76,6 @@ const AppContextProvider = (props: any) => {
     useEffect(() => {
         setWidth(window.innerWidth)
         setContextBreakpoint(width, setBreakPoint)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     useEffect(() => { setContextBreakpoint(width, setBreakPoint) }, [width])
 
@@ -64,16 +104,77 @@ const AppContextProvider = (props: any) => {
         }, timeout)
     }
     //////////////////////////////////////////////////////////////////
+    const handleSearchData = (data: dataTypeSearch) => {
+        console.log(data)
+        /*
+        switch (actualLocation) {
+            ////////////////////////////////////////////////////////////////////////
+            case "/fitness":
+                if (data.type === "order") {
+                    setFitnessSearch({
+                        ...fitnessSearch,
+                        [data.type]: data.code
+                    })
+                    break
+                }
+                if (data.type === "regions") {
+                    let regionQuery: { regionCode?: string, townCode?: string }[] = fitnessSearch.regions
+                    //IS LISTED//
+                    let foundRegionIndex = regionQuery.findIndex(
+                        (item: { regionCode?: string, townCode?: string }) => item.regionCode === data.region && item.townCode === data.town?.code
+                    )
+                    if (foundRegionIndex !== -1 && data.town?.checked === false) {
+                        //REMOVE WHEN CHECKED PROP IS FALSE//
+                        regionQuery.splice(foundRegionIndex, 1)
+                    } else {
+                        //ADD TO ARRAY//
+                        regionQuery.push({ regionCode: data.region, townCode: data.town?.code })
+                    }
+                    //SET NEW STATE//
+                    setFitnessSearch({
+                        ...fitnessSearch,
+                        regions: regionQuery
+                    })
+                    break
+                }
+                //OTHER INPUT TYPES//
+                let typeArray: any = fitnessSearch[data.type]
+                let removeItemIndex = typeArray.findIndex((item: string) => item === data.code)
+                if (removeItemIndex !== -1 && data.checked === false) {
+                    //REMOVE WHEN CHECKED PROP IS FALSE//
+                    typeArray.splice(removeItemIndex, 1)
+                } else {
+                    //ADD TO ARRAY//
+                    typeArray.push(data.code)
+                }
+                //SET NEW STATE//
+                setFitnessSearch({
+                    ...fitnessSearch,
+                    [data.type]: typeArray
+                })
 
-    let appState = {
+                break;
+            ////////////////////////////////////////////////////////////////////////
+            case "/coach":
+
+                break;
+        }*/
+
+
+    }
+    //////////////////////////////////////////////////////////////////
+    const appState: AppStateContext = {
         width: width,
         actualLocation: actualLocation,
         breakPoint: breakPoint,
+        fitnessSearch: fitnessSearch,
+        coachSearch: coachSearch,
         fn: {
             setActualLocation: setActualLocation,
             preloadCrossroadImg: preloadCrossroadImg,
             preloadHomeImg: preloadHomeImg,
-            preloadMenuImg: preloadMenuImg
+            preloadMenuImg: preloadMenuImg,
+            handleSearchData: handleSearchData
         }
     }
 
@@ -85,12 +186,12 @@ const AppContextProvider = (props: any) => {
 }
 
 //ANIMATION CONTEXT//
-const AnimationContextProvider = (props: any) => {
+const AnimationContextProvider = (props: ContextProviderProps) => {
     const [bigLogoPlayed, setBigLogoPlayed] = useState<boolean>(false)
     const [smallLogoPlayed, setSmallLogoPlayed] = useState<boolean>(false)
     const [filterOpen, setFilterOpen] = useState<boolean>(false)
 
-    let animationState = {
+    const animationState: AnStateContext = {
         bigLogoPlayed: bigLogoPlayed,
         smallLogoPlayed: smallLogoPlayed,
         filterOpen: filterOpen,

@@ -1,35 +1,29 @@
-import React, { useEffect, useState } from "react"
-import { Underliner } from "./Underliner"
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
-import { text } from '../config/textSource'
+import React from "react"
+import { Underliner } from "../Underliner"
 //FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../../Functions/classListMaker'
 
-const FilterHeader = React.memo((props: any) => {
+const FilterHeader = React.memo(React.forwardRef((props: filterHeader, ref: any) => {
     //////////////////////////////////////////////////
     //STATE//
-    const [open, setOpen] = useState<boolean>(false)
     //////////////////////////////////////////////////
     //VARIABLES//
-    const headerWrapperClasses = classListMaker(["filterHeaderWrapper"])
+    const headerWrapperClasses = classListMaker(["filterHeaderWrapper", "pointer"])
     const arrowWrapperClasses = classListMaker(["filterArrowWrapper"])
-    const lineArrowClasses = classListMaker(["filterArrowLine"])
+    const lineArrowClasses = classListMaker(["filterArrowLine", "relative"])
     //////////////////////////////////////////////////
     //ANIMATIONS//
-    useEffect(() => { }, [open])
     //////////////////////////////////////////////////
     //SETUP//
     return (
         <div
             className={headerWrapperClasses}
+            onClick={() => { props.onClick() }}
         >
             <h2>{props.title}</h2>
             <div
+                ref={ref}
                 className={arrowWrapperClasses}
-                onClick={() => { setOpen(!open) }}
-                onTouchEnd={() => { setOpen(!open) }}
-                onTouchCancel={() => { setOpen(open) }}
             >
                 <div className={lineArrowClasses}></div>
                 <div className={lineArrowClasses}></div>
@@ -37,6 +31,6 @@ const FilterHeader = React.memo((props: any) => {
             <Underliner width={"100%"} color={"black"} />
         </div>
     )
-})
+}))
 
 export { FilterHeader }
