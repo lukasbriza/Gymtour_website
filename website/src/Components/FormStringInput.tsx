@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, pattern, onChange, ...props }: any) => {
+const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, pattern, onChange, ...props }: formStringInputProps) => {
     //////////////////////////////////////////////////
     //STATE//
     const [style, setStyle] = useState(undefined)
@@ -33,7 +33,7 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
         if (type === "email" && emailResult === true) {
             setShowError(false)
             setCorrectValue(true)
-            onChange({ canSubmit: true, value: value, name: props.name })
+            onChange!({ canSubmit: true, value: value, name: props.name })
             return
         } else if (type === "email" && emailResult === false) {
             if (value.length === 0) {
@@ -42,7 +42,7 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
             }
             setShowError(true)
             setCorrectValue(false)
-            onChange({ canSubmit: false, value: value, name: props.name })
+            onChange!({ canSubmit: false, value: value, name: props.name })
             return
         }
 
@@ -51,16 +51,16 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
             if (result === false) {
                 setShowError(false)
                 setCorrectValue(true)
-                onChange({ canSubmit: true, value: value, name: props.name })
+                onChange!({ canSubmit: true, value: value, name: props.name })
                 return
             } else {
                 setShowError(true)
                 setCorrectValue(false)
-                onChange({ canSubmit: false, value: value, name: props.name })
+                onChange!({ canSubmit: false, value: value, name: props.name })
                 return
             }
         } else {
-            onChange({ canSubmit: true, value: value, name: props.name })
+            onChange!({ canSubmit: true, value: value, name: props.name })
             setCorrectValue(true)
             setShowError(false)
             return

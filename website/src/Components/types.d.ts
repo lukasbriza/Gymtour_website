@@ -145,3 +145,23 @@ type formModalProps = {
   callback: () => void;
   clearForm: () => void;
 };
+
+type formStringInputProps = {
+  className: string;
+  type: string;
+  name: string;
+  formId: string;
+  placeholder: string;
+  onChange?: (canSubmit: {
+    canSubmit: boolean;
+    value: string;
+    name: string;
+  }) => void;
+  required: boolean;
+  pattern?: any;
+  errorMessage: string;
+  errorStyle: React.StyleProperties;
+  sucessStyle: React.StyleProperties;
+  maxLength?: number;
+  minLength?: number;
+};

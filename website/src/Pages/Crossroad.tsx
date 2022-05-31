@@ -288,7 +288,7 @@ const RegisterPage = () => {
                             name={"nameInput"}
                             formId={"registerForm"}
                             placeholder={text.crossroad.RegisterPage.Form.input1.placeholder.cz}
-                            onChange={(canSubmit: { canSubmit: boolean, value: string, name: string }) => { handleChange(canSubmit) }}
+                            onChange={(canSubmit) => { handleChange(canSubmit) }}
                             required={true}
                             pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
                             errorMessage={text.crossroad.RegisterPage.Form.input1.errorMessage.cz}
@@ -303,7 +303,7 @@ const RegisterPage = () => {
                             name={"passwordInput"}
                             formId={"registerForm"}
                             placeholder={text.crossroad.RegisterPage.Form.input2.placeholder.cz}
-                            onChange={(canSubmit: { canSubmit: boolean, value: string, name: string }) => { handleChange(canSubmit) }}
+                            onChange={(canSubmit) => { handleChange(canSubmit) }}
                             required={true}
                             errorMessage={text.crossroad.RegisterPage.Form.input2.errorMessage.cz}
                             errorStyle={errorStyle}
@@ -316,7 +316,7 @@ const RegisterPage = () => {
                             name={"emailInput"}
                             formId={"registerForm"}
                             placeholder={text.crossroad.RegisterPage.Form.input3.placeholder.cz}
-                            onChange={(canSubmit: { canSubmit: boolean, value: string, name: string }) => { handleChange(canSubmit) }}
+                            onChange={(canSubmit) => { handleChange(canSubmit) }}
                             required={true}
                             errorMessage={text.crossroad.RegisterPage.Form.input3.errorMessage.cz}
                             errorStyle={errorStyle}

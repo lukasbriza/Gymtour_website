@@ -16,8 +16,24 @@ import fetchAgent from '../../Functions/fetchAgent'
 //under construction//
 const ContentFilter = React.memo((props: { open: boolean }) => {
     //////////////////////////////////////////////////
+    //TYPES//
+    type dataState = {
+        _id: string;
+        regions: {
+            name: { cz: string, eng: string },
+            code: string,
+            towns: { code?: string, name?: { cz: string, eng: string } }[]
+        }[];
+        equipment: { name: { cz: string, eng: string }, code: string }[];
+        general: { code: string; name: { cz: string, eng: string } }[];
+        others: { name: { cz: string, eng: string }, code: string }[];
+        gender: { name: { cz: string, eng: string }, code: string }[];
+        specialization: { name: { cz: string, eng: string }, code: string }[];
+
+    }
+    //////////////////////////////////////////////////
     //STATE//
-    const [data, setData] = useState<any>(undefined)
+    const [data, setData] = useState<dataState>()
     const [showContent, setShowContent] = useState<boolean>(false)
     //////////////////////////////////////////////////
     //VARIABLES//
@@ -82,12 +98,12 @@ const ContentFilter = React.memo((props: { open: boolean }) => {
                 switch (appContext?.actualLocation) {
                     case "/fitness":
                         if (!config.filter.avoidFilterTypes.fitness.includes(key)) {
-                            array.push({ filterType: key, data: data[key] })
+                            array.push({ filterType: key, data: data[key as keyof typeof data] })
                         }
                         break;
                     case "/coach":
                         if (!config.filter.avoidFilterTypes.coach.includes(key)) {
-                            array.push({ filterType: key, data: data[key] })
+                            array.push({ filterType: key, data: data[key as keyof typeof data] })
                         }
                         break;
                 }

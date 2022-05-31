@@ -17,8 +17,8 @@ const Fitness = () => {
     const [linkStyle, setLinkStyle] = useState({})
     //////////////////////////////////////////////////
     //VARIABLES//
-    const appContext: any = useContext(AppContext);
-    const anContext: any = useContext(AnimationContext);
+    const appContext = useContext(AppContext);
+    const anContext = useContext(AnimationContext);
 
     const fitnessClasses = classListMaker(["contentPage", "relative"])
     const headerSectionClasses = classListMaker(["headerSection", "minorColor1"])
@@ -27,7 +27,7 @@ const Fitness = () => {
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
-        anContext.fn.setBigLogoPlayed(true)
+        anContext?.fn.setBigLogoPlayed(true)
         animationStore.menu.logo.logoIn();
         setTimeout(() => {
             animationStore.menu.logo.logoTextIn();
@@ -39,7 +39,7 @@ const Fitness = () => {
     return (
         <div id="Fitness" className={config.basePageClassList + " " + fitnessClasses}>
             <section className={headerSectionClasses}>
-                <FilterIcon onClick={() => { anContext.fn.setFilterOpen(!anContext.filterOpen) }} />
+                <FilterIcon onClick={() => { anContext?.fn.setFilterOpen(!anContext.filterOpen) }} />
                 <h1>{text.fitness.PageHeader.cz}</h1>
                 <Link
                     style={linkStyle}
@@ -52,7 +52,7 @@ const Fitness = () => {
                     {text.fitness.HeaderBackButton.cz}
                 </Link>
             </section>
-            <ContentFilter open={anContext.filterOpen} />
+            <ContentFilter open={anContext!.filterOpen} />
             <section
                 className={searchContentClasses}
             >
