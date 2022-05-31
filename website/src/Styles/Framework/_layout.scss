@@ -36,13 +36,15 @@ html {
 body {
   overflow: auto;
   width: 100vw;
+  height: 100%;
 
   @include minHeightWidth;
 }
 
 #root {
-  width: 100%;
   background: rgb(47, 47, 47);
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
 
@@ -317,8 +319,9 @@ body {
 ////////////////////////////////////////////////////////
 //CONTENT PAGES//
 .contentPage {
+  z-index: 0;
 }
-
+//HEADER SECTION//
 .headerSection {
   display: grid;
   grid-template-rows: 70px min-content 15px;
@@ -326,6 +329,7 @@ body {
   grid-template-areas: ". . ." "filter header backButton" ". . .";
   align-items: center;
   justify-items: center;
+  z-index: 5;
 
   .filterIconWrapper {
     grid-area: filter;
@@ -342,11 +346,11 @@ body {
   }
 }
 
+//FILTER SECTION//
 .filterSectionWrapper {
-  position: fixed;
-}
-
-.filterSection {
+  @include mq($from: 400px) {
+    max-width: 300px;
+  }
 }
 
 .filterHeaderWrapper {
@@ -361,8 +365,8 @@ body {
   }
   .filterArrowWrapper {
     grid-area: arrow;
-    .filterArrowLine {
-    }
+    display: flex;
+    justify-content: center;
   }
   .underliner {
     grid-area: underliner;
@@ -372,6 +376,31 @@ body {
     margin-top: 4px;
   }
 }
+//SEARCH CONTENT SECTION//
+.searchContent {
+  .searchItem {
+    .popularityCounter {
+      display: flex;
+      align-items: center;
+      .popularityImgWrapper {
+        margin: 8px;
+        margin-right: 4px;
+      }
+    }
+    .itemBar {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr 50px;
+
+      .toppedImgWrapper {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
 ////////////////////////////////////////////////////////
 //FOOTER//
 .footer {

@@ -1,0 +1,42 @@
+.searchItem {
+  $size: 220px;
+  width: $size;
+  height: $size;
+  background: brown;
+}
+
+.popularityCounter {
+  .popularityImgWrapper {
+    height: 20px;
+    width: min-content;
+
+    .heart {
+      fill: rgb(231, 0, 0);
+    }
+  }
+  p {
+    color: $minorColor1;
+    font-weight: 600;
+    font-size: 0.8em;
+  }
+}
+
+.itemBar {
+  height: 42px;
+  background: rgba(0, 0, 0, 0.475);
+
+  h3 {
+    color: $minorColor1;
+    margin-left: 15px;
+  }
+  .toppedImgWrapper {
+    height: 22px;
+
+    .flamePath1 {
+      fill: rgb(47, 47, 46);
+    }
+    .flamePath2 {
+      fill: rgb(104, 104, 104);
+    }
+  }
+}

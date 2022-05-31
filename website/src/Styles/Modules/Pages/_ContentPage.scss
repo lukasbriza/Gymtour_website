@@ -1,9 +1,11 @@
 .contentPage {
-  position: relative;
-  min-height: 100vh;
+  display: block;
+  height: 100%;
 }
 
 .headerSection {
+  border-bottom: 1px solid grey;
+
   h1 {
     cursor: default;
     text-transform: uppercase;
@@ -13,9 +15,15 @@
     text-decoration: none;
     color: black;
     font-weight: 600;
+    text-decoration: underline;
   }
 
   a:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
+}
+
+.searchContent {
+  padding-top: 132px;
+  z-index: -2;
 }
