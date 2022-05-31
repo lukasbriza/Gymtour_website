@@ -27,7 +27,7 @@ const FilterSection = React.memo((props: filterSection) => {
         if (arrow === false) {
             animationStore.fitness.filter.arrowDown(arrowRef.current, typesRef.current, heighRef.current)
         }
-    }, [arrow])
+    }, [arrow, props.filterType])
     useEffect(() => {
         if (
             props.filterType === "regions" ||
@@ -59,8 +59,10 @@ const FilterSection = React.memo((props: filterSection) => {
             }
             setArrow(true)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        if (props.filterType === "order") {
+            heighRef.current = config.filter.typesHeight.order
+        }
+    }, [props.filterType])
     //////////////////////////////////////////////////
     //SETUP//
     return (
