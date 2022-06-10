@@ -124,18 +124,33 @@ type filterSection = {
 };
 
 type dataTypeSearch = {
-  type: string;
+  type:
+    | "regions"
+    | "equipment"
+    | "general"
+    | "others"
+    | "gender"
+    | "specialization"
+    | "order";
   region?: string;
   code?: string;
   town?: { code: string; checked: boolean };
   checked?: boolean;
 };
-type searchData = {
+type searchFitnessData = {
   order: number;
-  general?: any[];
-  equipment?: any[];
-  others?: any[];
+  general: any[];
+  equipment: any[];
+  others: any[];
   regions: any[];
+};
+
+type searchCoachData = {
+  order: number;
+  others: any[];
+  regions: any[];
+  specialization: any[];
+  gender: any[];
 };
 
 type formModalProps = {
