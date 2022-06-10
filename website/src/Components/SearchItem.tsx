@@ -1,48 +1,110 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Heart } from '../Components/SVG/Heart'
 import { Topped } from '../Components/SVG/Topped'
-import { gsap } from 'gsap'
+import { Tilt } from '../Components/Tilt'
+import { IsLoading } from './HOCs/IsLoading'
+import { SearchItemIMG } from '../Components/SearchItemIMG'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
-import { text } from '../config/textSource'
 //CONTEXT//
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 
-const SearchItem = ({ data }: any) => {
+interface SearchItemTypeFitness {
+    data: {
+        pictures: {
+            detail: {
+                main: string,
+                others: string[]
+            },
+            card: string
+        },
+        topped: boolean,
+        views: number,
+        likedBy: string[],
+        name: string,
+        street: string,
+        town: number,
+        region: number,
+        IN: number,
+        priceLevel: number,
+        contact: {
+            tel?: number,
+            mobile?: number,
+            email: string,
+            web?: string,
+            facebook?: string,
+            twitter?: string,
+            google?: string,
+            instagram?: string,
+            youtube?: string,
+        },
+        filters: {
+            equipment: number[],
+            general?: number[],
+            others?: number[]
+        }
+        open: {
+            mon: { from: number, to: number },
+            tue: { from: number, to: number },
+            wed: { from: number, to: number },
+            thu: { from: number, to: number },
+            fri: { from: number, to: number },
+            sat: { from: number, to: number },
+            sun: { from: number, to: number }
+        }
+        descriptionBasic: string,
+        descriptionFull: string,
+    }
+}
+const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
     //////////////////////////////////////////////////
     //STATE//
+    const [imgLoaded, setImgLoaded] = useState<boolean>(false)
     //////////////////////////////////////////////////
     //VARIABLES//
     const searchItemClasses = classListMaker(["searchItem", "relative"])
-    const imgClasses = classListMaker(["searchImg", "relative", "stretchY"])
     const itemBar = classListMaker(["itemBar", "absolute", "left", "bottom", "stretchX"])
     const popularityCounterClasses = classListMaker(["popularityCounter", "absolute", "top", "left"])
+    const viewsCounterClasses = classListMaker(["viewsCounter", "absolute", "top", "right"])
 
     const hearthRef = useRef<SVGSVGElement>(null)
     const toppedRef = useRef<SVGSVGElement>(null)
 
-    const toppedStyleOff = { display: "none" }
-    const toppedStyleOn = { display: "initial" }
+    const tiltOptions = {
+        reverse: true,
+        max: 9,
+        perspective: 1500,
+        glare: true,
+        "max-glare": 0.2,
+        "glare-prerender": false
+    }
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
-        let flamePath1: any = toppedRef.current?.children[1].children[0]
-        let flamePath2: any = toppedRef.current?.children[1].children[1]
-        if (data.topped === true) {
-            gsap.set(flamePath1, { fill: "rgb(255, 68, 0)" })
-            gsap.set(flamePath2, { fill: "rgb(255, 208, 0)" })
-        }
-        if (data.topped === false) {
-            gsap.set(flamePath1, { fill: "rgb(47, 47, 46)" })
-            gsap.set(flamePath2, { fill: "rgb(104, 104, 104)" })
-        }
     }, [])
     //////////////////////////////////////////////////
+    //FUNCTIONS//
+    const handleClick = () => {
+        console.log("handleClick")
+    }
+    //////////////////////////////////////////////////
     //SETUP//
+    const WithLoadingImg = IsLoading(SearchItemIMG)
+
     return (
-        <section className={searchItemClasses}>
-            <img src="" alt="" className={imgClasses} />
+
+        <Tilt
+            className={searchItemClasses}
+            options={tiltOptions}
+            onClick={() => { handleClick() }}
+        >
+            <WithLoadingImg
+                alt={data.name + " cardImg"}
+                loading={!imgLoaded}
+                onLoad={() => { setImgLoaded(true) }}
+            />
+
             <div
                 className={popularityCounterClasses}
             >
@@ -51,18 +113,46 @@ const SearchItem = ({ data }: any) => {
                     ref={hearthRef}
                 />
                 <p>
-                    {data.popularityCount}
+                    {data.likedBy.length}
                 </p>
             </div>
+            <div
+                className={viewsCounterClasses}
+            >
+                x{data.views}
+            </div>
             <div className={itemBar}>
-                <h3>{data.header}</h3>
+                <h3>{data.name}</h3>
                 <Topped
                     className="toppedImgWrapper"
                     ref={toppedRef}
+                    topped={data.topped}
                 />
             </div>
-        </section>
+        </Tilt>
+
     )
 }
 
-export { SearchItem }
+
+const SearchItemCoach = ({ data }: any) => {
+    //////////////////////////////////////////////////
+    //STATE//
+    //////////////////////////////////////////////////
+    //VARIABLES//
+    //////////////////////////////////////////////////
+    //ANIMATIONS//
+    useEffect(() => {
+
+    }, [])
+    //////////////////////////////////////////////////
+    //SETUP//
+    return (
+        <></>
+    )
+}
+
+//HOC SUBSCRIBTION//
+
+export { SearchItemFitness, SearchItemCoach }
+
