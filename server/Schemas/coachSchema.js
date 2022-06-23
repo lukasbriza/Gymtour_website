@@ -15,16 +15,16 @@ const contactSchema = new Schema({
 });
 
 const filters = new Schema({
-  gender: { type: Number, required: true },
-  specialization: [{ type: Number, required: true }],
-  others: [{ type: Number, required: false }],
+  gender: { type: String, required: true },
+  specialization: [{ type: String, required: true }],
+  others: [{ type: String, required: false }],
 });
 
 const picturesIds = {
   card: { type: String, required: true },
   detail: {
     main: { type: String, required: true },
-    others: { type: String, required: true, default: [] },
+    others: { type: [String], required: true, default: [] },
   },
 };
 const coachSchema = new mongoose.Schema({
@@ -65,6 +65,8 @@ const coachSchema = new mongoose.Schema({
     toDate: { type: Date, required: false, default: null },
   },
   approved: { type: Boolean, required: true, default: false },
+  views: { type: Number, required: false, default: 0 },
+  popularity: [{ type: String, required: false }],
 });
 
 const CoachModel = mongoose.model("Coach", coachSchema, "coaches");
