@@ -107,9 +107,9 @@ const fitnessAddValidation = (req, res, next) => {
       youtube: Joi.string().domain(),
     }),
     filters: Joi.object({
-      equipment: Joi.array().items(Joi.number().integer().required()),
-      general: Joi.array().items(Joi.number().integer()),
-      others: Joi.array().items(Joi.number().integer()),
+      equipment: Joi.array().items(Joi.string().required()),
+      general: Joi.array().items(Joi.string()),
+      others: Joi.array().items(Joi.string()),
     }),
     open: Joi.object({
       mon: Joi.object({
@@ -195,9 +195,9 @@ const fitnessUpdateValidation = (req, res, next) => {
       _id: Joi.string().min(10).required(),
     }),
     filters: Joi.object({
-      equipment: Joi.array().items(Joi.number().integer()).required(),
-      general: Joi.array().items(Joi.number().integer()),
-      others: Joi.array().items(Joi.number().integer()),
+      equipment: Joi.array().items(Joi.string()).required(),
+      general: Joi.array().items(Joi.string()),
+      others: Joi.array().items(Joi.string()),
       _id: Joi.string().min(10).required(),
     }),
     open: Joi.object({
@@ -253,11 +253,14 @@ const fitnessGetValidation = (req, res, next) => {
   let response = resBuild();
   const getSchema = Joi.object({
     query: Joi.object().required(),
-    projection: Joi.string(),
+    projection: Joi.array().items(Joi.string()),
     options: Joi.object(),
     limit: Joi.number(),
+    order: Joi.number(),
   });
-  const value = getSchema.validate(req.body.get, { render: false });
+  const value = getSchema.validate(JSON.parse(req.query.get), {
+    render: false,
+  });
   if (value.error) {
     new ValidationError(value.error.details[0].message, res, response);
   } else {
@@ -293,13 +296,13 @@ const coachAddValidation = (req, res, next) => {
       youtube: Joi.string().domain(),
     }),
     filters: Joi.object({
-      gender: Joi.number().integer().min(1).max(2).required(),
-      specialization: Joi.array().items(Joi.number()).required(),
-      others: Joi.array().items(Joi.number()),
+      gender: Joi.number().string().required(),
+      specialization: Joi.array().items(Joi.string()).required(),
+      others: Joi.array().items(Joi.string()),
     }),
     descriptionBasic: Joi.string().required(),
     descriptionFull: Joi.string(),
-    pistures: Joi.object({
+    pictures: Joi.object({
       card: Joi.string().required(),
       detail: Joi.object({
         main: Joi.string().required(),
@@ -354,9 +357,9 @@ const coachUpdateValidation = (req, res, next) => {
       _id: Joi.string().min(10).required(),
     }),
     filters: Joi.object({
-      gender: Joi.number().integer().min(1).max(2).required(),
-      specialization: Joi.array().items(Joi.number()).required(),
-      others: Joi.array().items(Joi.number()),
+      gender: Joi.number().string().required(),
+      specialization: Joi.array().items(Joi.string()).required(),
+      others: Joi.array().items(Joi.string()),
       _id: Joi.string().min(10).required(),
     }),
     descriptionBasic: Joi.string().required(),
