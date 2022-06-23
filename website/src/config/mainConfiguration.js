@@ -4,7 +4,7 @@ import { ReactLazyPreload } from "../Functions/ReactLazyPreload.ts";
 import { text } from "./textSource";
 
 ///////////////////////////////////////////////////////////////////
-//CODE PSLIT ON ROUTES//
+//CODE SPLIT ON ROUTES//
 const Home = ReactLazyPreload(() => import("../Pages/Home"));
 const Crossroad = ReactLazyPreload(() => import("../Pages/Crossroad"));
 const Fitness = ReactLazyPreload(() => import("../Pages/Fitness"));
@@ -19,6 +19,9 @@ const BusinessConditions = ReactLazyPreload(() =>
 const DataProcessing = ReactLazyPreload(() =>
   import("../Pages/DataProcessing")
 );
+
+const Login = ReactLazyPreload(() => import("../Pages/Login"));
+const Dashboard = ReactLazyPreload(() => import("../Pages/Dashboard"));
 ///////////////////////////////////////////////////////////////////
 
 const config = {
@@ -30,17 +33,15 @@ const config = {
     wide: 1300,
   },
   routes: {
-    mainPage: {
-      name: "Hlavní stránka",
-      path: "/",
-      component: Home,
-    },
+    mainPage: { name: "Hlavní stránka", path: "/", component: Home },
     crossroad: { name: "Rozcestí", path: "/crossroad", component: Crossroad },
     fitness: { name: "Fitness", path: "/fitness", component: Fitness },
     coach: { name: "Trenéři", path: "/coach", component: Coach },
     aboutUs: { name: "O nás", path: "/about", component: About },
     coOp: { name: "Spolupráce", path: "/coop", component: CoOp },
     contact: { name: "Kontakt", path: "/contact", component: Contact },
+    login: { name: "Login", path: "/login", component: Login },
+    dashboard: { name: "Účet", path: "/dashboard", component: Dashboard },
     businessConditions: {
       name: "Obchodní podmínky",
       path: "/businessconditions",
@@ -58,6 +59,21 @@ const config = {
     aboutUs: { name: text.menu.cz[1], path: "/about", component: About },
     coOp: { name: text.menu.cz[2], path: "/coop", component: CoOp },
     contact: { name: text.menu.cz[3], path: "/contact", component: Contact },
+  },
+  filter: {
+    avoidFilterTypes: {
+      fitness: ["gender", "specialization"],
+      coach: ["equipment", "general"],
+    },
+    typesHeight: {
+      order: 43,
+      regions: 88,
+      equipment: 172,
+      general: 86,
+      specialization: 86,
+      others: 65,
+      gender: 43,
+    },
   },
   footerLinks1: [
     { name: text.footer.Section2.link1.cz, path: "/businessconditions" },
@@ -302,21 +318,156 @@ const animationStore = {
     filter: {
       show: (wrapper) => {
         let tl = gsap.timeline();
-        tl.filterOn(wrapper, {
-          widthFrom: "0%",
-          widthTo: "100%",
-          widthDuration: 2,
-        });
+        tl.to(wrapper, { opacity: 1, display: "initial" }, 0)
+          .addLabel("start")
+          .filterOn(
+            wrapper,
+            {
+              widthFrom: "0%",
+              widthTo: "100%",
+              widthDuration: 4,
+            },
+            "start"
+          )
+          .to(
+            wrapper,
+            {
+              paddingLeft: "15px",
+              duration: 1,
+              ease: Power2.easeOut,
+            },
+            "start"
+          )
+          .fadeIn(".filterSection", {
+            displayInitial: "none",
+            displayAfter: "block",
+            stagger: 0.1,
+            duration: 0.3,
+          })
+          .fadeIn(".contentFilterButton", {
+            displayInitial: "none",
+            displayAfter: "block",
+            duration: 0.3,
+            delay: 0.8,
+          });
         return tl;
       },
       hide: (wrapper) => {
+        let arr = gsap.utils.toArray(".filterSection");
+        arr = arr.reverse();
         let tl = gsap.timeline();
-        tl.filterOff(wrapper, {
-          widthFrom: "100%",
-          widthTo: "0%",
-          widthDuration: 1.5,
-        });
+        tl.fadeOff(".contentFilterButton", {
+          displayInitial: "block",
+          displayAfter: "none",
+          duration: 0.3,
+        })
+          .fadeOff(arr, {
+            displayInitial: "block",
+            displayAfter: "none",
+            stagger: 0.1,
+            duration: 0.3,
+          })
+          .addLabel("start")
+          .to(
+            wrapper,
+            {
+              paddingLeft: "0px",
+              duration: 1,
+              delay: 1,
+              ease: Power2.easeOut,
+            },
+            "start"
+          )
+          .filterOff(
+            wrapper,
+            {
+              delay: 1,
+              widthFrom: "100%",
+              widthTo: "0%",
+              widthDuration: 1.5,
+            },
+            "start"
+          )
+          .to(wrapper, { opacity: 0, display: "none", delay: 0.5 });
         return tl;
+      },
+      arrowUp: (arrow, typesWrapper, containerHeight) => {
+        let tl = gsap.timeline();
+        tl.to(typesWrapper, {
+          height: containerHeight + "px",
+          duration: 0.0025,
+          ease: "none",
+        })
+          .addLabel("start")
+          .to(
+            arrow,
+            {
+              transform: "rotate(-179deg)",
+              duration: 1,
+              ease: Power3.easeOut,
+            },
+            "start"
+          )
+          .fadeOff(
+            typesWrapper,
+            {
+              displayInitial: "flex",
+              displayAfter: "flex",
+              stagger: 0,
+              duration: 0.25,
+              delay: 0,
+            },
+            "start"
+          )
+          .to(
+            typesWrapper,
+            {
+              height: 0 + "px",
+              ease: Power2.easeOut,
+              duration: 0.2,
+              delay: 0.7,
+            },
+            "start"
+          )
+          .to(typesWrapper, {
+            display: "none",
+            duration: 0.0025,
+            ease: "none",
+          });
+      },
+      arrowDown: (arrow, typesWrapper, containerHeight) => {
+        let tl = gsap.timeline();
+        tl.addLabel("arrow")
+          .to(
+            typesWrapper,
+            {
+              height: containerHeight + "px",
+              duration: 0.5,
+              ease: Power2.easeOut,
+            },
+            "arrow"
+          )
+          .to(
+            arrow,
+            {
+              transform: "rotate(0deg)",
+              duration: 1,
+              ease: Power3.easeOut,
+            },
+            "arrow"
+          )
+          .addLabel("start")
+          .fadeIn(
+            typesWrapper,
+            {
+              displayInitial: "none",
+              displayAfter: "flex",
+              stagger: 0,
+              duration: 1,
+              delay: 0,
+            },
+            "start"
+          );
       },
     },
   },

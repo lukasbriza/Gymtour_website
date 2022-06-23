@@ -46,9 +46,9 @@ const openHours = new Schema({
 });
 
 const filters = new Schema({
-  equipment: [{ type: Number, required: true }],
-  general: [{ type: Number, required: false }],
-  others: [{ type: Number, required: false }],
+  equipment: [{ type: String, required: true }],
+  general: [{ type: String, required: false }],
+  others: [{ type: String, required: false }],
 });
 
 const picturesIds = {
@@ -76,7 +76,7 @@ const fitnessSchema = new Schema({
   },
   descriptionFull: {
     type: String,
-    required: false,
+    required: true,
     default: null,
   },
   pictures: picturesIds,
@@ -96,6 +96,8 @@ const fitnessSchema = new Schema({
     toDate: { type: Date, required: false, default: null },
   },
   approved: { type: Boolean, required: true, default: false },
+  views: { type: Number, required: true, default: 0 },
+  popularity: [{ type: String, required: false }],
 });
 
 const FitnessModel = mongoose.model("Fitness", fitnessSchema, "fitnesses");

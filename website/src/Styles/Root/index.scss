@@ -22,7 +22,7 @@
 
 /*FRAMEWORK - Structure and layout files.*/
 @import "../Framework/mediaQueries";
-@import "../Framework/layout";
+@import "../Framework/Layout/layout";
 @import "../Framework/modificationClasses";
 @import "../Framework/PageTranstition";
 
@@ -45,3 +45,4 @@
 @import "../Modules/filterIcon";
 @import "../Modules/Pages/ContentPage";
 @import "../Modules/contetFilter";
+@import "../Modules/searchItem";

@@ -229,16 +229,22 @@ class CoachAbl {
     let response = resBuild();
     ///////////////////////////////////////////////////////////
     //INPUT//
-    let query = req.body.get.query;
-    let projection = req.body.get.projection ? req.body.get.projection : null;
-    let options = req.body.get.options ? req.body.get.options : null;
-    let limit = req.body.get.limit ? req.body.get.limit : 50;
+    const query = req.body.get.query;
+    const projection = req.body.get.projection ? req.body.get.projection : null;
+    const options = req.body.get.options ? req.body.get.options : null;
+    const limit = req.body.get.limit ? req.body.get.limit : 50;
+    const order = req.body.get.order ? req.body.get.order : 1;
+
     console.log(query, projection, options, limit);
+    ///////////////////////////////////////////////////////////
+    //DB CALL//
+    const orderQuerry = order === 1 ? { views: "desc" } : { name: "desc" };
     ///////////////////////////////////////////////////////////
     //DB CALL//
     let getRes;
     try {
       getRes = await CoachModel.find(query, projection, options)
+        .sort(orderQuerry)
         .limit(limit)
         .exec();
       response.data = getRes;

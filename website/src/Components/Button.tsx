@@ -2,23 +2,24 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 type ButtonProps = {
-    onClick: (e: any) => void,
+    onClick: (e: React.BaseSyntheticEvent) => void,
     modificationClass?: string,
     initialClass: string,
     hoverClass: string,
     transitionClass?: string,
     path?: string,
-    text: string
+    text: string,
+    disabled?: boolean
 }
 
-const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificationClass, text, ...props }: ButtonProps) => {
+const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificationClass, text, disabled = false, ...props }: ButtonProps) => {
     const [isActive, setActive] = useState(false)
     const [buttonClass, setClass] = useState<string>(initialClass)
 
     function handleTouchStart() {
         setActive(true)
     }
-    function handleTouchEnd(e: any) {
+    function handleTouchEnd(e: React.BaseSyntheticEvent) {
         onClick(e)
         setActive(false)
     }
@@ -28,7 +29,7 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
     function handleMouseLeave() {
         setActive(false)
     }
-    function handleClick(e: any) {
+    function handleClick(e: React.BaseSyntheticEvent) {
         onClick(e)
     }
 
@@ -63,9 +64,10 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
         )
     } else {
         return (
-            <div
+            <button
                 onClick={handleClick}
-                className={`${modificationClass ? modificationClass : ''}`}
+                className={`${modificationClass ? modificationClass : ''} pageButton`}
+                disabled={disabled}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
 
@@ -77,7 +79,7 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
                 >
                     {text}
                 </div>
-            </div>
+            </button>
         )
     }
 }

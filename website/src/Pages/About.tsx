@@ -14,18 +14,17 @@ const About = () => {
 
     //////////////////////////////////////////////////
     //VARIABLES//
-    const appContext: any = useContext(AppContext);
-    const anContext: any = useContext(AnimationContext);
+    const appContext = useContext(AppContext);
+    const anContext = useContext(AnimationContext);
 
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
-        anContext.fn.setBigLogoPlayed(true)
+        anContext?.fn.setBigLogoPlayed(true)
         animationStore.menu.logo.logoIn();
         setTimeout(() => {
             animationStore.menu.logo.logoTextIn();
         }, 200);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     //////////////////////////////////////////////////
     //SETUP//

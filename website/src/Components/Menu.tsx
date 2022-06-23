@@ -24,7 +24,7 @@ const Menu = () => {
   //const [smallLogoAnimationPlayed, setSmallLogoAnimationPlayed] = useState<boolean>(false)
   //////////////////////////////////////////////////
   //VARIABLES//
-  const appContext: any = useContext(AppContext);
+  const appContext = useContext(AppContext);
 
   let logoScale: number = 0.1;
   let textScale: number = 0.15;
@@ -43,7 +43,7 @@ const Menu = () => {
   //////////////////////////////////////////////////
   //MENU BACKGROUND//
   useEffect(() => {
-    let actualLocation = appContext.actualLocation;
+    let actualLocation = appContext?.actualLocation;
     if (actualLocation === "/" && background === undefined) {
       setBackground("transparent");
     }
@@ -51,34 +51,34 @@ const Menu = () => {
       setBackground(undefined);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appContext.actualLocation]);
+  }, [appContext?.actualLocation]);
   //DISPLAY MENU AND HAMBURGER LOGIC//
   useEffect(() => {
     if (
-      appContext.actualLocation !== "/" &&
-      appContext.width > config.breakpoints.tablet
+      appContext?.actualLocation !== "/" &&
+      appContext!.width > config.breakpoints.tablet
     ) {
       setShowOffer(true);
       setShowHamburger(false);
       setHamburger(false);
     }
     if (
-      appContext.actualLocation !== "/" &&
-      appContext.width <= config.breakpoints.tablet
+      appContext?.actualLocation !== "/" &&
+      appContext!.width <= config.breakpoints.tablet
     ) {
       setShowOffer(false);
       setShowHamburger(true);
     }
-    if (appContext.actualLocation === "/") {
+    if (appContext?.actualLocation === "/") {
       setHamburger(false);
       setShowHamburger(false);
       setShowOffer(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [appContext.actualLocation, appContext.width]);
+  }, [appContext?.actualLocation, appContext?.width]);
   //////////////////////////////////////////////////
   //MOBILE SETUP//
-  if (appContext.width <= config.breakpoints.tablet) {
+  if (appContext!.width <= config.breakpoints.tablet) {
     const menuMobileClassList = classListMaker([
       "absolute",
       "topZ",

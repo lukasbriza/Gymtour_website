@@ -16,7 +16,7 @@ const text = {
       Header: { cz: "Fitness" },
       Paragraph: {
         cz: `Každý by si měl vybrat takové místo, kde se bude cítit dobře. Někdo dá přednost menšímu, ale útulnému fitku, spíše rodinného charakteru. Naopak kdo má okolo sebe rád více lidí a prostoru, může si vybrat komplexní zařízení, kde je kromě posilovny i široký výběr dalších pohybových aktivit jako například squash, tenis, jumping, spinning, aerobik a další.\n\n
-      Najděte si své fitcentrum ještě dnes! `,
+      Najděte si své fitcentrum ještě dnes!`,
       },
       Button: { cz: "Vyhledat" },
     },
@@ -77,6 +77,26 @@ const text = {
   fitness: {
     PageHeader: { cz: "Fitness" },
     HeaderBackButton: { cz: "Zpět" },
+    Filter: {
+      sort: [{ cz: "Podle popularity" }, { cz: "Podle názvu" }],
+      sortHeader: { cz: "Seřadit" },
+      headers: [
+        { cz: "Regiony" },
+        { cz: "Vybavení" },
+        { cz: "Hlavní" },
+        { cz: "Ostatní" },
+        { cz: "Pohlaví" },
+        { cz: "Specializace" },
+      ],
+      filterButton: {
+        cz: "Filtrovat",
+      },
+    },
+    Content: {
+      nextButton: {
+        cz: " Další",
+      },
+    },
   },
   coach: {
     PageHeader: { cz: "Trenéři" },

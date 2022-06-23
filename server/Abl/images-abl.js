@@ -36,7 +36,8 @@ class ImagesAbl {
   async get(req, res) {
     let response = resBuild();
     ///////////////////////////////////////////////////////////
-    let id = mongoose.mongo.ObjectId(req.body.get._id);
+    let id = mongoose.mongo.ObjectId(req.query.id);
+    console.log(id);
     //TYPE VERIFICATION//
     if (id instanceof Array) {
       new APIError(
@@ -59,7 +60,7 @@ class ImagesAbl {
       let downloadStream = bucket.openDownloadStream(id);
       //DATA STREAM HANDLE//
       downloadStream.on("data", (data) => {
-        return res.status(200).write(data);
+        res.write(data);
       });
       downloadStream.on("error", (err) => {
         return new DatabaseError(
@@ -69,7 +70,8 @@ class ImagesAbl {
         );
       });
       downloadStream.on("end", () => {
-        return res.end();
+        console.log("end");
+        return res.status(200).end();
       });
       ///////////////////////////////////////////////////////////
     } catch (err) {

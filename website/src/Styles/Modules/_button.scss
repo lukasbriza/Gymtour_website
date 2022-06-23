@@ -1,3 +1,18 @@
+.pageButton {
+  line-height: unset;
+  outline: none;
+  border: none;
+  border-width: 0px;
+  background-color: transparent;
+}
+.pageButton:disabled {
+  cursor: default;
+  .buttonInitial {
+    background-color: rgb(83, 83, 83);
+    color: rgb(168, 168, 168);
+  }
+}
+
 .buttonInitial {
   width: 180px;
   color: $minorColor1;
@@ -12,10 +27,14 @@
   transition-property: background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease-out;
+  overflow: hidden;
 }
 .buttonHover {
   background-color: black;
   transition-property: background-color;
   transition-duration: 0.5s;
   transition-timing-function: ease-out;
+  margin: 0px;
+  border: none;
+  overflow: hidden;
 }

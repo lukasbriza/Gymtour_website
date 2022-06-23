@@ -95,6 +95,7 @@ const login = require("./Controllers/login-controller.js");
 const admin = require("./Controllers/admin-controller.js");
 const filter = require("./Controllers/filter-controller.js");
 const images = require("./Controllers/images-controller.js");
+const views = require("./Controllers/views-controller.js");
 
 app.use("/api-filter", filter);
 app.use("/api-fitness", fitness);
@@ -103,6 +104,7 @@ app.use("/api-user", user);
 app.use("/api-login", login);
 app.use("/api-admin", admin);
 app.use("/api-images", images);
+app.use("/api-views", views);
 
 ////////////////////////////////////////////////////////////////
 //DATABASE CONNECTION//

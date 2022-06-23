@@ -357,7 +357,7 @@ gsap.registerEffect({
   extendTimeline: true,
 });
 
-//FILTER ON//
+//FILTER OFF//
 gsap.registerEffect({
   name: "filterOff",
   effect: (filterWrapper, config) => {
@@ -370,6 +370,7 @@ gsap.registerEffect({
       {
         width: config.widthTo,
         duration: config.widthDuration,
+        delay: config.delay,
         ease: Power2.easeOut,
       }
     );
@@ -378,6 +379,7 @@ gsap.registerEffect({
     widthFrom: "100%",
     widthTo: "0%",
     widthDuration: 1,
+    delay: 0,
   },
   extendTimeline: true,
 });
