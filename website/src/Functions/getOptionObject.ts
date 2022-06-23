@@ -1,12 +1,14 @@
 class getOptionObject {
-  static returnObj: RequestInit = {
-    mode: "cors",
-    headers: { Accept: "application/json" },
-  };
-
+  returnObj: RequestInit;
+  constructor() {
+    this.returnObj = {
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+    };
+  }
   setMethod(method: "GET" | "POST" | "PUT" | "DELETE") {
-    if (getOptionObject.returnObj.method === undefined) {
-      getOptionObject.returnObj.method = method;
+    if (this.returnObj.method === undefined) {
+      this.returnObj.method = method;
       return this;
     } else {
       throw new Error("Method is already assigned!");
@@ -14,8 +16,8 @@ class getOptionObject {
   }
 
   addBody(data: object) {
-    if (getOptionObject.returnObj.method !== undefined) {
-      getOptionObject.returnObj.body = JSON.stringify(data);
+    if (this.returnObj.method !== undefined) {
+      this.returnObj.body = JSON.stringify(data);
       return this;
     } else {
       throw new Error("Define method first!");
@@ -23,7 +25,7 @@ class getOptionObject {
   }
 
   get() {
-    return getOptionObject.returnObj;
+    return this.returnObj;
   }
 }
 

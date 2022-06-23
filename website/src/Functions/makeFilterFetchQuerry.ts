@@ -4,6 +4,7 @@ const makeFilterFetchQuerry = (
   limit: number = 20
 ) => {
   let dataObj: any = { ...data };
+  //REMOVE REGIONS AND ORDER//
   delete dataObj.order;
   delete dataObj.regions;
 
@@ -11,7 +12,7 @@ const makeFilterFetchQuerry = (
   let queryObj: any = { $and: [{ approved: true }] };
   for (const key in dataObj) {
     if (dataObj[key].length !== 0) {
-      queryObj.$and.push({ [`filters.${key}`]: dataObj[key] });
+      queryObj.$and.push({ [`filters.${key}`]: { $all: dataObj[key] } });
     }
   }
 
@@ -36,6 +37,15 @@ const makeFilterFetchQuerry = (
   const fetchObj = {
     get: {
       query: queryObj,
+      projection: [
+        "name",
+        "pictures",
+        "_id",
+        "owner",
+        "views",
+        "topped",
+        "popularity",
+      ],
       options: {
         skip: skip,
       },
