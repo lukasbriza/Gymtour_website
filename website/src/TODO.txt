@@ -1,0 +1,5 @@
+HOC withLoading, HOC withRouter 
+
+1) refacror cross animaiton
+2) make filter querry to change dinamically
+3) modal on error in fetch call

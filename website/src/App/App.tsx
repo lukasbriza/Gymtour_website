@@ -1,7 +1,7 @@
 //COMPONENTS//
 import { Menu } from '../Components/Menu'
 //CONTEXT//
-import { AnimationContextProvider, AppContextProvider } from './Context'
+import { AnimationContextProvider, AppContextProvider, UserContextProvider } from './Context'
 //ANIMATIONS//
 import '../config/animationRegistration.js';
 //ROUTER//
@@ -17,14 +17,16 @@ function App() {
   return (
     <AppContextProvider>
       <AnimationContextProvider>
-        <div id="App">
-          <Router history={history}>
-            <Menu />
+        <UserContextProvider>
+          <div id="App">
+            <Router history={history}>
+              <Menu />
 
-            <PageRoutes />
+              <PageRoutes />
 
-          </Router>
-        </div>
+            </Router>
+          </div>
+        </UserContextProvider>
       </AnimationContextProvider>
     </AppContextProvider>
   );

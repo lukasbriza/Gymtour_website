@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 //FUNCTIONS//
 import { setContextBreakpoint } from '../Functions/setContextBreakpoint'
+import { handleSearchData } from '../Functions/handleSearchData'
 
 //IMAGES//
 import main from '../Images/main.webp'
@@ -16,14 +17,18 @@ export interface AppStateContext {
     width: number,
     actualLocation: string,
     breakPoint: "toMobile" | "fromMobile" | "fromTablet" | "fromDesktop" | "fromWide",
-    fitnessSearch: any,
-    coachSearch: any,
+    fitnessSearch: searchFitnessData,
+    coachSearch: searchCoachData,
+    filteredFitnessData: filteredData[] | [],
+    filteredCoachData: filteredData[] | [],
     fn: {
         setActualLocation: React.Dispatch<React.SetStateAction<string>>,
         preloadCrossroadImg: (timeout: number) => Promise<void>,
         preloadHomeImg: (timeout: number) => Promise<void>,
         preloadMenuImg: (timeout: number) => Promise<void>,
-        handleSearchData: (data: dataTypeSearch) => void
+        handleSearchData: (data: dataTypeSearch) => void,
+        setFilteredFitnessData: React.Dispatch<React.SetStateAction<filteredData[]>>,
+        setFilteredCoachData: React.Dispatch<React.SetStateAction<filteredData[]>>
     }
 }
 export interface AnStateContext {
@@ -36,16 +41,26 @@ export interface AnStateContext {
         setFilterOpen: React.Dispatch<React.SetStateAction<boolean>>
     }
 }
+
+export interface UserStateContext {
+    logged: boolean,
+    fn: {
+        setLogged: React.Dispatch<React.SetStateAction<boolean>>
+    }
+}
 //CONTEXTS//
 const AppContext = createContext<AppStateContext | null>(null)
 const AnimationContext = createContext<AnStateContext | null>(null)
-
+const UserContext = createContext<UserStateContext | null>(null)
+/////////////////////////////////////////////////////////////////////////////
 //APP CONTEXT//
 const AppContextProvider = (props: ContextProviderProps) => {
+    //////////////////////////////////////////////////////////////////
+    //CONTEXT STATE//
     const [width, setWidth] = useState<number>(1)
     const [actualLocation, setActualLocation] = useState<string>("/")
     const [breakPoint, setBreakPoint] = useState<"toMobile" | "fromMobile" | "fromTablet" | "fromDesktop" | "fromWide">("toMobile")
-    const [fitnessSearch, setFitnessSearch] = useState<searchData>(
+    const [fitnessSearch, setFitnessSearch] = useState<searchFitnessData>(
         {
             order: 1,
             equipment: [],
@@ -54,11 +69,17 @@ const AppContextProvider = (props: ContextProviderProps) => {
             regions: []
         }
     )
-    const [coachSearch, setCoachSearch] = useState<any>({
+    const [coachSearch, setCoachSearch] = useState<searchCoachData>({
         order: 1,
-        regions: []
+        regions: [],
+        others: [],
+        specialization: [],
+        gender: []
     })
-
+    const [filteredFitnessData, setFilteredFitnessData] = useState<filteredData[] | []>([])
+    const [filteredCoachData, setFilteredCoachData] = useState<filteredData[] | []>([])
+    //////////////////////////////////////////////////////////////////
+    //IMAGES//
     const crossroadArr = [
         { name: "fitness", img: fitness },
         { name: "trainer", img: trainer },
@@ -72,15 +93,7 @@ const AppContextProvider = (props: ContextProviderProps) => {
         //about , coop, contact
     ]
     //////////////////////////////////////////////////////////////////
-    //LISTENERS//
-    useEffect(() => {
-        setWidth(window.innerWidth)
-        setContextBreakpoint(width, setBreakPoint)
-    }, [])
-    useEffect(() => { setContextBreakpoint(width, setBreakPoint) }, [width])
-
-    window.addEventListener('resize', () => { setWidth(window.innerWidth) })
-    //////////////////////////////////////////////////////////////////
+    //PRELOAD IMAGE FNUNCTION//
     const cacheImg = (arr: any) => {
         arr.forEach(async (obj: any) => {
             let img = new Image()
@@ -104,64 +117,19 @@ const AppContextProvider = (props: ContextProviderProps) => {
         }, timeout)
     }
     //////////////////////////////////////////////////////////////////
-    const handleSearchData = (data: dataTypeSearch) => {
-        console.log(data)
-        /*
-        switch (actualLocation) {
-            ////////////////////////////////////////////////////////////////////////
-            case "/fitness":
-                if (data.type === "order") {
-                    setFitnessSearch({
-                        ...fitnessSearch,
-                        [data.type]: data.code
-                    })
-                    break
-                }
-                if (data.type === "regions") {
-                    let regionQuery: { regionCode?: string, townCode?: string }[] = fitnessSearch.regions
-                    //IS LISTED//
-                    let foundRegionIndex = regionQuery.findIndex(
-                        (item: { regionCode?: string, townCode?: string }) => item.regionCode === data.region && item.townCode === data.town?.code
-                    )
-                    if (foundRegionIndex !== -1 && data.town?.checked === false) {
-                        //REMOVE WHEN CHECKED PROP IS FALSE//
-                        regionQuery.splice(foundRegionIndex, 1)
-                    } else {
-                        //ADD TO ARRAY//
-                        regionQuery.push({ regionCode: data.region, townCode: data.town?.code })
-                    }
-                    //SET NEW STATE//
-                    setFitnessSearch({
-                        ...fitnessSearch,
-                        regions: regionQuery
-                    })
-                    break
-                }
-                //OTHER INPUT TYPES//
-                let typeArray: any = fitnessSearch[data.type]
-                let removeItemIndex = typeArray.findIndex((item: string) => item === data.code)
-                if (removeItemIndex !== -1 && data.checked === false) {
-                    //REMOVE WHEN CHECKED PROP IS FALSE//
-                    typeArray.splice(removeItemIndex, 1)
-                } else {
-                    //ADD TO ARRAY//
-                    typeArray.push(data.code)
-                }
-                //SET NEW STATE//
-                setFitnessSearch({
-                    ...fitnessSearch,
-                    [data.type]: typeArray
-                })
-
-                break;
-            ////////////////////////////////////////////////////////////////////////
-            case "/coach":
-
-                break;
-        }*/
-
-
+    //FUNCTIONS//
+    const handleSearchDataSubstitution = (data: dataTypeSearch) => {
+        handleSearchData(data, setFitnessSearch, fitnessSearch, setCoachSearch, coachSearch, actualLocation)
     }
+    //////////////////////////////////////////////////////////////////
+    //LISTENERS//
+    useEffect(() => {
+        setWidth(window.innerWidth)
+        setContextBreakpoint(width, setBreakPoint)
+    }, [])
+    useEffect(() => { setContextBreakpoint(width, setBreakPoint) }, [width])
+
+    window.addEventListener('resize', () => { setWidth(window.innerWidth) })
     //////////////////////////////////////////////////////////////////
     const appState: AppStateContext = {
         width: width,
@@ -169,12 +137,16 @@ const AppContextProvider = (props: ContextProviderProps) => {
         breakPoint: breakPoint,
         fitnessSearch: fitnessSearch,
         coachSearch: coachSearch,
+        filteredFitnessData: filteredFitnessData,
+        filteredCoachData: filteredCoachData,
         fn: {
             setActualLocation: setActualLocation,
             preloadCrossroadImg: preloadCrossroadImg,
             preloadHomeImg: preloadHomeImg,
             preloadMenuImg: preloadMenuImg,
-            handleSearchData: handleSearchData
+            handleSearchData: handleSearchDataSubstitution,
+            setFilteredFitnessData: setFilteredFitnessData,
+            setFilteredCoachData: setFilteredCoachData
         }
     }
 
@@ -184,7 +156,7 @@ const AppContextProvider = (props: ContextProviderProps) => {
         </AppContext.Provider>
     )
 }
-
+/////////////////////////////////////////////////////////////////////////////
 //ANIMATION CONTEXT//
 const AnimationContextProvider = (props: ContextProviderProps) => {
     const [bigLogoPlayed, setBigLogoPlayed] = useState<boolean>(false)
@@ -209,9 +181,28 @@ const AnimationContextProvider = (props: ContextProviderProps) => {
     )
 }
 
+const UserContextProvider = (props: any) => {
+    const [logged, setLogged] = useState<boolean>(false)
+
+    const userState: UserStateContext = {
+        logged: logged,
+        fn: {
+            setLogged: setLogged
+        }
+    }
+
+    return (
+        <UserContext.Provider value={userState}>
+            {props.children}
+        </UserContext.Provider>
+    )
+}
+
 export {
     AppContext,
     AnimationContext,
+    UserContext,
     AppContextProvider,
-    AnimationContextProvider
+    AnimationContextProvider,
+    UserContextProvider
 }
