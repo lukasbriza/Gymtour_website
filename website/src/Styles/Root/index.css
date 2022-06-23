@@ -71,6 +71,7 @@ body:before {
           box-sizing: border-box;
   font-family: "Open Sans", sans-serif, "Times New Roman";
   font-size: 1em;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1 {
@@ -497,16 +498,20 @@ body {
   -ms-grid-row: 2;
   -ms-grid-column: 3;
   grid-area: backButton;
-  -ms-flex-item-align: end;
-      -ms-grid-row-align: end;
-      align-self: end;
-  margin-bottom: 7px;
+  text-transform: uppercase;
 }
 
 @media (min-width: 25em) {
   .filterSectionWrapper {
     max-width: 300px;
   }
+}
+
+.filterSectionWrapper .pageButton {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .filterHeaderWrapper {
@@ -552,7 +557,25 @@ body {
   margin-top: 4px;
 }
 
-.searchContent .searchItem .popularityCounter {
+.searchContentWrapper {
+  overflow-y: auto;
+}
+
+.searchContentWrapper .searchContent {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  -ms-grid-rows: (250px)[auto-fill];
+      grid-template-rows: repeat(auto-fill, 250px);
+  grid-gap: calc(2em + 2vh) calc(1.5em + 1vmin);
+  grid-auto-flow: row dense;
+  width: 90%;
+  min-height: calc(100vh - 550px);
+  justify-items: center;
+}
+
+.searchContentWrapper .searchContent .searchItem .popularityCounter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -561,12 +584,18 @@ body {
           align-items: center;
 }
 
-.searchContent .searchItem .popularityCounter .popularityImgWrapper {
+.searchContentWrapper .searchContent .searchItem .popularityCounter .popularityImgWrapper {
   margin: 8px;
   margin-right: 4px;
 }
 
-.searchContent .searchItem .itemBar {
+.searchContentWrapper .searchContent .searchItem .toppedImgWrapper {
+  position: absolute;
+  margin-top: 5px;
+  right: 0px;
+}
+
+.searchContentWrapper .searchContent .searchItem .itemBar {
   display: -ms-grid;
   display: grid;
   -webkit-box-align: center;
@@ -576,11 +605,23 @@ body {
       grid-template-columns: 1fr 50px;
 }
 
-.searchContent .searchItem .itemBar .toppedImgWrapper {
+.searchContentWrapper .searchContent .searchItem .itemBar h3 {
+  max-width: 250px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.searchContentWrapper .searchContent .searchItem .itemBar .viewsCounter {
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.searchContentWrapper .contentPageButton {
+  margin-top: 30px;
   position: relative;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  display: inline-block;
+  cursor: pointer;
 }
 
 .footer {
@@ -1286,6 +1327,23 @@ body {
   opacity: 0;
 }
 
+.pageButton {
+  line-height: unset;
+  outline: none;
+  border: none;
+  border-width: 0px;
+  background-color: transparent;
+}
+
+.pageButton:disabled {
+  cursor: default;
+}
+
+.pageButton:disabled .buttonInitial {
+  background-color: #535353;
+  color: #a8a8a8;
+}
+
 .buttonInitial {
   width: 180px;
   color: white;
@@ -1301,6 +1359,7 @@ body {
           transition-duration: 0.2s;
   -webkit-transition-timing-function: ease-out;
           transition-timing-function: ease-out;
+  overflow: hidden;
 }
 
 .buttonHover {
@@ -1311,6 +1370,9 @@ body {
           transition-duration: 0.5s;
   -webkit-transition-timing-function: ease-out;
           transition-timing-function: ease-out;
+  margin: 0px;
+  border: none;
+  overflow: hidden;
 }
 
 .layer {
@@ -1616,7 +1678,7 @@ button[type="submit"]:active {
 
 .loadingWrapper {
   position: relative;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background: #111111;
   display: -webkit-box;
@@ -1686,19 +1748,26 @@ button[type="submit"]:active {
 }
 
 .headerSection a {
-  text-decoration: none;
   color: black;
-  font-weight: 600;
-  text-decoration: underline;
+  font-weight: 900;
+  text-decoration: none;
 }
 
 .headerSection a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-.searchContent {
-  padding-top: 132px;
+.searchContentWrapper {
+  width: 100%;
+  padding-top: 150px;
+  padding-bottom: 15px;
   z-index: -2;
+}
+
+.contentPageButton {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .filterSectionWrapper {
@@ -1765,6 +1834,18 @@ button[type="submit"]:active {
   margin-left: 5px;
 }
 
+.filterInputWrapper:hover {
+  cursor: pointer;
+}
+
+.filterInputWrapper:hover input {
+  cursor: pointer;
+}
+
+.filterInputWrapper:hover label {
+  cursor: pointer;
+}
+
 .filterHeaderWrapper h2 {
   font-size: 20px;
   margin-left: 4px;
@@ -1809,9 +1890,12 @@ button[type="submit"]:active {
 }
 
 .searchItem {
-  width: 220px;
-  height: 220px;
-  background: brown;
+  width: 300px !important;
+  height: 250px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  background: #8a8a8a !important;
+  overflow: hidden !important;
 }
 
 .popularityCounter .popularityImgWrapper {
@@ -1822,7 +1906,7 @@ button[type="submit"]:active {
 }
 
 .popularityCounter .popularityImgWrapper .heart {
-  fill: #e70000;
+  fill: #c4c4c4;
 }
 
 .popularityCounter p {
@@ -1831,25 +1915,38 @@ button[type="submit"]:active {
   font-size: 0.8em;
 }
 
-.itemBar {
-  height: 42px;
-  background: rgba(0, 0, 0, 0.475);
-}
-
-.itemBar h3 {
-  color: white;
-  margin-left: 15px;
-}
-
-.itemBar .toppedImgWrapper {
+.toppedImgWrapper {
   height: 22px;
 }
 
-.itemBar .toppedImgWrapper .flamePath1 {
-  fill: #2f2f2e;
+.itemBar {
+  height: 60px;
+  background: rgba(0, 0, 0, 0.475);
+  border-radius: 0 0 5px 5px;
 }
 
-.itemBar .toppedImgWrapper .flamePath2 {
-  fill: #686868;
+.itemBar h3 {
+  font-size: 1.2em;
+  color: white;
+  margin-left: 15px;
+  line-height: 1 !important;
+  overflow-wrap: break-word;
+}
+
+.itemBar .viewsCounter {
+  color: white;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.searchImg {
+  width: auto;
+  height: 100%;
+  background-position: center;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 /*# sourceMappingURL=index.css.map */

@@ -1,8 +1,15 @@
+$hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
+$returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
 .searchItem {
-  $size: 220px;
-  width: $size;
-  height: $size;
-  background: brown;
+  $height: 250px;
+  $width: $height + 50px;
+  width: $width !important;
+  height: $height !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  background: rgb(138, 138, 138) !important;
+  overflow: hidden !important;
 }
 
 .popularityCounter {
@@ -11,7 +18,8 @@
     width: min-content;
 
     .heart {
-      fill: rgb(231, 0, 0);
+      //fill: rgb(231, 0, 0);
+      fill: rgb(196, 196, 196);
     }
   }
   p {
@@ -21,22 +29,36 @@
   }
 }
 
+.toppedImgWrapper {
+  height: 22px;
+}
+
 .itemBar {
-  height: 42px;
+  height: 60px;
   background: rgba(0, 0, 0, 0.475);
+  border-radius: 0 0 5px 5px;
 
   h3 {
+    font-size: 1.2em;
     color: $minorColor1;
     margin-left: 15px;
+    line-height: 1 !important;
+    overflow-wrap: break-word;
   }
-  .toppedImgWrapper {
-    height: 22px;
 
-    .flamePath1 {
-      fill: rgb(47, 47, 46);
-    }
-    .flamePath2 {
-      fill: rgb(104, 104, 104);
-    }
+  .viewsCounter {
+    color: $minorColor1;
+    font-weight: 500;
+    font-size: 1em;
   }
+}
+
+.searchImg {
+  width: auto;
+  height: 100%;
+  background-position: center;
+  left: 50%;
+  transform: translateX(-50%);
+  background-size: cover;
+  background-repeat: no-repeat;
 }

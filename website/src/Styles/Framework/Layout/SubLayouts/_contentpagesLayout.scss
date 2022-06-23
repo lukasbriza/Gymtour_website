@@ -1,0 +1,115 @@
+////////////////////////////////////////////////////////
+//CONTENT PAGES//
+.contentPage {
+  z-index: 0;
+}
+//HEADER SECTION//
+.headerSection {
+  display: grid;
+  grid-template-rows: 70px min-content 15px;
+  grid-template-columns: 100px 1fr 100px;
+  grid-template-areas: ". . ." "filter header backButton" ". . .";
+  align-items: center;
+  justify-items: center;
+  z-index: 5;
+
+  .filterIconWrapper {
+    grid-area: filter;
+  }
+  h1 {
+    grid-area: header;
+    margin: 0px;
+  }
+
+  a {
+    grid-area: backButton;
+    text-transform: uppercase;
+  }
+}
+
+//FILTER SECTION//
+.filterSectionWrapper {
+  @include mq($from: 400px) {
+    max-width: 300px;
+  }
+
+  .pageButton {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.filterHeaderWrapper {
+  display: grid;
+  grid-template-columns: 5% 1fr 30px 5%;
+  grid-template-rows: 30px min-content;
+  grid-template-areas: ". header arrow ." ". underliner underliner .";
+  align-items: end;
+
+  h2 {
+    grid-area: header;
+  }
+  .filterArrowWrapper {
+    grid-area: arrow;
+    display: flex;
+    justify-content: center;
+  }
+  .underliner {
+    grid-area: underliner;
+    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4px;
+  }
+}
+//SEARCH CONTENT SECTION//
+.searchContentWrapper {
+  overflow-y: auto;
+  .searchContent {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, 250px);
+    grid-gap: calc(2em + 2vh) calc(1.5em + 1vmin);
+    grid-auto-flow: row dense;
+    width: 90%;
+    min-height: calc(100vh - 550px);
+    justify-items: center;
+
+    .searchItem {
+      .popularityCounter {
+        display: flex;
+        align-items: center;
+        .popularityImgWrapper {
+          margin: 8px;
+          margin-right: 4px;
+        }
+      }
+
+      .toppedImgWrapper {
+        position: absolute;
+        margin-top: 5px;
+        right: 0px;
+      }
+
+      .itemBar {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr 50px;
+        h3 {
+          max-width: 250px;
+          height: fit-content;
+        }
+        .viewsCounter {
+          justify-self: center;
+        }
+      }
+    }
+  }
+  .contentPageButton {
+    margin-top: 30px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+}

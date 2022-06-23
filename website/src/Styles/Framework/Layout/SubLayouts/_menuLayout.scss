@@ -1,0 +1,30 @@
+////////////////////////////////////////////////////////
+//MENU LAYOUT//
+.menu {
+  max-width: $maxWidth;
+  display: grid;
+  width: 100%;
+  min-width: 360px;
+  grid-template-columns: 15px 1fr min-content 1fr 25px;
+  grid-template-areas: ". . logo hamburger .";
+
+  @include mq($until: $maxWidth) {
+    width: 100vw;
+  }
+  @include mq($from: tablet) {
+    grid-template-columns: 15px min-content 1fr min-content 15px;
+    grid-template-areas: ". logo . menuOffer .";
+  }
+}
+.logoGrid {
+  grid-area: logo;
+}
+.menuOfferGrid {
+  grid-area: menuOffer;
+}
+.hamburgerGrid {
+  grid-area: hamburger;
+}
+.menuOfferGrid {
+  grid-area: menuOffer;
+}

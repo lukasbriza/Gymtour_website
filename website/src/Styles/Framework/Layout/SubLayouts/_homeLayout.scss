@@ -1,0 +1,89 @@
+////////////////////////////////////////////////////////
+//HOME LAYOUT//
+#Home {
+  max-width: $maxWidth;
+  display: grid;
+  grid-template-rows: 50px 1fr 4fr 1fr;
+  grid-template-areas:
+    "."
+    "pageHeader"
+    "mainHeader"
+    "button";
+}
+
+#pageHeader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  grid-area: pageHeader;
+}
+
+#bigLogoWrapper {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  grid-area: mainHeader;
+}
+
+#homeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    .headerWrapper {
+      width: min-content;
+      margin-left: 30px;
+    }
+
+    .headerWrapper:nth-child(1) {
+      margin-right: auto;
+    }
+    .headerWrapper:nth-child(2) {
+      margin-top: 25px;
+      margin-bottom: 25px;
+      margin-right: auto;
+    }
+    .headerWrapper:nth-child(3) {
+      margin-right: auto;
+    }
+
+    @include mq($from: tablet) {
+      width: 90%;
+
+      .headerWrapper {
+        width: min-content;
+      }
+      .headerWrapper:nth-child(1) {
+        margin-right: auto;
+      }
+      .headerWrapper:nth-child(2) {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-right: auto;
+        margin-left: calc((100vw / 2) - 280px);
+      }
+      .headerWrapper:nth-child(3) {
+        margin-left: auto;
+        margin-right: 0px;
+      }
+    }
+
+    @include mq($from: wide) {
+      width: 1170px;
+      .headerWrapper:nth-child(2) {
+        margin-right: auto;
+        margin-left: 370px;
+      }
+    }
+  }
+
+  grid-area: mainHeader;
+}
+
+#homeButton {
+  grid-area: button;
+}

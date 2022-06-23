@@ -53,6 +53,15 @@
     margin-left: 5px;
   }
 }
+.filterInputWrapper:hover {
+  cursor: pointer;
+  input {
+    cursor: pointer;
+  }
+  label {
+    cursor: pointer;
+  }
+}
 
 .filterHeaderWrapper {
   h2 {
