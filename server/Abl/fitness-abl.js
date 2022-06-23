@@ -250,19 +250,40 @@ class FitnessAbl {
     let response = resBuild();
     ///////////////////////////////////////////////////////////
     //INPUT//
-    let query = req.body.get.query;
-    let projection = req.body.get.projection ? req.body.get.projection : null;
-    let options = req.body.get.options ? req.body.get.options : null;
-    let limit = req.body.get.limit ? req.body.get.limit : 20;
-    console.log(query, projection, options, limit);
+    const URL_PARAMS = JSON.parse(req.query.get);
+    const query = URL_PARAMS.query;
+    const projection = URL_PARAMS.projection ? URL_PARAMS.projection : null;
+    const options = URL_PARAMS.options ? URL_PARAMS.options : null;
+    const limit = URL_PARAMS.limit ? URL_PARAMS.limit : 20;
+    const order = URL_PARAMS.order ? URL_PARAMS.order : 1;
+    /**
+     * {$and[
+     * {town:{$in:[]}}
+     * {region:{$in:[]}}
+     * {'filters.specialization':{$all:[]}}
+     * {'filters.others':{$all:[]}}
+     * {'filters.equipment':{$all:[]}}
+     * {'filters.general':{$all:[]}}
+     * ]}
+     */
     ///////////////////////////////////////////////////////////
     //DB CALL//
+    //HOW TO SORT?
+    const orderQuerry =
+      order === 1
+        ? { popularity: "desc" }
+        : order === 2
+        ? { name: "asc" }
+        : { views: "desc" };
     let getRes;
+
     try {
       getRes = await FitnessModel.find(query, projection, options)
+        .sort(orderQuerry)
         .limit(limit)
         .exec();
-      response.data = getRes;
+      response.data = await getRes;
+      console.log(response);
     } catch (err) {
       if (err instanceof Error) {
         new DatabaseError(
@@ -277,6 +298,7 @@ class FitnessAbl {
     //BUILD RESPONSE//
     return response;
   }
+
   async delete(req, res) {
     let response = resBuild();
     response.data = [];
