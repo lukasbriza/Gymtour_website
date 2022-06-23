@@ -1,17 +1,20 @@
 //FUNCTUION//
-import { ImgHTMLAttributes } from 'react'
+import React, { ImgHTMLAttributes } from 'react'
 import { classListMaker } from '../Functions/classListMaker'
 
-const SearchItemIMG = (props: ImgHTMLAttributes<any>) => {
-    //////////////////////////////////////////////////
-    //STATE//
+const SearchItemIMG = ({ loading, setImgLoaded, alt, ...props }: {
+    loading: boolean,
+    setImgLoaded: React.Dispatch<React.SetStateAction<boolean>>,
+    alt: string,
+    props: ImgHTMLAttributes<any>
+}) => {
     //////////////////////////////////////////////////
     //VARIABLES//
-    const imgClasses = classListMaker(["searchImg", "relative", "stretchY"])
+    const imgClasses = classListMaker(["searchImg", "absolute"])
 
     //////////////////////////////////////////////////
     //SETUP//
-    return <img alt={props.alt} className={imgClasses} {...props} />
+    return <img alt={alt} className={imgClasses} onLoad={() => { setImgLoaded(true) }} {...props} />
 }
 
 export { SearchItemIMG }

@@ -1,9 +1,10 @@
-import React, { useEffect, useContext, useRef, useState } from 'react'
+import React, { useEffect, useContext, useRef, useState, useCallback } from 'react'
+import { useLocation } from 'react-router-dom'
 import { FilterSection } from './FilterSection'
 import { Button } from '../Button'
 import { gsap } from 'gsap'
 //CONTEXT//
-import { AppContext, AnimationContext, AppStateContext } from '../../App/Context'
+import { AppContext } from '../../App/Context'
 //CONFIG//
 import { config, animationStore } from '../../config/mainConfiguration'
 import { text } from '../../config/textSource'
@@ -13,8 +14,9 @@ import { makeFilterFetchQuerry } from '../../Functions/makeFilterFetchQuerry'
 import fetchAgent from '../../Functions/fetchAgent'
 
 
+
 //under construction//
-const ContentFilter = React.memo((props: { open: boolean }) => {
+const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<React.SetStateAction<filteredData[] | []>>, fetch: { skip: number, limit: number } }) => {
     //////////////////////////////////////////////////
     //TYPES//
     type dataState = {
@@ -35,14 +37,43 @@ const ContentFilter = React.memo((props: { open: boolean }) => {
     //STATE//
     const [data, setData] = useState<dataState>()
     const [showContent, setShowContent] = useState<boolean>(false)
+    const location = useLocation()
     //////////////////////////////////////////////////
     //VARIABLES//
-    const anContext = useContext(AnimationContext)
     const appContext = useContext(AppContext)
 
     const filterSecctionWrapperClasses = classListMaker(["filterSectionWrapper", "relative"])
+    const buttonInitialClasses = classListMaker(["buttonInitial contentFilterButton pointer relative centerX"])
+    const buttonHoverClasses = classListMaker(["buttonHover"])
 
     const wrapperRef = useRef(null)
+
+
+    //HANDLE FILTER DATA//
+    const fetchFilterData = async (filterOrigin = false, skip = 0, limit = 20) => {
+        let querryCommand: filterFetchQuery | undefined = undefined;
+        const actualLocation = location.pathname === "/fitness" ? "fitness" : "coach"
+
+        if (location.pathname === "/fitness") {
+            querryCommand = makeFilterFetchQuerry(appContext!.fitnessSearch, skip, limit) //TODO - change dinamically (see after i came back)
+        }
+        else if (location.pathname === "/coach") {
+            querryCommand = makeFilterFetchQuerry(appContext!.coachSearch, skip, limit) //TODO - change dinamically (change limits / skips)
+        }
+        //MAKE FETCH CALL BASED ON FILTER QUERRY//
+        //console.log(querryCommand)
+        if (querryCommand !== undefined) {
+            const getData: any = await fetchAgent.getContentBasedOnFilter(querryCommand, actualLocation)
+            // console.log(getData)
+            if ((await getData).errorMap.length === 0) {
+                if (location.pathname === "/fitness") {
+                    filterOrigin === true ? props.setFilteredData(getData.data) : props.setFilteredData(appContext!.filteredFitnessData.concat(getData.data))
+                } else if (location.pathname === "/coach") {
+                    filterOrigin === true ? props.setFilteredData(getData.data) : props.setFilteredData(appContext!.filteredCoachData.concat(getData.data))
+                }
+            }
+        }
+    }
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
@@ -61,32 +92,27 @@ const ContentFilter = React.memo((props: { open: boolean }) => {
     //////////////////////////////////////////////////
     //FETCHING//
     useEffect(() => {
+        //GET FILTER DATA
         const filterData = fetchAgent.getFilterData()
         filterData.then((data: any) => {
             //CATCH ERROR//
             if (data.errorMap.length > 0) {
                 //THROW ERROR MODAL//
-                alert('Error modal')
+                alert('Filter data error modal. ' + data.errorMap)
             }
             if (data.errorMap.length === 0) {
-                console.log(data.data[0])
                 setData(data.data[0])
                 setShowContent(true)
             }
+        }).then(() => {
+            //INITIAL FETCH//
+            fetchFilterData()
         })
     }, [])
-
-    //HANDLE FILTER DATA//
-    const fetchFilterData = async (data: any) => {
-        let querryCommand;
-        if (appContext?.actualLocation === "/fitness") {
-            querryCommand = makeFilterFetchQuerry(appContext.fitnessSearch)
-        }
-        else if (appContext?.actualLocation === "/coach") {
-            querryCommand = makeFilterFetchQuerry(appContext.coachSearch)
-        }
-        console.log(querryCommand)
-    }
+    //TRIGGERED FETCH BY NEXT BUTTON//
+    useEffect(() => {
+        fetchFilterData(false, props.fetch.skip, props.fetch.limit)
+    }, [props.fetch])
     //////////////////////////////////////////////////
     //SETUP//
     if (showContent === true) {
@@ -115,7 +141,7 @@ const ContentFilter = React.memo((props: { open: boolean }) => {
                 ref={wrapperRef}
             >
                 <FilterSection
-                    header={"Seřadit"}
+                    header={text.fitness.Filter.sortHeader.cz}
                     filterType={"order"}
                     data={undefined}
                 />
@@ -130,16 +156,19 @@ const ContentFilter = React.memo((props: { open: boolean }) => {
                     )
                 })}
                 <Button
-                    onClick={fetchFilterData}
-                    initialClass={"buttonInitial contentFilterButton pointer relative centerX"}
-                    hoverClass={"buttonHover"}
-                    text={"Filtrovat"}
+                    /* FETCH DATA AND CLEAR ARRAY */
+                    onClick={() => {
+                        fetchFilterData(true)
+                    }}
+                    initialClass={buttonInitialClasses}
+                    hoverClass={buttonHoverClasses}
+                    text={text.fitness.Filter.filterButton.cz}
                 />
             </section>
         )
     } else {
-        return <>Loading...</>
+        return <div></div>
     }
-})
+}
 
 export { ContentFilter }

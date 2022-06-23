@@ -180,3 +180,55 @@ type formStringInputProps = {
   maxLength?: number;
   minLength?: number;
 };
+
+type getImgData = {
+  id: string;
+};
+
+type updateViewsData = {
+  updateViews: {
+    type: "coach" | "fitness";
+    _id: string;
+  };
+};
+
+interface filteredData {
+  _id: string;
+  name: string;
+  pictures: {
+    detail: {
+      main: string;
+      others: string[];
+    };
+    card: string;
+  };
+  owner: string;
+  views: number;
+  topped: { value: boolean; toDate: null | Date };
+  popularity: any[];
+}
+
+interface filterFetchQuery {
+  get: {
+    query: any;
+    projection: string[];
+    options: {
+      skip: number;
+    };
+    limit: number;
+    order: number;
+  };
+}
+
+interface feResponseObj {
+  data: any;
+  errorMap: {
+    Error: {
+      code: string | number;
+      name: string;
+      message: string;
+      trace: string;
+      date: Date | string;
+    };
+  }[];
+}

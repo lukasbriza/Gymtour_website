@@ -1,8 +1,9 @@
 import { classListMaker } from '../Functions/classListMaker'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { gsap, Power1 } from 'gsap'
 
 const Loading = ({ size, distance, duration, stagger, y }: { size?: string, distance?: string, duration?: number, stagger?: number, y?: string }) => {
+
     const loadingPageWrapper = classListMaker(["loadingWrapper"])
     const loadingCircleClasses = classListMaker(["loadingCircle"])
 
@@ -34,7 +35,7 @@ const Loading = ({ size, distance, duration, stagger, y }: { size?: string, dist
                 }).to(comp, {
                     marginBottom: '5px',
                     duration: DURATION,
-                    ease: Power1.easeIn
+                    ease: Power1.easeIn,
                 })
                 tl.repeat(-1)
             }, STAGGER * index)

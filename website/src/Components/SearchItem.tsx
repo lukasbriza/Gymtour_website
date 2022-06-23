@@ -4,6 +4,8 @@ import { Topped } from '../Components/SVG/Topped'
 import { Tilt } from '../Components/Tilt'
 import { IsLoading } from './HOCs/IsLoading'
 import { SearchItemIMG } from '../Components/SearchItemIMG'
+import fetchAgent from '../Functions/fetchAgent'
+import { useHistory } from 'react-router-dom'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
 //CONTEXT//
@@ -12,6 +14,7 @@ import { classListMaker } from '../Functions/classListMaker'
 
 interface SearchItemTypeFitness {
     data: {
+        _id: string,
         pictures: {
             detail: {
                 main: string,
@@ -19,54 +22,23 @@ interface SearchItemTypeFitness {
             },
             card: string
         },
-        topped: boolean,
+        topped: { value: boolean, toDate: null | Date },
         views: number,
-        likedBy: string[],
+        popularity: string[],
         name: string,
-        street: string,
-        town: number,
-        region: number,
-        IN: number,
-        priceLevel: number,
-        contact: {
-            tel?: number,
-            mobile?: number,
-            email: string,
-            web?: string,
-            facebook?: string,
-            twitter?: string,
-            google?: string,
-            instagram?: string,
-            youtube?: string,
-        },
-        filters: {
-            equipment: number[],
-            general?: number[],
-            others?: number[]
-        }
-        open: {
-            mon: { from: number, to: number },
-            tue: { from: number, to: number },
-            wed: { from: number, to: number },
-            thu: { from: number, to: number },
-            fri: { from: number, to: number },
-            sat: { from: number, to: number },
-            sun: { from: number, to: number }
-        }
-        descriptionBasic: string,
-        descriptionFull: string,
     }
 }
 const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
     //////////////////////////////////////////////////
     //STATE//
     const [imgLoaded, setImgLoaded] = useState<boolean>(false)
+    const [imgData, setImgData] = useState<string>()
     //////////////////////////////////////////////////
     //VARIABLES//
     const searchItemClasses = classListMaker(["searchItem", "relative"])
     const itemBar = classListMaker(["itemBar", "absolute", "left", "bottom", "stretchX"])
     const popularityCounterClasses = classListMaker(["popularityCounter", "absolute", "top", "left"])
-    const viewsCounterClasses = classListMaker(["viewsCounter", "absolute", "top", "right"])
+    const viewsCounterClasses = classListMaker(["viewsCounter", "relative"])
 
     const hearthRef = useRef<SVGSVGElement>(null)
     const toppedRef = useRef<SVGSVGElement>(null)
@@ -80,13 +52,29 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
         "glare-prerender": false
     }
     //////////////////////////////////////////////////
-    //ANIMATIONS//
+    //EFFECTS//
     useEffect(() => {
-    }, [])
+        //FETCH CARD IMG//
+        getCardImg(data.pictures.card)
+    }, [data.pictures.card])
     //////////////////////////////////////////////////
     //FUNCTIONS//
     const handleClick = () => {
-        console.log("handleClick")
+        //SET VIEW +1//
+        fetchAgent.updateViews({
+            updateViews: {
+                type: "fitness",
+                _id: data._id
+            }
+        }).then(result => {
+            //VERIFY CALL RESULT//
+            console.log(result)
+        })
+        //REDIRECT
+        //history.push("/fitness/" + data._id)
+    }
+    const getCardImg = async (id: string) => {
+        await fetchAgent.getImg({ id: id }, setImgData)
     }
     //////////////////////////////////////////////////
     //SETUP//
@@ -101,10 +89,11 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
         >
             <WithLoadingImg
                 alt={data.name + " cardImg"}
+                setImgLoaded={setImgLoaded}
                 loading={!imgLoaded}
-                onLoad={() => { setImgLoaded(true) }}
-            />
+                src={imgData}
 
+            />
             <div
                 className={popularityCounterClasses}
             >
@@ -113,21 +102,21 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
                     ref={hearthRef}
                 />
                 <p>
-                    {data.likedBy.length}
+                    {data.popularity.length}
                 </p>
             </div>
-            <div
-                className={viewsCounterClasses}
-            >
-                x{data.views}
-            </div>
+            <Topped
+                className="toppedImgWrapper"
+                ref={toppedRef}
+                topped={data.topped.value}
+            />
             <div className={itemBar}>
                 <h3>{data.name}</h3>
-                <Topped
-                    className="toppedImgWrapper"
-                    ref={toppedRef}
-                    topped={data.topped}
-                />
+                <div
+                    className={viewsCounterClasses}
+                >
+                    x{data.views}
+                </div>
             </div>
         </Tilt>
 

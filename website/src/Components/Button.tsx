@@ -8,10 +8,11 @@ type ButtonProps = {
     hoverClass: string,
     transitionClass?: string,
     path?: string,
-    text: string
+    text: string,
+    disabled?: boolean
 }
 
-const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificationClass, text, ...props }: ButtonProps) => {
+const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificationClass, text, disabled = false, ...props }: ButtonProps) => {
     const [isActive, setActive] = useState(false)
     const [buttonClass, setClass] = useState<string>(initialClass)
 
@@ -63,9 +64,10 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
         )
     } else {
         return (
-            <div
+            <button
                 onClick={handleClick}
-                className={`${modificationClass ? modificationClass : ''}`}
+                className={`${modificationClass ? modificationClass : ''} pageButton`}
+                disabled={disabled}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
 
@@ -77,7 +79,7 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
                 >
                     {text}
                 </div>
-            </div>
+            </button>
         )
     }
 }
