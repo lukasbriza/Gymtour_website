@@ -470,6 +470,18 @@ const animationStore = {
           );
       },
     },
+    card: {
+      init: (elements) => {
+        let tl = gsap.timeline();
+        tl.fadeIn(elements, {
+          displayInitial: "block",
+          displayAfter: "block",
+          stagger: 0.2,
+          duration: 0.5,
+        });
+        return tl;
+      },
+    },
   },
 };
 

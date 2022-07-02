@@ -53,7 +53,7 @@ class fetchAgent {
       fetchErrorObj,
       false
     );
-    const reader = await fetchRes.body.getReader();
+    const reader = fetchRes.body.getReader();
 
     let chunks: any = [];
     reader?.read().then(function processBinary({ done, value }: any) {
@@ -101,7 +101,10 @@ class fetchAgent {
   //////////////////////////////////////////////////////////////////////////
   //CONTENT ROUTES//
 
-  getContentBasedOnFilter(body: filterFetchQuery, page: "fitness" | "coach") {
+  async getContentBasedOnFilter(
+    body: filterFetchQuery,
+    page: "fitness" | "coach"
+  ) {
     console.log("getContentBasedOnFilter");
     ///////////////////////////////////////////////////////
     const adress: string =

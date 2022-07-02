@@ -5,10 +5,7 @@ import { Tilt } from '../Components/Tilt'
 import { IsLoading } from './HOCs/IsLoading'
 import { SearchItemIMG } from '../Components/SearchItemIMG'
 import fetchAgent from '../Functions/fetchAgent'
-import { useHistory } from 'react-router-dom'
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
-//CONTEXT//
+
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 
@@ -42,6 +39,7 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
 
     const hearthRef = useRef<SVGSVGElement>(null)
     const toppedRef = useRef<SVGSVGElement>(null)
+    const tiltRef = useRef<JSX.Element>(null)
 
     const tiltOptions = {
         reverse: true,
@@ -81,7 +79,6 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
     const WithLoadingImg = IsLoading(SearchItemIMG)
 
     return (
-
         <Tilt
             className={searchItemClasses}
             options={tiltOptions}
@@ -119,7 +116,6 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
                 </div>
             </div>
         </Tilt>
-
     )
 }
 
@@ -132,6 +128,7 @@ const SearchItemCoach = ({ data }: any) => {
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
+        //INITIAL FADE ANIMATION//
 
     }, [])
     //////////////////////////////////////////////////

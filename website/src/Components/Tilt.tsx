@@ -9,6 +9,7 @@ const Tilt = (props: any) => {
         VanillaTilt.init(tilt.current, options)
     }, [options])
 
+
     return (
         <section ref={tilt} {...rest}>
             {props.children}

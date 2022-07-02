@@ -1,10 +1,10 @@
-import React, { useEffect, useContext, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useContext, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { FilterSection } from './FilterSection'
 import { Button } from '../Button'
 import { gsap } from 'gsap'
 //CONTEXT//
-import { AppContext } from '../../App/Context'
+import { AppContext, AnimationContext } from '../../App/Context'
 //CONFIG//
 import { config, animationStore } from '../../config/mainConfiguration'
 import { text } from '../../config/textSource'
@@ -41,6 +41,7 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
     //////////////////////////////////////////////////
     //VARIABLES//
     const appContext = useContext(AppContext)
+    const anContext = useContext(AnimationContext)
 
     const filterSecctionWrapperClasses = classListMaker(["filterSectionWrapper", "relative"])
     const buttonInitialClasses = classListMaker(["buttonInitial contentFilterButton pointer relative centerX"])
@@ -48,7 +49,7 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
 
     const wrapperRef = useRef(null)
 
-
+    const initialRender = useRef(true)
     //HANDLE FILTER DATA//
     const fetchFilterData = async (filterOrigin = false, skip = 0, limit = 20) => {
         let querryCommand: filterFetchQuery | undefined = undefined;
@@ -64,7 +65,7 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
         //console.log(querryCommand)
         if (querryCommand !== undefined) {
             const getData: any = await fetchAgent.getContentBasedOnFilter(querryCommand, actualLocation)
-            // console.log(getData)
+            console.log(getData)
             if ((await getData).errorMap.length === 0) {
                 if (location.pathname === "/fitness") {
                     filterOrigin === true ? props.setFilteredData(getData.data) : props.setFilteredData(appContext!.filteredFitnessData.concat(getData.data))
@@ -108,10 +109,17 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
             //INITIAL FETCH//
             fetchFilterData()
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     //TRIGGERED FETCH BY NEXT BUTTON//
     useEffect(() => {
-        fetchFilterData(false, props.fetch.skip, props.fetch.limit)
+        //prevent to fetch during initial render
+        if (initialRender) {
+            initialRender.current = false
+        } else {
+            fetchFilterData(false, props.fetch.skip, props.fetch.limit)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.fetch])
     //////////////////////////////////////////////////
     //SETUP//
@@ -158,6 +166,8 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
                 <Button
                     /* FETCH DATA AND CLEAR ARRAY */
                     onClick={() => {
+                        anContext?.fn.setFilterOpen(!anContext.filterOpen);
+                        anContext?.fn.setContentPageCross(true);
                         fetchFilterData(true)
                     }}
                     initialClass={buttonInitialClasses}

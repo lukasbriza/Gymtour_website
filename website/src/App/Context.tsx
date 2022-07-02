@@ -35,10 +35,12 @@ export interface AnStateContext {
     bigLogoPlayed: boolean,
     smallLogoPlayed: boolean,
     filterOpen: boolean,
+    contentPageCross: boolean,
     fn: {
         setBigLogoPlayed: React.Dispatch<React.SetStateAction<boolean>>,
         setSmallLogoPlayed: React.Dispatch<React.SetStateAction<boolean>>,
-        setFilterOpen: React.Dispatch<React.SetStateAction<boolean>>
+        setFilterOpen: React.Dispatch<React.SetStateAction<boolean>>,
+        setContentPageCross: React.Dispatch<React.SetStateAction<boolean>>
     }
 }
 
@@ -162,15 +164,18 @@ const AnimationContextProvider = (props: ContextProviderProps) => {
     const [bigLogoPlayed, setBigLogoPlayed] = useState<boolean>(false)
     const [smallLogoPlayed, setSmallLogoPlayed] = useState<boolean>(false)
     const [filterOpen, setFilterOpen] = useState<boolean>(false)
+    const [contentPageCross, setContentPageCross] = useState<boolean>(false)
 
     const animationState: AnStateContext = {
         bigLogoPlayed: bigLogoPlayed,
         smallLogoPlayed: smallLogoPlayed,
         filterOpen: filterOpen,
+        contentPageCross: contentPageCross,
         fn: {
             setBigLogoPlayed: setBigLogoPlayed,
             setSmallLogoPlayed: setSmallLogoPlayed,
-            setFilterOpen: setFilterOpen
+            setFilterOpen: setFilterOpen,
+            setContentPageCross: setContentPageCross
         }
     }
 

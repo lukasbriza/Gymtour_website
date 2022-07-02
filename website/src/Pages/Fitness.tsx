@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FilterIcon } from '../Components/FilterIcon'
 import { ContentFilter } from '../Components/Filter/ContentFilter'
-import { SearchItemCoach, SearchItemFitness } from '../Components/SearchItem'
+import { SearchItemFitness } from '../Components/SearchItem'
 import { Button } from '../Components/Button'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
@@ -21,11 +21,7 @@ const Fitness = () => {
     const [fetchTriggerAmount, setFetchTriggerAmount] = useState<number>(20)
     const [disabled, setDisabled] = useState<boolean>(false)
     const [fetchSpan, setfetchSpan] = useState<{ skip: number, limit: number }>({ skip: 0, limit: 20 })
-
-    useEffect(() => {
-        console.log("endIndex: ", endIndex)
-        console.log("fetchTriggerAmount: ", fetchTriggerAmount)
-    }, [endIndex, fetchTriggerAmount])
+    const [initAn, setInitAn] = useState<boolean>(false)
     //////////////////////////////////////////////////
     //VARIABLES//
     const appContext = useContext(AppContext);
@@ -48,6 +44,16 @@ const Fitness = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(() => {
+        if (initAn === false && appContext?.filteredFitnessData.length !== 0) {
+            console.log(appContext?.filteredFitnessData)
+            console.log("here")
+            setInitAn(true)
+            const tl = animationStore.fitness.card.init(document.getElementsByClassName("searchItem"))
+            tl.eventCallback('onComplete', () => { setInitAn(false) })
+        }
+    }, [appContext?.filteredFitnessData])
+
     //DISABLE BUTTON//
     useEffect(() => {
         if (appContext!.filteredFitnessData.length <= endIndex) {
@@ -61,7 +67,10 @@ const Fitness = () => {
     return (
         <div id="Fitness" className={config.basePageClassList + " " + fitnessClasses}>
             <section className={headerSectionClasses}>
-                <FilterIcon onClick={() => { anContext?.fn.setFilterOpen(!anContext.filterOpen) }} />
+                <FilterIcon
+                    onClick={() => { anContext?.fn.setFilterOpen(!anContext.filterOpen) }}
+                    crossed={anContext?.contentPageCross}
+                />
                 <h1>{text.fitness.PageHeader.cz}</h1>
                 <Link
                     style={linkStyle}
@@ -78,7 +87,8 @@ const Fitness = () => {
             </section>
             <ContentFilter open={anContext!.filterOpen} setFilteredData={appContext!.fn.setFilteredFitnessData} fetch={fetchSpan} />
             <div className={searchContentWrapperClasses}>
-                <section
+                <div
+
                     className={searchContentClasses}
                 >
                     {
@@ -91,7 +101,7 @@ const Fitness = () => {
 
                         })
                     }
-                </section>
+                </div>
                 <Button
                     disabled={disabled}
                     modificationClass={contentPageButtonClasses}
