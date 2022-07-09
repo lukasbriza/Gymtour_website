@@ -145,7 +145,7 @@ const FilterTypes = React.memo(React.forwardRef((props: filterType, ref: any) =>
                         type="radio"
                         name="popularity"
                         id="inputPopularity"
-                        value={text.fitness.Filter.sort[0].cz}
+                        value={text.contentPage.Filter.sort[0].cz}
                         onChange={(e: BaseSyntheticEvent) => {
                             if (e.target.checked) {
                                 appContext?.fn.handleSearchData({
@@ -159,7 +159,7 @@ const FilterTypes = React.memo(React.forwardRef((props: filterType, ref: any) =>
                         }}
                         checked={popularity}
                     />
-                    <label htmlFor="inputPopularity">{text.fitness.Filter.sort[0].cz}</label>
+                    <label htmlFor="inputPopularity">{text.contentPage.Filter.sort[0].cz}</label>
                 </div>
                 <div
                     className={inputWrapperClasses + " orderInput"}
@@ -168,7 +168,7 @@ const FilterTypes = React.memo(React.forwardRef((props: filterType, ref: any) =>
                         type="radio"
                         name="name"
                         id="inputName"
-                        value={text.fitness.Filter.sort[1].cz}
+                        value={text.contentPage.Filter.sort[1].cz}
                         onChange={(e: BaseSyntheticEvent) => {
                             if (e.target.checked) {
                                 appContext?.fn.handleSearchData({
@@ -182,7 +182,7 @@ const FilterTypes = React.memo(React.forwardRef((props: filterType, ref: any) =>
                         }}
                         checked={name}
                     />
-                    <label htmlFor="inputName">{text.fitness.Filter.sort[1].cz}</label>
+                    <label htmlFor="inputName">{text.contentPage.Filter.sort[1].cz}</label>
                 </div>
             </>
         )

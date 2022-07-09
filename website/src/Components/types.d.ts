@@ -157,6 +157,8 @@ type formModalProps = {
   loading: boolean;
   sucess: boolean | undefined;
   msg: undefined | SetStateAction<Element>;
+  buttonMsg?: string;
+  callbackTiming?: number;
   callback: () => void;
   clearForm: () => void;
 };
@@ -187,7 +189,7 @@ type getImgData = {
 
 type updateViewsData = {
   updateViews: {
-    type: "coach" | "fitness";
+    type: "/coach" | "/fitness";
     _id: string;
   };
 };
@@ -231,4 +233,12 @@ interface feResponseObj {
       date: Date | string;
     };
   }[];
+}
+
+interface checkAuthOfUser {
+  token: string;
+}
+interface loginUser {
+  username: string;
+  password: string;
 }

@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FilterIcon } from '../Components/FilterIcon'
 import { ContentFilter } from '../Components/Filter/ContentFilter'
-import { SearchItemFitness } from '../Components/SearchItem'
+import { SearchItem } from '../Components/SearchItem'
 import { Button } from '../Components/Button'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
@@ -96,7 +96,7 @@ const Fitness = () => {
                             //DISABLED BUTTON LOGIC//
                             if (index >= 0 && index <= endIndex - 1) {
                                 //RETURN FITNESS ITEMS//
-                                return <SearchItemFitness data={data} key={data._id} />
+                                return <SearchItem data={data} key={data._id} />
                             }
 
                         })
@@ -117,7 +117,7 @@ const Fitness = () => {
                             setEndIndex(gap + endIndex);
                             //NOT TRIGGERED FETCH FROM DB//
                         } else {
-                            setEndIndex(endIndex + gap); // ok
+                            setEndIndex(endIndex + gap);
                         }
                     }}
                 />

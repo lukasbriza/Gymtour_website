@@ -77,29 +77,81 @@ const text = {
   fitness: {
     PageHeader: { cz: "Fitness" },
     HeaderBackButton: { cz: "Zpět" },
-    Filter: {
-      sort: [{ cz: "Podle popularity" }, { cz: "Podle názvu" }],
-      sortHeader: { cz: "Seřadit" },
-      headers: [
-        { cz: "Regiony" },
-        { cz: "Vybavení" },
-        { cz: "Hlavní" },
-        { cz: "Ostatní" },
-        { cz: "Pohlaví" },
-        { cz: "Specializace" },
-      ],
-      filterButton: {
-        cz: "Filtrovat",
-      },
-    },
     Content: {
       nextButton: {
         cz: " Další",
       },
     },
+    Filter: {
+      headers: [
+        { cz: "Regiony" },
+        { cz: "Vybavení" },
+        { cz: "Hlavní" },
+        { cz: "Ostatní" },
+      ],
+    },
+  },
+  contentPage: {
+    Filter: {
+      sort: [{ cz: "Podle popularity" }, { cz: "Podle názvu" }],
+      sortHeader: { cz: "Seřadit" },
+      filterButton: {
+        cz: "Filtrovat",
+      },
+    },
   },
   coach: {
     PageHeader: { cz: "Trenéři" },
+    HeaderBackButton: { cz: "Zpět" },
+    Content: {
+      nextButton: {
+        cz: " Další",
+      },
+    },
+    Filter: {
+      headers: [
+        { cz: "Regiony" },
+        { cz: "Ostatní" },
+        { cz: "Pohlaví" },
+        { cz: "Specializace" },
+      ],
+    },
+  },
+  login: {
+    Form: {
+      input1: {
+        placeholder: { cz: "Jméno" },
+        errorMessage: {
+          cz: "Nepovolený znak, nebo jméno je příliš krátké. Minimální délka je 5 znaků.",
+        },
+      },
+      input2: {
+        placeholder: { cz: "Heslo" },
+        errorMessage: {
+          cz: "Minimální délka hesla je 9 znaků, nebo používáte nepovolené znaky.",
+        },
+      },
+      link1: {
+        cz: "Zapomenuté heslo?",
+      },
+      button: {
+        cz: "Přihlásit",
+      },
+    },
+    modal: {
+      invalidInputs: {
+        cz: "Nesprávné heslo nebo uživatelské jméno. Zkuste to prosím znovu, nebo požádejte o obnovu hesla.",
+      },
+      sucessMsg: {
+        cz: "Přihlášení proběhlo úspěšně. Můžete pokračovat do správy účtu.",
+      },
+      buttonSucess: {
+        cz: "Pokračovat",
+      },
+      buttonFail: {
+        cz: "Zpět",
+      },
+    },
   },
   footer: {
     Section1: {

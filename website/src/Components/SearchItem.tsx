@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Heart } from '../Components/SVG/Heart'
 import { Topped } from '../Components/SVG/Topped'
 import { Tilt } from '../Components/Tilt'
@@ -9,7 +10,7 @@ import fetchAgent from '../Functions/fetchAgent'
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 
-interface SearchItemTypeFitness {
+interface SearchItemType {
     data: {
         _id: string,
         pictures: {
@@ -25,7 +26,17 @@ interface SearchItemTypeFitness {
         name: string,
     }
 }
-const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
+
+const tiltOptions = {
+    reverse: true,
+    max: 9,
+    perspective: 1500,
+    glare: true,
+    "max-glare": 0.2,
+    "glare-prerender": false
+}
+
+const SearchItem = ({ data }: SearchItemType) => {
     //////////////////////////////////////////////////
     //STATE//
     const [imgLoaded, setImgLoaded] = useState<boolean>(false)
@@ -37,18 +48,9 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
     const popularityCounterClasses = classListMaker(["popularityCounter", "absolute", "top", "left"])
     const viewsCounterClasses = classListMaker(["viewsCounter", "relative"])
 
+    const location = useLocation()
     const hearthRef = useRef<SVGSVGElement>(null)
     const toppedRef = useRef<SVGSVGElement>(null)
-    const tiltRef = useRef<JSX.Element>(null)
-
-    const tiltOptions = {
-        reverse: true,
-        max: 9,
-        perspective: 1500,
-        glare: true,
-        "max-glare": 0.2,
-        "glare-prerender": false
-    }
     //////////////////////////////////////////////////
     //EFFECTS//
     useEffect(() => {
@@ -61,7 +63,7 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
         //SET VIEW +1//
         fetchAgent.updateViews({
             updateViews: {
-                type: "fitness",
+                type: location.pathname === "/fitness" ? "/fitness" : "/coach",
                 _id: data._id
             }
         }).then(result => {
@@ -119,26 +121,5 @@ const SearchItemFitness = ({ data }: SearchItemTypeFitness) => {
     )
 }
 
-
-const SearchItemCoach = ({ data }: any) => {
-    //////////////////////////////////////////////////
-    //STATE//
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    //////////////////////////////////////////////////
-    //ANIMATIONS//
-    useEffect(() => {
-        //INITIAL FADE ANIMATION//
-
-    }, [])
-    //////////////////////////////////////////////////
-    //SETUP//
-    return (
-        <></>
-    )
-}
-
-//HOC SUBSCRIBTION//
-
-export { SearchItemFitness, SearchItemCoach }
+export { SearchItem }
 

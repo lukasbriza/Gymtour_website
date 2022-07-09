@@ -11,7 +11,7 @@ import { Footer } from '../Components/Footer'
 import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
 //CONTEXT//
-import { AnimationContext, AppContext } from "../App/Context"
+import { AnimationContext } from "../App/Context"
 //FUNCTUION//
 import { classListMaker } from '../Functions/classListMaker'
 import fetchAgent from '../Functions/fetchAgent'
@@ -221,7 +221,7 @@ const RegisterPage = () => {
         //HANDLE FETCH ERROR MAP ARRAY//
         if (fetchResult.errorMap.length > 0) {
             let msgText = fetchResult.errorMap.map((obj: errorMapObj, index: number) => {
-                let errorHtml = (
+                const errorHtml = (
                     <div className="modalErrorObj" key={index}>
                         <p className="modalErrorHeader" key={index + "a"}>{obj.Error.code + "- " + obj.Error.name}</p>
                         <p className="modalErrorContent" key={index + "b"}>{obj.Error.message}</p>
@@ -234,7 +234,7 @@ const RegisterPage = () => {
         }
         //HANDLE FETCH DATA//
         if (fetchResult.errorMap.length === 0 && fetchResult.data !== null) {
-            let msgHtml = (
+            const msgHtml = (
                 [<div className="modalSucessObj" key="1">
                     <p className="modalSucessContent" key="2">{text.crossroad.RegisterPage.Form.modal.sucessMsg.cz}</p>
                 </div>]
