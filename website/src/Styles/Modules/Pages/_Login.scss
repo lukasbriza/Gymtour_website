@@ -1,0 +1,40 @@
+.Login {
+  img {
+    background-position: center;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.loginHeaderWrapper {
+  cursor: default;
+
+  h2 {
+    color: white;
+  }
+}
+
+.loginFormWrapper {
+}
+
+.forgetPassword::after {
+  position: absolute;
+  content: " ";
+  height: 1px;
+  width: 142px;
+  background: white;
+
+  margin-top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  transition-property: width;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in;
+}
+
+.forgetPassword:hover:after {
+  width: 0px;
+}

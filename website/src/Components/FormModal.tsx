@@ -18,6 +18,7 @@ const FormModal = (props: formModalProps) => {
     const [showSucess, setShowSucess] = useState(false)
 
     const [msg, setMsg] = useState(<></>)
+    const [btnText, setBtnText] = useState<string>(text.crossroad.RegisterPage.Form.modal.button.cz)
     //////////////////////////////////////////////////
     //VARIABLES//
     const modalWrapperClasses = classListMaker(["modalWrapper", "absolute", "stretchVH", "stretchX", "top", "left"]);
@@ -38,6 +39,11 @@ const FormModal = (props: formModalProps) => {
 
     //////////////////////////////////////////////////
     //ANIMATIONS//
+    useEffect(() => {
+        if (props.buttonMsg !== undefined) {
+            setBtnText(props.buttonMsg)
+        }
+    }, [props.buttonMsg])
     useEffect(() => {
         //SHOW MODAL AND START LOADING ANIMATION//
         if (props.loading === true) {
@@ -81,6 +87,7 @@ const FormModal = (props: formModalProps) => {
     }
 
     const handleModalHide = () => {
+        const delay = props.callbackTiming !== undefined ? props.callbackTiming : 1500
         //ENABLE SCROLL//
         enableScroll()
         //HIDE MODAL//
@@ -90,7 +97,7 @@ const FormModal = (props: formModalProps) => {
             props.clearForm()
         }
         //SET DEFAULT STATE OF COMPONENTS//
-        setTimeout(() => { props.callback() }, 1500)
+        setTimeout(() => { props.callback() }, delay)
     }
 
     const setDefaultAnimationState = () => {
@@ -121,7 +128,7 @@ const FormModal = (props: formModalProps) => {
             gsap.set(".modalButton", {
                 opacity: 0
             })
-        }, 1000)
+        }, 500)
     }
     //////////////////////////////////////////////////
     //FUNCTIONS//
@@ -174,8 +181,12 @@ const FormModal = (props: formModalProps) => {
                 modificationClass={buttonClasses}
                 initialClass={"buttonInitial"}
                 hoverClass={"buttonHover"}
-                text={text.crossroad.RegisterPage.Form.modal.button.cz}
-                onClick={() => { handleModalHide(); setDefaultAnimationState() }}
+                text={btnText}
+                onClick={() => {
+                    handleModalHide();
+                    setDefaultAnimationState();
+
+                }}
             />
         </section>
     )

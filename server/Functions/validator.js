@@ -56,13 +56,10 @@ const registerValidation = (req, res, next) => {
 const loginValidation = (req, res, next) => {
   let response = resBuild();
   const loginSchema = Joi.object({
-    username: Joi.string()
-      .min(5)
-      .pattern(/^[a-zA-Z0-9@+-<>$#|%$ěščřžýáíéůúĚŠČŘŽÝÁÍÉ]+$/)
-      .required(),
-    password: Joi.string().min(9).required(),
+    username: Joi.string().required(),
+    password: Joi.string().required(),
   });
-  const value = loginSchema.validate(req.body, { render: false });
+  const value = loginSchema.validate(req.query, { render: false });
   if (value.error) {
     new ValidationError(value.error.details[0].message, res, response);
   } else {

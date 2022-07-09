@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 //COMPONENTS//
 import { SmallLogo } from "./SVG/SmallLogo";
 import { SmallText } from "./SVG/SmallText";
-
+import { LoginButton } from "../Components/SVG/LoginButton"
 //FUNCTUION//
 import { classListMaker } from "../Functions/classListMaker";
 //CONFIG//
@@ -144,14 +144,14 @@ const MenuOffer = (props: MenuOffer) => {
   const [show, setShow] = useState("none");
   const menuItemsClass = classListMaker(["stretchX", "relative", "offerItem"]);
   const menuOffer: any = useRef();
-  const appContext: any = useContext(AppContext)
+  const appContext = useContext(AppContext)
   /////////////////////////////////////////
   //OFFER SHOW LOGIC//
   useEffect(() => {
     if (props.show === true) {
       setShow("grid");
       animationStore.menu.menuOffer.show();
-      appContext.fn.preloadMenuImg(2000);
+      appContext?.fn.preloadMenuImg(2000);
     }
     if (props.show === false) {
       setShow("none");
@@ -195,12 +195,16 @@ const MenuOffer = (props: MenuOffer) => {
       onTouchStart={() => { fetchPages() }}
     >
       {menuItems}
+      <Link to={config.routes.login.path} className={menuItemsClass + ' loginButton'}>
+        <LoginButton />
+        <span className="tooltip">Účet</span>
+      </Link>
     </div>
   );
 };
 
 const MenuLayer = (props: MenuLayer) => {
-  const appContext: any = useContext(AppContext)
+  const appContext = useContext(AppContext)
   const menuItemsClass = classListMaker(["relative", "offerItem", "offerItem-layer"]);
   const menuLayerClass = classListMaker(["stretchVH", "absolute", "top", "right", "mainColor"]);
 
@@ -211,7 +215,7 @@ const MenuLayer = (props: MenuLayer) => {
     if (props.show === true) {
       fetchPages()
       animationStore.menu.layer.show(menuLayer.current)
-      appContext.fn.preloadMenuImg();
+      appContext?.fn.preloadMenuImg(250);
     }
     if (props.show === false) { animationStore.menu.layer.hide(menuLayer.current) }
   }, [props.show]);
@@ -243,7 +247,13 @@ const MenuLayer = (props: MenuLayer) => {
   /////////////////////////////////////////
   return (
     <div id="menuLayer" className={menuLayerClass} ref={menuLayer}>
-      <section id="menuOfferItems-wrapper">{menuItems}</section>
+      <section id="menuOfferItems-wrapper">
+        {menuItems}
+        <Link to={config.routes.login.path} className={menuItemsClass + ' loginButton'}>
+          <LoginButton />
+          <span className="tooltip">Účet</span>
+        </Link>
+      </section>
     </div>
   );
 };

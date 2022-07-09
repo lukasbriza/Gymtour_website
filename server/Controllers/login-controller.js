@@ -12,8 +12,6 @@ const {
   registerValidation,
   loginValidation,
 } = require("../Functions/validator");
-////////////////////////////////////////////////////////////////
-//SCHEMA TEMPLATE - import//
 
 ////////////////////////////////////////////////////////////////
 //ROUTES//
@@ -32,9 +30,11 @@ router
   });
 
 //CHECK TOKEN// OK
-router.route("/check").post(checkAuth, isAdmin, async (req, res) => {
-  const result = req.body;
+router.route("/check").post(checkAuth, async (req, res) => {
+  const result = await LoginAbl.checkAuth(req, res);
   res.status(200).send(result);
 });
+
+//CHECK IF IS ADMIN//
 ////////////////////////////////////////////////////////////////
 module.exports = router;

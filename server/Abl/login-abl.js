@@ -82,8 +82,8 @@ class LoginAbl {
     let response = resBuild();
     ///////////////////////////////////////////////////////////
     //INPUT//
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.query.username;
+    const password = req.query.password;
     ///////////////////////////////////////////////////////////
     //DB CALL//
     let userArr;
@@ -142,6 +142,11 @@ class LoginAbl {
     }
     ///////////////////////////////////////////////////////////
     //BUILD RESPONSE//
+    return response;
+  }
+  async checkAuth(req, res) {
+    let response = resBuild();
+    response.data = req.body.data;
     return response;
   }
 }

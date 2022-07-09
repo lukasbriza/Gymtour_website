@@ -73,6 +73,39 @@
   background-color: rgba(114, 114, 114, 0.733);
 }
 
+.loginButton {
+  svg {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  svg > path {
+    stroke: white;
+    stroke-width: 1px;
+  }
+}
+
+.loginButton:hover {
+  .tooltip {
+    visibility: visible;
+  }
+}
+.tooltip {
+  visibility: hidden;
+  width: 50px;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+  top: 65%;
+  font-size: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 #menuLayer {
   z-index: 0;
   width: 0%;

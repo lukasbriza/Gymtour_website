@@ -1,0 +1,59 @@
+#Login {
+  max-width: $maxWidth;
+  @include minHeightWidth;
+
+  .layer {
+    display: grid;
+    grid-template-rows: 1fr min-content min-content min-content 1fr;
+    grid-template-areas:
+      "."
+      "header"
+      "paragraph"
+      "form"
+      ".";
+  }
+}
+
+.loginHeaderWrapper {
+  h2 {
+    font-size: clamp(18px, 7vw, 40px);
+  }
+  .underliner {
+    margin-top: 0px;
+  }
+
+  padding-bottom: 15px;
+
+  grid-area: header;
+}
+
+.loginFormWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-self: center;
+
+  width: 70%;
+  grid-area: form;
+
+  max-width: 600px;
+  min-width: 350px;
+
+  .inputWrapper {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  #loginForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .loginFormButton {
+    width: 200px;
+    height: 60px;
+    padding: 0px;
+  }
+}

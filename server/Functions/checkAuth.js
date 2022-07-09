@@ -13,7 +13,6 @@ module.exports = (req, res, next) => {
       tokenExpired: false,
       userData: decoded,
     };
-
     req.body.data = response.data;
     next();
   } catch (err) {

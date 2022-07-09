@@ -35,6 +35,8 @@ const PageRoutes = () => {
                         <Route path={config.routes.crossroad.path} component={config.routes.crossroad.component} />
                         <Route path={config.routes.fitness.path} component={config.routes.fitness.component} />
                         <Route path={config.routes.coach.path} component={config.routes.coach.component} />
+                        <Route path={config.routes.login.path} component={config.routes.login.component} />
+                        <Route path={config.routes.dashboard.path} component={config.routes.dashboard.component} />
                         <Route path={config.routes.businessConditions.path} component={config.routes.businessConditions.component} />
                         <Route path={config.routes.dataProcessing.path} component={config.routes.dataProcessing.component} />
                         <Route path={config.routes.notFound.path} component={config.routes.notFound.component} />
