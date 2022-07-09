@@ -125,7 +125,6 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
     //SETUP//
     if (showContent === true) {
         let array = []
-
         //PREPARE DATA FOR FILTER CONSTRUCTION//
         for (const key in data) {
             if (key !== '_id') {
@@ -143,20 +142,25 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
                 }
             }
         }
+
         return (
             <section
                 className={filterSecctionWrapperClasses}
                 ref={wrapperRef}
             >
                 <FilterSection
-                    header={text.fitness.Filter.sortHeader.cz}
+                    header={text.contentPage.Filter.sortHeader.cz}
                     filterType={"order"}
                     data={undefined}
                 />
                 {array.map((obj: any, index: number) => {
                     return (
                         <FilterSection
-                            header={text.fitness.Filter.headers[index].cz}
+                            header={
+                                appContext?.actualLocation === "/fitness" ?
+                                    text.fitness.Filter.headers[index].cz :
+                                    text.coach.Filter.headers[index].cz
+                            }
                             filterType={obj.filterType}
                             data={obj.data}
                             key={index}
@@ -172,7 +176,7 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
                     }}
                     initialClass={buttonInitialClasses}
                     hoverClass={buttonHoverClasses}
-                    text={text.fitness.Filter.filterButton.cz}
+                    text={text.contentPage.Filter.filterButton.cz}
                 />
             </section>
         )
