@@ -229,25 +229,31 @@ class CoachAbl {
     let response = resBuild();
     ///////////////////////////////////////////////////////////
     //INPUT//
-    const query = req.body.get.query;
-    const projection = req.body.get.projection ? req.body.get.projection : null;
-    const options = req.body.get.options ? req.body.get.options : null;
-    const limit = req.body.get.limit ? req.body.get.limit : 50;
-    const order = req.body.get.order ? req.body.get.order : 1;
+    const URL_PARAMS = JSON.parse(req.query.get);
+    const query = URL_PARAMS.query;
+    const projection = URL_PARAMS.projection ? URL_PARAMS.projection : null;
+    const options = URL_PARAMS.options ? URL_PARAMS.options : null;
+    const limit = URL_PARAMS.limit ? URL_PARAMS.limit : 20;
+    const order = URL_PARAMS.order ? URL_PARAMS.order : 1;
 
-    console.log(query, projection, options, limit);
     ///////////////////////////////////////////////////////////
     //DB CALL//
-    const orderQuerry = order === 1 ? { views: "desc" } : { name: "desc" };
-    ///////////////////////////////////////////////////////////
-    //DB CALL//
+    //HOW TO SORT?
+    const orderQuerry =
+      order === 1
+        ? { popularity: "desc" }
+        : order === 2
+        ? { name: "asc" }
+        : { views: "desc" };
     let getRes;
+
     try {
       getRes = await CoachModel.find(query, projection, options)
         .sort(orderQuerry)
         .limit(limit)
         .exec();
-      response.data = getRes;
+      response.data = await getRes;
+      console.log(response);
     } catch (err) {
       if (err instanceof Error) {
         new DatabaseError(
