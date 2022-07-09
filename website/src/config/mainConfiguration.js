@@ -483,6 +483,175 @@ const animationStore = {
       },
     },
   },
+  coach: {
+    filter: {
+      show: (wrapper) => {
+        let tl = gsap.timeline();
+        tl.to(wrapper, { opacity: 1, display: "initial" }, 0)
+          .addLabel("start")
+          .filterOn(
+            wrapper,
+            {
+              widthFrom: "0%",
+              widthTo: "100%",
+              widthDuration: 4,
+            },
+            "start"
+          )
+          .to(
+            wrapper,
+            {
+              paddingLeft: "15px",
+              duration: 1,
+              ease: Power2.easeOut,
+            },
+            "start"
+          )
+          .fadeIn(".filterSection", {
+            displayInitial: "none",
+            displayAfter: "block",
+            stagger: 0.1,
+            duration: 0.3,
+          })
+          .fadeIn(".contentFilterButton", {
+            displayInitial: "none",
+            displayAfter: "block",
+            duration: 0.3,
+            delay: 0.8,
+          });
+        return tl;
+      },
+      hide: (wrapper) => {
+        let arr = gsap.utils.toArray(".filterSection");
+        arr = arr.reverse();
+        let tl = gsap.timeline();
+        tl.fadeOff(".contentFilterButton", {
+          displayInitial: "block",
+          displayAfter: "none",
+          duration: 0.3,
+        })
+          .fadeOff(arr, {
+            displayInitial: "block",
+            displayAfter: "none",
+            stagger: 0.1,
+            duration: 0.3,
+          })
+          .addLabel("start")
+          .to(
+            wrapper,
+            {
+              paddingLeft: "0px",
+              duration: 1,
+              delay: 1,
+              ease: Power2.easeOut,
+            },
+            "start"
+          )
+          .filterOff(
+            wrapper,
+            {
+              delay: 1,
+              widthFrom: "100%",
+              widthTo: "0%",
+              widthDuration: 1.5,
+            },
+            "start"
+          )
+          .to(wrapper, { opacity: 0, display: "none", delay: 0.5 });
+        return tl;
+      },
+      arrowUp: (arrow, typesWrapper, containerHeight) => {
+        let tl = gsap.timeline();
+        tl.to(typesWrapper, {
+          height: containerHeight + "px",
+          duration: 0.0025,
+          ease: "none",
+        })
+          .addLabel("start")
+          .to(
+            arrow,
+            {
+              transform: "rotate(-179deg)",
+              duration: 1,
+              ease: Power3.easeOut,
+            },
+            "start"
+          )
+          .fadeOff(
+            typesWrapper,
+            {
+              displayInitial: "flex",
+              displayAfter: "flex",
+              stagger: 0,
+              duration: 0.25,
+              delay: 0,
+            },
+            "start"
+          )
+          .to(
+            typesWrapper,
+            {
+              height: 0 + "px",
+              ease: Power2.easeOut,
+              duration: 0.2,
+              delay: 0.7,
+            },
+            "start"
+          )
+          .to(typesWrapper, {
+            display: "none",
+            duration: 0.0025,
+            ease: "none",
+          });
+      },
+      arrowDown: (arrow, typesWrapper, containerHeight) => {
+        let tl = gsap.timeline();
+        tl.addLabel("arrow")
+          .to(
+            typesWrapper,
+            {
+              height: containerHeight + "px",
+              duration: 0.5,
+              ease: Power2.easeOut,
+            },
+            "arrow"
+          )
+          .to(
+            arrow,
+            {
+              transform: "rotate(0deg)",
+              duration: 1,
+              ease: Power3.easeOut,
+            },
+            "arrow"
+          )
+          .addLabel("start")
+          .fadeIn(
+            typesWrapper,
+            {
+              displayInitial: "none",
+              displayAfter: "flex",
+              stagger: 0,
+              duration: 1,
+              delay: 0,
+            },
+            "start"
+          );
+      },
+    },
+    card: {
+      init: (elements) => {
+        let tl = gsap.timeline();
+        tl.fadeIn(elements, {
+          displayInitial: "block",
+          displayAfter: "block",
+          stagger: 0.2,
+          duration: 0.5,
+        });
+        return tl;
+      },
+    },
+  },
 };
 
 export { config, animationStore };
