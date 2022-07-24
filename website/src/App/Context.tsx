@@ -47,9 +47,11 @@ export interface AnStateContext {
 export interface UserStateContext {
     logged: boolean,
     userId: string,
+    userObject: userObjectType | undefined,
     fn: {
         setLogged: React.Dispatch<React.SetStateAction<boolean>>,
         setUserId: React.Dispatch<React.SetStateAction<string>>,
+        setUserObject: React.Dispatch<React.SetStateAction<userObjectType | undefined>>
     }
 }
 //CONTEXTS//
@@ -191,13 +193,16 @@ const AnimationContextProvider = (props: ContextProviderProps) => {
 const UserContextProvider = (props: ContextProviderProps) => {
     const [logged, setLogged] = useState<boolean>(false)
     const [userId, setUserId] = useState<string>("")
+    const [userObject, setUserObject] = useState<userObjectType | undefined>()
 
     const userState: UserStateContext = {
         logged: logged,
         userId: userId,
+        userObject: userObject,
         fn: {
             setLogged: setLogged,
-            setUserId: setUserId
+            setUserId: setUserId,
+            setUserObject: setUserObject
         }
     }
 
