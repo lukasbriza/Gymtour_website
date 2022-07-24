@@ -1,7 +1,7 @@
 import { getFetchAdress } from "./getFetchAdress";
 import { getFrontEndFetchErrObj } from "./getFrontEndFetchErrObj";
 import { getOptionObject } from "./getOptionObject";
-import { fetchCall } from "./fetchCall";
+import { fetchCall, fetchCallWithoutParsing } from "./fetchCall";
 const fetchAdress = getFetchAdress();
 
 class fetchAgent {
@@ -12,12 +12,13 @@ class fetchAgent {
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-filter/get";
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj = getFrontEndFetchErrObj({
-      trace: "FetchAgent/getFilterData",
-    });
+    const fetchErrorObj: feResponseObj<getFilterData_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/getFilterData",
+      });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall(adress, options, fetchErrorObj);
+    return fetchCall<getFilterData_FetchCall>(adress, options, fetchErrorObj);
   }
   //////////////////////////////////////////////////////////////////////////
   //USER ROUTEST//
@@ -26,13 +27,84 @@ class fetchAgent {
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-login/login";
     const options = new getOptionObject().setMethod("POST").addBody(data).get();
-    console.log(options);
-    const fetchErrorObj: feResponseObj = getFrontEndFetchErrObj({
-      trace: "FetchAgent/registerUser",
-    });
+    const fetchErrorObj: feResponseObj<registerUser_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/registerUser",
+      });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall(adress, options, fetchErrorObj);
+    return fetchCall<registerUser_FetchCall>(adress, options, fetchErrorObj);
+  }
+  checkAuthOfUser(data: checkAuthOfUser) {
+    console.log("checkAuthOfUser");
+    ///////////////////////////////////////////////////////
+    const adress: string = fetchAdress + "/api-login/check";
+    const options = new getOptionObject()
+      .setMethod("POST")
+      .addHeader("Authorization", data.token)
+      .get();
+    const fetchErrorObj: feResponseObj<checkAuthOfUser_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/checkAuthOfUser",
+      });
+    ///////////////////////////////////////////////////////
+    //FETCH CALL//
+    return fetchCall<checkAuthOfUser_FetchCall>(adress, options, fetchErrorObj);
+  }
+  loginUser(data: loginUser) {
+    console.log("loginUser");
+    ///////////////////////////////////////////////////////
+    const adress: string =
+      fetchAdress +
+      `/api-login/login?username=${data.username}&password=${data.password}`;
+    const options = new getOptionObject().setMethod("GET").get();
+    const fetchErrorObj: feResponseObj<loginUser_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/loginUser",
+      });
+    ///////////////////////////////////////////////////////
+    //FETCH CALL//
+    return fetchCall<loginUser_FetchCall>(adress, options, fetchErrorObj);
+  }
+  getUserInformation(data: userInformation) {
+    console.log("getUserInformation");
+    ///////////////////////////////////////////////////////
+    const adress: string = fetchAdress + `/api-user/user?id=${data.id}`;
+    const options = new getOptionObject()
+      .setMethod("GET")
+      .addHeader("Authorization", data.token)
+      .get();
+    const fetchErrorObj: feResponseObj<getUserInformation_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/getUserInformation",
+      });
+    ///////////////////////////////////////////////////////
+    //FETCH CALL//
+    return fetchCall<getUserInformation_FetchCall>(
+      adress,
+      options,
+      fetchErrorObj
+    );
+  }
+  changeUserInformation(data: changeInformation) {
+    console.log("changeUserInformation");
+    ///////////////////////////////////////////////////////
+    const adress: string = fetchAdress + `/api-user/user`;
+    const options = new getOptionObject()
+      .setMethod("PUT")
+      .addHeader("Authorization", data.token)
+      .get();
+    const fetchErrorObj: feResponseObj<changeUserInformation_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/changeUserInformation",
+      });
+    ///////////////////////////////////////////////////////
+    //FETCH CALL//
+    return fetchCall<changeUserInformation_FetchCall>(
+      adress,
+      options,
+      fetchErrorObj
+    );
   }
 
   //////////////////////////////////////////////////////////////////////////
@@ -41,17 +113,15 @@ class fetchAgent {
     console.log("getImg");
     const adress: string = `http://localhost:3000/api-images/image?id=${data.id}`;
     const options = new getOptionObject().setMethod("GET").get();
-
-    const fetchErrorObj: feResponseObj = getFrontEndFetchErrObj({
+    const fetchErrorObj: feResponseObj<any> = getFrontEndFetchErrObj({
       trace: "FetchAgent/getImg",
     });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    const fetchRes: any = await fetchCall(
+    const fetchRes: any = await fetchCallWithoutParsing(
       adress,
       options,
-      fetchErrorObj,
-      false
+      fetchErrorObj
     );
     const reader = fetchRes.body.getReader();
 
@@ -72,35 +142,36 @@ class fetchAgent {
     });
   }
   //////////////////////////////////////////////////////////////////////////
-  //VIEWS ROUTES// ?????
+  //VIEWS ROUTES//
   getViews(id: string, type: "fitness" | "coach") {
     console.log("getViews");
     ///////////////////////////////////////////////////////
     const adress: string =
       fetchAdress + `/api-views/views?type=${type}&_id=${id}`;
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj = getFrontEndFetchErrObj({
-      trace: "FetchAgent/getViews",
-    });
+    const fetchErrorObj: feResponseObj<getViews_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/getViews",
+      });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall(adress, options, fetchErrorObj);
+    return fetchCall<getViews_FetchCall>(adress, options, fetchErrorObj);
   }
   updateViews(data: updateViewsData) {
     console.log("updateViews");
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-views/views";
     const options = new getOptionObject().setMethod("POST").addBody(data).get();
-    const fetchErrorObj: feResponseObj = getFrontEndFetchErrObj({
-      trace: "FetchAgent/getViews",
-    });
+    const fetchErrorObj: feResponseObj<updateViews_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/getViews",
+      });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall(adress, options, fetchErrorObj);
+    return fetchCall<updateViews_FetchCall>(adress, options, fetchErrorObj);
   }
   //////////////////////////////////////////////////////////////////////////
   //CONTENT ROUTES//
-
   async getContentBasedOnFilter(
     body: filterFetchQuery,
     page: "fitness" | "coach"
@@ -110,12 +181,14 @@ class fetchAgent {
     const adress: string =
       fetchAdress + `/api-${page}/${page}?get=${JSON.stringify(body.get)}`;
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj = getFrontEndFetchErrObj({
-      trace: "FetchAgent/getContentBasedOnFilter",
-    });
+    const fetchErrorObj: feResponseObj<filteredData[]> = getFrontEndFetchErrObj(
+      {
+        trace: "FetchAgent/getContentBasedOnFilter",
+      }
+    );
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall(adress, options, fetchErrorObj);
+    return fetchCall<filteredData[]>(adress, options, fetchErrorObj);
   }
 }
 

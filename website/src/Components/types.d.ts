@@ -169,7 +169,7 @@ type formStringInputProps = {
   name: string;
   formId: string;
   placeholder: string;
-  onChange?: (canSubmit: {
+  onChange: (canSubmit: {
     canSubmit: boolean;
     value: string;
     name: string;
@@ -222,10 +222,10 @@ interface filterFetchQuery {
   };
 }
 
-interface feResponseObj {
-  data: any;
+interface feResponseObj<T> {
+  data: T | null;
   errorMap: {
-    Error: {
+    Error?: {
       code: string | number;
       name: string;
       message: string;
@@ -241,4 +241,94 @@ interface checkAuthOfUser {
 interface loginUser {
   username: string;
   password: string;
+}
+interface userInformation extends checkAuthOfUser {
+  id: string;
+}
+
+interface getFilterData_FetchCall {
+  _id: string;
+  regions: {
+    name: { cz: string; eng: string };
+    code: string;
+    towns?: { code: string; name: { cz: string; eng: string } }[];
+  }[];
+}
+
+interface registerUser_FetchCall {
+  registered: boolean;
+  email: string;
+}
+
+interface checkAuthOfUser_FetchCall {
+  authenticated: boolean;
+  tokenExpired: boolean;
+  userData: {
+    username: string;
+    isAdmin: boolean;
+    userId: string;
+    iat: number;
+    exp: number;
+  };
+}
+
+interface loginUser_FetchCall {
+  authenticated: boolean;
+  token: string;
+  userId: string;
+}
+interface getUserInformation_FetchCall {
+  agreement: {
+    terms: { awarded: string; status: boolean };
+    dataProcessingForPropagation: { awarded: string; status: boolean };
+  };
+  _id: string;
+  isAdmin: boolean;
+  username: string;
+  email: string;
+  fitnessOwned: string[] | [];
+  coachOwned: string[] | [];
+}
+
+interface getViews_FetchCall {
+  _id: string;
+  views: number;
+}
+
+interface updateViews_FetchCall {
+  acknowledged: boolean;
+  modifiedCount: number;
+  upsertedId: null | string;
+  upsertedCount: number;
+  matchedCount: number;
+}
+
+interface changeUserInformation_FetchCall {
+  updated: boolean;
+}
+
+interface userObjectType {
+  _id: string;
+  isAdmin: boolean;
+  username: string;
+  email: string;
+  fitnessOwned: string[];
+  coachOwned: string[];
+  agreement: {
+    terms: {
+      awarded: string | Date;
+      status: boolean;
+    };
+    dataProcessingForPropagation: {
+      awarded: string | Date;
+      status: boolean;
+    };
+  };
+}
+
+interface changeInformation {
+  type: "password" | "username" | "email";
+  _id: string;
+  value: string;
+  token: string;
 }

@@ -24,6 +24,15 @@ class getOptionObject {
     }
   }
 
+  addHeader(key: any, value: string) {
+    const obj = { [key]: "Bearer " + value };
+    const headerObj: any = this.returnObj.headers;
+    const newHeaderObj = Object.assign(headerObj, obj);
+    this.returnObj.headers = newHeaderObj;
+    console.log(this.returnObj);
+    return this;
+  }
+
   get() {
     return this.returnObj;
   }

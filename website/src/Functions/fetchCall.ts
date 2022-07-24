@@ -1,23 +1,18 @@
-const fetchCall = (
+function fetchCall<T>(
   adress: string,
   options: RequestInit,
-  errorObj: feResponseObj,
-  parse: boolean = true
-) => {
+  errorObj: feResponseObj<T>
+): Promise<feResponseObj<T>> {
   return new Promise(async (resolve, reject) => {
     try {
       const Res: Response = await fetch(adress, options);
-      if (parse === false) {
-        resolve(Res);
-        return;
-      }
-      const ResObj: feResponseObj = await Res.json();
-      //CATCH BE ERROR//
+      const ResObj: feResponseObj<T> = await Res.json();
+      //CATCH THE ERROR//
       if (ResObj.errorMap.length > 0) {
         throw ResObj;
       }
       resolve(ResObj);
-    } catch (err) {
+    } catch (err: any) {
       //CATCH FE ERROR - DUE TO ERROR IN FETCH//
       if (err instanceof Error) {
         let error = errorObj;
@@ -27,6 +22,23 @@ const fetchCall = (
       resolve(err); //TODO - show err modal
     }
   });
-};
+}
 
-export { fetchCall };
+function fetchCallWithoutParsing<T>(
+  adress: string,
+  options: RequestInit,
+  errorObj: feResponseObj<T>
+): Promise<Response> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const Res: Response = await fetch(adress, options);
+
+      resolve(Res);
+      return;
+    } catch (err: any) {
+      resolve(err); //TODO - show err modal
+    }
+  });
+}
+
+export { fetchCall, fetchCallWithoutParsing };
