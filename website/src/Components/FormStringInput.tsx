@@ -23,26 +23,29 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
         if (props.minLength !== undefined && value.length < props.minLength && value.length > 0) {
             setCorrectValue(false)
             setShowError(true)
+            onChange({ canSubmit: false, value: value, name: props.name })
             return
         } else if (props.minLength !== undefined && value.length === 0) {
             setShowError(false)
             setStyle(undefined)
+            onChange({ canSubmit: false, value: value, name: props.name })
         }
 
         //email type?
         if (type === "email" && emailResult === true) {
             setShowError(false)
             setCorrectValue(true)
-            onChange!({ canSubmit: true, value: value, name: props.name })
+            onChange({ canSubmit: true, value: value, name: props.name })
             return
         } else if (type === "email" && emailResult === false) {
             if (value.length === 0) {
                 setShowError(false)
+                onChange({ canSubmit: false, value: value, name: props.name })
                 return
             }
             setShowError(true)
             setCorrectValue(false)
-            onChange!({ canSubmit: false, value: value, name: props.name })
+            onChange({ canSubmit: false, value: value, name: props.name })
             return
         }
 
@@ -56,11 +59,11 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
             } else {
                 setShowError(true)
                 setCorrectValue(false)
-                onChange!({ canSubmit: false, value: value, name: props.name })
+                onChange({ canSubmit: false, value: value, name: props.name })
                 return
             }
         } else {
-            onChange!({ canSubmit: true, value: value, name: props.name })
+            onChange({ canSubmit: true, value: value, name: props.name })
             setCorrectValue(true)
             setShowError(false)
             return
