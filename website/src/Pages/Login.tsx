@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import { Link, useHistory } from "react-router-dom"
 import { gsap } from 'gsap'
 import { UserContext, AnimationContext } from '../App/Context'
@@ -46,6 +46,7 @@ const Login = () => {
     const history = useHistory()
     const userContext = useContext(UserContext)
     const anContext = useContext(AnimationContext);
+
     //////////////////////////////////////////////////
     //FUNCTIONS//
     const checkLogged = async () => {
@@ -54,7 +55,7 @@ const Login = () => {
             userContext?.fn.setLogged(true)
             userContext?.fn.setUserId(logged.userId)
             //REDIRECT TO DASHBOARD
-            // redirectToDashboard()
+            redirectToDashboard()
         }
     }
     const handleModalDefault = () => {
@@ -87,14 +88,15 @@ const Login = () => {
             ) {
                 //SEND RQ TO SERVER
                 const fetchResult: any = await fetchAgent.loginUser({ username: name.value, password: password.value })
-                console.log(fetchResult)
                 //SUCESS SCENARIO
                 if (fetchResult.errorMap.length === 0 && fetchResult.data !== null) {
                     if (fetchResult.data.authenticated === true) {
                         //CHANGE STATE IN APP
                         userContext?.fn.setLogged(true)
                         //SAVE TOKEN TO BROWSER
-                        saveToken(fetchResult.data.token)
+                        await saveToken(fetchResult.data.token)
+                        //SAVE USER ID TO CONTEXT
+                        userContext?.fn.setUserId(fetchResult.data.userId)
                         //MODAL - SUCESS
                         setModalBtnText(text.login.modal.buttonSucess.cz)
                         showModal({ loading: false, sucess: true, msg: sucessHtml })
@@ -143,6 +145,28 @@ const Login = () => {
     const clearForm = () => {
         gsap.set(".formInput", { value: "", border: "2px solid transparent" })
     }
+
+    //SUBMIT ON ENTER//
+    useEffect(() => {
+        const enterPressSubmit = (event: any) => {
+            if (event.key === "Enter" && modal.loading === false) {
+                handleSubmit(event)
+            }
+        }
+        window.addEventListener("keydown", enterPressSubmit)
+
+        return () => {
+            window.removeEventListener("keydown", enterPressSubmit)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    //CHECK IF TOKEN IS AVALIABLE ON LOAD//
+    useEffect(() => {
+        checkLogged()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
@@ -151,10 +175,7 @@ const Login = () => {
         setTimeout(() => {
             animationStore.menu.logo.logoTextIn();
         }, 200);
-    }, [])
-
-    useEffect(() => {
-        checkLogged()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //////////////////////////////////////////////////
@@ -202,6 +223,9 @@ const Login = () => {
                             />
                             <Link to="/login/forgetPassword" className={forgetPasswordClasses}>
                                 {text.login.Form.link1.cz}
+                            </Link>
+                            <Link to="/login/forgetName" className={forgetPasswordClasses}>
+                                {text.login.Form.link2.cz}
                             </Link>
                             <button
                                 className="registerFormButton loginFormButton"
