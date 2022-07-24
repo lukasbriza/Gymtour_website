@@ -40,4 +40,8 @@ const removeToken = async () => {
   removeLocal("gymtour.cz_token");
 };
 
-export { isLogged, saveToken, removeToken };
+const getToken = async () => {
+  return getLocal("gymtour.cz_token");
+};
+
+export { isLogged, saveToken, removeToken, getToken };
