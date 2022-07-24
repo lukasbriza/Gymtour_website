@@ -652,6 +652,111 @@ const animationStore = {
       },
     },
   },
+  dashboard: {
+    sidebarHamburger: {
+      crossOn: async (slices) => {
+        const tl = gsap.timeline();
+        tl.then(gsap.effects.crossOn(slices[0], slices[1], slices[2]));
+        return tl;
+      },
+      crossOff: (slices) => {
+        const tl = gsap.timeline();
+        tl.then(gsap.effects.crossOff(slices[0], slices[1], slices[2]));
+        return tl;
+      },
+    },
+    menuShift: {
+      on: async (menu, hmbBackground, slices, items) => {
+        const tl = gsap.timeline();
+        tl.addLabel("start")
+          .to(
+            menu,
+            {
+              width: "100%",
+              duration: 2,
+              ease: Power3.easeOut,
+            },
+            "start"
+          )
+          .to(
+            hmbBackground,
+            {
+              backgroundColor: "transparent",
+              duration: 0.5,
+              ease: "linear",
+            },
+            "start"
+          )
+          .to(
+            hmbBackground,
+            {
+              right: "10px",
+              duration: 0.5,
+              ease: Power3.easeOut,
+            },
+            "start"
+          )
+          .to(
+            slices,
+            {
+              backgroundColor: "white",
+              duration: 0.5,
+              ease: "linear",
+            },
+            "start"
+          )
+          .fadeIn(items, { delay: 0.75, displayAfter: "initial" });
+        return tl;
+      },
+      off: async (menu, hmbBackground, slices, items) => {
+        const fadeoddDelay = 1;
+        const tl = gsap.timeline();
+        tl.fadeOff(items, { delay: 0, displayAfter: "none", stagger: 0.1 })
+          .addLabel("start")
+          .to(
+            menu,
+            {
+              width: "0%",
+              duration: 2,
+              delay: fadeoddDelay,
+              ease: Power2.easeOut,
+            },
+            "start"
+          )
+          .to(
+            hmbBackground,
+            {
+              backgroundColor: "white",
+              delay: fadeoddDelay + 0.5,
+              duration: 0.5,
+              ease: Power2.easeOut,
+            },
+            "start"
+          )
+          .to(
+            hmbBackground,
+            {
+              right: "-70px",
+              duration: 1,
+              delay: fadeoddDelay + 0.3,
+              ease: "linear",
+            },
+            "start"
+          )
+          .to(
+            slices,
+            {
+              backgroundColor: "black",
+              delay: 0.3 + fadeoddDelay,
+              duration: 0.5,
+              ease: "linear",
+            },
+            "start"
+          );
+        return tl;
+      },
+    },
+  },
 };
 
 export { config, animationStore };
