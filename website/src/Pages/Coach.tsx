@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FilterIcon } from '../Components/FilterIcon'
 import { ContentFilter } from '../Components/Filter/ContentFilter'
 import { SearchItem } from '../Components/SearchItem'
+import { ErrorModal } from '../Components/ErrorModal'
 import { Button } from '../Components/Button'
 //CONFIG//
 import { config, animationStore } from '../config/mainConfiguration'
@@ -22,6 +23,10 @@ const Coach = () => {
     const [disabled, setDisabled] = useState<boolean>(false)
     const [fetchSpan, setfetchSpan] = useState<{ skip: number, limit: number }>({ skip: 0, limit: 20 })
     const [initAn, setInitAn] = useState<boolean>(false)
+
+    const [errorModal, setErrorModal] = useState<boolean>(false)
+    const [errorHeader, setErrorHeader] = useState<string>("")
+    const [errorMessage, setErrorMessage] = useState<string>("")
     //////////////////////////////////////////////////
     //VARIABLES//
     const appContext = useContext(AppContext);
@@ -64,66 +69,74 @@ const Coach = () => {
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="Coach" className={config.basePageClassList + " " + coachClasses}>
-            <section className={headerSectionClasses}>
-                <FilterIcon
-                    onClick={() => { anContext?.fn.setFilterOpen(!anContext.filterOpen) }}
-                    crossed={anContext?.contentPageCross}
-                />
-                <h1>{text.coach.PageHeader.cz}</h1>
-                <Link
-                    style={linkStyle}
-                    to={config.routes.crossroad.path}
-                    className={linkClasses}
-                    onTouchStart={() => setLinkStyle({ textDecoration: 'none' })}
-                    onTouchEnd={() => setLinkStyle({ textDecoration: 'underline' })}
-                    onClick={() => setLinkStyle({ textDecoration: 'underline' })}
-                >
-                    <div>
-                        {text.coach.HeaderBackButton.cz}
-                    </div>
-                </Link>
-            </section>
-            <ContentFilter open={anContext!.filterOpen} setFilteredData={appContext!.fn.setFilteredCoachData} fetch={fetchSpan} /> {/** */}
-            <div className={searchContentWrapperClasses}>
-                <div
+        <>
+            <div id="Coach" className={config.basePageClassList + " " + coachClasses}>
+                <section className={headerSectionClasses}>
+                    <FilterIcon
+                        onClick={() => { anContext?.fn.setFilterOpen(!anContext.filterOpen) }}
+                        crossed={anContext?.contentPageCross}
+                    />
+                    <h1>{text.coach.PageHeader.cz}</h1>
+                    <Link
+                        style={linkStyle}
+                        to={config.routes.crossroad.path}
+                        className={linkClasses}
+                        onTouchStart={() => setLinkStyle({ textDecoration: 'none' })}
+                        onTouchEnd={() => setLinkStyle({ textDecoration: 'underline' })}
+                        onClick={() => setLinkStyle({ textDecoration: 'underline' })}
+                    >
+                        <div>
+                            {text.coach.HeaderBackButton.cz}
+                        </div>
+                    </Link>
+                </section>
+                <ContentFilter open={anContext!.filterOpen} setFilteredData={appContext!.fn.setFilteredCoachData} fetch={fetchSpan} /> {/** */}
+                <div className={searchContentWrapperClasses}>
+                    <div
 
-                    className={searchContentClasses}
-                >
-                    {
+                        className={searchContentClasses}
+                    >
+                        {
 
-                        appContext?.filteredCoachData.map((data: filteredData, index: number) => {
-                            //DISABLED BUTTON LOGIC//
-                            if (index >= 0 && index <= endIndex - 1) {
-                                //RETURN FITNESS ITEMS//
-                                return <SearchItem data={data} key={data._id} />
-                            }
+                            appContext?.filteredCoachData.map((data: filteredData, index: number) => {
+                                //DISABLED BUTTON LOGIC//
+                                if (index >= 0 && index <= endIndex - 1) {
+                                    //RETURN FITNESS ITEMS//
+                                    return (<SearchItem data={data} key={data._id} callback={(e) => {
+                                        //ERROR MODAL SHOW
+                                        setErrorHeader(text.errorModal.headers.coach.searchItem.cz)
+                                        const message = (e.errorMap.map((error) => { return error.Error?.message }) + text.errorModal.contactMessage.cz)
+                                        setErrorMessage(message)
+                                        setErrorModal(true)
+                                    }} />)
+                                }
 
-                        })
+                            })
 
-                    }
-                </div>
-                <Button
-                    disabled={disabled}
-                    modificationClass={contentPageButtonClasses}
-                    initialClass={"buttonInitial"}
-                    hoverClass={"buttonHover"}
-                    text={text.coach.Content.nextButton.cz}
-                    onClick={() => {
-                        //TRIGGERED FETCH FROM DB --- 10- 20//
-                        if (endIndex === fetchTriggerAmount) {
-                            //FETCH NEW ITEMS FROM DB//
-                            setfetchSpan({ skip: fetchTriggerAmount, limit: 20 })
-                            setFetchTriggerAmount(fetchTriggerAmount + 20);
-                            setEndIndex(gap + endIndex);
-                            //NOT TRIGGERED FETCH FROM DB//
-                        } else {
-                            setEndIndex(endIndex + gap);
                         }
-                    }}
-                />
+                    </div>
+                    <Button
+                        disabled={disabled}
+                        modificationClass={contentPageButtonClasses}
+                        initialClass={"buttonInitial"}
+                        hoverClass={"buttonHover"}
+                        text={text.coach.Content.nextButton.cz}
+                        onClick={() => {
+                            //TRIGGERED FETCH FROM DB --- 10- 20//
+                            if (endIndex === fetchTriggerAmount) {
+                                //FETCH NEW ITEMS FROM DB//
+                                setfetchSpan({ skip: fetchTriggerAmount, limit: 20 })
+                                setFetchTriggerAmount(fetchTriggerAmount + 20);
+                                setEndIndex(gap + endIndex);
+                                //NOT TRIGGERED FETCH FROM DB//
+                            } else {
+                                setEndIndex(endIndex + gap);
+                            }
+                        }}
+                    />
+                </div>
             </div>
-        </div>
+            <ErrorModal show={errorModal} message={errorMessage} errorHeader={errorHeader} callback={() => { setErrorModal(false) }} /></>
     )
 }
 

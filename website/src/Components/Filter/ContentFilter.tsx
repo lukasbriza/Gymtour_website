@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { FilterSection } from './FilterSection'
 import { Button } from '../Button'
+import { ErrorModal } from '../ErrorModal'
 import { gsap } from 'gsap'
 //CONTEXT//
 import { AppContext, AnimationContext } from '../../App/Context'
@@ -37,6 +38,10 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
     //STATE//
     const [data, setData] = useState<dataState>()
     const [showContent, setShowContent] = useState<boolean>(false)
+    const [errorModal, setErrorModal] = useState<boolean>(false)
+    const [errorHeader, setErrorHeader] = useState<string>("")
+    const [errorMessage, setErrorMessage] = useState<string>("")
+
     const location = useLocation()
     //////////////////////////////////////////////////
     //VARIABLES//
@@ -65,13 +70,19 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
         //console.log(querryCommand)
         if (querryCommand !== undefined) {
             const getData: any = await fetchAgent.getContentBasedOnFilter(querryCommand, actualLocation)
-            console.log(getData)
+
             if ((await getData).errorMap.length === 0) {
                 if (location.pathname === "/fitness") {
                     filterOrigin === true ? props.setFilteredData(getData.data) : props.setFilteredData(appContext!.filteredFitnessData.concat(getData.data))
                 } else if (location.pathname === "/coach") {
                     filterOrigin === true ? props.setFilteredData(getData.data) : props.setFilteredData(appContext!.filteredCoachData.concat(getData.data))
                 }
+            } else {
+                //ERROR MODAL
+                setErrorHeader(text.errorModal.headers.contentFilter[0].cz)
+                const message = (getData.errorMap.map((error: any) => error.Error?.message) + text.errorModal.contactMessage.cz)
+                setErrorMessage(message)
+                setErrorModal(true)
             }
         }
     }
@@ -99,7 +110,10 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
             //CATCH ERROR//
             if (data.errorMap.length > 0) {
                 //THROW ERROR MODAL//
-                alert('Filter data error modal. ' + data.errorMap)
+                setErrorHeader(text.errorModal.headers.contentFilter[1].cz)
+                const message = (data.errorMap.map((error: any) => error.Error?.message) + text.errorModal.contactMessage.cz)
+                setErrorMessage(message)
+                setErrorModal(true)
             }
             if (data.errorMap.length === 0) {
                 setData(data.data[0])
@@ -113,7 +127,6 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
     }, [])
     //TRIGGERED FETCH BY NEXT BUTTON//
     useEffect(() => {
-        //prevent to fetch during initial render
         if (initialRender) {
             initialRender.current = false
         } else {
@@ -144,44 +157,52 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
         }
 
         return (
-            <section
-                className={filterSecctionWrapperClasses}
-                ref={wrapperRef}
-            >
-                <FilterSection
-                    header={text.contentPage.Filter.sortHeader.cz}
-                    filterType={"order"}
-                    data={undefined}
-                />
-                {array.map((obj: any, index: number) => {
-                    return (
-                        <FilterSection
-                            header={
-                                appContext?.actualLocation === "/fitness" ?
-                                    text.fitness.Filter.headers[index].cz :
-                                    text.coach.Filter.headers[index].cz
-                            }
-                            filterType={obj.filterType}
-                            data={obj.data}
-                            key={index}
-                        />
-                    )
-                })}
-                <Button
-                    /* FETCH DATA AND CLEAR ARRAY */
-                    onClick={() => {
-                        anContext?.fn.setFilterOpen(!anContext.filterOpen);
-                        anContext?.fn.setContentPageCross(true);
-                        fetchFilterData(true)
-                    }}
-                    initialClass={buttonInitialClasses}
-                    hoverClass={buttonHoverClasses}
-                    text={text.contentPage.Filter.filterButton.cz}
-                />
-            </section>
+            <>
+                <section
+                    className={filterSecctionWrapperClasses}
+                    ref={wrapperRef}
+                >
+                    <FilterSection
+                        header={text.contentPage.Filter.sortHeader.cz}
+                        filterType={"order"}
+                        data={undefined}
+                    />
+                    {array.map((obj: any, index: number) => {
+                        return (
+                            <FilterSection
+                                header={
+                                    appContext?.actualLocation === "/fitness" ?
+                                        text.fitness.Filter.headers[index].cz :
+                                        text.coach.Filter.headers[index].cz
+                                }
+                                filterType={obj.filterType}
+                                data={obj.data}
+                                key={index}
+                            />
+                        )
+                    })}
+                    <Button
+                        /* FETCH DATA AND CLEAR ARRAY */
+                        onClick={() => {
+                            anContext?.fn.setFilterOpen(!anContext.filterOpen);
+                            anContext?.fn.setContentPageCross(true);
+                            fetchFilterData(true)
+                        }}
+                        initialClass={buttonInitialClasses}
+                        hoverClass={buttonHoverClasses}
+                        text={text.contentPage.Filter.filterButton.cz}
+                    />
+                </section>
+                <ErrorModal show={errorModal} message={errorMessage} errorHeader={errorHeader} callback={() => { setErrorModal(false) }} />
+            </>
         )
     } else {
-        return <div></div>
+        return (
+            <>
+                <div></div>
+                <ErrorModal show={errorModal} message={errorMessage} errorHeader={errorHeader} callback={() => { setErrorModal(false) }} />
+            </>
+        )
     }
 }
 
