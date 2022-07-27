@@ -12,8 +12,8 @@ class ViewsAbl {
     let response = resBuild();
     ///////////////////////////////////////////////////////////
     //INPUT//
-    const type = req.body.getViews.type;
-    const _id = req.body.getViews._id;
+    const type = req.query.type;
+    const _id = req.query._id;
     ///////////////////////////////////////////////////////////
     //DB CALL//
     let call;
@@ -57,10 +57,10 @@ class ViewsAbl {
     //GET RECORD//
     let record;
     try {
-      if (type == "coach") {
+      if (type == "/coach") {
         record = await CoachModel.findById(_id, "views");
       }
-      if (type == "fitness") {
+      if (type == "/fitness") {
         record = await FitnessModel.findById(_id, "views");
       }
     } catch (err) {
@@ -76,13 +76,12 @@ class ViewsAbl {
     }
     //UPDATE RECORD//
     let views = record.views + 1;
-
     let updateCall;
     try {
-      if (type == "coach") {
+      if (type == "/coach") {
         updateCall = await CoachModel.updateOne({ _id: _id }, { views: views });
       }
-      if (type == "fitness") {
+      if (type == "/fitness") {
         updateCall = await FitnessModel.updateOne(
           { _id: _id },
           { views: views }

@@ -11,12 +11,17 @@ const isAdmin = require("../Functions/isAdmin");
 const {
   updateUservalidation,
   deleteUservalidation,
+  getUserValidation,
 } = require("../Functions/validator");
 ////////////////////////////////////////////////////////////////
 //ROUTES//
 router
   .route("/user")
   //UPDATE USER//
+  .get(checkAuth, getUserValidation, async (req, res) => {
+    const result = await UserAbl.get(req, res);
+    res.status(200).send(result);
+  })
   .put(checkAuth, updateUservalidation, async (req, res) => {
     const result = await UserAbl.update(req, res);
     res.status(200).send(result);

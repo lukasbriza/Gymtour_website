@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
       };
       res.status(200).send(response);
     } else {
-      new ValidationError("Token verification error.", res, response);
+      new ValidationError("Token verification error.", res, resBuild());
       return;
     }
   }

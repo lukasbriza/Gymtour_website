@@ -57,7 +57,7 @@ class LoginAbl {
           terms: {
             status: termStatus,
           },
-          dataProcessinfForPropagation: {
+          dataProcessingForPropagation: {
             status: dataProcessingStatus,
           },
         },
@@ -125,7 +125,11 @@ class LoginAbl {
           }
         );
         ///////////////////////////////////////////////////////
-        response.data = { authenticated: true, token: token };
+        response.data = {
+          authenticated: true,
+          token: token,
+          userId: userArr[0]._id,
+        };
       } else if (compareResult == false) {
         response.data = { authenticated: false };
       } else {

@@ -4,19 +4,44 @@ const Joi = require("joi");
 
 const updateUservalidation = (req, res, next) => {
   let response = resBuild();
-  const updateSchema = Joi.object({
-    password: Joi.string().min(9),
-    username: Joi.string()
-      .min(5)
-      .pattern(/^[a-zA-Z0-9@+-<>$#|%$ěščřžýáíéůúĚŠČŘŽÝÁÍÉ]+$/),
-    email: Joi.string().email(),
-  });
-
-  const value = updateSchema.validate(req.body.update, { render: false });
-  if (value.error) {
-    new ValidationError(value.error.details[0].message, res, response);
+  let updateObj;
+  console.log(req.body);
+  if (req.body.type == "password") {
+    updateObj = Joi.object({
+      type: Joi.string(),
+      _id: Joi.string(),
+      value: Joi.string().min(9),
+      token: Joi.string(),
+    });
+  }
+  if (req.body.type == "email") {
+    updateObj = Joi.object({
+      type: Joi.string(),
+      _id: Joi.string(),
+      value: Joi.string().email(),
+      token: Joi.string(),
+    });
+  }
+  if (req.body.type == "username") {
+    updateObj = Joi.object({
+      type: Joi.string(),
+      _id: Joi.string(),
+      value: Joi.string()
+        .min(5)
+        .pattern(/^[a-zA-Z0-9@+-<>$#|%$ěščřžýáíéůúĚŠČŘŽÝÁÍÉ]+$/),
+      token: Joi.string(),
+    });
+  }
+  if (updateObj !== undefined) {
+    const updateSchema = updateObj;
+    const value = updateSchema.validate(req.body.update, { render: false });
+    if (value.error) {
+      new ValidationError(value.error.details[0].message, res, response);
+    } else {
+      next();
+    }
   } else {
-    next();
+    new ValidationError("Wrong type in body.", res, response);
   }
 };
 
@@ -60,6 +85,18 @@ const loginValidation = (req, res, next) => {
     password: Joi.string().required(),
   });
   const value = loginSchema.validate(req.query, { render: false });
+  if (value.error) {
+    new ValidationError(value.error.details[0].message, res, response);
+  } else {
+    next();
+  }
+};
+const getUserValidation = (req, res, next) => {
+  let response = resBuild();
+  const getUserSchema = Joi.object({
+    id: Joi.string().required(),
+  });
+  const value = getUserSchema.validate(req.query, { render: false });
   if (value.error) {
     new ValidationError(value.error.details[0].message, res, response);
   } else {
@@ -151,7 +188,7 @@ const fitnessAddValidation = (req, res, next) => {
       terms: Joi.object({
         status: Joi.boolean().required(),
       }),
-      dataProcessinfForPropagation: Joi.object({
+      dataProcessingForPropagation: Joi.object({
         status: Joi.boolean().required(),
       }),
     }),
@@ -310,7 +347,7 @@ const coachAddValidation = (req, res, next) => {
       terms: Joi.object({
         status: Joi.boolean().required(),
       }),
-      dataProcessinfForPropagation: Joi.object({
+      dataProcessingForPropagation: Joi.object({
         status: Joi.boolean().required(),
       }),
     }),
@@ -462,6 +499,7 @@ module.exports = {
   deleteUservalidation,
   registerValidation,
   loginValidation,
+  getUserValidation,
   fitnessRemoveValidation,
   fitnessAddValidation,
   fitnessUpdateValidation,

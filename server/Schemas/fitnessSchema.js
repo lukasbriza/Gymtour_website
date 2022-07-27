@@ -85,7 +85,7 @@ const fitnessSchema = new Schema({
       status: { type: Boolean, required: true },
       awarded: { type: Date, default: new Date() },
     },
-    dataProcessinfForPropagation: {
+    dataProcessingForPropagation: {
       status: { type: Boolean, required: true },
       awarded: { type: Date, default: new Date() },
     },
