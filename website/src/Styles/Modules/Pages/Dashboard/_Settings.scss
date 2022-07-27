@@ -1,0 +1,128 @@
+.settings {
+  background: $dashboardColor;
+  color: $mainColor;
+  overflow: auto;
+
+  .headerWrapper {
+    width: min-content;
+    white-space: nowrap;
+
+    h1 {
+      margin: 0px;
+      line-height: 38px;
+    }
+    #settingsUnderliner {
+      margin: 0px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .settingsText {
+  }
+
+  .formDivider {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 3px;
+    background: black;
+    border-radius: 80%;
+    margin: 25px 0px;
+    max-width: 525px;
+  }
+  .dataChangeRequestWrapper {
+    form {
+      margin-bottom: 15px;
+      h4 {
+        font-size: 16px;
+      }
+      .inputWrapper {
+        max-width: 300px;
+        input {
+          width: 100% !important;
+        }
+      }
+
+      .settingsFormButton:hover {
+        background: black;
+      }
+
+      .settingsFormButton:disabled {
+        background: grey;
+      }
+
+      .settingsFormButton:disabled:hover {
+        background: grey;
+      }
+
+      .settingsFormButton {
+        width: 120px;
+        color: white;
+        background-color: #292727;
+        font-weight: 600;
+        font-size: 17px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 15px 0px;
+        transition-property: background-color;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-out;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+    }
+    #changeNameForm {
+      .inputWrapper {
+        .changeNameInput {
+          height: 50px;
+          width: inherit;
+          padding-left: 10px;
+          background-color: rgba(76, 76, 76, 0.274);
+          color: black;
+          border: 1px solid black;
+          border-radius: 5px;
+        }
+      }
+    }
+    #changePasswordForm {
+      .inputWrapper {
+        .newPasswordInput {
+          height: 50px;
+          width: inherit;
+          padding-left: 10px;
+          background-color: rgba(76, 76, 76, 0.274);
+          color: black;
+          border: 1px solid black;
+          border-radius: 5px;
+        }
+        .oldPasswordInput {
+          height: 50px;
+          width: inherit;
+          padding-left: 10px;
+          background-color: rgba(76, 76, 76, 0.274);
+          color: black;
+          border: 1px solid black;
+          border-radius: 5px;
+        }
+      }
+    }
+    #changeEmailForm {
+      .inputWrapper {
+        .changeEmailInput {
+          height: 50px;
+          width: inherit;
+          padding-left: 10px;
+          background-color: rgba(76, 76, 76, 0.274);
+          color: black;
+          border: 1px solid black;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+.settingsForm {
+}

@@ -101,21 +101,23 @@
   }
 }
 
-.inputWrapper:nth-child(1) {
-  @include mq($from: tablet) {
-    padding-right: 10px;
-    grid-area: input1;
+#registerForm {
+  .inputWrapper:nth-child(1) {
+    @include mq($from: tablet) {
+      padding-right: 10px;
+      grid-area: input1;
+    }
   }
-}
-.inputWrapper:nth-child(2) {
-  @include mq($from: tablet) {
-    padding-left: 10px;
-    grid-area: input2;
+  .inputWrapper:nth-child(2) {
+    @include mq($from: tablet) {
+      padding-left: 10px;
+      grid-area: input2;
+    }
   }
-}
-.inputWrapper:nth-child(3) {
-  @include mq($from: tablet) {
-    grid-area: input3;
+  .inputWrapper:nth-child(3) {
+    @include mq($from: tablet) {
+      grid-area: input3;
+    }
   }
 }
 

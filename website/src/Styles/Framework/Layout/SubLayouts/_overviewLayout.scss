@@ -1,0 +1,154 @@
+.overview {
+  z-index: 0;
+  .infoWrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+
+    .text {
+      padding-right: 10px;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+    .infoHolder {
+      white-space: nowrap;
+    }
+  }
+
+  .contentWrapper {
+    display: grid;
+    grid-template-rows: 30px min-content 70px min-content min-content min-content min-content;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      ". ."
+      ". id"
+      ". ."
+      "header header"
+      "name email"
+      "fitness businessCondition"
+      "coach termCondition"
+      "button button";
+
+    max-width: 780px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include mq($until: 980px) {
+      width: 80%;
+    }
+
+    @include mq($until: 850px) {
+      grid-template-rows: 30px min-content 70px min-content min-content min-content min-content min-content min-content min-content min-content;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        ". "
+        "id"
+        ". "
+        "header"
+        "name"
+        "email"
+        "fitness"
+        "coach"
+        "termCondition"
+        "businessCondition"
+        "button";
+
+      .infoWrapper:nth-child(3),
+      .infoWrapper:nth-child(4),
+      .infoWrapper:nth-child(5),
+      .infoWrapper:nth-child(6),
+      .infoWrapper:nth-child(7),
+      .infoWrapper:nth-child(8) {
+        display: grid;
+        grid-template-columns: 260px auto;
+        .text {
+          width: 260px;
+        }
+      }
+    }
+
+    @include mq($until: 600px) {
+      width: 90%;
+      .infoWrapper:nth-child(3),
+      .infoWrapper:nth-child(4),
+      .infoWrapper:nth-child(5),
+      .infoWrapper:nth-child(6),
+      .infoWrapper:nth-child(7),
+      .infoWrapper:nth-child(8) {
+        margin-left: 0px !important;
+      }
+    }
+
+    @include mq($until: 430px) {
+      width: 60%;
+      .infoWrapper:nth-child(3),
+      .infoWrapper:nth-child(4),
+      .infoWrapper:nth-child(5),
+      .infoWrapper:nth-child(6),
+      .infoWrapper:nth-child(7),
+      .infoWrapper:nth-child(8) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    //ID
+    .infoWrapper:nth-child(1) {
+      grid-area: id;
+      justify-self: end;
+      margin-right: 30px;
+    }
+    //HEADER
+    .headerWrapper {
+      grid-area: header;
+      justify-self: center;
+      margin-bottom: 30px;
+    }
+    //USERNAME
+    .infoWrapper:nth-child(3) {
+      grid-area: name;
+      margin-left: 50px;
+    }
+    //EMAIL
+    .infoWrapper:nth-child(4) {
+      grid-area: email;
+      margin-left: 50px;
+    }
+    //FITNESS
+    .infoWrapper:nth-child(5) {
+      grid-area: fitness;
+      margin-left: 50px;
+    }
+    //COACH
+    .infoWrapper:nth-child(6) {
+      grid-area: coach;
+      margin-left: 50px;
+    }
+    //BUSINESS CONDITION
+    .infoWrapper:nth-child(7) {
+      grid-area: businessCondition;
+      margin-left: 50px;
+    }
+    //TERMCONDITION
+    .infoWrapper:nth-child(8) {
+      grid-area: termCondition;
+      margin-left: 50px;
+    }
+    //BUTTON
+    .overviewButton {
+      grid-area: button;
+      width: min-content;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      margin-top: 30px;
+
+      div {
+        padding: 15px 0px;
+        width: 120px;
+      }
+    }
+  }
+}

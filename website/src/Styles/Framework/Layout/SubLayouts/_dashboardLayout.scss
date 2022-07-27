@@ -1,0 +1,37 @@
+.Dashboard {
+  display: grid;
+
+  .sideBar {
+    position: absolute;
+    z-index: +1;
+  }
+
+  @include mq($from: desktop) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .dashboardSection {
+      position: relative;
+      width: 100%;
+    }
+
+    .sideMenuTrigger {
+      display: none !important;
+    }
+    .sideBar {
+      width: 300px !important;
+      position: relative;
+    }
+    .sideBarItem {
+      text-align: center;
+      opacity: 1 !important;
+      display: initial !important;
+      padding: 25px 0px;
+      width: 100%;
+    }
+    .sideBarItem:nth-child(2) {
+      margin-top: 0px;
+    }
+  }
+}
