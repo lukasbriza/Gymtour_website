@@ -24,7 +24,8 @@ interface SearchItemType {
         views: number,
         popularity: string[],
         name: string,
-    }
+    },
+    callback: (e: feResponseObj<updateViews_FetchCall>) => void
 }
 
 const tiltOptions = {
@@ -36,7 +37,7 @@ const tiltOptions = {
     "glare-prerender": false
 }
 
-const SearchItem = ({ data }: SearchItemType) => {
+const SearchItem = ({ data, callback }: SearchItemType) => {
     //////////////////////////////////////////////////
     //STATE//
     const [imgLoaded, setImgLoaded] = useState<boolean>(false)
@@ -68,7 +69,9 @@ const SearchItem = ({ data }: SearchItemType) => {
             }
         }).then(result => {
             //VERIFY CALL RESULT//
-            console.log(result)
+            if (result.errorMap.length !== 0) {
+                callback(result)
+            }
         })
         //REDIRECT
         //history.push("/fitness/" + data._id)
