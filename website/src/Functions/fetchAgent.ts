@@ -92,6 +92,7 @@ class fetchAgent {
     const adress: string = fetchAdress + `/api-user/user`;
     const options = new getOptionObject()
       .setMethod("PUT")
+      .addBody(data)
       .addHeader("Authorization", data.token)
       .get();
     const fetchErrorObj: feResponseObj<changeUserInformation_FetchCall> =
