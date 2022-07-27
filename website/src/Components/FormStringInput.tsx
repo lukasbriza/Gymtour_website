@@ -15,7 +15,7 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
     const emailRegexp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}$/gi
     //////////////////////////////////////////////////
     //FUNCTIONS//
-    const verification = (e: React.BaseSyntheticEvent) => {
+    const verification = (e: any) => {
         let value = e.target.value
         let result = globalRegExp.test(value)
         let emailResult = emailRegexp.test(value)

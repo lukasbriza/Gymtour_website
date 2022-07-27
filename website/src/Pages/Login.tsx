@@ -146,22 +146,6 @@ const Login = () => {
         gsap.set(".formInput", { value: "", border: "2px solid transparent" })
     }
 
-    //SUBMIT ON ENTER//
-    useEffect(() => {
-        const enterPressSubmit = (event: any) => {
-            if (event.key === "Enter" && modal.loading === false) {
-                handleSubmit(event)
-            }
-        }
-        window.addEventListener("keydown", enterPressSubmit)
-
-        return () => {
-            window.removeEventListener("keydown", enterPressSubmit)
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     //CHECK IF TOKEN IS AVALIABLE ON LOAD//
     useEffect(() => {
         checkLogged()
