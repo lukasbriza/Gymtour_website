@@ -54,7 +54,7 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
             if (result === false) {
                 setShowError(false)
                 setCorrectValue(true)
-                onChange!({ canSubmit: true, value: value, name: props.name })
+                onChange({ canSubmit: true, value: value, name: props.name })
                 return
             } else {
                 setShowError(true)

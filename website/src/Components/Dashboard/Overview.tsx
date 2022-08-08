@@ -7,7 +7,8 @@ import { useHistory } from 'react-router-dom'
 import fetchAgent from '../../Functions/fetchAgent'
 import { getToken } from '../../Functions/loginLogic'
 import { classListMaker } from '../../Functions/classListMaker'
-//CONFIG//
+import { text } from '../../config/textSource'
+
 //CONTEXT//
 import { UserContext } from '../../App/Context'
 
@@ -20,13 +21,11 @@ const Overview = () => {
     const [errorHeader, setErrorHeader] = useState<string>("")
     //////////////////////////////////////////////////
     //VARIABLES//
-    const overviewClasses = classListMaker(["overview"])
+    const overviewClasses = classListMaker(["overview", "dashboardSection"])
 
     const userContext = useContext(UserContext)
     const history = useHistory()
     const userReqSended = useRef(false)
-    //////////////////////////////////////////////////
-    //FUNCTIONS//
     //////////////////////////////////////////////////
     //EFFECTS//
     useEffect(() => {
@@ -49,8 +48,8 @@ const Overview = () => {
                             setUserObject(result.data)
                         } else {
                             //ERROR MODAL
-                            setErrorHeader("Získání informací selhalo")
-                            const message = (result.errorMap.map((error) => error.Error?.message) + " Kontaktujte administrátora na emailové adrese info@gymtour.cz")
+                            setErrorHeader(text.errorModal.headers.overview.cz)
+                            const message = (result.errorMap.map((error) => error.Error?.message) + text.errorModal.contactMessage.cz)
                             setErrorMessage(message)
                             setErrorModal(true)
                         }
@@ -72,53 +71,53 @@ const Overview = () => {
             <section className={overviewClasses}>
                 <div className="contentWrapper">
                     <div className="infoWrapper">
-                        <div className="text">ID:</div>
+                        <div className="text">{text.dahboard.Overview.section1.text.cz}</div>
                         <div className="id infoHolder">
                             {userContext?.userObject?._id}
                         </div>
                     </div>
 
                     <div className="headerWrapper">
-                        <h1>Účet</h1>
+                        <h1>{text.dahboard.Overview.section2.header.cz}</h1>
                         <Underliner width={"80%"} id={"dashboardUnderliner"} color={"black"} />
                     </div>
                     <div className="infoWrapper">
-                        <div className="text">Uživatelské jméno:</div>
+                        <div className="text">{text.dahboard.Overview.section3.text.cz}</div>
                         <div className="username infoHolder">
                             {userContext?.userObject?.username}
                         </div>
                     </div>
 
                     <div className="infoWrapper">
-                        <div className="text">Email uživatele:</div>
+                        <div className="text">{text.dahboard.Overview.section4.text.cz}</div>
                         <div className="email infoHolder">
                             {userContext?.userObject?.email}
                         </div>
                     </div>
 
                     <div className="infoWrapper">
-                        <div className="text">Počet fitness/welness záznamů:</div>
+                        <div className="text">{text.dahboard.Overview.section5.text.cz}</div>
                         <div className="fitnessOwned infoHolder">
                             {userContext?.userObject?.fitnessOwned.length}
                         </div>
                     </div>
 
                     <div className="infoWrapper">
-                        <div className="text">Počet coach záznamů:</div>
+                        <div className="text">{text.dahboard.Overview.section6.text.cz}</div>
                         <div className="coachOwned infoHolder">
                             {userContext?.userObject?.coachOwned.length}
                         </div>
                     </div>
 
                     <div className="infoWrapper">
-                        <div className="text">Souhlas s podmínkami přidán:</div>
+                        <div className="text">{text.dahboard.Overview.section7.text.cz}</div>
                         <div className="termsAwarded infoHolder">
                             {new Date(String(userContext?.userObject?.agreement.terms.awarded)).toLocaleDateString("cs-CZ")}
                         </div>
                     </div>
 
                     <div className="infoWrapper">
-                        <div className="text">GDPR souhlas přidán:</div>
+                        <div className="text">{text.dahboard.Overview.section8.text.cz}</div>
                         <div className="dataprocessingAwarded infoHolder">
                             {new Date(String(userContext?.userObject?.agreement.dataProcessingForPropagation.awarded)).toLocaleDateString("cs-CZ")}
                         </div>

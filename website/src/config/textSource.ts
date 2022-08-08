@@ -2,6 +2,7 @@ const text = {
   menu: {
     cz: ["Hlavní stránka", "O nás", "Spolupráce", "Kontakt"],
   },
+  menuTooltip: { cz: "Účet" },
   home: {
     PageHeader: { cz: "Fitness / Welness katalog." },
     Header: {
@@ -119,6 +120,7 @@ const text = {
   },
   login: {
     Form: {
+      header: { cz: "Přihlásit" },
       input1: {
         placeholder: { cz: "Jméno" },
         errorMessage: {
@@ -140,6 +142,44 @@ const text = {
       button: {
         cz: "Přihlásit",
       },
+    },
+    ForgetPasswordForm: {
+      header: { cz: "Obnova hesla" },
+      text: {
+        cz: `Pro obnovení hesla vyplňte přihlašovací jméno a email přiřazený k účtu,
+      pro který chcete heslo obnovit. Po ověření Vám zašleme vygenerované heslo na email,
+      které si v administraci změníte.`,
+      },
+      inputHeader1: { cz: "Přihlašovací jméno k účtu:" },
+      input1: {
+        placeholder: { cz: "Jméno" },
+        errorMessage: { cz: "test" },
+      },
+      inputHeader2: { cz: "Email k účtu:" },
+      input2: {
+        placeholder: { cz: "Email" },
+        errorMessage: { cz: "test" },
+      },
+      button: { cz: "Obnovit" },
+    },
+    ForgetNameForm: {
+      header: { cz: "Obnova jména" },
+      text: {
+        cz: `Pro obnovení uživatelského jména vyplňte heaslo a email přiřazený k účtu,
+        pro který chcete uživatelské jméno obnovit. Po ověření Vám zašleme vygenerované jméno na email,
+        které si v administraci následně změníte.`,
+      },
+      inputHeader1: { cz: "Email k účtu:" },
+      input1: {
+        placeholder: { cz: "Email" },
+        errorMessage: { cz: "test" },
+      },
+      inputHeader2: { cz: "Heslo k účtu:" },
+      input2: {
+        placeholder: { cz: "Heslo" },
+        errorMessage: { cz: "test" },
+      },
+      button: { cz: "Obnovit" },
     },
     modal: {
       invalidInputs: {
@@ -171,7 +211,7 @@ const text = {
         cz: "Změna osobních údajů",
       },
       text: {
-        cz: "doprovodný text",
+        cz: "Po každé změně údajů Vám bude zaslán informační email. V změny emailové adresy, nezapomeňte změnu adresy potvrdit kliknutím na odkaz ve zprávě zaslané na Váš starý email.",
       },
       form: {
         header1: {
@@ -208,6 +248,93 @@ const text = {
         },
         button3: { cz: "Změnit" },
       },
+    },
+    Overview: {
+      section1: {
+        text: { cz: "ID:" },
+      },
+      section2: {
+        header: { cz: "Účet" },
+      },
+      section3: {
+        text: { cz: "Uživatelské jméno:" },
+      },
+      section4: {
+        text: { cz: "Email uživatele:" },
+      },
+      section5: {
+        text: { cz: "Počet fitness/welness záznamů:" },
+      },
+      section6: {
+        text: { cz: "Počet coach záznamů:" },
+      },
+      section7: {
+        text: { cz: "Souhlas s podmínkami přidán:" },
+      },
+      section8: {
+        text: { cz: "GDPR souhlas přidán:" },
+      },
+    },
+  },
+  emailUpdate: {
+    modal: {
+      approveSucess: { cz: "Ověření emailové adresy proběhlo úspěšně." },
+      approveEarlier: {
+        cz: "Klikl jste na již použitý odkaz, změna již byla ověřena dříve.",
+      },
+      approveError: {
+        header: { cz: "Ověření emailové adresy selhalo" },
+        text: {
+          cz: "Je možné že platnost odkazu vypršela, prosím opakujte proces znovu. V případě potíží nás kontaktujte na info@gymtour.cz",
+        },
+      },
+    },
+    formModal: {
+      button: { cz: "Zavřít" },
+    },
+    sucessComponent: {
+      header: { cz: "Email ověřen" },
+      content: {
+        pt1: { cz: " Váš email byl úspěšně změněn." },
+        pt2: {
+          cz: " Kliknutím na tlačítko níže budete přesměrování na hlavní stránku.",
+        },
+      },
+      button: { cz: "Přesměrovat" },
+    },
+    failureComponent: {
+      header: { cz: "Ověření selhalo" },
+      content: {
+        pt1: {
+          cz: 'Bohužel se nám nepodařilo ověřit Váš email. Můžete zkusit vygenerovat nový odkaz v sekci "Nastavení", nebo nás můžete kontaktovat na info@gymtour.cz.',
+        },
+        pt2: {
+          cz: " Kliknutím na tlačítko níže budete přesměrování na hlavní stránku.",
+        },
+      },
+      button: { cz: "Přesměrovat" },
+    },
+    alreadyApprovedComponent: {
+      header: { cz: "Ověření proběhlo" },
+      content: {
+        pt1: { cz: "Změna Vašeho emailu byla již ověřena." },
+        pt2: {
+          cz: " Kliknutím na tlačítko níže budete přesměrování na hlavní stránku.",
+        },
+      },
+      button: { cz: "Přesměrovat" },
+    },
+    missingIdComponent: {
+      header: { cz: "Chybějící ID" },
+      content: {
+        pt1: {
+          cz: "V URL jsme nezaznamenali žádné ID. Klikněte prosím znovu na odkaz, který jsme Vám zaslali do Vašeho emailu.",
+        },
+        pt2: {
+          cz: " Kliknutím na tlačítko níže budete přesměrování na hlavní stránku.",
+        },
+      },
+      button: { cz: "Přesměrovat" },
     },
   },
   footer: {
