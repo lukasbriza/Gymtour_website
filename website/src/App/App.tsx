@@ -1,5 +1,3 @@
-//COMPONENTS//
-import { Menu } from '../Components/Menu'
 //CONTEXT//
 import { AnimationContextProvider, AppContextProvider, UserContextProvider } from './Context'
 //ANIMATIONS//
@@ -20,10 +18,7 @@ function App() {
         <UserContextProvider>
           <div id="App">
             <Router history={history}>
-              <Menu />
-
               <PageRoutes />
-
             </Router>
           </div>
         </UserContextProvider>
@@ -33,16 +28,3 @@ function App() {
 }
 
 export default App;
-
-/*
-TO-DO
-- setup cors policy
-- prepare user login on server Auth0 
-
--log in preparation
--register form sucess message
--scrollbar styling
--form data processing
-
--update eventlistener logic > cleaner function
-*/

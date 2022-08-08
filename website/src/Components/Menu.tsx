@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 //COMPONENTS//
 import { SmallLogo } from "./SVG/SmallLogo";
@@ -8,11 +8,12 @@ import { LoginButton } from "../Components/SVG/LoginButton"
 import { classListMaker } from "../Functions/classListMaker";
 //CONFIG//
 import { config, animationStore } from "../config/mainConfiguration";
+import { text } from '../config/textSource'
 //CONTEXT//
 import { AppContext } from "../App/Context";
 
-///////////////////////////////////////////////////////////////////////////////////////
-const Menu = () => {
+
+const Menu = ({ show }: { show: boolean }) => {
   //////////////////////////////////////////////////
   //STATE//
   const [background, setBackground] = useState<undefined | "transparent">(
@@ -40,6 +41,8 @@ const Menu = () => {
   const menuOfferClass = classListMaker(["menuOfferGrid"]);
 
   const routesArray = Object.values(config.menuItems);
+
+  const menuRef = useRef(null)
   //////////////////////////////////////////////////
   //MENU BACKGROUND//
   useEffect(() => {
@@ -76,6 +79,15 @@ const Menu = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appContext?.actualLocation, appContext?.width]);
+  //SHOW MENU LOGIC//
+  useEffect(() => {
+    if (show === true) {
+      animationStore.menu.show(menuRef.current)
+    }
+    if (show === false) {
+      animationStore.menu.hide(menuRef.current)
+    }
+  }, [show])
   //////////////////////////////////////////////////
   //MOBILE SETUP//
   if (appContext!.width <= config.breakpoints.tablet) {
@@ -90,6 +102,7 @@ const Menu = () => {
         id="menu-mob"
         className={menuMobileClassList}
         style={{ backgroundColor: background, background: background }}
+        ref={menuRef}
       >
         <Link className={logoWrapperClass} to={config.routes.mainPage.path}>
           <SmallLogo scale={logoScale} className={smallLogoClass} />
@@ -120,6 +133,7 @@ const Menu = () => {
         id="menu-pc"
         className={menuPcClassList}
         style={{ backgroundColor: background, background: background }}
+        ref={menuRef}
       >
         <Link
           className={logoWrapperClass}
@@ -197,7 +211,7 @@ const MenuOffer = (props: MenuOffer) => {
       {menuItems}
       <Link to={config.routes.login.path} className={menuItemsClass + ' loginButton'}>
         <LoginButton />
-        <span className="tooltip">Účet</span>
+        <span className="tooltip">{text.menuTooltip.cz}</span>
       </Link>
     </div>
   );
@@ -218,7 +232,7 @@ const MenuLayer = (props: MenuLayer) => {
       appContext?.fn.preloadMenuImg(250);
     }
     if (props.show === false) { animationStore.menu.layer.hide(menuLayer.current) }
-  }, [props.show]);
+  }, [appContext?.fn, props.show]);
   /////////////////////////////////////////
   //FUNCTIONS//
   const fetchPages = async () => {
