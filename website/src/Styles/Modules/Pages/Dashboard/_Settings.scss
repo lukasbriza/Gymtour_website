@@ -2,127 +2,75 @@
   background: $dashboardColor;
   color: $mainColor;
   overflow: auto;
+  padding-top: 60px;
+
+  .settingsText {
+    max-width: 800px;
+    padding: 0px 10%;
+    text-align: center;
+  }
 
   .headerWrapper {
-    width: min-content;
-    white-space: nowrap;
+    width: 100%;
+    height: 60px;
+    background: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 
-    h1 {
-      margin: 0px;
-      line-height: 38px;
-    }
-    #settingsUnderliner {
-      margin: 0px;
+    * {
       position: relative;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: default;
     }
   }
-  .settingsText {
-  }
 
-  .formDivider {
+  .inputWrapper {
+    width: 300px;
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 3px;
-    background: black;
-    border-radius: 80%;
-    margin: 25px 0px;
-    max-width: 525px;
+    margin-bottom: 10px;
+
+    input {
+      width: inherit;
+      height: 50px;
+      padding-left: 10px;
+      background-color: rgb(255, 255, 255);
+      color: black;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
   }
-  .dataChangeRequestWrapper {
-    form {
-      margin-bottom: 15px;
-      h4 {
-        font-size: 16px;
-      }
-      .inputWrapper {
-        max-width: 300px;
-        input {
-          width: 100% !important;
-        }
-      }
 
-      .settingsFormButton:hover {
-        background: black;
-      }
+  .settingsForm {
+    max-width: 800px;
 
-      .settingsFormButton:disabled {
-        background: grey;
-      }
-
-      .settingsFormButton:disabled:hover {
-        background: grey;
-      }
-
-      .settingsFormButton {
-        width: 120px;
-        color: white;
-        background-color: #292727;
-        font-weight: 600;
-        font-size: 17px;
-        text-transform: uppercase;
-        text-align: center;
-        padding: 15px 0px;
-        transition-property: background-color;
-        transition-duration: 0.2s;
-        transition-timing-function: ease-out;
-        overflow: hidden;
-        margin-top: 10px;
-      }
+    p {
+      padding-bottom: 5px;
     }
-    #changeNameForm {
-      .inputWrapper {
-        .changeNameInput {
-          height: 50px;
-          width: inherit;
-          padding-left: 10px;
-          background-color: rgba(76, 76, 76, 0.274);
-          color: black;
-          border: 1px solid black;
-          border-radius: 5px;
-        }
-      }
-    }
-    #changePasswordForm {
-      .inputWrapper {
-        .newPasswordInput {
-          height: 50px;
-          width: inherit;
-          padding-left: 10px;
-          background-color: rgba(76, 76, 76, 0.274);
-          color: black;
-          border: 1px solid black;
-          border-radius: 5px;
-        }
-        .oldPasswordInput {
-          height: 50px;
-          width: inherit;
-          padding-left: 10px;
-          background-color: rgba(76, 76, 76, 0.274);
-          color: black;
-          border: 1px solid black;
-          border-radius: 5px;
-        }
-      }
-    }
-    #changeEmailForm {
-      .inputWrapper {
-        .changeEmailInput {
-          height: 50px;
-          width: inherit;
-          padding-left: 10px;
-          background-color: rgba(76, 76, 76, 0.274);
-          color: black;
-          border: 1px solid black;
-          border-radius: 5px;
-        }
+  }
+  .settingsForm:last-of-type {
+    padding-bottom: 25px;
+  }
+
+  #changePasswordForm {
+    @include mq($from: 1200px) {
+      .buttonWrapper {
+        flex-basis: 100%;
       }
     }
   }
-}
 
-.settingsForm {
+  .settingsFormButton {
+    margin-top: 0px;
+    background-color: #292727;
+    width: min-content;
+    padding: 15px 0px;
+    min-width: 120px;
+  }
+  .settingsFormButton:hover {
+    background-color: black;
+  }
 }

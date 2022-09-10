@@ -84,12 +84,7 @@ const text = {
       },
     },
     Filter: {
-      headers: [
-        { cz: "Regiony" },
-        { cz: "Vybavení" },
-        { cz: "Hlavní" },
-        { cz: "Ostatní" },
-      ],
+      headers: [{ cz: "Regiony" }, { cz: "Vybavení" }, { cz: "Hlavní" }, { cz: "Ostatní" }],
     },
   },
   contentPage: {
@@ -110,12 +105,7 @@ const text = {
       },
     },
     Filter: {
-      headers: [
-        { cz: "Regiony" },
-        { cz: "Ostatní" },
-        { cz: "Pohlaví" },
-        { cz: "Specializace" },
-      ],
+      headers: [{ cz: "Regiony" }, { cz: "Ostatní" }, { cz: "Pohlaví" }, { cz: "Specializace" }],
     },
   },
   login: {
@@ -211,10 +201,13 @@ const text = {
         cz: "Změna osobních údajů",
       },
       text: {
-        cz: "Po každé změně údajů Vám bude zaslán informační email. V změny emailové adresy, nezapomeňte změnu adresy potvrdit kliknutím na odkaz ve zprávě zaslané na Váš starý email.",
+        cz: "Po každé změně údajů Vám bude zaslán informační email. U změny emailové adresy, nezapomeňte změnu adresy potvrdit kliknutím na odkaz ve zprávě zaslané na Váš starý email.",
       },
       form: {
         header1: {
+          cz: "Změna přihlašovacího jména",
+        },
+        p1: {
           cz: "Nové uživatelské jméno:",
         },
         input1: {
@@ -224,14 +217,15 @@ const text = {
           },
         },
         button1: { cz: "Změnit" },
-        header2: { cz: "Staré heslo:" },
+        header2: { cz: "Změna hesla" },
+        p2: { cz: "Staré heslo:" },
         input2: {
           placeholder: { cz: "Staré heslo" },
           errorMessage: {
             cz: "Minimální délka hesla je 9 znaků, nebo používáte nepovolené znaky.",
           },
         },
-        header3: { cz: "Nové heslo:" },
+        p3: { cz: "Nové heslo:" },
         input3: {
           placeholder: {
             cz: "Nové heslo",
@@ -241,7 +235,8 @@ const text = {
           },
         },
         button2: { cz: "Změnit" },
-        header4: { cz: "Nový email:" },
+        header3: { cz: "Změna emailové adresy" },
+        p4: { cz: "Nový email:" },
         input4: {
           placeholder: { cz: "Nový email" },
           errorMessage: { cz: "Nespávný tvar emailové adresy." },
@@ -273,6 +268,80 @@ const text = {
       },
       section8: {
         text: { cz: "GDPR souhlas přidán:" },
+      },
+    },
+    AddItem: {
+      FitnessForm: {
+        header1: { cz: "Obecné informace" },
+        GeneralSection: {
+          p1: { cz: "Název Fitness *" },
+          placeholder1: { cz: "Název Fitness" },
+          p2: { cz: "IČO *" },
+          placeholder2: { cz: "IČO" },
+        },
+        RegionSection: {
+          header1: { cz: "Poloha" },
+          p1: { cz: "Region *" },
+          p2: { cz: "Město *" },
+        },
+        StreetSection: {
+          p1: { cz: "Ulice *" },
+          placeholder1: { cz: "Ulice" },
+          p2: { cz: "Popisné číslo *" },
+          placeholder2: { cz: "Číslo" },
+        },
+        ContactSection: {
+          header: { cz: "Kontakty" },
+          p1: { cz: "Email*" },
+          placeholder1: { cz: "Email" },
+          p2: { cz: "Telefon" },
+          placeholder2: { cz: "Telefon" },
+          p3: { cz: "Mobil" },
+          placeholder3: { cz: "Mobil" },
+          p4: { cz: "Web" },
+          placeholder4: { cz: "Web" },
+          p5: { cz: "Facebook" },
+          placeholder5: { cz: "Facebook" },
+          p6: { cz: "Twitter" },
+          placeholder6: { cz: "Twitter" },
+          p7: { cz: "Google+" },
+          placeholder7: { cz: "Google+" },
+          p8: { cz: "Instagram" },
+          placeholder8: { cz: "Instagram" },
+          p9: { cz: "Youtube" },
+          placeholder9: { cz: "Youtube" },
+        },
+        ServiceSection: {
+          gender: { cz: "Pohlaví:" },
+          service: { cz: "Vybavení:" },
+          general: { cz: "Hlavní:" },
+          others: { cz: "Ostatní:" },
+          specialization: { cz: "Specializace:" },
+          header: { cz: "Poskytované služby" },
+        },
+        WorkHoursSection: {
+          header: { cz: "Otevírací doba" },
+          from: { cz: "od:" },
+          to: { cz: "to" },
+        },
+        DescribtionSection: {
+          header: { cz: "Popis náhledu" },
+          describtionText: { cz: "Desc text" },
+        },
+      },
+      CoachForm: {
+        GeneralSection: {
+          p1: { cz: "Jméno *" },
+          placeholder1: { cz: "Jméno" },
+          p2: { cz: "Příjmení *" },
+          placeholder2: { cz: "Příjmení" },
+          p3: { cz: "Přezdívka" },
+          placeholder3: { cz: "Přezdívka" },
+        },
+        DescribtionSection: {
+          header: { cz: "Popis náhledu" },
+          describtionText: { cz: "Desc text" },
+        },
       },
     },
   },
@@ -358,10 +427,7 @@ const text = {
   errorModal: {
     button: { cz: "Zavřít" },
     headers: {
-      contentFilter: [
-        { cz: "Nepovedlo se získat záznamy" },
-        { cz: "Nepovedlo se získat data" },
-      ],
+      contentFilter: [{ cz: "Nepovedlo se získat záznamy" }, { cz: "Nepovedlo se získat data" }],
       overview: { cz: "Získání informací selhalo" },
       fitness: {
         searchItem: { cz: "Něco se pokazilo" },

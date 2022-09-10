@@ -253,6 +253,26 @@ interface getFilterData_FetchCall {
     code: string;
     towns?: { code: string; name: { cz: string; eng: string } }[];
   }[];
+  equipment: {
+    name: { cz: string; eng: string };
+    code: string;
+  }[];
+  gender: {
+    name: { cz: string; eng: string };
+    code: string;
+  }[];
+  general: {
+    name: { cz: string; eng: string };
+    code: string;
+  }[];
+  others: {
+    name: { cz: string; eng: string };
+    code: string;
+  }[];
+  specialization: {
+    name: { cz: string; eng: string };
+    code: string;
+  }[];
 }
 
 interface registerUser_FetchCall {
@@ -307,6 +327,11 @@ interface changeUserInformation_FetchCall {
   updated: boolean;
 }
 
+interface emailApprove_FetchCall {
+  approved: boolean;
+  changeMade: boolean;
+}
+
 interface userObjectType {
   _id: string;
   isAdmin: boolean;
@@ -330,5 +355,9 @@ interface changeInformation {
   type: "password" | "username" | "email";
   _id: string;
   value: string;
+  token: string;
+}
+
+interface emailApprove {
   token: string;
 }

@@ -30,8 +30,14 @@
 
 @import "../Modules/Pages/Home";
 @import "../Modules/Pages/Crossroad";
+@import "../Modules/Pages/ContentPage";
 @import "../Modules/Pages/NotFound";
 @import "../Modules//Pages/Login";
+@import "../Modules/Pages/EmailUpdate";
+@import "../Modules/Pages/Dashboard/Dashboard";
+@import "../Modules/Pages/Dashboard/Overview";
+@import "../Modules/Pages/Dashboard/Settings";
+@import "../Modules/Pages/Dashboard/AddItem";
 
 @import "../Modules/menu";
 @import "../Modules/logo";
@@ -44,6 +50,7 @@
 @import "../Modules/modal";
 @import "../Modules/loading";
 @import "../Modules/filterIcon";
-@import "../Modules/Pages/ContentPage";
 @import "../Modules/contetFilter";
 @import "../Modules/searchItem";
+@import "../Modules/errorModal";
+@import "../Modules/priceLevelSection";

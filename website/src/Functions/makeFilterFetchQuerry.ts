@@ -104,7 +104,7 @@ export { makeFilterFetchQuerry };
             "terms":{
                 "status": true
             },
-            "dataProcessinfForPropagation": {
+            "dataProcessingForPropagation": {
                 "status": true
             }
         },
@@ -148,7 +148,7 @@ export { makeFilterFetchQuerry };
             "terms":{
                 "status": true
             },
-            "dataProcessinfForPropagation": {
+            "dataProcessingForPropagation": {
                 "status": true
             }
         },

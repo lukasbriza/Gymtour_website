@@ -1,5 +1,5 @@
-import { useEffect, useState, useContext, useRef } from 'react'
-import { Link, useHistory } from "react-router-dom"
+import { useEffect, useState, useContext } from 'react'
+import { Link, useHistory, Switch, Route, useLocation } from "react-router-dom"
 import { gsap } from 'gsap'
 import { UserContext, AnimationContext } from '../App/Context'
 import { Layer } from '../Components/Layer'
@@ -7,6 +7,7 @@ import { Underliner } from '../Components/Underliner'
 import { FormStringInput } from '../Components/FormStringInput'
 import { FormModal } from '../Components/FormModal'
 import { Footer } from '../Components/Footer'
+import { Button } from '../Components/Button'
 //CONFIG//
 import { animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
@@ -38,6 +39,7 @@ const Login = () => {
     //VARIABLES//
     const loginPageClasses = classListMaker(["stretchX", "stretchVH", "relative", "Login"])
     const layerClasses = classListMaker(["stretchY", "stretchX"])
+    const loginPageWrapperClasses = classListMaker(["stretchY", "stretchX", "loginContentWrapper"])
     const loginHeaderWrapper = classListMaker(["relative", "loginHeaderWrapper"])
     const loginFormWrapperClasses = classListMaker(["loginFormWrapper", "relative"])
     const formInputClasses = classListMaker(["formInput"])
@@ -46,6 +48,7 @@ const Login = () => {
     const history = useHistory()
     const userContext = useContext(UserContext)
     const anContext = useContext(AnimationContext);
+    const location = useLocation()
 
     //////////////////////////////////////////////////
     //FUNCTIONS//
@@ -170,70 +173,213 @@ const Login = () => {
                 id="Login"
                 className={loginPageClasses}
             >
-                <img src={register} alt="RegisterBckgImg" />
+                <img src={register} alt="LoginBckgImg" />
                 <Layer className={layerClasses}>
-                    <div className={loginHeaderWrapper}>
-                        <h2>{"Přihlásit"}</h2>
-                        <Underliner width={"80%"} />
-                    </div>
-                    <div className={loginFormWrapperClasses}>
-                        <form action="#Login" id="loginForm" onSubmit={handleSubmit}>
-                            <FormStringInput
-                                className={formInputClasses}
-                                type={"text"}
-                                name={"nameInput"}
-                                formId={"loginForm"}
-                                placeholder={text.login.Form.input1.placeholder.cz}
-                                onChange={(canSubmit) => { handleChange(canSubmit) }}
-                                required={true}
-                                pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
-                                errorMessage={text.login.Form.input1.errorMessage.cz}
-                                errorStyle={errorStyle}
-                                sucessStyle={sucessStyle}
-                                minLength={1}
-                            />
-                            <FormStringInput
-                                className={formInputClasses}
-                                type={"password"}
-                                name={"passwordInput"}
-                                formId={"registerForm"}
-                                placeholder={text.login.Form.input2.placeholder.cz}
-                                onChange={(canSubmit) => { handleChange(canSubmit) }}
-                                required={true}
-                                errorMessage={text.login.Form.input2.errorMessage.cz}
-                                errorStyle={errorStyle}
-                                sucessStyle={sucessStyle}
-                                minLength={1}
-                            />
-                            <Link to="/login/forgetPassword" className={forgetPasswordClasses}>
-                                {text.login.Form.link1.cz}
-                            </Link>
-                            <Link to="/login/forgetName" className={forgetPasswordClasses}>
-                                {text.login.Form.link2.cz}
-                            </Link>
-                            <button
-                                className="registerFormButton loginFormButton"
-                                type="submit"
-                                onClick={handleSubmit}
-                            >
-                                {text.login.Form.button.cz}
-                            </button>
+                    <Switch location={location}>
+                        <Route exact path={"/login"}>
+                            <div className={loginPageWrapperClasses}>
+                                <div className={loginHeaderWrapper}>
+                                    <h2>{text.login.Form.header.cz}</h2>
+                                    <Underliner width={"80%"} />
+                                </div>
+                                <div className={loginFormWrapperClasses}>
+                                    <form action="#Login" id="loginForm" onSubmit={handleSubmit}>
+                                        <FormStringInput
+                                            className={formInputClasses}
+                                            type={"text"}
+                                            name={"nameInput"}
+                                            formId={"loginForm"}
+                                            placeholder={text.login.Form.input1.placeholder.cz}
+                                            onChange={(canSubmit) => { handleChange(canSubmit) }}
+                                            required={true}
+                                            pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
+                                            errorMessage={text.login.Form.input1.errorMessage.cz}
+                                            errorStyle={errorStyle}
+                                            sucessStyle={sucessStyle}
+                                            minLength={1}
+                                        />
+                                        <FormStringInput
+                                            className={formInputClasses}
+                                            type={"password"}
+                                            name={"passwordInput"}
+                                            formId={"registerForm"}
+                                            placeholder={text.login.Form.input2.placeholder.cz}
+                                            onChange={(canSubmit) => { handleChange(canSubmit) }}
+                                            required={true}
+                                            errorMessage={text.login.Form.input2.errorMessage.cz}
+                                            errorStyle={errorStyle}
+                                            sucessStyle={sucessStyle}
+                                            minLength={1}
+                                        />
+                                        <Link to="/login/forgetPassword" className={forgetPasswordClasses}>
+                                            {text.login.Form.link1.cz}
+                                        </Link>
+                                        <Link to="/login/forgetName" className={forgetPasswordClasses}>
+                                            {text.login.Form.link2.cz}
+                                        </Link>
+                                        <button
+                                            className="registerFormButton loginFormButton"
+                                            type="submit"
+                                            onClick={handleSubmit}
+                                        >
+                                            {text.login.Form.button.cz}
+                                        </button>
 
-                        </form>
-                    </div>
-                    <FormModal
-                        loading={modal.loading}
-                        sucess={modal.sucess}
-                        msg={modal.msg}
-                        buttonMsg={modalBtnText}
-                        callbackTiming={0}
-                        callback={() => { if (userContext?.logged === true) { redirectToDashboard() }; handleModalDefault() }}
-                        clearForm={clearForm}
-                    />
+                                    </form>
+                                </div>
+                                <FormModal
+                                    loading={modal.loading}
+                                    sucess={modal.sucess}
+                                    msg={modal.msg}
+                                    buttonMsg={modalBtnText}
+                                    callbackTiming={0}
+                                    callback={() => { if (userContext?.logged === true) { redirectToDashboard() }; handleModalDefault() }}
+                                    clearForm={clearForm}
+                                />
+                            </div>
+                        </Route>
+                        <Route path={"/login/forgetPassword"}>
+                            <ForgetPassword />
+                        </Route>
+                        <Route path={"/login/forgetName"}>
+                            <ForgetName />
+                        </Route>
+
+                    </Switch>
                 </Layer>
             </section>
             <Footer />
         </>
+    )
+}
+
+const ForgetPassword = () => {
+    //////////////////////////////////////////////////
+    //STATE//
+    //////////////////////////////////////////////////
+    //VARIBLES//
+    const forgetPasswordWrapperClasses = classListMaker(["stretchX", "stretchY", "forgetPasswordFormWrapper"])
+    const forgetPasswordFormInput = classListMaker(["formInput"])
+    //////////////////////////////////////////////////
+    //EFFECTS//
+    //////////////////////////////////////////////////
+    //FUNCTIONS//
+    const handleChange = ({ canSubmit, value, name }: { canSubmit: boolean, value: string, name: string }) => {
+
+    }
+    const handleSubmit = () => { }
+    //////////////////////////////////////////////////
+    //SETUP//
+    return (
+        <div className={forgetPasswordWrapperClasses}>
+            <form action="#Login" id="forgetPasswordForm" className="stretchX stretchY" onSubmit={handleSubmit}>
+                <div className={"forgetPasswordHeader"}>
+                    <h2>{text.login.ForgetPasswordForm.header.cz}</h2>
+                    <Underliner width={"80%"} />
+                </div>
+                <p className="forgetPasswordText">{text.login.ForgetPasswordForm.text.cz}</p>
+                <h3 className="nameHeader">{text.login.ForgetPasswordForm.inputHeader1.cz}</h3>
+                <FormStringInput
+                    className={forgetPasswordFormInput}
+                    type={"text"}
+                    name={"forgetPasswordNameInput"}
+                    formId={"forgetPasswordForm"}
+                    placeholder={text.login.ForgetPasswordForm.input1.placeholder.cz}
+                    onChange={(canSubmit) => { handleChange(canSubmit) }}
+                    required={false}
+                    pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
+                    errorMessage={text.login.ForgetPasswordForm.input1.errorMessage.cz}
+                    errorStyle={errorStyle}
+                    sucessStyle={sucessStyle}
+                    maxLength={30}
+                    minLength={5}
+                />
+                <h3 className="emailHeader">{text.login.ForgetPasswordForm.inputHeader2.cz}</h3>
+                <FormStringInput
+                    className={forgetPasswordFormInput}
+                    type={"email"}
+                    name={"forgetPasswordEmailInput"}
+                    formId={"forgetPasswordForm"}
+                    placeholder={text.login.ForgetPasswordForm.input2.placeholder.cz}
+                    onChange={(canSubmit) => { handleChange(canSubmit) }}
+                    required={true}
+                    errorMessage={text.login.ForgetPasswordForm.input2.errorMessage.cz}
+                    errorStyle={errorStyle}
+                    sucessStyle={sucessStyle}
+                />
+                <Button
+                    onClick={handleSubmit}
+                    modificationClass={"modification"}
+                    initialClass={"buttonInitial"}
+                    hoverClass={"buttonHover"}
+                    text={text.login.ForgetPasswordForm.button.cz}
+                />
+            </form>
+
+        </div>
+    )
+}
+const ForgetName = () => {
+    //////////////////////////////////////////////////
+    //STATE//
+    //////////////////////////////////////////////////
+    //VARIBLES//
+    const forgetNameWrapperClasses = classListMaker(["forgetNameWrapper", "stretchX", "stretchY"])
+    const forgetNameFormInput = classListMaker(["formInput"])
+    //////////////////////////////////////////////////
+    //EFFECTS//
+    //////////////////////////////////////////////////
+    //FUNCTIONS//
+    const handleChange = ({ canSubmit, value, name }: { canSubmit: boolean, value: string, name: string }) => {
+
+    }
+    const handleSubmit = () => { }
+    //////////////////////////////////////////////////
+    //SETUP//
+    return (
+        <div className={forgetNameWrapperClasses}>
+            <form action="#Login" id="forgetNameForm" className="stretchX stretchY" onSubmit={handleSubmit}>
+                <div className={"forgetNameHeader"}>
+                    <h2>{text.login.ForgetNameForm.header.cz}</h2>
+                    <Underliner width={"80%"} />
+                </div>
+                <p className="forgetNameText">{text.login.ForgetNameForm.text.cz}</p>
+                <h3 className="emailHeader">{text.login.ForgetNameForm.inputHeader1.cz}</h3>
+                <FormStringInput
+                    className={forgetNameFormInput}
+                    type={"email"}
+                    name={"forgetNameEmailInput"}
+                    formId={"forgetNameForm"}
+                    placeholder={text.login.ForgetNameForm.input1.placeholder.cz}
+                    onChange={(canSubmit) => { handleChange(canSubmit) }}
+                    required={true}
+                    errorMessage={text.login.ForgetNameForm.input1.errorMessage.cz}
+                    errorStyle={errorStyle}
+                    sucessStyle={sucessStyle}
+                />
+                <h3 className="passwordHeader">{text.login.ForgetNameForm.inputHeader2.cz}</h3>
+                <FormStringInput
+                    className={forgetNameFormInput}
+                    type={"password"}
+                    name={"forgetNamePasswordInput"}
+                    formId={"forgetNameForm"}
+                    placeholder={text.login.ForgetNameForm.input2.placeholder.cz}
+                    onChange={(canSubmit) => { handleChange(canSubmit) }}
+                    required={true}
+                    errorMessage={text.login.ForgetNameForm.input2.errorMessage.cz}
+                    errorStyle={errorStyle}
+                    sucessStyle={sucessStyle}
+                    minLength={9}
+                />
+                <Button
+                    onClick={handleSubmit}
+                    modificationClass={"modification"}
+                    initialClass={"buttonInitial"}
+                    hoverClass={"buttonHover"}
+                    text={text.login.ForgetNameForm.button.cz}
+                />
+            </form>
+        </div>
     )
 }
 

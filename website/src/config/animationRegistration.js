@@ -159,7 +159,7 @@ gsap.registerEffect({
 gsap.registerEffect({
   name: "fadeOffto",
   effect: (targets, config) => {
-    gsap
+    const effect = gsap
       .to(targets, {
         opacity: 0,
         delay: config.delay,
@@ -174,9 +174,38 @@ gsap.registerEffect({
           ease: "none",
         });
       });
+    return effect;
   },
   defaults: {
     displayAfter: "none",
+    stagger: 0,
+    delay: 0,
+    duration: 0.2,
+  },
+  extendTimeline: true,
+});
+gsap.registerEffect({
+  name: "fadeInto",
+  effect: (targets, config) => {
+    const effect = gsap
+      .to(targets, {
+        opacity: 1,
+        delay: config.delay,
+        stagger: config.stagger,
+        duration: config.duration,
+        ease: Power3.easeIn,
+      })
+      .then(() => {
+        gsap.to(targets, {
+          display: config.displayAfter,
+          duration: 0.02,
+          ease: "none",
+        });
+      });
+    return effect;
+  },
+  defaults: {
+    displayAfter: "grid",
     stagger: 0,
     delay: 0,
     duration: 0.2,

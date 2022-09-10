@@ -3,17 +3,55 @@
   @include minHeightWidth;
 
   .layer {
-    display: grid;
-    grid-template-rows: 1fr min-content min-content min-content 1fr;
-    grid-template-areas:
-      "."
-      "header"
-      "paragraph"
-      "form"
-      ".";
+    .loginContentWrapper {
+      display: grid;
+      justify-items: center;
+      grid-template-rows: 1fr min-content min-content min-content 1fr;
+      grid-template-areas:
+        "."
+        "header"
+        "paragraph"
+        "form"
+        ".";
+    }
+    .forgetPasswordFormWrapper {
+      #forgetPasswordForm {
+        display: grid;
+        justify-items: center;
+        grid-template-rows: 1fr min-content min-content min-content min-content min-content min-content min-content 1fr;
+        grid-template-areas:
+          "."
+          "header"
+          "forgetPasswordText"
+          "nameHeader"
+          "nameInput"
+          "emailHeader"
+          "emailInput"
+          "button"
+          ".";
+      }
+    }
+    .forgetNameWrapper {
+      #forgetNameForm {
+        display: grid;
+        justify-items: center;
+        grid-template-rows: 1fr min-content min-content min-content min-content min-content min-content min-content 1fr;
+        grid-template-areas:
+          "."
+          "header"
+          "forgetNameText"
+          "emailHeader"
+          "emailInput"
+          "passwordHeader"
+          "passwordInput"
+          "button"
+          ".";
+      }
+    }
   }
 }
 
+//LOGIN FORM
 .loginHeaderWrapper {
   h2 {
     font-size: clamp(18px, 7vw, 40px);
@@ -37,7 +75,7 @@
   grid-area: form;
 
   max-width: 600px;
-  min-width: 350px;
+  min-width: 320px;
 
   .inputWrapper {
     padding-left: 0px;
@@ -59,5 +97,96 @@
     width: 200px;
     height: 60px;
     padding: 0px;
+  }
+}
+
+//FORGET PASSWORD FORM
+#forgetPasswordForm {
+  width: 70%;
+  max-width: 600px;
+  min-width: 320px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .forgetPasswordHeader {
+    grid-area: header;
+    @include mq($until: 500px) {
+      font-size: 18px;
+    }
+  }
+
+  .forgetPasswordText {
+    text-align: center;
+    grid-area: forgetPasswordText;
+
+    @include mq($until: 500px) {
+      font-size: 15px;
+    }
+  }
+  .nameHeader {
+    justify-self: left;
+    grid-area: nameHeader;
+    @include mq($until: 500px) {
+      font-size: 16px !important;
+    }
+  }
+  .inputWrapper:nth-of-type(2) {
+    grid-area: nameInput;
+  }
+
+  .emailHeader {
+    justify-self: left;
+    grid-area: emailHeader;
+    @include mq($until: 500px) {
+      font-size: 16px !important;
+    }
+  }
+  .inputWrapper:nth-of-type(3) {
+    grid-area: emailInput;
+  }
+  .pageButton {
+    grid-area: button;
+  }
+}
+
+//FORGET NAME FORM
+#forgetNameForm {
+  width: 70%;
+  max-width: 600px;
+  min-width: 320px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .forgetNameHeader {
+    grid-area: header;
+  }
+  .forgetNameText {
+    grid-area: forgetNameText;
+    text-align: center;
+  }
+  .emailHeader {
+    justify-self: left;
+    grid-area: emailHeader;
+    @include mq($until: 500px) {
+      font-size: 16px !important;
+    }
+  }
+  .inputWrapper:nth-of-type(2) {
+    grid-area: emailInput;
+  }
+  .passwordHeader {
+    justify-self: left;
+    grid-area: passwordHeader;
+    @include mq($until: 500px) {
+      font-size: 16px !important;
+    }
+  }
+  .inputWrapper:nth-of-type(3) {
+    grid-area: passwordInput;
+  }
+  .pageButton {
+    grid-area: button;
   }
 }

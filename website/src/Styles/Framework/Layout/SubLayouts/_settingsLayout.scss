@@ -1,103 +1,33 @@
 .settings {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  .headerWrapper {
-    margin-top: 90px;
-    margin-bottom: 15px;
-  }
   .settingsText {
-    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
-  .dataChangeRequestWrapper {
-    form {
-      padding: 0 30px;
-      max-width: 750px;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
+  .settingsForm {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-      h4 {
-        margin-bottom: 10px;
-        margin-left: 10%;
+  #changePasswordForm {
+    @include mq($from: 1200px) {
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+
+      .buttonWrapper {
+        button {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+        }
       }
-      .inputWrapper {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      .settingsFormButton {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-    }
-  }
-}
-
-#changeNameForm {
-  @include mq($from: 550px) {
-    h4 {
-      margin-left: 0px;
-    }
-    .inputWrapper {
-      left: unset;
-      transform: unset;
-      padding-left: 0px;
-    }
-  }
-}
-#changePasswordForm {
-  @include mq($from: 550px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: min-content min-content min-content;
-    grid-template-areas:
-      "header1 header2"
-      "input1 input2"
-      "button button";
-
-    h4 {
-      margin-left: 0px;
-    }
-    #oldPasswordHeader {
-      grid-area: header1;
-    }
-    #newPasswordHeader {
-      grid-area: header2;
-    }
-    .newPasswordInput {
-      grid-area: input2 !important;
-    }
-    .oldPasswordInput {
-      grid-area: input1 !important;
-    }
-    .inputWrapper {
-      left: unset;
-      transform: unset;
-      width: 90%;
-      padding-left: 0px;
-    }
-    .changePasswordFormButton {
-      grid-area: button;
-    }
-  }
-}
-#changeEmailForm {
-  padding-bottom: 50px;
-  .inputWrapper {
-  }
-
-  @include mq($from: 550px) {
-    h4 {
-      margin-left: 0px;
-    }
-    .inputWrapper {
-      left: unset;
-      transform: unset;
-      padding-left: 0px;
     }
   }
 }

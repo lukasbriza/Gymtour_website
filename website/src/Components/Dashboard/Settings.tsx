@@ -1,6 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
 import { FormStringInput } from '../FormStringInput'
-import { Underliner } from '../Underliner'
 import { FormModal } from '../FormModal'
 import { saveToken, getToken } from '../../Functions/loginLogic'
 import {
@@ -298,105 +297,121 @@ const Settings = () => {
     return (
         <>
             <section className={settingsClasses}>
-                <div className="headerWrapper centerX relative">
-                    <h1>{text.dahboard.Settings.header.cz}</h1>
-                    <Underliner width={"90%"} id={"settingsUnderliner"} color={"black"} />
+                <div className="headerWrapper">
+                    <h2>{text.dahboard.Settings.header.cz}</h2>
                 </div>
                 <p className="settingsText">{text.dahboard.Settings.text.cz}</p>
                 <section className="dataChangeRequestWrapper">
-
+                    <div className="headerWrapper">
+                        <h2>{text.dahboard.Settings.form.header1.cz}</h2>
+                    </div>
                     <form action="#changeNameForm" id="changeNameForm" className="settingsForm" onSubmit={() => { console.log("submit") }}>
-                        <h4>{text.dahboard.Settings.form.header1.cz}</h4>
-                        <div className="formDivider"></div>
-                        <FormStringInput
-                            className={nameInputClasses}
-                            type={"text"}
-                            name={"nameInput"}
-                            formId={"changeNameForm"}
-                            placeholder={text.dahboard.Settings.form.input1.placeholder.cz}
-                            onChange={(canSubmit) => { handleChange(canSubmit) }}
-                            required={false}
-                            pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
-                            errorMessage={text.dahboard.Settings.form.input1.errorMessage.cz}
-                            errorStyle={errorStyle}
-                            sucessStyle={sucessStyle}
-                            maxLength={30}
-                            minLength={5}
-                        />
-                        <button
-                            className="changeNameFormButton settingsFormButton"
-                            type="submit"
-                            onClick={nameSubmit}
-                            disabled={usernameDisabledButton}
-                        >
-                            {text.dahboard.Settings.form.button1.cz}
-                        </button>
+                        <div className="changeNameInputWrapper">
+                            <p>{text.dahboard.Settings.form.p1.cz}</p>
+                            <FormStringInput
+                                className={nameInputClasses}
+                                type={"text"}
+                                name={"nameInput"}
+                                formId={"changeNameForm"}
+                                placeholder={text.dahboard.Settings.form.input1.placeholder.cz}
+                                onChange={(canSubmit) => { handleChange(canSubmit) }}
+                                required={false}
+                                pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
+                                errorMessage={text.dahboard.Settings.form.input1.errorMessage.cz}
+                                errorStyle={errorStyle}
+                                sucessStyle={sucessStyle}
+                                maxLength={30}
+                                minLength={5}
+                            />
+                        </div>
+                        <div className="buttonWrapper">
+                            <button
+                                className="changeNameFormButton settingsFormButton"
+                                type="submit"
+                                onClick={nameSubmit}
+                                disabled={usernameDisabledButton}
+                            >
+                                {text.dahboard.Settings.form.button1.cz}
+                            </button>
+                        </div>
                     </form>
 
+                    <div className="headerWrapper">
+                        <h2>{text.dahboard.Settings.form.header2.cz}</h2>
+                    </div>
                     <form action="#changePasswordForm" id="changePasswordForm" className="settingsForm" onSubmit={() => { console.log("submit") }}>
-                        <h4 id="oldPasswordHeader">{text.dahboard.Settings.form.header2.cz}</h4>
-                        <h4 id="newPasswordHeader">{text.dahboard.Settings.form.header3.cz}</h4>
-                        <div className="formDivider changePasswordDivider"></div>
-                        <div className="formDivider changePasswordDivider-mobile"></div>
-                        <FormStringInput
-                            className={oldPasswordInputClasses}
-                            type={"password"}
-                            name={"oldPasswordInput"}
-                            formId={"changePasswordForm"}
-                            placeholder={text.dahboard.Settings.form.input2.placeholder.cz}
-                            onChange={(canSubmit) => { handleChange(canSubmit) }}
-                            required={false}
-                            errorMessage={text.dahboard.Settings.form.input2.errorMessage.cz}
-                            errorStyle={errorStyle}
-                            sucessStyle={sucessStyle}
-                            minLength={9}
-                        />
-                        <FormStringInput
-                            className={newPasswordInputClasses}
-                            type={"password"}
-                            name={"newPasswordInput"}
-                            formId={"changePasswordForm"}
-                            placeholder={text.dahboard.Settings.form.input3.placeholder.cz}
-                            onChange={(canSubmit) => { handleChange(canSubmit); }}
-                            required={false}
-                            errorMessage={text.dahboard.Settings.form.input3.errorMessage.cz}
-                            errorStyle={errorStyle}
-                            sucessStyle={sucessStyle}
-                            minLength={9}
-                        />
-                        <button
-                            className="changePasswordFormButton settingsFormButton"
-                            type="submit"
-                            onClick={passwordSubmit}
-                            disabled={passwordDisabledButton}
-                        >
-                            {text.dahboard.Settings.form.button2.cz}
-                        </button>
+                        <div className="changePasswordInputWrapper">
+                            <p>{text.dahboard.Settings.form.p2.cz}</p>
+                            <FormStringInput
+                                className={oldPasswordInputClasses}
+                                type={"password"}
+                                name={"oldPasswordInput"}
+                                formId={"changePasswordForm"}
+                                placeholder={text.dahboard.Settings.form.input2.placeholder.cz}
+                                onChange={(canSubmit) => { handleChange(canSubmit) }}
+                                required={false}
+                                errorMessage={text.dahboard.Settings.form.input2.errorMessage.cz}
+                                errorStyle={errorStyle}
+                                sucessStyle={sucessStyle}
+                                minLength={9}
+                            />
+                        </div>
+                        <div className="changePasswordInputWrapper">
+                            <p>{text.dahboard.Settings.form.p3.cz}</p>
+                            <FormStringInput
+                                className={newPasswordInputClasses}
+                                type={"password"}
+                                name={"newPasswordInput"}
+                                formId={"changePasswordForm"}
+                                placeholder={text.dahboard.Settings.form.input3.placeholder.cz}
+                                onChange={(canSubmit) => { handleChange(canSubmit); }}
+                                required={false}
+                                errorMessage={text.dahboard.Settings.form.input3.errorMessage.cz}
+                                errorStyle={errorStyle}
+                                sucessStyle={sucessStyle}
+                                minLength={9}
+                            />
+                        </div>
+                        <div className="buttonWrapper">
+                            <button
+                                className="changePasswordFormButton settingsFormButton"
+                                type="submit"
+                                onClick={passwordSubmit}
+                                disabled={passwordDisabledButton}
+                            >
+                                {text.dahboard.Settings.form.button2.cz}
+                            </button>
+                        </div>
                     </form>
-
+                    <div className="headerWrapper">
+                        <h2>{text.dahboard.Settings.form.header3.cz}</h2>
+                    </div>
                     <form action="#changeEmailForm" id="changeEmailForm" className="settingsForm">
-                        <h4>Nový email:</h4>
-                        <div className="formDivider"></div>
-                        <FormStringInput
-                            className={emailInputClasses}
-                            type={"email"}
-                            name={"emailInput"}
-                            formId={"changeEmailForm"}
-                            placeholder={text.dahboard.Settings.form.input4.placeholder.cz}
-                            onChange={(canSubmit) => { handleChange(canSubmit) }}
-                            required={true}
-                            errorMessage={text.dahboard.Settings.form.input4.errorMessage.cz}
-                            errorStyle={errorStyle}
-                            sucessStyle={sucessStyle}
-                        />
-                        <button
-                            className="changeEmailFormButton settingsFormButton"
-                            type="submit"
-                            onClick={emailSubmit}
-                            disabled={emailDisabledButton}
-                        >
-                            {text.dahboard.Settings.form.button3.cz}
-                        </button>
+                        <div className="changeEmailInputWrapper">
+                            <p>{text.dahboard.Settings.form.p4.cz}</p>
+                            <FormStringInput
+                                className={emailInputClasses}
+                                type={"email"}
+                                name={"emailInput"}
+                                formId={"changeEmailForm"}
+                                placeholder={text.dahboard.Settings.form.input4.placeholder.cz}
+                                onChange={(canSubmit) => { handleChange(canSubmit) }}
+                                required={true}
+                                errorMessage={text.dahboard.Settings.form.input4.errorMessage.cz}
+                                errorStyle={errorStyle}
+                                sucessStyle={sucessStyle}
+                            />
+                        </div>
+                        <div className="buttonWrapper">
+                            <button
+                                className="changeEmailFormButton settingsFormButton"
+                                type="submit"
+                                onClick={emailSubmit}
+                                disabled={emailDisabledButton}
+                            >
+                                {text.dahboard.Settings.form.button3.cz}
+                            </button>
+                        </div>
                     </form>
                 </section>
             </section>

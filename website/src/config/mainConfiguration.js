@@ -22,6 +22,7 @@ const DataProcessing = ReactLazyPreload(() =>
 
 const Login = ReactLazyPreload(() => import("../Pages/Login"));
 const Dashboard = ReactLazyPreload(() => import("../Pages/Dashboard"));
+const EmailUpdate = ReactLazyPreload(() => import("../Pages/EmailUpdate"));
 ///////////////////////////////////////////////////////////////////
 
 const config = {
@@ -51,6 +52,11 @@ const config = {
       name: "Zpracování údajů",
       path: "/dataprocessing",
       component: DataProcessing,
+    },
+    emailUpdate: {
+      name: "Email update",
+      path: "/emailUpdate",
+      component: EmailUpdate,
     },
     notFound: { name: "404", path: "*", component: NotFound },
   },
@@ -155,6 +161,16 @@ const animationStore = {
           duration: 0.5,
         }).layerOff(layer, { delay: 1 });
       },
+    },
+    show: (target) => {
+      let tl = gsap.timeline();
+      tl.fadeInto(target, { displayAfter: "grid" });
+      return tl;
+    },
+    hide: (target) => {
+      let tl = gsap.timeline();
+      tl.fadeOffto(target, { displayAfter: "none" });
+      return tl;
     },
   },
   home: {
@@ -754,6 +770,18 @@ const animationStore = {
             "start"
           );
         return tl;
+      },
+    },
+  },
+  emailUpdate: {
+    content: {
+      show: (target) => {
+        const tl = gsap.timeline();
+        tl.fadeIn(target, {
+          displayInitial: "none",
+          displayAfter: "flex",
+          stagger: 0,
+        });
       },
     },
   },

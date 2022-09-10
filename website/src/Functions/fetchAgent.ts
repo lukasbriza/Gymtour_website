@@ -12,13 +12,13 @@ class fetchAgent {
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-filter/get";
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj<getFilterData_FetchCall> =
+    const fetchErrorObj: feResponseObj<getFilterData_FetchCall[]> =
       getFrontEndFetchErrObj({
         trace: "FetchAgent/getFilterData",
       });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall<getFilterData_FetchCall>(adress, options, fetchErrorObj);
+    return fetchCall<getFilterData_FetchCall[]>(adress, options, fetchErrorObj);
   }
   //////////////////////////////////////////////////////////////////////////
   //USER ROUTEST//
@@ -106,6 +106,19 @@ class fetchAgent {
       options,
       fetchErrorObj
     );
+  }
+  emailApprove(data: emailApprove) {
+    console.log("emailApprove");
+    ///////////////////////////////////////////////////////
+    const adress: string = fetchAdress + `/emailUpdate/call`;
+    const options = new getOptionObject().setMethod("POST").addBody(data).get();
+    const fetchErrorObj: feResponseObj<emailApprove_FetchCall> =
+      getFrontEndFetchErrObj({
+        trace: "FetchAgent/emailApprove",
+      });
+    ///////////////////////////////////////////////////////
+    //FETCH CALL//
+    return fetchCall<emailApprove_FetchCall>(adress, options, fetchErrorObj);
   }
 
   //////////////////////////////////////////////////////////////////////////
