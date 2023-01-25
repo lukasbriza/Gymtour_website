@@ -1,13 +1,28 @@
-import React from "react"
+import { useAppContext } from "@hooks"
+import { Props } from "@lukasbriza/lbui-lib"
+import React, { useEffect, useState } from "react"
+import { BigLogoProps } from "./_types"
 
-const BigLogo = React.forwardRef((props: BigLogo, ref: any) => {
+export const BigLogo = React.forwardRef<SVGPathElement, BigLogoProps & Props<SVGSVGElement>>((props, ref) => {
+    const [logoScale, setLogoScale] = useState<number>(0.7)
+    const { breakPoint } = useAppContext()
+
+    useEffect(() => {
+        switch (breakPoint) {
+            case "fromMobile":
+                setLogoScale(0.5)
+                break;
+            default:
+                setLogoScale(0.7)
+        }
+    }, [breakPoint])
 
     return (
         <svg
             {...props}
             viewBox="0 0 300 332"
-            width={300 * props.scale}
-            height={332 * props.scale}
+            width={300 * logoScale}
+            height={332 * logoScale}
             xmlns="http://www.w3.org/2000/svg"
         >
 
@@ -25,5 +40,3 @@ const BigLogo = React.forwardRef((props: BigLogo, ref: any) => {
         </svg>
     )
 })
-
-export { BigLogo }

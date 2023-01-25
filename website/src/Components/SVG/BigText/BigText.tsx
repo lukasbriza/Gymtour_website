@@ -1,11 +1,27 @@
-import React from 'react'
-const BigText = React.forwardRef((props: BigText, ref: any): any => {
+import React, { useEffect, useState } from 'react'
+import { BigTextProps } from './_types';
+import { useAppContext } from '@hooks';
+
+const BigText = React.forwardRef<BigTextProps, any>((props, ref: any) => {
+    const [textScale, setTextScale] = useState<number>(0.5)
+    const { breakPoint } = useAppContext()
     const { gRef, yRef, mRef, tRef, oRef, uRef, rRef } = ref.current;
+
+    useEffect(() => {
+        switch (breakPoint) {
+            case "fromMobile":
+                setTextScale(0.3)
+                break;
+            default:
+                setTextScale(0.5)
+        }
+    }, [breakPoint])
+
     return (
         <svg
             {...props}
-            width={704 * props.scale}
-            height={105 * props.scale}
+            width={704 * textScale}
+            height={105 * textScale}
             viewBox="0 0 704 105"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

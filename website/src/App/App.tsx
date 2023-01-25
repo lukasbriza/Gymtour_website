@@ -1,30 +1,28 @@
-//CONTEXT//
-import { AnimationContextProvider, AppContextProvider, UserContextProvider } from './Context'
-//ANIMATIONS//
 import '../config/animationRegistration.js';
-//ROUTER//
-import { Router } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+
+import { BrowserRouter } from 'react-router-dom'
 import { PageRoutes } from './PageRoutes'
-//BROWSER HISTORY//
-const history = createBrowserHistory()
+import { AppContextProvider } from './context/AppContext.js';
+import { AnimationContextProvider } from './context/Animationcontext.js';
+import { UserContextProvider } from './context/UserContext.js';
+import { FC } from 'react';
+import { Layout } from './Layout.js';
 
 
-function App() {
 
+
+export const App: FC = () => {
   return (
     <AppContextProvider>
       <AnimationContextProvider>
         <UserContextProvider>
-          <div id="App">
-            <Router history={history}>
+          <BrowserRouter>
+            <Layout>
               <PageRoutes />
-            </Router>
-          </div>
+            </Layout>
+          </BrowserRouter>
         </UserContextProvider>
       </AnimationContextProvider>
     </AppContextProvider>
   );
 }
-
-export default App;

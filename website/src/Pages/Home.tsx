@@ -1,52 +1,27 @@
-import { useEffect, useContext, useState, useRef, createRef } from 'react'
+import { useEffect, useState, useRef, FC } from 'react'
 import { Link } from 'react-router-dom'
-import { BigLogo } from '../Components/SVG/BigLogo'
-import { BigText } from '../Components/SVG/BigText'
-
+import { BigLogo } from "@components"
+import { BigText } from '../Components/SVG/BigText/BigText'
+import clsx from 'clsx'
 import main from '../Images/main.webp'
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
-//CONTEXT//
-import { AnimationContext, AppContext } from "../App/Context"
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { useAnimationContext } from '@hooks'
+import { bigLogoAnimation, showHeader, smallLogoShow } from '@animations'
+import { routes } from '@config'
 
-///////////////////////////////////////////////////////////////////////////////////////
 const Home = () => {
-    const appContext = useContext(AppContext)
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const buttonClasses = classListMaker(["link", "absolute", "centerX"])
-    const homeClasses = classListMaker(["stretchVH", "minHeightWidth"])
-    //////////////////////////////////////////////////
-    //FUNCTION//
-    const fetchPages = async () => {
-        config.routes.crossroad.component.preload()
-    }
-    //////////////////////////////////////////////////
-    //PRELOAD - FETCH//
-    useEffect(() => {
-        fetchPages().then(() => {
-            console.log('Crossroad preloaded...')
-        })
-        appContext?.fn.preloadCrossroadImg(1000)
-    }, [])
-    //////////////////////////////////////////////////
-    //SETUP//
     return (
         <div
             id="Home"
-            className={config.basePageClassList + " " + homeClasses}
+            className={clsx(["relative", "stretch", "minorColor2", "stretchVH", "minHeightWidth"])}
         >
             <img src={main} alt="homepageImage" />
             <PageHeader />
             <MainSection />
             <Link
-                to={config.routes.crossroad.path}
+                to={routes.crossroad.path}
                 id="homeButton"
-                className={buttonClasses}
-                onMouseEnter={() => { config.routes.crossroad.component.preload() }}
+                className={clsx(["link", "absolute", "centerX"])}
             >
                 {text.home.Button.cz}
             </Link>
@@ -54,12 +29,11 @@ const Home = () => {
         </div>
     )
 }
-///////////////////////////////////////////////////////////////////////////////////////
-const PageHeader = () => {
-    const PageHeaderClassList = classListMaker(["stretchX", "relative", "minorColor1Text"])
+
+const PageHeader: FC = () => {
     return (
         <div
-            className={PageHeaderClassList}
+            className={clsx(["stretchX", "relative", "minorColor1Text"])}
             id="pageHeader"
         >
             {text.home.PageHeader.cz}
@@ -67,23 +41,10 @@ const PageHeader = () => {
     )
 }
 
-const MainSection = () => {
-    //////////////////////////////////////////////////
-    //STATE//
-    const [showLogo, setShowLogo] = useState<boolean>(true)
-    const [logoScale, setLogoScale] = useState<number>(0.7)
-    const [textScale, setTextScale] = useState<number>(0.5)
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const anContext = useContext(AnimationContext);
-    const appContext = useContext(AppContext)
-
-    const bigLogoWrapperClass = classListMaker(["relative", "stretchX"])
-    const bigLogoClasses = classListMaker(["relative"])
-    const bigTextClasses = classListMaker(["relative"])
-    const headerClasses = classListMaker(["relative", "minorColor1Text"])
-    const homeHeaderClasses = classListMaker(["homeHeader"])
-    const homeHeaderWrapperClasses = classListMaker(["headerWrapper"])
+const MainSection: FC = () => {
+    const [showLogo, setShowLogo] = useState<boolean>(false)
+    const { bigLogoPlayed, smallLogoPlayed, fn } = useAnimationContext()
+    const { setBigLogoPlayed, setSmallLogoPlayed } = fn
 
     const bigLogoWrapper = useRef<HTMLDivElement>(null)
     const pathRef = useRef<SVGPathElement>(null)
@@ -98,16 +59,20 @@ const MainSection = () => {
 
     const header = useRef<HTMLDivElement>(null)
 
-    //////////////////////////////////////////////////
-    //ANIMATIONS//
-    //////////////////////////////////////////////////
-    //BIG LOGO ANIMATION LOGIC//
-    //MAIN HEADER ANIMATION LOGIC//
-    //SMALL LOGO ANIMATION LOGIC//
-    useEffect(() => {
-        if (anContext?.bigLogoPlayed === false) {
+    const bigLogoIsCurrent = bigLogoWrapper.current &&
+        pathRef.current &&
+        gRef.current &&
+        yRef.current &&
+        mRef.current &&
+        tRef.current &&
+        oRef.current &&
+        uRef.current &&
+        rRef.current
 
-            animationStore.home.logo.show(
+    useEffect(() => {
+        //INITIAL LOGIC
+        if (bigLogoPlayed === false && bigLogoIsCurrent) {
+            bigLogoAnimation(
                 bigLogoWrapper.current,
                 pathRef.current,
                 [
@@ -120,94 +85,72 @@ const MainSection = () => {
                     rRef.current
                 ],
                 setShowLogo,
-                anContext.fn.setBigLogoPlayed
+                setBigLogoPlayed
             )
+            return
         }
-        else if (anContext?.bigLogoPlayed === true && anContext.smallLogoPlayed === false) {
-            animationStore.menu.logo.logoIn();
-            setTimeout(() => {
-                animationStore.menu.logo.logoTextIn();
-            }, 200);
-            animationStore.home.mainHeader.show()
-            anContext.fn.setSmallLogoPlayed(true)
+        if (bigLogoPlayed === true && smallLogoPlayed === false) {
+            smallLogoShow()
+            showHeader()
+            setSmallLogoPlayed(true)
+            return
         }
-        else if (anContext?.bigLogoPlayed === true && anContext.smallLogoPlayed === true) {
-            animationStore.home.mainHeader.show()
-            anContext.fn.setSmallLogoPlayed(true)
+        if (bigLogoPlayed === true && smallLogoPlayed === true) {
+            showHeader()
+            setSmallLogoPlayed(true)
+            return
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     //////////////////////////////////////////////////
     //MAIN HEADER AND SMALL LOGO LOGIC//
     useEffect(() => {
-        if (showLogo === false) {
-            if (anContext?.smallLogoPlayed === false) {
-                animationStore.menu.logo.logoIn();
-                setTimeout(() => {
-                    animationStore.menu.logo.logoTextIn();
-                }, 200);
-                anContext.fn.setSmallLogoPlayed(true)
-            }
-            animationStore.home.mainHeader.show()
+        if (showLogo && !smallLogoPlayed) {
+            smallLogoShow()
+            setSmallLogoPlayed(true)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [showLogo])
-    //////////////////////////////////////////////////
-    //LOGO SCALE LOGIC//
-    useEffect(() => {
-        switch (appContext?.breakPoint) {
-            case "fromMobile":
-                setLogoScale(0.5)
-                setTextScale(0.3)
-                break;
-            default:
-                setLogoScale(0.7)
-                setTextScale(0.5)
-        }
-    }, [appContext?.breakPoint])
-    //////////////////////////////////////////////////
+        showLogo && showHeader()
+    }, [setSmallLogoPlayed, showLogo, smallLogoPlayed])
+
     return (
         <>
             <div
                 id="bigLogoWrapper"
-                className={bigLogoWrapperClass}
+                className={clsx(["relative", "stretchX"])}
                 ref={bigLogoWrapper}
             >
-                <div className={bigLogoClasses}>
+                <div className={"relative"}>
                     <BigLogo
                         id="bigLogo"
-                        scale={logoScale}
                         ref={pathRef}
                     />
                 </div>
-                <div className={bigTextClasses}>
+                <div className={"relative"}>
                     <BigText
                         id="bigText"
-                        scale={textScale}
                         ref={textRef}
                     />
                 </div>
             </div>
             <div
-                className={headerClasses}
+                className={clsx(["relative", "minorColor1Text"])}
                 id="homeHeader"
                 ref={header}
             >
                 <div>
-                    <div className={homeHeaderWrapperClasses}>
-                        <h1 className={homeHeaderClasses}>{text.home.Header.part1.cz}</h1>
+                    <div className={"headerWrapper"}>
+                        <h1 className={"homeHeader"}>{text.home.Header.part1.cz}</h1>
                     </div>
-                    <div className={homeHeaderWrapperClasses}>
-                        <h1 className={homeHeaderClasses}>{text.home.Header.part2.cz}</h1>
+                    <div className={"headerWrapper"}>
+                        <h1 className={"homeHeader"}>{text.home.Header.part2.cz}</h1>
                     </div>
-                    <div className={homeHeaderWrapperClasses}>
-                        <h1 className={homeHeaderClasses}>{text.home.Header.part3.cz}</h1>
+                    <div className={"headerWrapper"}>
+                        <h1 className={"homeHeader"}>{text.home.Header.part3.cz}</h1>
                     </div>
                 </div>
             </div>
         </>
     )
-
 }
 
 export default Home

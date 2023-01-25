@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,9 +14,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "incremental": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@app": ["./src/app/index.ts"],
+      "@components": ["./src/Components/index.ts"],
+      "@config": ["./src/config/index.ts"],
+      "@utils": ["./src/utils/index.ts"],
+      "@assets": ["./src/assets"],
+      "@hooks": ["./src/hooks/index.ts"],
+      "@animations": ["./src/animations/index.ts"]
+    }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "src"],
+  "exclude": ["node_modules"]
 }
