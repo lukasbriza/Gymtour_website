@@ -1,22 +1,19 @@
-import { useEffect, useState, useContext } from 'react'
-import { Link, useHistory, Switch, Route, useLocation } from "react-router-dom"
+import { useEffect, useState, FC } from 'react'
+import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { gsap } from 'gsap'
-import { UserContext, AnimationContext } from '../App/Context'
 import { Layer } from '../Components/Layer'
 import { Underliner } from '../Components/Underliner'
 import { FormStringInput } from '../Components/FormStringInput'
 import { FormModal } from '../Components/FormModal'
 import { Footer } from '../Components/Footer'
 import { Button } from '../Components/Button'
-//CONFIG//
-import { animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
-//FUNCTIONS//
-import fetchAgent from '../Functions/fetchAgent'
-import { isLogged, saveToken } from '../Functions/loginLogic'
-import { classListMaker } from '../Functions/classListMaker'
-//IMAGES//
-import register from '../Images/register.webp'
+import fetchAgent from '../utils/fetchAgent'
+import { isLogged, saveToken } from '../utils/loginLogic'
+import register from '../assets/register.webp'
+import { useAnimationContext, useUsercontext } from '@hooks'
+import { smallLogoShow } from '@animations'
+import clsx from 'clsx'
 
 const errorStyle = {
     borderColor: "red",
@@ -28,30 +25,18 @@ const sucessStyle = {
 }
 
 type canSubmitObj = { canSubmit: boolean, value: string }
-const Login = () => {
-    //////////////////////////////////////////////////
-    //STATE//
+const Login: FC = () => {
+
     const [modal, showModal] = useState<modalType>({ loading: false, sucess: undefined, msg: undefined })
     const [modalBtnText, setModalBtnText] = useState<string>(text.login.modal.buttonSucess.cz)
     const [password, setPassword] = useState<canSubmitObj>({ canSubmit: false, value: "" })
     const [name, setName] = useState<canSubmitObj>({ canSubmit: false, value: "" })
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const loginPageClasses = classListMaker(["stretchX", "stretchVH", "relative", "Login"])
-    const layerClasses = classListMaker(["stretchY", "stretchX"])
-    const loginPageWrapperClasses = classListMaker(["stretchY", "stretchX", "loginContentWrapper"])
-    const loginHeaderWrapper = classListMaker(["relative", "loginHeaderWrapper"])
-    const loginFormWrapperClasses = classListMaker(["loginFormWrapper", "relative"])
-    const formInputClasses = classListMaker(["formInput"])
-    const forgetPasswordClasses = classListMaker(["link forgetPassword"])
 
-    const history = useHistory()
-    const userContext = useContext(UserContext)
-    const anContext = useContext(AnimationContext);
+    const navigate = useNavigate()
+    const userContext = useUsercontext()
+    const anContext = useAnimationContext()
     const location = useLocation()
 
-    //////////////////////////////////////////////////
-    //FUNCTIONS//
     const checkLogged = async () => {
         const logged = await isLogged()
         if (logged?.logged === true) {
@@ -143,49 +128,44 @@ const Login = () => {
         }
     }
     const redirectToDashboard = () => {
-        history.push("/dashboard")
+        navigate("/dashboard")
     }
     const clearForm = () => {
         gsap.set(".formInput", { value: "", border: "2px solid transparent" })
     }
 
-    //CHECK IF TOKEN IS AVALIABLE ON LOAD//
+
     useEffect(() => {
         checkLogged()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    //////////////////////////////////////////////////
-    //ANIMATIONS//
+
     useEffect(() => {
         anContext?.fn.setBigLogoPlayed(true)
-        animationStore.menu.logo.logoIn();
-        setTimeout(() => {
-            animationStore.menu.logo.logoTextIn();
-        }, 200);
+        smallLogoShow()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    //////////////////////////////////////////////////
-    //SETUP//
+
     return (
         <>
             <section
                 id="Login"
-                className={loginPageClasses}
+                className={clsx(["stretchX", "stretchVH", "relative", "Login"])}
             >
                 <img src={register} alt="LoginBckgImg" />
-                <Layer className={layerClasses}>
-                    <Switch location={location}>
-                        <Route exact path={"/login"}>
-                            <div className={loginPageWrapperClasses}>
-                                <div className={loginHeaderWrapper}>
+                <Layer className={clsx(["stretchY", "stretchX"])}>
+                    <Routes location={location}>
+                        <Route path={"/login"}>
+                            <div className={clsx(["stretchY", "stretchX", "loginContentWrapper"])}>
+                                <div className={clsx(["relative", "loginHeaderWrapper"])}>
                                     <h2>{text.login.Form.header.cz}</h2>
                                     <Underliner width={"80%"} />
                                 </div>
-                                <div className={loginFormWrapperClasses}>
+                                <div className={clsx(["loginFormWrapper", "relative"])}>
                                     <form action="#Login" id="loginForm" onSubmit={handleSubmit}>
                                         <FormStringInput
-                                            className={formInputClasses}
+                                            className={"formInput"}
                                             type={"text"}
                                             name={"nameInput"}
                                             formId={"loginForm"}
@@ -199,7 +179,7 @@ const Login = () => {
                                             minLength={1}
                                         />
                                         <FormStringInput
-                                            className={formInputClasses}
+                                            className={"formInput"}
                                             type={"password"}
                                             name={"passwordInput"}
                                             formId={"registerForm"}
@@ -211,10 +191,10 @@ const Login = () => {
                                             sucessStyle={sucessStyle}
                                             minLength={1}
                                         />
-                                        <Link to="/login/forgetPassword" className={forgetPasswordClasses}>
+                                        <Link to="/login/forgetPassword" className={clsx(["link", "forgetPassword"])}>
                                             {text.login.Form.link1.cz}
                                         </Link>
-                                        <Link to="/login/forgetName" className={forgetPasswordClasses}>
+                                        <Link to="/login/forgetName" className={clsx(["link", "forgetPassword"])}>
                                             {text.login.Form.link2.cz}
                                         </Link>
                                         <button
@@ -245,7 +225,7 @@ const Login = () => {
                             <ForgetName />
                         </Route>
 
-                    </Switch>
+                    </Routes>
                 </Layer>
             </section>
             <Footer />
@@ -253,25 +233,14 @@ const Login = () => {
     )
 }
 
-const ForgetPassword = () => {
-    //////////////////////////////////////////////////
-    //STATE//
-    //////////////////////////////////////////////////
-    //VARIBLES//
-    const forgetPasswordWrapperClasses = classListMaker(["stretchX", "stretchY", "forgetPasswordFormWrapper"])
-    const forgetPasswordFormInput = classListMaker(["formInput"])
-    //////////////////////////////////////////////////
-    //EFFECTS//
-    //////////////////////////////////////////////////
-    //FUNCTIONS//
+const ForgetPassword: FC = () => {
     const handleChange = ({ canSubmit, value, name }: { canSubmit: boolean, value: string, name: string }) => {
 
     }
     const handleSubmit = () => { }
-    //////////////////////////////////////////////////
-    //SETUP//
+
     return (
-        <div className={forgetPasswordWrapperClasses}>
+        <div className={clsx(["stretchX", "stretchY", "forgetPasswordFormWrapper"])}>
             <form action="#Login" id="forgetPasswordForm" className="stretchX stretchY" onSubmit={handleSubmit}>
                 <div className={"forgetPasswordHeader"}>
                     <h2>{text.login.ForgetPasswordForm.header.cz}</h2>
@@ -280,7 +249,7 @@ const ForgetPassword = () => {
                 <p className="forgetPasswordText">{text.login.ForgetPasswordForm.text.cz}</p>
                 <h3 className="nameHeader">{text.login.ForgetPasswordForm.inputHeader1.cz}</h3>
                 <FormStringInput
-                    className={forgetPasswordFormInput}
+                    className={"formInput"}
                     type={"text"}
                     name={"forgetPasswordNameInput"}
                     formId={"forgetPasswordForm"}
@@ -296,7 +265,7 @@ const ForgetPassword = () => {
                 />
                 <h3 className="emailHeader">{text.login.ForgetPasswordForm.inputHeader2.cz}</h3>
                 <FormStringInput
-                    className={forgetPasswordFormInput}
+                    className={"formInput"}
                     type={"email"}
                     name={"forgetPasswordEmailInput"}
                     formId={"forgetPasswordForm"}
@@ -319,25 +288,15 @@ const ForgetPassword = () => {
         </div>
     )
 }
-const ForgetName = () => {
-    //////////////////////////////////////////////////
-    //STATE//
-    //////////////////////////////////////////////////
-    //VARIBLES//
-    const forgetNameWrapperClasses = classListMaker(["forgetNameWrapper", "stretchX", "stretchY"])
-    const forgetNameFormInput = classListMaker(["formInput"])
-    //////////////////////////////////////////////////
-    //EFFECTS//
-    //////////////////////////////////////////////////
-    //FUNCTIONS//
+const ForgetName: FC = () => {
+
     const handleChange = ({ canSubmit, value, name }: { canSubmit: boolean, value: string, name: string }) => {
 
     }
     const handleSubmit = () => { }
-    //////////////////////////////////////////////////
-    //SETUP//
+
     return (
-        <div className={forgetNameWrapperClasses}>
+        <div className={clsx(["forgetNameWrapper", "stretchX", "stretchY"])}>
             <form action="#Login" id="forgetNameForm" className="stretchX stretchY" onSubmit={handleSubmit}>
                 <div className={"forgetNameHeader"}>
                     <h2>{text.login.ForgetNameForm.header.cz}</h2>
@@ -346,7 +305,7 @@ const ForgetName = () => {
                 <p className="forgetNameText">{text.login.ForgetNameForm.text.cz}</p>
                 <h3 className="emailHeader">{text.login.ForgetNameForm.inputHeader1.cz}</h3>
                 <FormStringInput
-                    className={forgetNameFormInput}
+                    className={"formInput"}
                     type={"email"}
                     name={"forgetNameEmailInput"}
                     formId={"forgetNameForm"}
@@ -359,7 +318,7 @@ const ForgetName = () => {
                 />
                 <h3 className="passwordHeader">{text.login.ForgetNameForm.inputHeader2.cz}</h3>
                 <FormStringInput
-                    className={forgetNameFormInput}
+                    className={"formInput"}
                     type={"password"}
                     name={"forgetNamePasswordInput"}
                     formId={"forgetNameForm"}

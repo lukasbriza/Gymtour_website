@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import { BigLogo } from "@components"
 import { BigText } from '../Components/SVG/BigText/BigText'
 import clsx from 'clsx'
-import main from '../Images/main.webp'
+import main from '../assets/main.webp'
 import { text } from '../config/textSource'
 import { useAnimationContext } from '@hooks'
 import { bigLogoAnimation, showHeader, smallLogoShow } from '@animations'
 import { routes } from '@config'
 
-const Home = () => {
+const Home: FC = () => {
     return (
         <div
             id="Home"

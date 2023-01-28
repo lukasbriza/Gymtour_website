@@ -1,4 +1,4 @@
-import { gsap, Sine } from "gsap";
+import { gsap, Sine, Power2, Power3 } from "gsap";
 
 type strokeConfig = {
   strokeDasharrayInitial?: string;
@@ -52,18 +52,19 @@ export const fadeIn = (target: gsap.TweenTarget, config: fadeInConfig = {}) => {
     delay: config.delay ?? 0,
   };
   const tl = gsap.timeline();
-  tl.fromTo(
-    target,
-    { display: anConfig.displayInitial, opacity: 0 },
-    {
-      duration: anConfig.duration,
-      opacity: 1,
-      delay: anConfig.delay,
-      stagger: anConfig.stagger,
-      display: anConfig.displayAfter,
-      ease: Power3.easeIn,
-    }
-  );
+  tl.set(target, { display: anConfig.displayInitial })
+    .fromTo(
+      target,
+      { opacity: 0 },
+      {
+        duration: anConfig.duration,
+        opacity: 1,
+        delay: anConfig.delay,
+        stagger: anConfig.stagger,
+        ease: Power3.easeIn,
+      }
+    )
+    .set(target, { display: anConfig.displayAfter });
   return tl;
 };
 

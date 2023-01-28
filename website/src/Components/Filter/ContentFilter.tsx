@@ -1,18 +1,17 @@
-import React, { useEffect, useContext, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { FilterSection } from './FilterSection'
 import { Button } from '../Button'
 import { ErrorModal } from '../ErrorModal'
 import { gsap } from 'gsap'
-//CONTEXT//
-import { AppContext, AnimationContext } from '../../App/Context'
-//CONFIG//
-import { config, animationStore } from '../../config/mainConfiguration'
 import { text } from '../../config/textSource'
 //FUNCTUION//
-import { classListMaker } from '../../Functions/classListMaker'
-import { makeFilterFetchQuerry } from '../../Functions/makeFilterFetchQuerry'
-import fetchAgent from '../../Functions/fetchAgent'
+import { classListMaker } from '../../utils/classListMaker'
+import { makeFilterFetchQuerry } from '../../utils/makeFilterFetchQuerry'
+import fetchAgent from '../../utils/fetchAgent'
+import { useAnimationContext, useAppContext } from '@hooks'
+import { filterOff, filterOn } from '@animations'
+import { filter } from '@config'
 
 
 
@@ -45,8 +44,8 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
     const location = useLocation()
     //////////////////////////////////////////////////
     //VARIABLES//
-    const appContext = useContext(AppContext)
-    const anContext = useContext(AnimationContext)
+    const appContext = useAppContext()
+    const anContext = useAnimationContext()
 
     const filterSecctionWrapperClasses = classListMaker(["filterSectionWrapper", "relative"])
     const buttonInitialClasses = classListMaker(["buttonInitial contentFilterButton pointer relative centerX"])
@@ -89,13 +88,11 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
-        if (props.open === true) {
-            animationStore.fitness.filter.show(wrapperRef.current)
-        }
-        if (props.open === false) {
-            animationStore.fitness.filter.hide(wrapperRef.current)
+        if (wrapperRef.current) {
+            props.open ? filterOn(wrapperRef.current) : filterOff(wrapperRef.current)
         }
     }, [props.open])
+
     useEffect(() => {
         setTimeout(() => {
             gsap.set(wrapperRef.current, { opacity: 0, display: "none" })
@@ -143,12 +140,12 @@ const ContentFilter = (props: { open: boolean, setFilteredData: React.Dispatch<R
             if (key !== '_id') {
                 switch (appContext?.actualLocation) {
                     case "/fitness":
-                        if (!config.filter.avoidFilterTypes.fitness.includes(key)) {
+                        if (!filter.avoidFilterTypes.fitness.includes(key as any)) {
                             array.push({ filterType: key, data: data[key as keyof typeof data] })
                         }
                         break;
                     case "/coach":
-                        if (!config.filter.avoidFilterTypes.coach.includes(key)) {
+                        if (!filter.avoidFilterTypes.coach.includes(key as any)) {
                             array.push({ filterType: key, data: data[key as keyof typeof data] })
                         }
                         break;

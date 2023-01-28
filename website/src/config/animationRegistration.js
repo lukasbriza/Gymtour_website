@@ -4,7 +4,7 @@ import { gsap, Sine, Power2, Power3 } from "gsap";
 //REGISTER ANIMATIONS//
 ////////////////////////////////////////////////////////////////////////////
 //DISPLAYPREPARE//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "displayPrepare",
   effect: (targets, config) => {
     return gsap.fromTo(
@@ -18,9 +18,9 @@ gsap.registerEffect({
     to: "initial",
   },
   extendTimeline: true,
-});
+});*/
 //STROKE//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "stroke",
   effect: (targets, config) => {
     return gsap.fromTo(
@@ -43,9 +43,9 @@ gsap.registerEffect({
     duration: 3,
   },
   extendTimeline: true,
-});
+});*/
 //FILL//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "fill",
   effect: (targets, config) => {
     return gsap.fromTo(
@@ -65,9 +65,9 @@ gsap.registerEffect({
     duration: 1,
   },
   extendTimeline: true,
-});
+});*/
 //FADE IN//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "fadeIn",
   effect: (targets, config) => {
     let animation = gsap
@@ -110,9 +110,9 @@ gsap.registerEffect({
     delay: 0,
   },
   extendTimeline: true,
-});
+});*/
 //FADE OFF//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "fadeOff",
   effect: (targets, config) => {
     setTimeout(() => {
@@ -155,7 +155,7 @@ gsap.registerEffect({
     duration: 0.2,
   },
   extendTimeline: true,
-});
+});*/
 gsap.registerEffect({
   name: "fadeOffto",
   effect: (targets, config) => {
@@ -212,7 +212,7 @@ gsap.registerEffect({
   },
   extendTimeline: true,
 });
-//HAMBURGER CROSS ON//
+/*//HAMBURGER CROSS ON//
 gsap.registerEffect({
   name: "crossOn",
   effect: (slice1, slice2, slice3, config = {}) => {
@@ -261,9 +261,9 @@ gsap.registerEffect({
     });
   },
   extendTimeline: true,
-});
+});*/
 //LAYER ON//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "layerOn",
   effect: (target, config) => {
     let animation = gsap.to(target, {
@@ -295,7 +295,7 @@ gsap.registerEffect({
     delay: 0,
   },
   extendTimeline: true,
-});
+});*/
 
 //CIRCLE LOADING ANIMATION COMPLETE CIRCLE//
 gsap.registerEffect({
@@ -333,7 +333,7 @@ gsap.registerEffect({
 });
 
 //CIRCLE INFINITE ROTATION//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "infiniteRotation",
   effect: (target, config) => {
     let animation = gsap.fromTo(
@@ -357,10 +357,9 @@ gsap.registerEffect({
     repeat: -1,
   },
   extendTimeline: true,
-});
-
+});*/
 //FILTER ON//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "filterOn",
   effect: (filterWrapper, config) => {
     let tl = gsap.timeline();
@@ -384,10 +383,10 @@ gsap.registerEffect({
     widthDuration: 1,
   },
   extendTimeline: true,
-});
+});*/
 
 //FILTER OFF//
-gsap.registerEffect({
+/*gsap.registerEffect({
   name: "filterOff",
   effect: (filterWrapper, config) => {
     let tl = gsap.timeline();
@@ -411,4 +410,4 @@ gsap.registerEffect({
     delay: 0,
   },
   extendTimeline: true,
-});
+});*/

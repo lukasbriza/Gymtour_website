@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Underliner } from "../Underliner"
 //FUNCTUION//
-import { classListMaker } from '../../Functions/classListMaker'
+import { classListMaker } from '../../utils/classListMaker'
 
 const FilterHeader = React.memo(React.forwardRef((props: filterHeader, ref: any) => {
     //////////////////////////////////////////////////

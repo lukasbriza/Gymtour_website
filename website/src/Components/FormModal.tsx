@@ -4,12 +4,11 @@ import { Button } from './Button'
 import { Circle } from './SVG/Circle'
 import { Cross } from './SVG/Cross'
 import { Sucess } from './SVG/Sucess'
-//CONFIG//
-import { animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
 //CONTEXT//
 //FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../utils/classListMaker'
+import { hideFormModal, infiniteRotation, loadingError, loadingSuccess, showFormModal, showMessageButton } from '@animations'
 
 const FormModal = (props: formModalProps) => {
     //////////////////////////////////////////////////
@@ -46,34 +45,30 @@ const FormModal = (props: formModalProps) => {
     }, [props.buttonMsg])
     useEffect(() => {
         //SHOW MODAL AND START LOADING ANIMATION//
-        if (props.loading === true) {
+        if (props.loading === true && modalRef.current && circleRef.current) {
             //DISABLE SCROLL//
             disableScroll()
             //SHOW MODAL//
-            animationStore.crossroad.modal.show(modalRef.current)
+            showFormModal(modalRef.current)
             //START ANIMATION//
-            animationStore.crossroad.modal.infiniteRotation(circleRef.current)
+            infiniteRotation(circleRef.current)
         }
     }, [props.loading])
     useEffect(() => {
-        if (props.sucess === true) {
+        if (props.sucess === true && circleRef.current && sucessRef.current) {
             //SUCESS ANIMATION//
             setShowSucess(true)
-            animationStore.crossroad.modal.loadingCompleteSucess(
+            loadingSuccess(
                 circleRef.current,
-                basicColor,
-                colorEndSucess,
                 sucessRef.current,
                 showMsgBtn
             )
         }
-        if (props.sucess === false) {
+        if (props.sucess === false && circleRef.current) {
             //ERROR ANIMAITON//
             setShowCross(true)
-            animationStore.crossroad.modal.loadingCompleteError(
+            loadingError(
                 circleRef.current,
-                basicColor,
-                colorEndError,
                 showMsgBtn
             )
         }
@@ -83,7 +78,7 @@ const FormModal = (props: formModalProps) => {
     //SHOW MESSAGE AND BUTTON ANIMAITON//
     const showMsgBtn = () => {
         setMsg(props.msg)
-        animationStore.crossroad.modal.showMsgBtn(msgSectionRef.current, ".modalButton")
+        msgSectionRef.current && showMessageButton(msgSectionRef.current)
     }
 
     const handleModalHide = () => {
@@ -91,7 +86,7 @@ const FormModal = (props: formModalProps) => {
         //ENABLE SCROLL//
         enableScroll()
         //HIDE MODAL//
-        animationStore.crossroad.modal.hide(modalRef.current);
+        modalRef.current && hideFormModal(modalRef.current);
         //CLEAR FORM//
         if (props.sucess === true) {
             props.clearForm()

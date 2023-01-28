@@ -1,4 +1,4 @@
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../utils/classListMaker'
 import { useRef, useEffect, useState } from 'react'
 import { gsap, Power1 } from 'gsap'
 

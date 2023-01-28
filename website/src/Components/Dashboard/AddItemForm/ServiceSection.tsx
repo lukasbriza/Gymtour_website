@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
-import fetchAgent from '../../../Functions/fetchAgent'
+import fetchAgent from '../../../utils/fetchAgent'
 //FUNCTIONS//
-import { classListMaker } from '../../../Functions/classListMaker'
+import { classListMaker } from '../../../utils/classListMaker'
 //TEXTS//
 import { text } from '../../../config/textSource'
 

@@ -66,7 +66,6 @@ export const AppContextProvider: FC<ContextProviderProps> = (props) => {
     const [coachSearch, setCoachSearch] = useState<searchCoachData>(defaultState.coachSearch)
     const [filteredFitnessData, setFilteredFitnessData] = useState<filteredData[] | []>([])
     const [filteredCoachData, setFilteredCoachData] = useState<filteredData[] | []>([])
-    const location = useLocation()
     const { children } = props
 
     const handleSearchDataSubstitution = (data: dataTypeSearch) => {
@@ -86,6 +85,7 @@ export const AppContextProvider: FC<ContextProviderProps> = (props) => {
                 setBreakPoint(compute)
             }
         }
+
         window.addEventListener('resize', () => handler)
         return () => {
             window.removeEventListener('resize', () => handler)
@@ -94,10 +94,10 @@ export const AppContextProvider: FC<ContextProviderProps> = (props) => {
     }, [])
 
     useEffect(() => {
-        if (location.pathname !== actualLocation) {
-            setActualLocation(location.pathname)
+        if (window.location.pathname !== actualLocation) {
+            setActualLocation(window.location.pathname)
         }
-    }, [actualLocation, location.pathname])
+    }, [window.location.pathname])
 
     const context = useMemo<AppStateContext>(() => ({
         width: width,

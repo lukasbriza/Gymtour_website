@@ -2,15 +2,13 @@ import { useEffect, useState, useContext, useRef } from 'react'
 import { Underliner } from '../Underliner'
 import { Button } from '../Button'
 import { ErrorModal } from '../ErrorModal'
-import { useHistory } from 'react-router-dom'
-//FUNCTIONS//
-import fetchAgent from '../../Functions/fetchAgent'
-import { getToken } from '../../Functions/loginLogic'
-import { classListMaker } from '../../Functions/classListMaker'
+import fetchAgent from '../../utils/fetchAgent'
+import { getToken } from '../../utils/loginLogic'
+import { classListMaker } from '../../utils/classListMaker'
 import { text } from '../../config/textSource'
 
-//CONTEXT//
-import { UserContext } from '../../App/Context'
+import { useNavigate } from 'react-router'
+import { useUsercontext } from '@hooks'
 
 const Overview = () => {
     //////////////////////////////////////////////////
@@ -23,8 +21,8 @@ const Overview = () => {
     //VARIABLES//
     const overviewClasses = classListMaker(["overview", "dashboardSection"])
 
-    const userContext = useContext(UserContext)
-    const history = useHistory()
+    const userContext = useUsercontext()
+    const navigate = useNavigate()
     const userReqSended = useRef(false)
     //////////////////////////////////////////////////
     //EFFECTS//
@@ -64,8 +62,7 @@ const Overview = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userObject])
-    //////////////////////////////////////////////////
-    //SETUP//
+
     return (
         <>
             <section className={overviewClasses}>
@@ -123,7 +120,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <Button
-                        onClick={() => { history.push("/dashboard/settings") }}
+                        onClick={() => { navigate("/dashboard/settings") }}
                         modificationClass={"overviewButton"}
                         initialClass={"buttonInitial"}
                         hoverClass={"buttonHover"}

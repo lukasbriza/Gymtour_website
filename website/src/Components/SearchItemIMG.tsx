@@ -1,6 +1,6 @@
 //FUNCTUION//
 import React, { ImgHTMLAttributes } from 'react'
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../utils/classListMaker'
 
 const SearchItemIMG = ({ loading, setImgLoaded, alt, ...props }: {
     loading: boolean,

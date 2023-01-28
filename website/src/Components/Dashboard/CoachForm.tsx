@@ -9,7 +9,7 @@ import { DescribtionSection } from './AddItemForm/DescribtionSection'
 //CONFIG//
 import { text } from '../../config/textSource'
 //FUNCTIONS//
-import { classListMaker } from '../../Functions/classListMaker'
+import { classListMaker } from '../../utils/classListMaker'
 
 type canSubmitType = { canSubmit: boolean, value: string, name: string }
 const errorStyle = {

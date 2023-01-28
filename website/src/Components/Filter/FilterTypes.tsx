@@ -1,9 +1,7 @@
-import React, { useState, useContext, BaseSyntheticEvent } from 'react';
-import { AppContext } from '../../App/Context';
-//CONFIG//
+import React, { useState, BaseSyntheticEvent } from 'react';
 import { text } from '../../config/textSource'
-//FUNCTUION//
-import { classListMaker } from '../../Functions/classListMaker'
+import { classListMaker } from '../../utils/classListMaker'
+import { useAppContext } from '@hooks';
 
 
 const FilterTypes = React.memo(React.forwardRef((props: filterType, ref: any) => {
@@ -19,12 +17,8 @@ const FilterTypes = React.memo(React.forwardRef((props: filterType, ref: any) =>
 
     let component;
 
-    const appContext = useContext(AppContext)
-    //////////////////////////////////////////////////
-    //FUNCTIONS//
-    //////////////////////////////////////////////////
-    //SETUP//
-    //REGIONS//
+    const appContext = useAppContext()
+
     if (props.type === "regions") {
         component = props.data.map(
             (region:

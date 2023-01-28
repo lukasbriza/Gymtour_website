@@ -1,77 +1,58 @@
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext, useState, FC } from 'react'
 import { Link } from 'react-router-dom'
 import { FilterIcon } from '../Components/FilterIcon'
 import { ContentFilter } from '../Components/Filter/ContentFilter'
 import { SearchItem } from '../Components/SearchItem'
 import { ErrorModal } from '../Components/ErrorModal'
 import { Button } from '../Components/Button'
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
-//CONTEXT//
-import { AppContext, AnimationContext } from "../App/Context"
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { useAnimationContext, useAppContext } from '@hooks'
+import clsx from 'clsx'
+import { showcards, smallLogoShow } from '@animations'
+import { routes } from '@config'
 
-const Coach = () => {
+const Coach: FC = () => {
     const gap = 10;
-    //////////////////////////////////////////////////
-    //STATE//
     const [linkStyle, setLinkStyle] = useState({})
     const [endIndex, setEndIndex] = useState<number>(gap)
     const [fetchTriggerAmount, setFetchTriggerAmount] = useState<number>(20)
     const [disabled, setDisabled] = useState<boolean>(false)
     const [fetchSpan, setfetchSpan] = useState<{ skip: number, limit: number }>({ skip: 0, limit: 20 })
     const [initAn, setInitAn] = useState<boolean>(false)
-
     const [errorModal, setErrorModal] = useState<boolean>(false)
     const [errorHeader, setErrorHeader] = useState<string>("")
     const [errorMessage, setErrorMessage] = useState<string>("")
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const appContext = useContext(AppContext);
-    const anContext = useContext(AnimationContext);
+    const { filteredCoachData, fn } = useAppContext()
+    const anContext = useAnimationContext()
 
-    const coachClasses = classListMaker(["contentPage", "relative"])
-    const headerSectionClasses = classListMaker(["headerSection", "minorColor1"])
-    const searchContentWrapperClasses = classListMaker(["searchContentWrapper", "absolute", "stretch", "top"])
-    const searchContentClasses = classListMaker(["searchContent", "relative", "centerX"])
-    const linkClasses = classListMaker(["mainColorText"])
-    const contentPageButtonClasses = classListMaker(["contentPageButton"])
-    //////////////////////////////////////////////////
-    //ANIMATIONS//
+
     useEffect(() => {
         anContext?.fn.setBigLogoPlayed(true)
-        animationStore.menu.logo.logoIn();
-        setTimeout(() => {
-            animationStore.menu.logo.logoTextIn();
-        }, 200);
+        smallLogoShow()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        if (initAn === false && appContext?.filteredCoachData.length !== 0) {
-            console.log(appContext?.filteredCoachData)
-            console.log("here")
+        if (initAn === false && filteredCoachData.length !== 0) {
+            console.log(filteredCoachData)
             setInitAn(true)
-            const tl = animationStore.coach.card.init(document.getElementsByClassName("searchItem"))
-            tl.eventCallback('onComplete', () => { setInitAn(false) })
+            showcards().eventCallback('onComplete', () => { setInitAn(false) })
         }
-    }, [appContext?.filteredCoachData])
+    }, [filteredCoachData, initAn])
 
     //DISABLE BUTTON//
     useEffect(() => {
-        if (appContext!.filteredCoachData.length <= endIndex) {
+        if (filteredCoachData.length <= endIndex) {
             setDisabled(true)
         } else {
             setDisabled(false)
         }
-    }, [appContext, endIndex])
-    //////////////////////////////////////////////////
-    //SETUP//
+    }, [endIndex, filteredCoachData.length])
+
     return (
         <>
-            <div id="Coach" className={config.basePageClassList + " " + coachClasses}>
-                <section className={headerSectionClasses}>
+            <div id="Coach" className={clsx(["relative", "stretch", "minorColor2", "contentPage", "relative"])}>
+                <section className={clsx(["headerSection", "minorColor1"])}>
                     <FilterIcon
                         onClick={() => { anContext?.fn.setFilterOpen(!anContext.filterOpen) }}
                         crossed={anContext?.contentPageCross}
@@ -79,8 +60,8 @@ const Coach = () => {
                     <h1>{text.coach.PageHeader.cz}</h1>
                     <Link
                         style={linkStyle}
-                        to={config.routes.crossroad.path}
-                        className={linkClasses}
+                        to={routes.crossroad.path}
+                        className={clsx(["mainColorText"])}
                         onTouchStart={() => setLinkStyle({ textDecoration: 'none' })}
                         onTouchEnd={() => setLinkStyle({ textDecoration: 'underline' })}
                         onClick={() => setLinkStyle({ textDecoration: 'underline' })}
@@ -90,15 +71,15 @@ const Coach = () => {
                         </div>
                     </Link>
                 </section>
-                <ContentFilter open={anContext!.filterOpen} setFilteredData={appContext!.fn.setFilteredCoachData} fetch={fetchSpan} /> {/** */}
-                <div className={searchContentWrapperClasses}>
+                <ContentFilter open={anContext!.filterOpen} setFilteredData={fn.setFilteredCoachData} fetch={fetchSpan} /> {/** */}
+                <div className={clsx(["searchContentWrapper", "absolute", "stretch", "top"])}>
                     <div
 
-                        className={searchContentClasses}
+                        className={clsx(["searchContent", "relative", "centerX"])}
                     >
                         {
 
-                            appContext?.filteredCoachData.map((data: filteredData, index: number) => {
+                            filteredCoachData.map((data: filteredData, index: number) => {
                                 //DISABLED BUTTON LOGIC//
                                 if (index >= 0 && index <= endIndex - 1) {
                                     //RETURN FITNESS ITEMS//
@@ -117,7 +98,7 @@ const Coach = () => {
                     </div>
                     <Button
                         disabled={disabled}
-                        modificationClass={contentPageButtonClasses}
+                        modificationClass={clsx(["contentPageButton"])}
                         initialClass={"buttonInitial"}
                         hoverClass={"buttonHover"}
                         text={text.coach.Content.nextButton.cz}

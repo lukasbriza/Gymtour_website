@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { LayoutProps } from "./_types";
 import { Menu } from "@components";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -7,7 +7,6 @@ import { transitionSetup } from "@config";
 import { useUsercontext } from "@hooks";
 
 export const Layout: FC<LayoutProps> = (props) => {
-    const [show, setShow] = useState<boolean>(true)
     const { logged, userId } = useUsercontext()
     const location = useLocation()
     const navigate = useNavigate()
@@ -16,18 +15,16 @@ export const Layout: FC<LayoutProps> = (props) => {
     //LOGGED STATE CONTROL AND MENU SHOW LOGIC//
     useEffect(() => {
         if (location.pathname.startsWith("/dashboard")) {
-            setShow(false)
             if (logged === false || userId === "") {
                 navigate("/login")
             }
         } else {
-            setShow(true)
         }
     }, [location, logged, navigate, userId])
 
     return (
         <div id="App">
-            <Menu show={show} />
+            <Menu />
             <TransitionGroup
                 component={null}
             >

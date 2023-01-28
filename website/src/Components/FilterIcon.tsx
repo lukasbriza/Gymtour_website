@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import { gsap, Power2, Power1, Power3 } from 'gsap'
-//CONTEXT//
-import { AnimationContext } from '../App/Context'
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../utils/classListMaker'
+import { useAnimationContext } from '@hooks'
 
 const FilterIcon = React.memo((props: { onClick: () => void, crossed: boolean | undefined }) => {
     //////////////////////////////////////////////////
@@ -19,7 +17,7 @@ const FilterIcon = React.memo((props: { onClick: () => void, crossed: boolean | 
     const ref2 = useRef<HTMLDivElement>(null)
     const ref3 = useRef<HTMLDivElement>(null)
 
-    const anContext = useContext(AnimationContext)
+    const anContext = useAnimationContext()
     //////////////////////////////////////////////////
     //ANIMATIONS//
     const hoverInAnimation = () => {

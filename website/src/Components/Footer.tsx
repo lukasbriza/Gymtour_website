@@ -3,11 +3,9 @@ import YoutubeLogo from "../Components/SVG/YoutubeLogo"
 import InstagramLogo from "../Components/SVG/InstagramLogo"
 import { Underliner } from "./Underliner"
 import { Link } from "react-router-dom"
-//CONFIG//
 import { text } from '../config/textSource'
-import { config } from '../config/mainConfiguration'
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../utils/classListMaker'
+import { footerLinks } from "@config"
 
 const Footer = () => {
     //////////////////////////////////////////////////
@@ -22,7 +20,7 @@ const Footer = () => {
     const copyRightClasses = classListMaker(["copyRight"])
     const logoWrapperClasses = classListMaker(["logoWrapper"])
 
-    const gymtourLinks = config.footerLinks2.map((obj, index) => {
+    const gymtourLinks = footerLinks.footerLinks2.map((obj, index) => {
         return (
             <div
                 className="footerLinkWrapper"
@@ -33,7 +31,7 @@ const Footer = () => {
             </div>)
     })
 
-    const otherLinks = config.footerLinks1.map((obj, index) => {
+    const otherLinks = footerLinks.footerLinks1.map((obj, index) => {
         return (
             <div
                 className="footerLinkWrapper"

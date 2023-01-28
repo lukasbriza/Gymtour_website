@@ -2,11 +2,11 @@ import '../config/animationRegistration.js';
 
 import { BrowserRouter } from 'react-router-dom'
 import { PageRoutes } from './PageRoutes'
-import { AppContextProvider } from './context/AppContext.js';
-import { AnimationContextProvider } from './context/Animationcontext.js';
-import { UserContextProvider } from './context/UserContext.js';
+import { AppContextProvider } from './context/AppContext';
+import { AnimationContextProvider } from './context/AnimationContext';
+import { UserContextProvider } from './context/UserContext';
 import { FC } from 'react';
-import { Layout } from './Layout.js';
+import { Layout } from './Layout';
 
 
 

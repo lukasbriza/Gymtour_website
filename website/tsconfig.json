@@ -27,6 +27,6 @@
       "@animations": ["./src/animations/index.ts"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "src"],
+  "include": ["**/*.ts", "**/*.tsx", "src", "craco.config.js"],
   "exclude": ["node_modules"]
 }

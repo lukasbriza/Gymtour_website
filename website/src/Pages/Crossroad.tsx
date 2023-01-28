@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, FC } from 'react'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { Button } from '../Components/Button'
@@ -7,37 +7,26 @@ import { Underliner } from '../Components/Underliner'
 import { FormStringInput } from '../Components/FormStringInput'
 import { FormModal } from '../Components/FormModal'
 import { Footer } from '../Components/Footer'
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
-//CONTEXT//
-import { AnimationContext } from "../App/Context"
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
-import fetchAgent from '../Functions/fetchAgent'
+import fetchAgent from '../utils/fetchAgent'
 //IMAGES//
-import fitness from '../Images/fitness.webp'
-import trainer from '../Images/trainer.webp'
-import register from '../Images/register.webp'
+import fitness from '../assets/fitness.webp'
+import trainer from '../assets/trainer.webp'
+import register from '../assets/register.webp'
+import { useAnimationContext } from '@hooks'
+import { smallLogoShow } from '@animations'
+import clsx from 'clsx'
+import { routes } from '@config'
 
 
-const Crossroad = () => {
-    //////////////////////////////////////////////////
-    //STATE//
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const anContext: any = useContext(AnimationContext);
+const Crossroad: FC = () => {
+    const anContext = useAnimationContext()
 
-    const crossroadClasses = classListMaker([])
-    //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
         anContext.fn.setBigLogoPlayed(true)
         if (anContext.smallLogoPlayed === false) {
-            animationStore.menu.logo.logoIn();
-            setTimeout(() => {
-                animationStore.menu.logo.logoTextIn();
-            }, 200);
+            smallLogoShow()
             anContext.fn.setSmallLogoPlayed(true)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,7 +34,7 @@ const Crossroad = () => {
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="Crossroad" className={config.basePageClassList + crossroadClasses}>
+        <div id="Crossroad" className={clsx(["relative", "stretch", "minorColor2"])}>
             <div id="crossroadSectionWrapper">
                 <FitnessPage />
                 <div id="divider" className="divider"></div>
@@ -57,40 +46,25 @@ const Crossroad = () => {
     )
 }
 
-const FitnessPage = () => {
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const fitnessPageClasses = classListMaker(["stretchX", "stretchVH", "relative", "minHeightWidth", "FitnessSection"])
-    const fitnessHeaderClasses = classListMaker(["fitnessSectionHeader"])
-    const fitnessParagraphClasses = classListMaker(["fitnessSectionParagraph"])
-    const buttonClasses = classListMaker(["crossroadButton"])
-    const layerClasses = classListMaker(["stretchY", "stretchX"])
-    //////////////////////////////////////////////////
-    //PRELOAD-FETCH//
-    const fetchFitness = async () => {
-        config.routes.fitness.component.preload()
-    }
-    //////////////////////////////////////////////////
+const FitnessPage: FC = () => {
     return (
         <section
             id="FitnessSection"
-            className={fitnessPageClasses}
-            onMouseEnter={() => { fetchFitness() }}
-            onTouchStart={() => { fetchFitness() }}
+            className={clsx(["stretchX", "stretchVH", "relative", "minHeightWidth", "FitnessSection"])}
         >
             <img src={fitness} alt="FitnesBckgImg" />
-            <Layer className={layerClasses}>
+            <Layer className={clsx(["stretchY", "stretchX"])}>
 
-                <h1 className={fitnessHeaderClasses}>
+                <h1 className={"fitnessSectionHeader"}>
                     {text.crossroad.FitnessPage.Header.cz}
                 </h1>
-                <div className={fitnessParagraphClasses}>
+                <div className={"fitnessSectionParagraph"}>
                     {text.crossroad.FitnessPage.Paragraph.cz}
                 </div>
                 <Button
-                    path={config.routes.fitness.path}
+                    path={routes.fitness.path}
                     onClick={() => { console.log("clicked") }}
-                    modificationClass={buttonClasses}
+                    modificationClass={"crossroadButton"}
                     initialClass={'buttonInitial'}
                     hoverClass={'buttonHover'}
                     text={text.crossroad.FitnessPage.Button.cz}
@@ -101,37 +75,22 @@ const FitnessPage = () => {
     )
 }
 
-const CoachPage = () => {
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const coachPageClasses = classListMaker(["stretchX", "stretchVH", "relative", "minHeightWidth", "CoachSection"])
-    const coachHeaderClasses = classListMaker(["coachSectionHeader"])
-    const coachParagraphClasses = classListMaker(["coachSectionParagraph"])
-    const buttonClasses = classListMaker(["crossroadButton"])
-    const layerClasses = classListMaker(["stretchY", "stretchX"])
-    //////////////////////////////////////////////////
-    //PRELOAD-FETCH//
-    const fetchCoach = async () => {
-        config.routes.coach.component.preload()
-    }
-    //////////////////////////////////////////////////
+const CoachPage: FC = () => {
     return (
         <section
             id="CoachSection"
-            className={coachPageClasses}
-            onMouseEnter={() => { fetchCoach() }}
-            onTouchStart={() => { fetchCoach() }}
+            className={clsx(["stretchX", "stretchVH", "relative", "minHeightWidth", "CoachSection"])}
         >
             <img src={trainer} alt="TrainerBckgImg" />
-            <Layer className={layerClasses}>
-                <h1 className={coachHeaderClasses}>{text.crossroad.CoachPage.Header.cz}</h1>
-                <div className={coachParagraphClasses}>
+            <Layer className={clsx(["stretchY", "stretchX"])}>
+                <h1 className={"coachSectionHeader"}>{text.crossroad.CoachPage.Header.cz}</h1>
+                <div className={"coachSectionParagraph"}>
                     {text.crossroad.CoachPage.Paragraph.cz}
                 </div>
                 <Button
-                    path={config.routes.coach.path}
+                    path={routes.coach.path}
                     onClick={() => { console.log("clicked") }}
-                    modificationClass={buttonClasses}
+                    modificationClass={"crossroadButton"}
                     initialClass={'buttonInitial'}
                     hoverClass={'buttonHover'}
                     text={text.crossroad.CoachPage.Button.cz}
@@ -142,7 +101,7 @@ const CoachPage = () => {
     )
 }
 
-const RegisterPage = () => {
+const RegisterPage: FC = () => {
     //////////////////////////////////////////////////
     //STATE//
     const [name, setName] = useState({ canSubmit: false, value: "" })
@@ -150,18 +109,7 @@ const RegisterPage = () => {
     const [email, setEmail] = useState({ canSubmit: false, value: "" })
     const [terms, setTerms] = useState(false)
     const [dataProcessing, setDataProcessing] = useState(false)
-
     const [modal, showModal] = useState<modalType>({ loading: false, sucess: undefined, msg: undefined })
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const contactPageClasses = classListMaker(["stretchX", "stretchVH", "relative", "RegisterSection"])
-    const layerClasses = classListMaker(["stretchY", "stretchX"])
-    const registerHeaderWrapper = classListMaker(["centerX", "relative", "registerHeaderWrapper"])
-    const registerParagraphClasses = classListMaker(["registerParagraph", "relative", "centerX"])
-    const registerFormWrapperClasses = classListMaker(["registerFormWrapper", "centerX", "relative"])
-    const formInputClasses = classListMaker(["formInput"])
-    const formTermsClasses = classListMaker(["formTerms relative centerX"])
-    const formCheckboxLinkClasses = classListMaker(["link"])
 
     const errorStyle = {
         borderColor: "red",
@@ -269,21 +217,21 @@ const RegisterPage = () => {
     return (
         <section
             id="RegisterSection"
-            className={contactPageClasses}
+            className={clsx(["stretchX", "stretchVH", "relative", "RegisterSection"])}
         >
             <img src={register} alt="RegisterBckgImg" />
-            <Layer className={layerClasses}>
-                <div className={registerHeaderWrapper}>
+            <Layer className={clsx(["stretchY", "stretchX"])}>
+                <div className={clsx(["centerX", "relative", "registerHeaderWrapper"])}>
                     <h2>{text.crossroad.RegisterPage.Header.cz}</h2>
                     <Underliner width={"80%"} />
                 </div>
-                <div className={registerParagraphClasses}>
+                <div className={clsx(["registerParagraph", "relative", "centerX"])}>
                     {text.crossroad.RegisterPage.Paragraph.cz}
                 </div>
-                <div className={registerFormWrapperClasses}>
+                <div className={clsx(["registerFormWrapper", "centerX", "relative"])}>
                     <form action="#RegisterSection" id="registerForm" onSubmit={handleSubmit}>
                         <FormStringInput
-                            className={formInputClasses}
+                            className={"formInput"}
                             type={"text"}
                             name={"nameInput"}
                             formId={"registerForm"}
@@ -298,7 +246,7 @@ const RegisterPage = () => {
                             minLength={5}
                         />
                         <FormStringInput
-                            className={formInputClasses}
+                            className={"formInput"}
                             type={"password"}
                             name={"passwordInput"}
                             formId={"registerForm"}
@@ -311,7 +259,7 @@ const RegisterPage = () => {
                             minLength={9}
                         />
                         <FormStringInput
-                            className={formInputClasses}
+                            className={"formInput"}
                             type={"email"}
                             name={"emailInput"}
                             formId={"registerForm"}
@@ -322,7 +270,7 @@ const RegisterPage = () => {
                             errorStyle={errorStyle}
                             sucessStyle={sucessStyle}
                         />
-                        <div className={formTermsClasses}>
+                        <div className={clsx(["formTerms relative centerX"])}>
                             <div>
                                 <input
                                     type="checkbox"
@@ -332,7 +280,7 @@ const RegisterPage = () => {
                                     onClick={() => setTerms(!terms)}
                                 />
                                 <label htmlFor="termsRegistration">
-                                    <Link to={config.routes.businessConditions.path} className={formCheckboxLinkClasses}>
+                                    <Link to={routes.businessConditions.path} className={"link"}>
                                         {text.crossroad.RegisterPage.Form.checkbox1.label.cz}
                                     </Link>
                                 </label>
@@ -346,7 +294,7 @@ const RegisterPage = () => {
                                     onClick={() => setDataProcessing(!dataProcessing)}
                                 />
                                 <label htmlFor="dataprocessingRegistration">
-                                    <Link to={config.routes.dataProcessing.path} className={formCheckboxLinkClasses}>
+                                    <Link to={routes.dataProcessing.path} className={"link"}>
                                         {text.crossroad.RegisterPage.Form.checkbox2.label.cz}
                                     </Link>
                                 </label>

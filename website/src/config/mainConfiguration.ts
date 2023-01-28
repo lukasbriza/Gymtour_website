@@ -1,7 +1,5 @@
 import { ReactLazyPreload } from "../utils/ReactLazyPreload";
 
-///////////////////////////////////////////////////////////////////
-//CODE SPLIT ON ROUTES//
 const Home = ReactLazyPreload(() => import("../pages/Home"));
 const Crossroad = ReactLazyPreload(() => import("../pages/Crossroad"));
 const Fitness = ReactLazyPreload(() => import("../pages/Fitness"));
@@ -75,6 +73,22 @@ export const footerLinks = {
 
 export const transitionSetup = {
   transitionTimeout: 500,
+} as const;
+
+export const filter = {
+  avoidFilterTypes: {
+    fitness: ["gender", "specialization"],
+    coach: ["equipment", "general"],
+  },
+  typesHeight: {
+    order: 43,
+    regions: 88,
+    equipment: 172,
+    general: 86,
+    specialization: 86,
+    others: 65,
+    gender: 43,
+  },
 } as const;
 ///////////////////
 /*

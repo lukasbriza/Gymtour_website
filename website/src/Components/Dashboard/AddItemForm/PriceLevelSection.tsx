@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 //FUNCTIONS//
-import { classListMaker } from '../../../Functions/classListMaker'
+import { classListMaker } from '../../../utils/classListMaker'
 
 const PriceLevelSection = ({ onChange }: { onChange: (x: number) => void }) => {
     //////////////////////////////////////////////////

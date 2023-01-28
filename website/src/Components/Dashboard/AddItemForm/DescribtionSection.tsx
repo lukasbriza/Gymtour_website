@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 //FUNCTIONS//
-import { classListMaker } from '../../../Functions/classListMaker'
+import { classListMaker } from '../../../utils/classListMaker'
 
 type DescribtionSectionProps = { describtionText: string, describtionHeader: string, onChange: (data: { canSubmit: boolean, value: string }) => void }
 

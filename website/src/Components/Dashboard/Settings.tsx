@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react'
 import { FormStringInput } from '../FormStringInput'
 import { FormModal } from '../FormModal'
-import { saveToken, getToken } from '../../Functions/loginLogic'
+import { saveToken, getToken } from '../../utils/loginLogic'
 import {
     emailUpdateSucess,
     emailUpdateErrorHtml,
@@ -12,19 +12,15 @@ import {
     passwordUpdateSucess,
     nameUpdateErrorHtml
 } from './modalObjects'
-import fetchAgent from '../../Functions/fetchAgent'
+import fetchAgent from '../../utils/fetchAgent'
 import { gsap } from 'gsap'
-//FUNCTIONS//
-import { classListMaker } from '../../Functions/classListMaker'
-//CONFIG//
+import { classListMaker } from '../../utils/classListMaker'
 import { text } from '../../config/textSource'
-//CONTEXT//
-import { UserContext } from '../../App/Context'
+import { useUsercontext } from '@hooks'
+
 
 
 const Settings = () => {
-    //////////////////////////////////////////////////
-    //STATE//
     interface stateType {
         canSubmit: boolean, value: string
     }
@@ -55,9 +51,8 @@ const Settings = () => {
     const oldPasswordInputClasses = classListMaker(["oldPasswordInput"])
     const emailInputClasses = classListMaker(["changeEmailInput"])
 
-    const userContext = useContext(UserContext)
-    //////////////////////////////////////////////////
-    //FUNCTIONS//
+    const userContext = useUsercontext()
+
     const showAuthError = () => {
         showModal({ loading: false, sucess: false, msg: wrongPassword })
     }

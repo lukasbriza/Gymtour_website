@@ -5,10 +5,10 @@ import { Topped } from '../Components/SVG/Topped'
 import { Tilt } from '../Components/Tilt'
 import { IsLoading } from './HOCs/IsLoading'
 import { SearchItemIMG } from '../Components/SearchItemIMG'
-import fetchAgent from '../Functions/fetchAgent'
+import fetchAgent from '../utils/fetchAgent'
 
 //FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../utils/classListMaker'
 
 interface SearchItemType {
     data: {

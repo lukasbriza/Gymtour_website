@@ -1,16 +1,4 @@
 //GLOBAL TYPES//
-type MenuOffer = {
-  className: string;
-  offer: { name: string; path: string; component: any }[];
-  show: boolean | undefined;
-};
-
-type Hamburger = {
-  className: string;
-  isActive: () => void;
-  show: boolean;
-  hamburger: boolean | undefined;
-};
 
 type SmallLogo = {
   className: string;
@@ -20,18 +8,6 @@ type SmallLogo = {
 type SmallText = {
   className: string;
   scale: number;
-};
-
-type MenuLayer = {
-  offer: { name: string; path: string; component: any }[];
-  show: boolean | undefined;
-};
-
-type BigLogo = {
-  id: string;
-  className?: string;
-  scale: number;
-  ref: any;
 };
 
 type BigText = {
@@ -84,54 +60,26 @@ type errorMapObj = {
 
 type contentFilter = {
   open: boolean;
-  avoidFilterType?: string[
-    | "regions"
-    | "equipment"
-    | "general"
-    | "others"
-    | "gender"
-    | "specialization"
-    | "order"];
+  avoidFilterType?: string["regions" | "equipment" | "general" | "others" | "gender" | "specialization" | "order"];
 };
 type filterHeader = {
   title: string;
   onClick: () => void;
 };
 type filterType = {
-  type:
-    | "regions"
-    | "equipment"
-    | "general"
-    | "others"
-    | "gender"
-    | "specialization"
-    | "order";
+  type: "regions" | "equipment" | "general" | "others" | "gender" | "specialization" | "order";
   data: any;
 };
 
 type filterSection = {
-  filterType:
-    | "regions"
-    | "equipment"
-    | "general"
-    | "others"
-    | "gender"
-    | "specialization"
-    | "order";
+  filterType: "regions" | "equipment" | "general" | "others" | "gender" | "specialization" | "order";
   header: string;
   data: any;
   key?: number;
 };
 
 type dataTypeSearch = {
-  type:
-    | "regions"
-    | "equipment"
-    | "general"
-    | "others"
-    | "gender"
-    | "specialization"
-    | "order";
+  type: "regions" | "equipment" | "general" | "others" | "gender" | "specialization" | "order";
   region?: string;
   code?: string;
   town?: { code: string; checked: boolean };
@@ -169,11 +117,7 @@ type formStringInputProps = {
   name: string;
   formId: string;
   placeholder: string;
-  onChange: (canSubmit: {
-    canSubmit: boolean;
-    value: string;
-    name: string;
-  }) => void;
+  onChange: (canSubmit: { canSubmit: boolean; value: string; name: string }) => void;
   required: boolean;
   pattern?: any;
   errorMessage: string;

@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FilterHeader } from './FilterHeader'
 import { FilterTypes } from './FilterTypes'
-import { AppContext } from '../../App/Context';
-//CONFIG//
-import { config, animationStore } from '../../config/mainConfiguration'
-//FUNCTUION//
-import { classListMaker } from '../../Functions/classListMaker'
+import { classListMaker } from '../../utils/classListMaker'
+import { filter } from '@config';
+import { arrowDown, arrowUp } from '@animations';
 
 const FilterSection = React.memo((props: filterSection) => {
     //////////////////////////////////////////////////
@@ -21,11 +19,13 @@ const FilterSection = React.memo((props: filterSection) => {
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
-        if (arrow === true) {
-            animationStore.fitness.filter.arrowUp(arrowRef.current, typesRef.current, heighRef.current)
-        }
-        if (arrow === false) {
-            animationStore.fitness.filter.arrowDown(arrowRef.current, typesRef.current, heighRef.current)
+        if (arrowRef.current && typesRef.current && heighRef.current) {
+            if (arrow === true) {
+                arrowUp(arrowRef.current, typesRef.current, heighRef.current)
+            }
+            if (arrow === false) {
+                arrowDown(arrowRef.current, typesRef.current, heighRef.current)
+            }
         }
     }, [arrow, props.filterType])
     useEffect(() => {
@@ -39,28 +39,28 @@ const FilterSection = React.memo((props: filterSection) => {
         ) {
             switch (props.filterType) {
                 case "regions":
-                    heighRef.current = config.filter.typesHeight.regions
+                    heighRef.current = filter.typesHeight.regions
                     break;
                 case "equipment":
-                    heighRef.current = config.filter.typesHeight.equipment
+                    heighRef.current = filter.typesHeight.equipment
                     break;
                 case "general":
-                    heighRef.current = config.filter.typesHeight.general
+                    heighRef.current = filter.typesHeight.general
                     break;
                 case "specialization":
-                    heighRef.current = config.filter.typesHeight.specialization
+                    heighRef.current = filter.typesHeight.specialization
                     break;
                 case "others":
-                    heighRef.current = config.filter.typesHeight.others
+                    heighRef.current = filter.typesHeight.others
                     break;
                 case "gender":
-                    heighRef.current = config.filter.typesHeight.gender
+                    heighRef.current = filter.typesHeight.gender
                     break;
             }
             setArrow(true)
         }
         if (props.filterType === "order") {
-            heighRef.current = config.filter.typesHeight.order
+            heighRef.current = filter.typesHeight.order
         }
     }, [props.filterType])
     //////////////////////////////////////////////////

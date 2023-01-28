@@ -1,22 +1,19 @@
-import { useEffect, useContext, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FilterIcon } from '../Components/FilterIcon'
 import { ContentFilter } from '../Components/Filter/ContentFilter'
 import { SearchItem } from '../Components/SearchItem'
 import { ErrorModal } from '../Components/ErrorModal'
 import { Button } from '../Components/Button'
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
 import { text } from '../config/textSource'
-//CONTEXT//
-import { AppContext, AnimationContext } from "../App/Context"
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { useAnimationContext, useAppContext } from '@hooks'
+import { showCards, smallLogoShow } from '@animations'
+import clsx from 'clsx'
+import { routes } from '@config'
 
-const Fitness = () => {
+const Fitness: FC = () => {
     const gap = 10;
-    //////////////////////////////////////////////////
-    //STATE//
+
     const [linkStyle, setLinkStyle] = useState({})
     const [endIndex, setEndIndex] = useState<number>(gap)
     const [fetchTriggerAmount, setFetchTriggerAmount] = useState<number>(20)
@@ -27,40 +24,27 @@ const Fitness = () => {
     const [errorModal, setErrorModal] = useState<boolean>(false)
     const [errorHeader, setErrorHeader] = useState<string>("")
     const [errorMessage, setErrorMessage] = useState<string>("")
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const appContext = useContext(AppContext);
-    const anContext = useContext(AnimationContext);
 
-    const fitnessClasses = classListMaker(["contentPage", "relative"])
-    const headerSectionClasses = classListMaker(["headerSection", "minorColor1"])
-    const searchContentWrapperClasses = classListMaker(["searchContentWrapper", "absolute", "stretch", "top"])
-    const searchContentClasses = classListMaker(["searchContent", "relative", "centerX"])
-    const linkClasses = classListMaker(["mainColorText"])
-    const contentPageButtonClasses = classListMaker(["contentPageButton"])
-    //////////////////////////////////////////////////
-    //ANIMATIONS//
+    const appContext = useAppContext()
+    const anContext = useAnimationContext()
+
     useEffect(() => {
         anContext?.fn.setBigLogoPlayed(true)
-        animationStore.menu.logo.logoIn();
-        setTimeout(() => {
-            animationStore.menu.logo.logoTextIn();
-        }, 200);
+        smallLogoShow()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         if (initAn === false && appContext?.filteredFitnessData.length !== 0) {
             console.log(appContext?.filteredFitnessData)
-            console.log("here")
             setInitAn(true)
-            const tl = animationStore.fitness.card.init(document.getElementsByClassName("searchItem"))
-            tl.eventCallback('onComplete', () => { setInitAn(false) })
+            showCards()
+                .eventCallback('onComplete', () => { setInitAn(false) })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [appContext?.filteredFitnessData])
 
-    //DISABLE BUTTON//
+
     useEffect(() => {
         if (appContext!.filteredFitnessData.length <= endIndex) {
             setDisabled(true)
@@ -68,12 +52,11 @@ const Fitness = () => {
             setDisabled(false)
         }
     }, [appContext, endIndex])
-    //////////////////////////////////////////////////
-    //SETUP//
+
     return (
         <>
-            <div id="Fitness" className={config.basePageClassList + " " + fitnessClasses}>
-                <section className={headerSectionClasses}>
+            <div id="Fitness" className={clsx(["relative", "stretch", "minorColor2", "contentPage", "relative"])}>
+                <section className={clsx(["headerSection", "minorColor1"])}>
                     <FilterIcon
                         onClick={() => { anContext?.fn.setFilterOpen(!anContext.filterOpen) }}
                         crossed={anContext?.contentPageCross}
@@ -81,8 +64,8 @@ const Fitness = () => {
                     <h1>{text.fitness.PageHeader.cz}</h1>
                     <Link
                         style={linkStyle}
-                        to={config.routes.crossroad.path}
-                        className={linkClasses}
+                        to={routes.crossroad.path}
+                        className={"mainColorText"}
                         onTouchStart={() => setLinkStyle({ textDecoration: 'none' })}
                         onTouchEnd={() => setLinkStyle({ textDecoration: 'underline' })}
                         onClick={() => setLinkStyle({ textDecoration: 'underline' })}
@@ -93,11 +76,8 @@ const Fitness = () => {
                     </Link>
                 </section>
                 <ContentFilter open={anContext!.filterOpen} setFilteredData={appContext!.fn.setFilteredFitnessData} fetch={fetchSpan} />
-                <div className={searchContentWrapperClasses}>
-                    <div
-
-                        className={searchContentClasses}
-                    >
+                <div className={clsx(["searchContentWrapper", "absolute", "stretch", "top"])}>
+                    <div className={clsx(["searchContent", "relative", "centerX"])}>
                         {
                             appContext?.filteredFitnessData.map((data: filteredData, index: number) => {
                                 //DISABLED BUTTON LOGIC//
@@ -116,7 +96,7 @@ const Fitness = () => {
                     </div>
                     <Button
                         disabled={disabled}
-                        modificationClass={contentPageButtonClasses}
+                        modificationClass={"contentPageButton"}
                         initialClass={"buttonInitial"}
                         hoverClass={"buttonHover"}
                         text={text.fitness.Content.nextButton.cz}
