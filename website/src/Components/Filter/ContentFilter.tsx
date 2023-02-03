@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { FilterSection } from './FilterSection'
-import { Button } from '../Button'
+import { Button } from '../Button/Button'
 import { ErrorModal } from '../ErrorModal'
 import { gsap } from 'gsap'
 import { text } from '../../config/textSource'
@@ -9,9 +9,9 @@ import { text } from '../../config/textSource'
 import { classListMaker } from '../../utils/classListMaker'
 import { makeFilterFetchQuerry } from '../../utils/makeFilterFetchQuerry'
 import fetchAgent from '../../utils/fetchAgent'
-import { useAnimationContext, useAppContext } from '@hooks'
+import { useAnimationContext, useAppContext } from 'src/hooks/_index'
 import { filterOff, filterOn } from '@animations'
-import { filter } from '@config'
+import { filter } from 'src/config/_index'
 
 
 

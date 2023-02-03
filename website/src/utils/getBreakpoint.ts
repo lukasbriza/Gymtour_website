@@ -1,4 +1,4 @@
-import { BreakPoints } from "@app";
+import { BreakPoints } from "src/app/_index";
 
 export const getBreakPoint = (width: number): BreakPoints => {
   if (width > 360) {

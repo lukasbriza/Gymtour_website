@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, useRef } from 'react'
-import { Underliner } from '../Underliner'
-import { Button } from '../Button'
+import { Underliner } from '../Underliner/Underliner'
+import { Button } from '../Button/Button'
 import { ErrorModal } from '../ErrorModal'
 import fetchAgent from '../../utils/fetchAgent'
 import { getToken } from '../../utils/loginLogic'
@@ -8,7 +8,7 @@ import { classListMaker } from '../../utils/classListMaker'
 import { text } from '../../config/textSource'
 
 import { useNavigate } from 'react-router'
-import { useUsercontext } from '@hooks'
+import { useUsercontext } from 'src/hooks/_index'
 
 const Overview = () => {
     //////////////////////////////////////////////////

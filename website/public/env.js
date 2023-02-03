@@ -14,6 +14,7 @@ window.env = {
   "EDITOR": "C:\\Windows\\notepad.exe",
   "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
   "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+  "GENERATE_SOURCEMAP": "false",
   "GIT_ASKPASS": "f:\\Programy\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
   "HOME": "C:\\Users\\lukas",
   "HOMEDRIVE": "C:",

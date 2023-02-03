@@ -1,5 +1,8 @@
-import { FC, createContext, useMemo, useState } from "react";
+import { FC, createContext, useEffect, useMemo, useState } from "react";
 import { AnimationStateContext, ContextProviderProps } from "./_types";
+import { useAppContext } from "@hooks";
+import { smallLogoShow } from "@animations";
+import { useLocation } from "react-router-dom";
 
 const defaultState: AnimationStateContext = {
     bigLogoPlayed: false,
@@ -21,7 +24,17 @@ export const AnimationContextProvider: FC<ContextProviderProps> = (props) => {
     const [smallLogoPlayed, setSmallLogoPlayed] = useState<boolean>(defaultState.smallLogoPlayed)
     const [filterOpen, setFilterOpen] = useState<boolean>(defaultState.filterOpen)
     const [contentPageCross, setContentPageCross] = useState<boolean>(defaultState.contentPageCross)
+    const location = useLocation()
     const { children } = props
+
+    useEffect(() => {
+        if (location.pathname !== "/" && smallLogoPlayed === false) {
+            setBigLogoPlayed(true);
+            smallLogoShow();
+            setSmallLogoPlayed(true);
+
+        }
+    }, [location, smallLogoPlayed])
 
     const animationState: AnimationStateContext = useMemo(() => ({
         bigLogoPlayed: bigLogoPlayed,
@@ -34,7 +47,7 @@ export const AnimationContextProvider: FC<ContextProviderProps> = (props) => {
             setFilterOpen: setFilterOpen,
             setContentPageCross: setContentPageCross
         }
-    }), [bigLogoPlayed, smallLogoPlayed, filterOpen, filterOpen, contentPageCross])
+    }), [bigLogoPlayed, smallLogoPlayed, filterOpen, contentPageCross])
 
     return (
         <AnimationContext.Provider value={animationState}>

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react'
 import { FitnessForm } from './FitnessForm'
 import { CoachForm } from './CoachForm'
-import { Underliner } from '../Underliner'
+import { Underliner } from '../Underliner/Underliner'
 import { ErrorModal } from '../ErrorModal'
 //FUNCTIONS//
 import fetchAgent from '../../utils/fetchAgent'

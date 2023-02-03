@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BigTextProps } from './_types';
-import { useAppContext } from '@hooks';
+import { useAppContext } from 'src/hooks/_index';
 
 const BigText = React.forwardRef<BigTextProps, any>((props, ref: any) => {
     const [textScale, setTextScale] = useState<number>(0.5)

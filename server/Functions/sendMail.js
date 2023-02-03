@@ -2,13 +2,13 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const { APIError } = require("../Functions/errorBuilder");
 
-async function sendMail(receiver, type, value, id = undefined) {
+async function sendMail(receiver, type, value, id = undefined, res, response) {
   console.log("sendMail");
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "brizalukas96@gmail.com",
-      pass: "dvnnpwxlklrfmvff",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
@@ -29,13 +29,13 @@ async function sendMail(receiver, type, value, id = undefined) {
           const token = jwt.sign({ _id: id }, process.env.JWT_SIGN_KEY);
           try {
             info = await transporter.sendMail({
-              from: "brizalukas96@gmail.com",
+              from: process.env.EMAIL_USER,
               to: receiver,
               subject: subject,
               html: `
                     <div>
                     <div style="margin-bottom: 10px"><b>Dobrý den.</b></div>
-                    <div>Prosíme o ověření změny emailové adresy <b>${value}</b> kliknutím na tento odkaz: <a href="${
+                    <div>Prosíme o ověření změny emailové adresy <b>${receiver}</b> na <b>${value}</b> kliknutím na tento odkaz: <a href="${
                 process.env.EMAIL_VERIFICATION_ADRESS + token
               }"
                     target="_blank"
@@ -67,7 +67,7 @@ async function sendMail(receiver, type, value, id = undefined) {
       case "password":
         try {
           info = await transporter.sendMail({
-            from: "brizalukas96@gmail.com",
+            from: process.env.EMAIL_USER,
             to: receiver,
             subject: subject,
             html: `
@@ -100,7 +100,7 @@ async function sendMail(receiver, type, value, id = undefined) {
       case "username":
         try {
           info = await transporter.sendMail({
-            from: "brizalukas96@gmail.com",
+            from: process.env.EMAIL_USER,
             to: receiver,
             subject: subject,
             html: `

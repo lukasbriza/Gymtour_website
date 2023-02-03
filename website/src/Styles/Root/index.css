@@ -286,10 +286,22 @@ body {
   }
   .registerFormWrapper #registerForm {
     display: grid;
+    -moz-column-gap: 15px;
+         column-gap: 15px;
+    row-gap: 10px;
     grid-template-rows: 1fr 1fr -webkit-min-content 1fr;
     grid-template-rows: 1fr 1fr min-content 1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "input1 input2" "input3 input3" "formTerms formTerms" "button button";
+  }
+  .registerFormWrapper .input1 {
+    grid-area: input1;
+  }
+  .registerFormWrapper .input2 {
+    grid-area: input2;
+  }
+  .registerFormWrapper .input3 {
+    grid-area: input3;
   }
 }
 
@@ -2328,35 +2340,63 @@ body {
   width: 100%;
 }
 
-.formInput {
-  height: 50px;
+.stringInputHelperRoot {
+  width: 100%;
+}
+
+.stringInputRoot {
   width: inherit;
-  padding-left: 10px;
-  background-color: rgba(192, 192, 192, 0.274);
+}
+.stringInputRoot input {
+  caret-color: white;
   color: white;
-  border: 2px solid transparent;
-  border-radius: 5px;
+  cursor: pointer;
+  height: 60px;
+  width: inherit;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.253);
 }
 
-.formInput::-moz-placeholder {
-  opacity: 1;
-  color: rgb(226, 226, 226);
+.stringInputRoot:hover label {
+  color: white;
 }
-
-.formInput:-ms-input-placeholder {
-  opacity: 1;
-  color: rgb(226, 226, 226);
-}
-
-.formInput::placeholder {
-  opacity: 1;
-  color: rgb(226, 226, 226);
-}
-
-.errorMessage {
+.stringInputRoot:hover .stringInputLabelError {
   color: red;
-  margin: 5px 5px;
-  font-size: 10px;
+}
+
+.stringInputRootFocused label {
+  background: rgba(123, 123, 123, 0.128);
+}
+.stringInputRootFocused input {
+  outline-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.stringInputLabel {
+  cursor: pointer;
+  color: white;
+  background: rgba(255, 255, 255, 0);
+}
+
+.stringInputHelper {
+  min-height: 15px;
+}
+
+.stringFocusRootError input {
+  outline-color: red !important;
+  outline-width: 1px !important;
+}
+.stringFocusRootError label {
+  font-size: 14px !important;
+  color: white !important;
+}
+
+.stringInputLabelError {
+  color: red;
+  font-size: 16px;
+}
+
+.stringInputError {
+  border: 1px solid red;
 }
 
 button[type=submit] {

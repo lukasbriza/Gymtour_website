@@ -1,14 +1,11 @@
 import { useEffect, useState, useRef, FC } from "react";
 import { Link } from "react-router-dom";
-import { SmallLogo } from "../SVG/SmallLogo";
-import { SmallText } from "../SVG/SmallText";
-import { LoginButton } from "../SVG/LoginButton"
-import { text } from '../../config/textSource'
-import { useAppContext } from "@hooks";
-import clsx from "clsx";
+import { SmallLogo, SmallText, LoginButton } from "@svg";
+import { useAppContext } from "@hooks"
 import { routes, breakpoints, menuItems } from "@config";
 import { crossOff, crossOn, hideHamburger, hideLayer, hideMenu, hideMenuOffer, showHamburger, showLayer, showMenu, showMenuOffer } from "@animations";
 import { HamburgerProps, MenuLayerProps, MenuOfferProps } from "./_types";
+import clsx from "clsx";
 
 
 
@@ -38,14 +35,16 @@ export const Menu: FC = () => {
 
   //DISPLAY MENU AND HAMBURGER LOGIC//
   useEffect(() => {
-    if (!isMainPage && biggerThanTablet) {
-      setShowOffer(true);
-      setShowHamburger(false);
-      setHamburger(false);
-    }
-    if (!isMainPage && smallerOrEqualThenTablet) {
-      setShowOffer(false);
-      setShowHamburger(true);
+    if (!isMainPage) {
+      if (biggerThanTablet) {
+        setShowOffer(true);
+        setShowHamburger(false);
+        setHamburger(false);
+      }
+      if (smallerOrEqualThenTablet) {
+        setShowOffer(false);
+        setShowHamburger(true);
+      }
     }
     if (isMainPage) {
       setHamburger(false);
@@ -69,50 +68,48 @@ export const Menu: FC = () => {
     }
   }, [isDashboard, showMenuComp])
 
-  if (width && width <= breakpoints.tablet) {
-    return (
-      <nav
-        id="menu-mob"
-        className={clsx(["absolute", "topZ", "menu"])}
-        style={{ backgroundColor: background, background: background }}
-        ref={menuRef}
+  //ROUTE CHANGE MENULAYER SE OFF//
+  useEffect(() => {
+    if (hamburger) {
+      setHamburger(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actualLocation])
+
+  return (
+    <nav
+      id={smallerOrEqualThenTablet ? "menu-mob" : "menu-pc"}
+      className={clsx(["absolute", "topZ", "menu"])}
+      style={{ backgroundColor: background, background: background }}
+      ref={menuRef}
+    >
+      <Link
+        className={clsx(["logo-wrapper", "logoGrid"])}
+        to={routes.mainPage.path}
       >
-        <Link className={clsx(["logo-wrapper", "logoGrid"])} to={routes.mainPage.path}>
-          <SmallLogo scale={logoScale} className={clsx(["relative", "centerY"])} />
-          <SmallText scale={textScale} className={clsx(["relative", "centerY"])} />
-        </Link>
-        <Hamburger
-          className={clsx(["hamburgerGrid", "gridRightX", "gridCenterY",])}
-          isActive={handleIsActive}
-          show={showHamburger}
-          hamburger={hamburger}
-        />
-        <MenuLayer offer={routesArray} show={hamburger} />
-      </nav>
-    );
-  } else {
-    return (
-      <nav
-        id="menu-pc"
-        className={clsx(["absolute", "topZ", "menu"])}
-        style={{ backgroundColor: background, background: background }}
-        ref={menuRef}
-      >
-        <Link
-          className={clsx(["logo-wrapper", "logoGrid"])}
-          to={routes.mainPage.path}
-        >
-          <SmallLogo scale={logoScale} className={clsx(["relative", "centerY"])} />
-          <SmallText scale={textScale} className={clsx(["relative", "centerY"])} />
-        </Link>
-        <MenuOffer
-          className={clsx(["menuOfferGrid"])}
-          offer={routesArray}
-          show={showOffer}
-        />
-      </nav>
-    );
-  }
+        <SmallLogo scale={logoScale} className={clsx(["relative", "centerY"])} />
+        <SmallText scale={textScale} className={clsx(["relative", "centerY"])} />
+      </Link>
+      {
+        smallerOrEqualThenTablet ?
+          <>
+            <Hamburger
+              className={clsx(["hamburgerGrid", "gridRightX", "gridCenterY",])}
+              isActive={handleIsActive}
+              show={showHamburger}
+              hamburger={hamburger}
+            />
+            <MenuLayer offer={routesArray} show={hamburger} />
+          </> :
+          <MenuOffer
+            className={clsx(["menuOfferGrid"])}
+            offer={routesArray}
+            show={showOffer}
+          />
+      }
+    </nav>
+  );
+
 };
 
 
@@ -141,7 +138,6 @@ const MenuOffer: FC<MenuOfferProps> = (props) => {
       {menuItems}
       <Link to={routes.login.path} className={clsx(["stretchX", "relative", "offerItem", "loginButton"])}>
         <LoginButton />
-        <span className="tooltip">{text.menuTooltip.cz}</span>
       </Link>
     </div>
   );
@@ -158,7 +154,7 @@ const MenuLayer: FC<MenuLayerProps> = (props) => {
     }
   }, [show]);
 
-  let menuItems = props.offer.map(
+  const menuItems = props.offer.map(
     (obj: { name: string; path: string; component: void }, index) => {
       return (
         <Link to={obj.path} className={clsx(["relative", "offerItem", "offerItem-layer"])} key={index}>
@@ -174,7 +170,6 @@ const MenuLayer: FC<MenuLayerProps> = (props) => {
         {menuItems}
         <Link to={routes.login.path} className={clsx(["relative", "offerItem", "offerItem-layer", "loginButton"])}>
           <LoginButton />
-          <span className="tooltip">Účet</span>
         </Link>
       </section>
     </div>
@@ -182,7 +177,7 @@ const MenuLayer: FC<MenuLayerProps> = (props) => {
 };
 
 const Hamburger: FC<HamburgerProps> = (props) => {
-  const { hamburger, show } = props
+  const { hamburger, show, isActive } = props
   const slice1 = useRef<HTMLDivElement>(null)
   const slice2 = useRef<HTMLDivElement>(null)
   const slice3 = useRef<HTMLDivElement>(null)
@@ -190,18 +185,14 @@ const Hamburger: FC<HamburgerProps> = (props) => {
 
 
   useEffect(() => {
-    if (slice1.current && slice2.current && slice3.current) {
-      hamburger ?
-        crossOn(slice1.current, slice2.current, slice3.current) :
-        crossOff(slice1.current, slice2.current, slice3.current)
-    }
+    hamburger ?
+      crossOn(slice1.current, slice2.current, slice3.current) :
+      crossOff(slice1.current, slice2.current, slice3.current)
   }, [hamburger])
 
   useEffect(() => {
     const { current } = wrapperRef
-    if (current) {
-      show ? showHamburger(current) : hideHamburger(current)
-    }
+    show ? showHamburger(current) : hideHamburger(current)
   }, [show])
 
   return (
@@ -209,9 +200,7 @@ const Hamburger: FC<HamburgerProps> = (props) => {
       id="hamburger-wrapper"
       className={props.className}
       ref={wrapperRef}
-      onClick={() => {
-        props.isActive()
-      }}
+      onClick={isActive}
     >
       <div className={"slice minorColor1 stretchX"} ref={slice1}></div>
       <div className={"slice minorColor1 stretchX"} ref={slice2}></div>

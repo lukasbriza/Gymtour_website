@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FilterIcon } from '../Components/FilterIcon'
-import { ContentFilter } from '../Components/Filter/ContentFilter'
-import { SearchItem } from '../Components/SearchItem'
-import { ErrorModal } from '../Components/ErrorModal'
-import { Button } from '../Components/Button'
+import { FilterIcon } from '../components/FilterIcon'
+import { ContentFilter } from '../components/Filter/ContentFilter'
+import { SearchItem } from '../components/SearchItem'
+import { ErrorModal } from '../components/ErrorModal'
+import { Button } from '../components/Button/Button'
 import { text } from '../config/textSource'
-import { useAnimationContext, useAppContext } from '@hooks'
+import { useAnimationContext, useAppContext } from 'src/hooks/_index'
 import { showCards, smallLogoShow } from '@animations'
 import clsx from 'clsx'
-import { routes } from '@config'
+import { routes } from 'src/config/_index'
 
 const Fitness: FC = () => {
     const gap = 10;

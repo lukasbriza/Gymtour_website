@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { gsap } from 'gsap'
-import { Button } from './Button'
+import { Button } from './Button/Button'
 import { Circle } from './SVG/Circle'
 import { Cross } from './SVG/Cross'
 import { Sucess } from './SVG/Sucess'

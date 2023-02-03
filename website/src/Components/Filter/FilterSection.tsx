@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FilterHeader } from './FilterHeader'
 import { FilterTypes } from './FilterTypes'
 import { classListMaker } from '../../utils/classListMaker'
-import { filter } from '@config';
+import { filter } from 'src/config/_index';
 import { arrowDown, arrowUp } from '@animations';
 
 const FilterSection = React.memo((props: filterSection) => {

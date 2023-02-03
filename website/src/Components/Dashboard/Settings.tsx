@@ -16,7 +16,7 @@ import fetchAgent from '../../utils/fetchAgent'
 import { gsap } from 'gsap'
 import { classListMaker } from '../../utils/classListMaker'
 import { text } from '../../config/textSource'
-import { useUsercontext } from '@hooks'
+import { useUsercontext } from 'src/hooks/_index'
 
 
 

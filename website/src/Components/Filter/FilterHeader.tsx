@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Underliner } from "../Underliner"
+import { Underliner } from "../Underliner/Underliner"
 //FUNCTUION//
 import { classListMaker } from '../../utils/classListMaker'
 

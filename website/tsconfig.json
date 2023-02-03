@@ -18,13 +18,15 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@app": ["./src/app/index.ts"],
-      "@components": ["./src/Components/index.ts"],
-      "@config": ["./src/config/index.ts"],
-      "@utils": ["./src/utils/index.ts"],
+      "@app": ["src/app/_index.ts"],
+      "@components": ["src/components/_index.ts"],
+      "@config": ["src/config/_index.ts"],
+      "@utils": ["src/utils/_index.ts"],
       "@assets": ["./src/assets"],
-      "@hooks": ["./src/hooks/index.ts"],
-      "@animations": ["./src/animations/index.ts"]
+      "@hooks": ["src/hooks/_index.ts"],
+      "@animations": ["./src/animations/_index.ts"],
+      "@svg": ["src/components/SVG/_index.ts"],
+      "@validations": ["./src/validations/_index.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "src", "craco.config.js"],

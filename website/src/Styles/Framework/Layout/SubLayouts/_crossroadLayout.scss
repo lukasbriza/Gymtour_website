@@ -88,6 +88,8 @@
   @include mq($from: tablet) {
     #registerForm {
       display: grid;
+      column-gap: 15px;
+      row-gap: 10px;
       grid-template-rows: 1fr 1fr min-content 1fr;
       grid-template-columns: 1fr 1fr;
       grid-template-areas:
@@ -98,6 +100,16 @@
     }
     width: 85%;
     max-width: 900px;
+
+    .input1 {
+      grid-area: input1;
+    }
+    .input2 {
+      grid-area: input2;
+    }
+    .input3 {
+      grid-area: input3;
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-import { ContextProviderProps, UserStateContext } from "@app";
+import { ContextProviderProps, UserStateContext } from "src/app/_index";
 import { FC, createContext, useMemo, useState } from "react";
 
 const initialstate: UserStateContext = {

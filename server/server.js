@@ -78,7 +78,14 @@ app.use(
     message: config.rateLimit.message,
   })
 );
-
+app.use(
+  "/emailUpdate",
+  rateLimit({
+    max: config.rateLimit.maxRequests,
+    windowMs: config.rateLimit.windowMS,
+    message: config.rateLimit.message,
+  })
+);
 //API IMAGES RATE LIMIT??//
 /************************/
 ////////////////////////////////////////////////////////////////
@@ -96,6 +103,7 @@ const admin = require("./Controllers/admin-controller.js");
 const filter = require("./Controllers/filter-controller.js");
 const images = require("./Controllers/images-controller.js");
 const views = require("./Controllers/views-controller.js");
+const emailUpdate = require("./Controllers/emailUpdate-controller.js");
 
 app.use("/api-filter", filter);
 app.use("/api-fitness", fitness);
@@ -105,6 +113,7 @@ app.use("/api-login", login);
 app.use("/api-admin", admin);
 app.use("/api-images", images);
 app.use("/api-views", views);
+app.use("/emailUpdate", emailUpdate);
 
 ////////////////////////////////////////////////////////////////
 //DATABASE CONNECTION//

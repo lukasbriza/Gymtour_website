@@ -1,10 +1,10 @@
 import { useRef, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Heart } from '../Components/SVG/Heart'
-import { Topped } from '../Components/SVG/Topped'
-import { Tilt } from '../Components/Tilt'
+import { Heart } from '../components/SVG/Heart'
+import { Topped } from '../components/SVG/Topped'
+import { Tilt } from '../components/Tilt'
 import { IsLoading } from './HOCs/IsLoading'
-import { SearchItemIMG } from '../Components/SearchItemIMG'
+import { SearchItemIMG } from '../components/SearchItemIMG'
 import fetchAgent from '../utils/fetchAgent'
 
 //FUNCTUION//

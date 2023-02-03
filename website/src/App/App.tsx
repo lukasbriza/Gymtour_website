@@ -1,5 +1,3 @@
-import '../config/animationRegistration.js';
-
 import { BrowserRouter } from 'react-router-dom'
 import { PageRoutes } from './PageRoutes'
 import { AppContextProvider } from './context/AppContext';
@@ -13,16 +11,16 @@ import { Layout } from './Layout';
 
 export const App: FC = () => {
   return (
-    <AppContextProvider>
-      <AnimationContextProvider>
-        <UserContextProvider>
-          <BrowserRouter>
+    <BrowserRouter>
+      <AppContextProvider>
+        <AnimationContextProvider>
+          <UserContextProvider>
             <Layout>
               <PageRoutes />
             </Layout>
-          </BrowserRouter>
-        </UserContextProvider>
-      </AnimationContextProvider>
-    </AppContextProvider>
+          </UserContextProvider>
+        </AnimationContextProvider>
+      </AppContextProvider>
+    </BrowserRouter>
   );
 }

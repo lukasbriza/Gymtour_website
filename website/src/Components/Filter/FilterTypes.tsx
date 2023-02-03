@@ -1,7 +1,7 @@
 import React, { useState, BaseSyntheticEvent } from 'react';
 import { text } from '../../config/textSource'
 import { classListMaker } from '../../utils/classListMaker'
-import { useAppContext } from '@hooks';
+import { useAppContext } from 'src/hooks/_index';
 
 
 const FilterTypes = React.memo(React.forwardRef((props: filterType, ref: any) => {

@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap, { Power2 } from "gsap";
 import { fadeIn, fadeOff } from "./effects";
 
 export const showMenu = (target: HTMLElement) => {
@@ -29,7 +29,7 @@ export const hideMenuOffer = () => {
   return tl;
 };
 
-export const crossOn = (slice1: HTMLDivElement, slice2: HTMLDivElement, slice3: HTMLDivElement) => {
+export const crossOn = (slice1: gsap.TweenTarget, slice2: gsap.TweenTarget, slice3: gsap.TweenTarget) => {
   const tl = gsap.timeline();
   tl.addLabel("start")
     .to(
@@ -61,7 +61,7 @@ export const crossOn = (slice1: HTMLDivElement, slice2: HTMLDivElement, slice3: 
   return tl;
 };
 
-export const crossOff = (slice1: HTMLDivElement, slice2: HTMLDivElement, slice3: HTMLDivElement) => {
+export const crossOff = (slice1: gsap.TweenTarget, slice2: gsap.TweenTarget, slice3: gsap.TweenTarget) => {
   const tl = gsap.timeline();
   tl.addLabel("start")
     .to(
@@ -79,14 +79,14 @@ export const crossOff = (slice1: HTMLDivElement, slice2: HTMLDivElement, slice3:
   return tl;
 };
 
-export const showHamburger = (wrapper: HTMLDivElement) => {
+export const showHamburger = (wrapper: gsap.TweenTarget) => {
   const tl = gsap.timeline();
-  tl.add(fadeIn(wrapper, { displayInitial: "none", displayAfter: "grid" }));
+  tl.add(fadeIn(wrapper, { displayInitial: "grid", displayAfter: "grid" }));
 
   return tl;
 };
 
-export const hideHamburger = (wrapper: HTMLDivElement) => {
+export const hideHamburger = (wrapper: gsap.TweenTarget) => {
   const tl = gsap.timeline();
   tl.add(fadeOff(wrapper, { displayInitial: "grid", displayAfter: "none" }));
 
@@ -95,8 +95,8 @@ export const hideHamburger = (wrapper: HTMLDivElement) => {
 
 export const showLayer = (layer: HTMLDivElement) => {
   const tl = gsap.timeline();
-  tl.to(layer, { width: "100%", duration: 2, ease: Power2.easeOut }).add(
-    fadeIn(".offerItem-layer", { displayInitial: "none", displayAfter: "grid", delay: 1 })
+  tl.to(layer, { width: "100%", duration: 1.2, ease: Power2.easeOut }).add(
+    fadeIn(".offerItem-layer", { displayInitial: "grid", displayAfter: "grid", delay: 0 })
   );
 
   return tl;
@@ -106,9 +106,9 @@ export const hideLayer = (layer: HTMLDivElement) => {
   const tl = gsap.timeline();
   tl.add(fadeOff(".offerItem-layer", { displayInitial: "grid", displayAfter: "none", duration: 0.5 })).to(layer, {
     width: "0%",
-    duration: 0,
+    duration: 1.5,
     ease: Power2.easeOut,
-    delay: 1,
+    delay: 0.5,
   });
 
   return tl;

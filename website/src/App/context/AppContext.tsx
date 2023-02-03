@@ -1,12 +1,12 @@
 import { FC, createContext, useMemo, useState } from "react";
 import { AppStateContext, BreakPoints, ContextProviderProps } from "./_types";
-import { getBreakPoint, handleSearchData, preloadImg } from '@utils'
+import { getBreakPoint, handleSearchData, preloadImg } from 'src/utils/_index'
 
 //IMAGES//
-import main from '../../assets/main.webp'
-import fitness from '../../assets/fitness.webp'
-import trainer from '../../assets/trainer.webp'
-import register from '../../assets/register.webp'
+import main from '@assets/main.webp'
+import fitness from '@assets/fitness.webp'
+import trainer from '@assets/trainer.webp'
+import register from '@assets/register.webp'
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -66,6 +66,7 @@ export const AppContextProvider: FC<ContextProviderProps> = (props) => {
     const [coachSearch, setCoachSearch] = useState<searchCoachData>(defaultState.coachSearch)
     const [filteredFitnessData, setFilteredFitnessData] = useState<filteredData[] | []>([])
     const [filteredCoachData, setFilteredCoachData] = useState<filteredData[] | []>([])
+    const location = useLocation()
     const { children } = props
 
     const handleSearchDataSubstitution = (data: dataTypeSearch) => {
@@ -86,18 +87,18 @@ export const AppContextProvider: FC<ContextProviderProps> = (props) => {
             }
         }
 
-        window.addEventListener('resize', () => handler)
+        window.addEventListener('resize', handler)
         return () => {
-            window.removeEventListener('resize', () => handler)
+            window.removeEventListener('resize', handler)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        if (window.location.pathname !== actualLocation) {
-            setActualLocation(window.location.pathname)
+        if (location.pathname !== actualLocation) {
+            setActualLocation(location.pathname)
         }
-    }, [window.location.pathname])
+    }, [actualLocation, location])
 
     const context = useMemo<AppStateContext>(() => ({
         width: width,

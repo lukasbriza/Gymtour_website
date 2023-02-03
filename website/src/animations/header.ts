@@ -5,9 +5,11 @@ export const showHeader = () => {
   const homeHeader = gsap.utils.toArray(".homeHeader");
 
   const tl = gsap.timeline();
-  tl.add(fadeIn(homeHeader, { stagger: 0.3, delay: 0.5, duration: 1 }))
-    .add(fadeIn("#pageHeader", { delay: 1.5, duration: 1, displayAfter: "flex" }))
-    .add(fadeIn("#homeButton", { delay: 1.5, duration: 1 }));
+  tl.addLabel("start")
+    .add(fadeIn(homeHeader, { stagger: 0.3, delay: 0, duration: 1.1 }), "start")
+    .add("afterHeaders")
+    .add(fadeIn("#pageHeader", { duration: 1 }), "afterHeaders")
+    .add(fadeIn("#homeButton", { duration: 1 }), "afterHeaders");
 
   return tl;
 };

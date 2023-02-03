@@ -1,15 +1,17 @@
 import { useEffect, useState, useRef, FC } from 'react'
 import { Link } from 'react-router-dom'
-import { BigLogo } from "@components"
-import { BigText } from '../Components/SVG/BigText/BigText'
+import { BigLogo } from "src/components/_index"
+import { BigText } from '../components/SVG/BigText/BigText'
 import clsx from 'clsx'
 import main from '../assets/main.webp'
 import { text } from '../config/textSource'
-import { useAnimationContext } from '@hooks'
+import { useAnimationContext } from 'src/hooks/_index'
 import { bigLogoAnimation, showHeader, smallLogoShow } from '@animations'
-import { routes } from '@config'
+import { routes } from 'src/config/_index'
 
+//TODO! - change linf for button
 const Home: FC = () => {
+    const { bigLogoPlayed } = useAnimationContext()
     return (
         <div
             id="Home"
@@ -18,13 +20,16 @@ const Home: FC = () => {
             <img src={main} alt="homepageImage" />
             <PageHeader />
             <MainSection />
-            <Link
-                to={routes.crossroad.path}
-                id="homeButton"
-                className={clsx(["link", "absolute", "centerX"])}
-            >
-                {text.home.Button.cz}
-            </Link>
+            {
+                bigLogoPlayed &&
+                <Link
+                    to={routes.crossroad.path}
+                    id="homeButton"
+                    className={clsx(["link", "absolute", "centerX"])}
+                >
+                    {text.home.Button.cz}
+                </Link>
+            }
 
         </div>
     )
@@ -59,19 +64,8 @@ const MainSection: FC = () => {
 
     const header = useRef<HTMLDivElement>(null)
 
-    const bigLogoIsCurrent = bigLogoWrapper.current &&
-        pathRef.current &&
-        gRef.current &&
-        yRef.current &&
-        mRef.current &&
-        tRef.current &&
-        oRef.current &&
-        uRef.current &&
-        rRef.current
-
     useEffect(() => {
-        //INITIAL LOGIC
-        if (bigLogoPlayed === false && bigLogoIsCurrent) {
+        if (bigLogoPlayed === false) {
             bigLogoAnimation(
                 bigLogoWrapper.current,
                 pathRef.current,
@@ -90,20 +84,16 @@ const MainSection: FC = () => {
             return
         }
         if (bigLogoPlayed === true && smallLogoPlayed === false) {
-            smallLogoShow()
             showHeader()
-            setSmallLogoPlayed(true)
             return
         }
         if (bigLogoPlayed === true && smallLogoPlayed === true) {
             showHeader()
-            setSmallLogoPlayed(true)
             return
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    //////////////////////////////////////////////////
-    //MAIN HEADER AND SMALL LOGO LOGIC//
+
     useEffect(() => {
         if (showLogo && !smallLogoPlayed) {
             smallLogoShow()

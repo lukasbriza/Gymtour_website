@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { Exclamation } from './SVG/Exclamation'
-import { Button } from './Button'
+import { Button } from './Button/Button'
 import { text } from '../config/textSource'
 import { classListMaker } from '../utils/classListMaker'
 

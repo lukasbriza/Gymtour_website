@@ -5,7 +5,7 @@ const Joi = require("joi");
 const updateUservalidation = (req, res, next) => {
   let response = resBuild();
   let updateObj;
-  console.log(req.body);
+
   if (req.body.type == "password") {
     updateObj = Joi.object({
       type: Joi.string(),
@@ -42,6 +42,19 @@ const updateUservalidation = (req, res, next) => {
     }
   } else {
     new ValidationError("Wrong type in body.", res, response);
+  }
+};
+
+const emailUpdateValidation = (req, res, next) => {
+  let response = resBuild();
+  const emailUpdateSchema = Joi.object({
+    token: Joi.string().required(),
+  });
+  const value = emailUpdateSchema.validate(req.body, { render: false });
+  if (value.error) {
+    new ValidationError(value.error.details[0].message, res, response);
+  } else {
+    next();
   }
 };
 
@@ -496,6 +509,7 @@ const notificationDeleteValidation = (req, res, next) => {
 
 module.exports = {
   updateUservalidation,
+  emailUpdateValidation,
   deleteUservalidation,
   registerValidation,
   loginValidation,

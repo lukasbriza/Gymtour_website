@@ -5,11 +5,7 @@ const bcrypt = require("bcrypt");
 //SCHEMA//
 const { UserModel } = require("../Schemas/userSchema");
 //ERROR//
-const {
-  ValidationError,
-  DatabaseError,
-  APIError,
-} = require("../Functions/errorBuilder");
+const { ValidationError, DatabaseError } = require("../Functions/errorBuilder");
 
 ////////////////////////////////////////////////////////////////
 class UserAbl {
@@ -55,12 +51,15 @@ class UserAbl {
     let update;
     //USERNAME UPDATE LOGIC//
     if (type === "username") {
-      console.log(type, _id, updateValue);
       //VERIFY EXISTENCE OF NEW USERNAME//
       try {
         const verify = await UserModel.find({ username: updateValue });
         if (verify.length !== 0) {
-          new DatabaseError("This username is alreade in use.", res, response);
+          new ValidationError(
+            "This username is alreade in use.",
+            res,
+            response
+          );
           return;
         }
       } catch (err) {
@@ -76,18 +75,24 @@ class UserAbl {
           { username: updateValue }
         );
       } catch (err) {
-        console.log("err");
         if (err instanceof Error) {
           new DatabaseError("Database call failed.", res, response);
           return;
         }
         throw err;
       }
-      await sendMail("lukasbriza@seznam.cz", "username", updateValue);
+      //SEND MAIL//
+      await sendMail(
+        user[0].email,
+        "username",
+        updateValue,
+        undefined,
+        res,
+        response
+      );
     }
     //PASSWORD UPDATE LOGIC//
     if (type === "password") {
-      console.log(type, _id, updateValue);
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(updateValue, salt);
 
@@ -102,19 +107,25 @@ class UserAbl {
         }
         throw err;
       }
-      let getUser = await UserModel.findById(_id);
-      await sendMail("lukasbriza@seznam.cz", "password", getUser.username);
+      //SEND MAIL//
+      await sendMail(
+        user[0].email,
+        "password",
+        user[0].username,
+        undefined,
+        res,
+        response
+      );
     }
     //EMAIL UPDATE LOGIC//
     if (type === "email") {
-      console.log(type, _id, updateValue);
       let date = new Date();
-
       //VERIFY EXISTENCE OF NEW EMAIL//
       try {
         const verify = await UserModel.find({ email: updateValue });
+
         if (verify.length > 0) {
-          new DatabaseError("Email adress is already in use.", res, response);
+          new ValidationError("Email adress is already in use.", res, response);
           return;
         }
       } catch (err) {
@@ -138,12 +149,19 @@ class UserAbl {
         }
         throw err;
       }
-      let getUser = await UserModel.findById(_id);
-      await sendMail("lukasbriza@seznam.cz", "email", getUser.email, _id);
+
+      await sendMail(
+        user[0].email,
+        "email",
+        updateValue,
+        _id,
+        undefined,
+        res,
+        response
+      );
     }
     ///////////////////////////////////////////////////////////
     //VERIFICATION FOR ALL//
-    console.log("verification");
     if (update.modifiedCount == 1 && update.matchedCount == 1) {
       response.data = { updated: true };
     } else {
@@ -151,9 +169,6 @@ class UserAbl {
       new DatabaseError("Update of object failed.", res, response);
       return;
     }
-    ///////////////////////////////////////////////////////////
-    //SEND MAIL LOGIC//
-    /** */
     ///////////////////////////////////////////////////////////
     //BUILD RESPONSE//
     return response;

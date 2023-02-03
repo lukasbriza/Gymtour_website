@@ -45,8 +45,8 @@ type fadeInConfig = {
 };
 export const fadeIn = (target: gsap.TweenTarget, config: fadeInConfig = {}) => {
   const anConfig = {
-    displayInitial: config.displayInitial ?? "initial",
-    displayAfter: config.displayAfter ?? "initial",
+    displayInitial: config.displayInitial,
+    displayAfter: config.displayAfter,
     stagger: config.stagger ?? 0.2,
     duration: config.duration ?? 0.5,
     delay: config.delay ?? 0,

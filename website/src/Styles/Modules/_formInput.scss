@@ -2,23 +2,68 @@
   width: 100%;
 }
 
-.formInput {
-  height: 50px;
+.stringInputHelperRoot {
+  width: 100%;
+}
+
+.stringInputRoot {
   width: inherit;
-  padding-left: 10px;
-  background-color: rgba(192, 192, 192, 0.274);
+  input {
+    caret-color: white;
+    color: white;
+    cursor: pointer;
+    height: 60px;
+    width: inherit;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.253);
+  }
+}
+
+.stringInputRoot:hover {
+  label {
+    color: white;
+  }
+
+  .stringInputLabelError {
+    color: red;
+  }
+}
+
+.stringInputRootFocused {
+  label {
+    background: rgba(123, 123, 123, 0.128);
+  }
+  input {
+    outline-color: rgba(255, 255, 255, 0.5) !important;
+  }
+}
+
+.stringInputLabel {
+  cursor: pointer;
   color: white;
-  border: 2px solid transparent;
-  border-radius: 5px;
+  background: rgba(255, 255, 255, 0);
 }
 
-.formInput::placeholder {
-  opacity: 1;
-  color: rgb(226, 226, 226);
+.stringInputHelper {
+  min-height: 15px;
 }
 
-.errorMessage {
+.stringFocusRootError {
+  input {
+    outline-color: red !important;
+    outline-width: 1px !important;
+  }
+  label {
+    font-size: 14px !important;
+    color: white !important;
+  }
+}
+
+.stringInputLabelError {
   color: red;
-  margin: 5px 5px;
-  font-size: 10px;
+  font-size: 16px;
+}
+
+.stringInputError {
+  border: 1px solid red;
 }

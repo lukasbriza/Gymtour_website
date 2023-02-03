@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import { gsap, Power2, Power1, Power3 } from 'gsap'
 import { classListMaker } from '../utils/classListMaker'
-import { useAnimationContext } from '@hooks'
+import { useAnimationContext } from 'src/hooks/_index'
 
 const FilterIcon = React.memo((props: { onClick: () => void, crossed: boolean | undefined }) => {
     //////////////////////////////////////////////////
