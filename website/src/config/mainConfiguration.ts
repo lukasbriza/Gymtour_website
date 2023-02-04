@@ -8,10 +8,14 @@ const NotFound = ReactLazyPreload(() => import("../pages/NotFound"));
 const About = ReactLazyPreload(() => import("../pages/About"));
 const CoOp = ReactLazyPreload(() => import("../pages/CoOp"));
 const Contact = ReactLazyPreload(() => import("../pages/Contact"));
-const BusinessConditions = ReactLazyPreload(() => import("../pages/BusinessConditions"));
-const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"));
+const BusinessConditions = ReactLazyPreload(
+  () => import("../pages/BusinessConditions")
+);
+const DataProcessing = ReactLazyPreload(
+  () => import("../pages/DataProcessing")
+);
 
-const Login = ReactLazyPreload(() => import("../pages/Login"));
+const Login = ReactLazyPreload(() => import("../pages/login/Login"));
 const Dashboard = ReactLazyPreload(() => import("../pages/Dashboard"));
 const EmailUpdate = ReactLazyPreload(() => import("../pages/EmailUpdate"));
 
@@ -23,27 +27,43 @@ export const breakpoints = {
 } as const;
 
 export const routes = {
-  mainPage: { name: "Hlavní stránka", path: "/", component: Home },
-  crossroad: { name: "Rozcestí", path: "/crossroad", component: Crossroad },
-  fitness: { name: "Fitness", path: "/fitness", component: Fitness },
-  coach: { name: "Trenéři", path: "/coach", component: Coach },
-  aboutUs: { name: "O nás", path: "/about", component: About },
-  coOp: { name: "Spolupráce", path: "/coop", component: CoOp },
-  contact: { name: "Kontakt", path: "/contact", component: Contact },
-  login: { name: "Login", path: "/login", component: Login },
-  dashboard: { name: "Účet", path: "/dashboard", component: Dashboard },
+  mainPage: { name: "routes:mainPage", path: "/", component: Home },
+  crossroad: {
+    name: "routes:crossroad",
+    path: "/crossroad",
+    component: Crossroad,
+  },
+  fitness: {
+    name: "routes:fitness",
+    path: "/fitness",
+    component: Fitness,
+  },
+  coach: { name: "routes:coach", path: "/coach", component: Coach },
+  aboutUs: { name: "routes:aboutUs", path: "/about", component: About },
+  coOp: { name: "routes:coOp", path: "/coop", component: CoOp },
+  contact: {
+    name: "routes:contact",
+    path: "/contact",
+    component: Contact,
+  },
+  login: { name: "routes:login", path: "/login", component: Login },
+  dashboard: {
+    name: "routes:dashboard",
+    path: "/dashboard",
+    component: Dashboard,
+  },
   businessConditions: {
-    name: "Obchodní podmínky",
+    name: "routes:businessConditions",
     path: "/businessconditions",
     component: BusinessConditions,
   },
   dataProcessing: {
-    name: "Zpracování údajů",
+    name: "routes:dataProcessing",
     path: "/dataprocessing",
     component: DataProcessing,
   },
   emailUpdate: {
-    name: "Email update",
+    name: "routes:emailUpdate",
     path: "/emailUpdate",
     component: EmailUpdate,
   },
@@ -51,15 +71,34 @@ export const routes = {
 } as const;
 
 export const menuItems = {
-  mainPage: { name: routes.mainPage.name, path: routes.mainPage.path, component: routes.mainPage.component },
-  aboutUs: { name: routes.aboutUs.name, path: routes.aboutUs.path, component: routes.aboutUs.component },
-  coOp: { name: routes.coOp.name, path: routes.coOp.path, component: routes.coOp.component },
-  contact: { name: routes.contact.name, path: routes.contact.path, component: routes.contact.component },
+  mainPage: {
+    name: routes.mainPage.name,
+    path: routes.mainPage.path,
+    component: routes.mainPage.component,
+  },
+  aboutUs: {
+    name: routes.aboutUs.name,
+    path: routes.aboutUs.path,
+    component: routes.aboutUs.component,
+  },
+  coOp: {
+    name: routes.coOp.name,
+    path: routes.coOp.path,
+    component: routes.coOp.component,
+  },
+  contact: {
+    name: routes.contact.name,
+    path: routes.contact.path,
+    component: routes.contact.component,
+  },
 } as const;
 
 export const footerLinks = {
   footerLinks1: [
-    { name: routes.businessConditions.name, path: routes.businessConditions.path },
+    {
+      name: routes.businessConditions.name,
+      path: routes.businessConditions.path,
+    },
     { name: routes.dataProcessing.name, path: routes.dataProcessing.path },
   ],
   footerLinks2: [

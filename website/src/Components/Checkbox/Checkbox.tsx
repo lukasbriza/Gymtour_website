@@ -1,19 +1,8 @@
 import { FC } from "react";
 import { CheckboxSquaredHF, HelperText } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
-import { Control } from "react-hook-form";
+import { CheckboxProps } from "./_types";
 
-type CheckboxProps = {
-    className?: string;
-    helperClass?: string;
-    helperText?: string;
-    errorText?: string;
-    show?: boolean;
-    isError: boolean;
-    control: Control<any, any>;
-    name: string;
-    label: string
-}
 export const Checkbox: FC<CheckboxProps> = (props) => {
     const {
         className,

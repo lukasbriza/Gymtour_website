@@ -18,7 +18,7 @@ export const PageRoutes: FC = () => {
             <Route path={routes.fitness.path} element={<routes.fitness.component />} />
             <Route path={routes.coach.path} element={<routes.coach.component />} />
             <Route path={routes.login.path} element={<routes.login.component />} />
-            <Route path={routes.dashboard.path} element={<routes.dashboard.component />} />
+            {/*<Route path={routes.dashboard.path} element={<routes.dashboard.component />} />*/}
             <Route path={routes.businessConditions.path} element={<routes.businessConditions.component />} />
             <Route path={routes.dataProcessing.path} element={<routes.dataProcessing.component />} />
             <Route path={routes.emailUpdate.path} element={<routes.emailUpdate.component />} />

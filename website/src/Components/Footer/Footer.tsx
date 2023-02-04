@@ -1,12 +1,10 @@
-import FacebookLogo from "../SVG/FacebookLogo"
-import YoutubeLogo from "../SVG/YoutubeLogo"
-import InstagramLogo from "../SVG/InstagramLogo"
-import { Underliner } from "../Underliner/Underliner"
 import { Link } from "react-router-dom"
 import { text } from '../../config/textSource'
-import { footerLinks } from "src/config/_index"
 import { FC } from "react"
 import clsx from "clsx"
+import { Underliner } from "@components"
+import { footerLinks } from "@config"
+import { FacebookLogo, InstagramLogo, YoutubeLogo } from "@svg"
 
 const Footer: FC = () => {
     const gymtourLinks = footerLinks.footerLinks2.map((obj, index) => {

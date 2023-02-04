@@ -2259,6 +2259,7 @@ body {
   margin-top: 25px;
 }
 .followUs h3 {
+  white-space: nowrap;
   font-size: 1.2rem;
   text-transform: uppercase;
   cursor: default;

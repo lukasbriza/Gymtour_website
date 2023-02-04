@@ -1,16 +1,16 @@
 import { useEffect, useState, FC } from 'react'
 import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import { gsap } from 'gsap'
-import { Layer } from '../components/Layer'
-import { Underliner } from '../components/Underliner/Underliner'
-import { FormStringInput } from '../components/FormStringInput'
-import { FormModal } from '../components/FormModal'
-import { Footer } from '../components/Footer/Footer'
-import { Button } from '../components/Button/Button'
-import { text } from '../config/textSource'
-import fetchAgent from '../utils/fetchAgent'
-import { isLogged, saveToken } from '../utils/loginLogic'
-import register from '../assets/register.webp'
+import { Layer } from '../../components/Layer'
+import { Underliner } from '../../components/Underliner/Underliner'
+import { FormStringInput } from '../../components/FormStringInput'
+import { FormModal } from '../../components/FormModal'
+import { Footer } from '../../components/Footer/Footer'
+import { Button } from '../../components/Button/Button'
+import { text } from '../../config/textSource'
+import fetchAgent from '../../utils/fetchAgent'
+import { isLogged, saveToken } from '../../utils/loginLogic'
+import register from '@assets/register.webp'
 import { useAnimationContext, useUsercontext } from 'src/hooks/_index'
 import { smallLogoShow } from '@animations'
 import clsx from 'clsx'
@@ -155,8 +155,6 @@ const Login: FC = () => {
             >
                 <img src={register} alt="LoginBckgImg" />
                 <Layer className={clsx(["stretchY", "stretchX"])}>
-                    <Routes location={location}>
-                        <Route path={"/login"}>
                             <div className={clsx(["stretchY", "stretchX", "loginContentWrapper"])}>
                                 <div className={clsx(["relative", "loginHeaderWrapper"])}>
                                     <h2>{text.login.Form.header.cz}</h2>
@@ -217,15 +215,6 @@ const Login: FC = () => {
                                     clearForm={clearForm}
                                 />
                             </div>
-                        </Route>
-                        <Route path={"/login/forgetPassword"}>
-                            <ForgetPassword />
-                        </Route>
-                        <Route path={"/login/forgetName"}>
-                            <ForgetName />
-                        </Route>
-
-                    </Routes>
                 </Layer>
             </section>
             <Footer />

@@ -25,7 +25,7 @@ export const RegisterPage: FC = () => {
         },
         mode: "onBlur",
         reValidateMode: "onBlur",
-        resolver: formValidationSchema(t)
+       // resolver: formValidationSchema(t)
     })
 
     const errorStyle = {
@@ -146,21 +146,21 @@ export const RegisterPage: FC = () => {
                     <form action="#RegisterSection" id="registerForm" onSubmit={handleSubmit(onSubmit)}>
                         <StringInput
                             className={"input1"}
-                            label={t("common.name")}
+                            label={t("common:name")}
                             control={control}
                             isError={errors.name !== undefined}
                             name={"name"}
                         />
                         <StringInput
                             className={"input2"}
-                            label={t("common.password")}
+                            label={t("common:password")}
                             control={control}
                             isError={errors.password !== undefined}
                             name={"password"}
                         />
                         <StringInput
                             className={"input3"}
-                            label={t("common.email")}
+                            label={t("common:email")}
                             control={control}
                             isError={errors.email !== undefined}
                             name={"email"}

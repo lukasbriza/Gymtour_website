@@ -4,8 +4,8 @@ import { enTranslation } from "./resource/en";
 import { initReactI18next } from "react-i18next";
 
 export const resources = {
-  cs: { csTranslation },
-  en: { enTranslation },
+  cs: { ...csTranslation },
+  en: { ...enTranslation },
 } as const;
 
 export const i18n = i18next.use(initReactI18next).init({

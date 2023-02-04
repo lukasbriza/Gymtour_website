@@ -1,13 +1,12 @@
 import { useEffect, useState, useRef, FC } from 'react'
 import { Link } from 'react-router-dom'
-import { BigLogo } from "src/components/_index"
-import { BigText } from '../components/SVG/BigText/BigText'
 import clsx from 'clsx'
 import main from '../assets/main.webp'
 import { text } from '../config/textSource'
-import { useAnimationContext } from 'src/hooks/_index'
 import { bigLogoAnimation, showHeader, smallLogoShow } from '@animations'
-import { routes } from 'src/config/_index'
+import { BigLogo, BigText } from '@svg'
+import { routes } from '@config'
+import { useAnimationContext } from '@hooks'
 
 //TODO! - change linf for button
 const Home: FC = () => {
