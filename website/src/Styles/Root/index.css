@@ -287,7 +287,7 @@ body {
   .registerFormWrapper #registerForm {
     display: grid;
     -moz-column-gap: 15px;
-         column-gap: 15px;
+    column-gap: 15px;
     row-gap: 10px;
     grid-template-rows: 1fr 1fr -webkit-min-content 1fr;
     grid-template-rows: 1fr 1fr min-content 1fr;
@@ -756,20 +756,20 @@ body {
     grid-template-areas: ". " "id" ". " "header" "name" "email" "fitness" "coach" "termCondition" "businessCondition" "button";
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-.overview .contentWrapper .infoWrapper:nth-child(4),
-.overview .contentWrapper .infoWrapper:nth-child(5),
-.overview .contentWrapper .infoWrapper:nth-child(6),
-.overview .contentWrapper .infoWrapper:nth-child(7),
-.overview .contentWrapper .infoWrapper:nth-child(8) {
+  .overview .contentWrapper .infoWrapper:nth-child(4),
+  .overview .contentWrapper .infoWrapper:nth-child(5),
+  .overview .contentWrapper .infoWrapper:nth-child(6),
+  .overview .contentWrapper .infoWrapper:nth-child(7),
+  .overview .contentWrapper .infoWrapper:nth-child(8) {
     display: grid;
     grid-template-columns: 260px auto;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3) .text,
-.overview .contentWrapper .infoWrapper:nth-child(4) .text,
-.overview .contentWrapper .infoWrapper:nth-child(5) .text,
-.overview .contentWrapper .infoWrapper:nth-child(6) .text,
-.overview .contentWrapper .infoWrapper:nth-child(7) .text,
-.overview .contentWrapper .infoWrapper:nth-child(8) .text {
+  .overview .contentWrapper .infoWrapper:nth-child(4) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(5) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(6) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(7) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(8) .text {
     width: 260px;
   }
 }
@@ -778,11 +778,11 @@ body {
     width: 90%;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-.overview .contentWrapper .infoWrapper:nth-child(4),
-.overview .contentWrapper .infoWrapper:nth-child(5),
-.overview .contentWrapper .infoWrapper:nth-child(6),
-.overview .contentWrapper .infoWrapper:nth-child(7),
-.overview .contentWrapper .infoWrapper:nth-child(8) {
+  .overview .contentWrapper .infoWrapper:nth-child(4),
+  .overview .contentWrapper .infoWrapper:nth-child(5),
+  .overview .contentWrapper .infoWrapper:nth-child(6),
+  .overview .contentWrapper .infoWrapper:nth-child(7),
+  .overview .contentWrapper .infoWrapper:nth-child(8) {
     margin-left: 0px !important;
   }
 }
@@ -791,11 +791,11 @@ body {
     width: 60%;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-.overview .contentWrapper .infoWrapper:nth-child(4),
-.overview .contentWrapper .infoWrapper:nth-child(5),
-.overview .contentWrapper .infoWrapper:nth-child(6),
-.overview .contentWrapper .infoWrapper:nth-child(7),
-.overview .contentWrapper .infoWrapper:nth-child(8) {
+  .overview .contentWrapper .infoWrapper:nth-child(4),
+  .overview .contentWrapper .infoWrapper:nth-child(5),
+  .overview .contentWrapper .infoWrapper:nth-child(6),
+  .overview .contentWrapper .infoWrapper:nth-child(7),
+  .overview .contentWrapper .infoWrapper:nth-child(8) {
     display: flex;
     flex-direction: column;
   }
@@ -1029,9 +1029,9 @@ body {
 #Home img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1103,9 +1103,9 @@ body {
 .FitnessSection img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1171,9 +1171,9 @@ body {
 .CoachSection img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1224,9 +1224,9 @@ body {
 .RegisterSection img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1256,19 +1256,6 @@ body {
   margin-top: 20px;
   width: 70%;
   text-align: center;
-}
-
-.formTerms div input {
-  cursor: pointer;
-}
-.formTerms div label {
-  margin-left: 10px;
-}
-.formTerms div label:hover {
-  text-decoration: underline;
-}
-.formTerms div:nth-child(1) {
-  margin-bottom: 10px;
 }
 
 .contentPage {
@@ -1307,9 +1294,9 @@ body {
 .Login img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -1439,9 +1426,9 @@ body {
 #EmailUpdate img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -2399,7 +2386,12 @@ body {
   border: 1px solid red;
 }
 
-button[type=submit] {
+.checkboxClass {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+button[type="submit"] {
   width: 100%;
   padding: 20px 0px;
   margin-top: 20px;
@@ -2413,14 +2405,14 @@ button[type=submit] {
   font-size: 18px;
 }
 
-button[type=submit]:hover {
+button[type="submit"]:hover {
   background: rgb(10, 21, 88);
   transition-property: background;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;
 }
 
-button[type=submit]:active {
+button[type="submit"]:active {
   background: rgb(38, 62, 105);
   transition-property: background;
   transition-duration: 0.1s;
@@ -2783,24 +2775,24 @@ button[type=submit]:active {
 
 .errorModalAnimationOn {
   -webkit-animation-name: errorModalOn;
-          animation-name: errorModalOn;
+  animation-name: errorModalOn;
   -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
+  animation-duration: 0.5s;
   -webkit-animation-timing-function: ease-out;
-          animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
   -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
 .errorModalAnimationOff {
   -webkit-animation-name: errorModalOff;
-          animation-name: errorModalOff;
+  animation-name: errorModalOff;
   -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
+  animation-duration: 0.5s;
   -webkit-animation-timing-function: ease-out;
-          animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
   -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes errorModalOn {
@@ -2923,4 +2915,4 @@ button[type=submit]:active {
   border-width: 5px;
   border-style: solid;
   border-color: rgb(55, 55, 55) transparent transparent transparent;
-}/*# sourceMappingURL=index.css.map */
+} /*# sourceMappingURL=index.css.map */
