@@ -1258,6 +1258,19 @@ body {
   text-align: center;
 }
 
+.formTerms div input {
+  cursor: pointer;
+}
+.formTerms div label {
+  margin-left: 10px;
+}
+.formTerms div label:hover {
+  text-decoration: underline;
+}
+.formTerms div:nth-child(1) {
+  margin-bottom: 10px;
+}
+
 .contentPage {
   display: block;
   height: 100%;
@@ -2384,11 +2397,6 @@ body {
 
 .stringInputError {
   border: 1px solid red;
-}
-
-.checkboxClass {
-  width: 16px !important;
-  height: 16px !important;
 }
 
 button[type="submit"] {

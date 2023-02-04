@@ -149,7 +149,12 @@
   position: absolute;
   content: "";
   background: rgb(0, 0, 0);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 .registerHeaderWrapper {
@@ -166,4 +171,19 @@
 }
 
 .formTerms {
+  div {
+    input {
+      cursor: pointer;
+    }
+    label {
+      margin-left: 10px;
+    }
+    label:hover {
+      text-decoration: underline;
+    }
+  }
+
+  div:nth-child(1) {
+    margin-bottom: 10px;
+  }
 }

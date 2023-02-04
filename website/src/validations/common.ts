@@ -5,7 +5,7 @@ import Joi from "joi";
 export const requiredStringValidation = (t: TFunction, max: number) => {
   return Joi.string()
     .ruleset.max(max)
-    .rule({ message: t("validation:max", { max: max }) })
+    .rule({ message: t("validation.max", { max: max }) })
     .required()
     .messages({ "string.empty": t("validation.required") });
 };
@@ -13,7 +13,7 @@ export const requiredStringValidation = (t: TFunction, max: number) => {
 export const requiredEmailValidaiton = (t: TFunction, max: number) => {
   return Joi.string()
     .ruleset.max(max)
-    .rule({ message: t("validation:max", { max: max }) })
+    .rule({ message: t("validation.max", { max: max }) })
     .required()
     .messages({ "string.empty": t("validation.required") });
 };
@@ -21,15 +21,17 @@ export const requiredEmailValidaiton = (t: TFunction, max: number) => {
 export const requiredMinMaxValidation = (t: TFunction, min: number, max: number) => {
   return Joi.string()
     .ruleset.min(min)
-    .rule({ message: t("validation:min", { min: min }) })
+    .rule({ message: t("validation.min", { min: min }) })
     .ruleset.max(max)
-    .rule({ message: t("validation:max", { max: max }) });
+    .rule({ message: t("validation.max", { max: max }) });
 };
 
 export const requiredBooleanValidation = (t: TFunction) => {
-  return Joi.boolean().equal(true);
+  return Joi.boolean()
+    .ruleset.equal([true])
+    .rule({ message: t("validation.required") as string });
 };
 
 export const optionalBooleanValidation = (t: TFunction) => {
-  return Joi.boolean().equal(true, false).messages({ "any.only": "validation:noBoolean" });
+  return Joi.boolean().optional().message(t(""));
 };

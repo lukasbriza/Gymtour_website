@@ -1,4 +1,4 @@
-import { Layer, Underliner, StringInput, Checkbox } from "@components"
+import { Layer, Underliner, StringInput } from "@components"
 import clsx from "clsx"
 import { FC } from "react"
 import { text } from "src/config/textSource"
@@ -12,8 +12,6 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { formValidationSchema } from "./RegisterPage.validation"
 import { RegisterFormValues } from "./_types"
-import { i18n } from "src/i18n"
-import i18next from "i18next"
 
 export const RegisterPage: FC = () => {
     const { t } = useTranslation()
@@ -38,8 +36,8 @@ export const RegisterPage: FC = () => {
         borderColor: "rgb(0, 180, 0)",
         borderWidth: "3px"
     }
-    //RegisterFormValues
-    const onSubmit = (values: any) => { i18next.changeLanguage("en") }
+
+    const onSubmit = (values: RegisterFormValues) => { }
     /*
     const handleSubmit = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
@@ -111,9 +109,25 @@ export const RegisterPage: FC = () => {
         }
 
     }
+    const handleChange = (input: { canSubmit: boolean, value: string, name: string }) => {
+        switch (input.name) {
+            case 'nameInput':
+                setName({ canSubmit: input.canSubmit, value: input.value })
+                break
+            case 'passwordInput':
+                setPassword({ canSubmit: input.canSubmit, value: input.value })
+                break
+            case 'emailInput':
+                setEmail({ canSubmit: input.canSubmit, value: input.value })
+                break
+        }
 
-*/
+    }
+    const handleModalDefault = () => {
+        showModal({ loading: false, sucess: undefined, msg: undefined })
+    }*/
     const clearForm = () => reset()
+
     return (
         <section
             id="RegisterSection"
@@ -129,43 +143,57 @@ export const RegisterPage: FC = () => {
                     {text.crossroad.RegisterPage.Paragraph.cz}
                 </div>
                 <div className={clsx(["registerFormWrapper", "centerX", "relative"])}>
-                    <form action="#RegisterSection" id="registerForm" onSubmit={onSubmit}>
+                    <form action="#RegisterSection" id="registerForm" onSubmit={handleSubmit(onSubmit)}>
                         <StringInput
                             className={"input1"}
-                            label={t("common:name")}
+                            label={t("common.name")}
                             control={control}
                             isError={errors.name !== undefined}
                             name={"name"}
                         />
                         <StringInput
                             className={"input2"}
-                            label={t("common:password")}
+                            label={t("common.password")}
                             control={control}
                             isError={errors.password !== undefined}
                             name={"password"}
                         />
                         <StringInput
                             className={"input3"}
-                            label={t("common:email")}
+                            label={t("common.email")}
                             control={control}
                             isError={errors.email !== undefined}
                             name={"email"}
                         />
                         <div className={clsx(["formTerms relative centerX"])}>
-                            <Checkbox
-                                className={"termsCheckbox"}
-                                control={control}
-                                isError={errors.terms !== undefined}
-                                label={t("common:businessTermsAgreement")}
-                                name={"terms"}
-                            />
-                            <Checkbox
-                                className={"termsCheckbox"}
-                                control={control}
-                                isError={errors.terms !== undefined}
-                                label={t("common:dataProcessingAgreement")}
-                                name={"dataProcessing"}
-                            />
+                            {/*<div>
+                                <input
+                                    type="checkbox"
+                                    className="checkbox"
+                                    id="termsRegistration"
+                                    name="termsRegistration"
+                                    onClick={() => setTerms(!terms)}
+                                />
+                                <label htmlFor="termsRegistration">
+                                    <Link to={routes.businessConditions.path} className={"link"}>
+                                        {text.crossroad.RegisterPage.Form.checkbox1.label.cz}
+                                    </Link>
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    className="checkbox"
+                                    id="dataprocessingRegistration"
+                                    name="dataprocessingRegistration"
+                                    onClick={() => setDataProcessing(!dataProcessing)}
+                                />
+                                <label htmlFor="dataprocessingRegistration">
+                                    <Link to={routes.dataProcessing.path} className={"link"}>
+                                        {text.crossroad.RegisterPage.Form.checkbox2.label.cz}
+                                    </Link>
+                                </label>
+                            </div>*/}
                         </div>
                         <button className="registerFormButton" type="submit" >{text.crossroad.RegisterPage.Form.button.cz}</button>
                     </form>
