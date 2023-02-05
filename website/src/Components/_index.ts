@@ -7,3 +7,5 @@ export * from "./CoachPage/CoachPage";
 export * from "./Underliner/Underliner";
 export * from "./RegisterPage/RegisterPage";
 export * from "./StringInput/StringInput";
+export * from "./Checkbox/Checkbox";
+export * from "./ModalHeader/ModalHeader";

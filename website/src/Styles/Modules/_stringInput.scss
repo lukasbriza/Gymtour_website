@@ -4,6 +4,7 @@
 
 .stringInputHelperRoot {
   width: 100%;
+  margin-bottom: 5px;
 }
 
 .stringInputRoot {
@@ -45,7 +46,8 @@
 }
 
 .stringInputHelper {
-  min-height: 15px;
+  font-size: 0.8em;
+  height: 23px;
 }
 
 .stringFocusRootError {

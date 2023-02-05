@@ -26,6 +26,9 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             error={isError}
         >
             <CheckboxSquaredHF
+                labelClass={"checkboxLabel"}
+                checkboxClass={"checkboxClass"}
+                checkerClass={clsx(["checkerClass"])}
                 control={control}
                 name={name}
                 label={label}

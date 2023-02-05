@@ -1,94 +1,101 @@
-.modalWrapper {
-  background: rgb(42, 42, 42);
-  display: none;
-  justify-items: center;
-  grid-template-rows: 1fr min-content min-content min-content 1fr;
-  grid-template-areas: "." "anSection" "msgSection" "button" ".";
-  z-index: +1000;
-  position: fixed;
+.rootModalClass {
+  background: rgba(0, 0, 0, 0.477);
+  backdrop-filter: blur(5px);
 }
 
-.animaitonWrapper {
-  grid-area: anSection;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.modalClass {
+  min-width: 340px;
+  width: 60%;
+  max-width: 480px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: rgba(52, 52, 52, 0.774);
+  color: white;
+}
+
+.buttonClass {
+  opacity: 0;
+  background: rgb(38, 62, 105);
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  height: 45px;
+  span {
+    line-height: unset;
+  }
+}
+
+.buttonClass:hover {
+  background: rgb(10, 21, 88);
+  transition-property: background;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+}
+
+.modalTextClass {
+  opacity: 0;
+  white-space: pre-wrap;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.modalHeader {
+  position: relative;
+  width: 100%;
+}
+
+.successHeader {
+  text-transform: uppercase;
+  opacity: 0;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.errorHeader {
+  text-transform: uppercase;
+  opacity: 0;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .circleContainer {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  .circle {
-    display: block;
-    border-radius: 50%;
+  display: block;
+  margin: auto;
+  circle {
+    //set by Math.ceil(2 * Math.PI * r)
+    stroke-dasharray: 202;
+    stroke-dashoffset: 202;
   }
 }
 
-.svgCross {
-  display: initial;
-  $number: 55;
+.successContainer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  position: absolute;
 
-  line:nth-child(1) {
-    stroke-dasharray: $number;
-    stroke-dashoffset: $number;
-  }
-  line:nth-child(2) {
-    stroke-dasharray: $number;
-    stroke-dashoffset: -55;
-  }
-}
-
-.svgSucess {
   path {
-    stroke-dasharray: 92;
-    stroke-dashoffset: 92;
+    stroke-dasharray: 91.63243865966797;
+    stroke-dashoffset: 91.63243865966797;
   }
 }
 
-.msgWrapper {
-  grid-area: msgSection;
-  min-height: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
+.errorCrossContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  .modalSucessObj {
-    width: 100%;
-    opacity: 0;
-    .modalSucessContent {
-      margin: 20px 10px;
-      color: rgb(3, 117, 3);
-      font-weight: 600;
-      text-align: center;
-    }
-  }
-
-  .modalErrorObj {
-    width: 100%;
-    opacity: 0;
-    .modalErrorHeader {
-      color: #ff2c2c;
-      text-align: center;
-      font-weight: 600;
-    }
-    .modalErrorContent {
-      color: #ff2c2c;
-      text-align: center;
-    }
-  }
-}
-
-.modalButton {
-  margin-top: 30px;
-  grid-area: button;
-  opacity: 0;
-  cursor: pointer;
-  .buttonInitial {
-    background-color: #263e69;
-  }
-  .buttonHover {
-    background-color: rgb(10, 21, 88);
+  line {
+    stroke-dasharray: 36.53257369995117;
+    stroke-dashoffset: 36.53257369995117;
   }
 }

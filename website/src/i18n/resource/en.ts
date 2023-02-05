@@ -12,6 +12,8 @@ export const enTranslation: AppTranslationType = {
     name: "Jméno",
     username: "Uživatelské jméno",
     password: "Heslo",
+    businessTermsAgreement: "Souhlas s obchodními podmínkami",
+    dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
   },
   routes: {
     mainPage: "Hlavní stránka",
@@ -26,5 +28,22 @@ export const enTranslation: AppTranslationType = {
     businessConditions: "Obchodní podmínky",
     dataProcessing: "Zpracování údajů",
     emailUpdate: "Změna emailu",
+  },
+
+  footer: {
+    followUs: "Sledujte nás",
+    other: "Ostatní",
+    gymtour: "Gymtour",
+  },
+
+  registerPage: {
+    modalHeader: "Vítejte!",
+    modalText: "Na email  “{{email}}„  Vám byly zaslány instrukce pro aktivaci účtu.",
+    modalButton: "Zavřít",
+    modalErrorHeader: "Je nám líto!",
+    modalErrorText: "Něco se pokazilo a nemohli jsme dokončit Váš požadavek. \nZkuste to prosím později.",
+    registerButton: "Registrovat",
+    registerHeader: "Zaregistrovat se",
+    registerParagraph: "Pro “lajkování„ příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
   },
 };

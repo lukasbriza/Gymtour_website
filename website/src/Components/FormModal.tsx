@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from 'react'
 import { gsap } from 'gsap'
 import { Button } from './Button/Button'
-import { Circle } from './SVG/Circle'
-import { Cross } from './SVG/Cross'
-import { Sucess } from './SVG/Sucess'
+import { Circle } from './SVG/Circle/Circle'
+import { Cross } from './SVG/Cross/Cross'
+import { Sucess } from './SVG/Sucess/Sucess'
 import { text } from '../config/textSource'
 //CONTEXT//
 //FUNCTUION//
 import { classListMaker } from '../utils/classListMaker'
-import { hideFormModal, infiniteRotation, loadingError, loadingSuccess, showFormModal, showMessageButton } from '@animations'
+import { hideFormModal, infiniteRotation, loadingError, showFormModal, showMessageButton } from '@animations'
 
 const FormModal = (props: formModalProps) => {
     //////////////////////////////////////////////////
@@ -58,11 +58,11 @@ const FormModal = (props: formModalProps) => {
         if (props.sucess === true && circleRef.current && sucessRef.current) {
             //SUCESS ANIMATION//
             setShowSucess(true)
-            loadingSuccess(
-                circleRef.current,
-                sucessRef.current,
-                showMsgBtn
-            )
+            /* loadingSuccess(
+                 circleRef.current,
+                 sucessRef.current,
+                 showMsgBtn
+             )*/
         }
         if (props.sucess === false && circleRef.current) {
             //ERROR ANIMAITON//
@@ -145,26 +145,8 @@ const FormModal = (props: formModalProps) => {
     return (
         <section className={modalWrapperClasses} ref={modalRef}>
             <div className={animationSectionClasses}>
-                <Circle
-                    scale={0.8}
-                    strokecolor={basicColor}
-                    strokewidth={5}
-                    ref={circleRef}
-                />
-                <Cross
-                    show={showCross}
-                    scale={0.9}
-                    strokecolor={colorEndError}
-                    strokewidth={5}
-                    ref={crossRef}
-                />
-                <Sucess
-                    show={showSucess}
-                    scale={1.5}
-                    strokecolor={colorEndSucess}
-                    strokewidth={5}
-                    ref={sucessRef}
-                />
+
+
             </div>
             <div
                 className={msgSectionClasses}

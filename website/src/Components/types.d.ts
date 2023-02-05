@@ -17,12 +17,6 @@ type BigText = {
   ref: any;
 };
 
-type Circle = {
-  scale: number;
-  strokecolor: string;
-  strokewidth: number;
-};
-
 type Underliner = {
   id?: string;
   width: string;

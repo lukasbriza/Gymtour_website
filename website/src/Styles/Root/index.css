@@ -287,7 +287,7 @@ body {
   .registerFormWrapper #registerForm {
     display: grid;
     -moz-column-gap: 15px;
-    column-gap: 15px;
+         column-gap: 15px;
     row-gap: 10px;
     grid-template-rows: 1fr 1fr -webkit-min-content 1fr;
     grid-template-rows: 1fr 1fr min-content 1fr;
@@ -325,12 +325,6 @@ body {
 
 .formTerms {
   grid-area: formTerms;
-  font-size: 12px;
-}
-.formTerms div {
-  display: flex;
-  align-items: center;
-  height: 18px;
 }
 @media (min-width: 47.5em) {
   .formTerms {
@@ -756,20 +750,20 @@ body {
     grid-template-areas: ". " "id" ". " "header" "name" "email" "fitness" "coach" "termCondition" "businessCondition" "button";
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-  .overview .contentWrapper .infoWrapper:nth-child(4),
-  .overview .contentWrapper .infoWrapper:nth-child(5),
-  .overview .contentWrapper .infoWrapper:nth-child(6),
-  .overview .contentWrapper .infoWrapper:nth-child(7),
-  .overview .contentWrapper .infoWrapper:nth-child(8) {
+.overview .contentWrapper .infoWrapper:nth-child(4),
+.overview .contentWrapper .infoWrapper:nth-child(5),
+.overview .contentWrapper .infoWrapper:nth-child(6),
+.overview .contentWrapper .infoWrapper:nth-child(7),
+.overview .contentWrapper .infoWrapper:nth-child(8) {
     display: grid;
     grid-template-columns: 260px auto;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(4) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(5) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(6) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(7) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(8) .text {
+.overview .contentWrapper .infoWrapper:nth-child(4) .text,
+.overview .contentWrapper .infoWrapper:nth-child(5) .text,
+.overview .contentWrapper .infoWrapper:nth-child(6) .text,
+.overview .contentWrapper .infoWrapper:nth-child(7) .text,
+.overview .contentWrapper .infoWrapper:nth-child(8) .text {
     width: 260px;
   }
 }
@@ -778,11 +772,11 @@ body {
     width: 90%;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-  .overview .contentWrapper .infoWrapper:nth-child(4),
-  .overview .contentWrapper .infoWrapper:nth-child(5),
-  .overview .contentWrapper .infoWrapper:nth-child(6),
-  .overview .contentWrapper .infoWrapper:nth-child(7),
-  .overview .contentWrapper .infoWrapper:nth-child(8) {
+.overview .contentWrapper .infoWrapper:nth-child(4),
+.overview .contentWrapper .infoWrapper:nth-child(5),
+.overview .contentWrapper .infoWrapper:nth-child(6),
+.overview .contentWrapper .infoWrapper:nth-child(7),
+.overview .contentWrapper .infoWrapper:nth-child(8) {
     margin-left: 0px !important;
   }
 }
@@ -791,11 +785,11 @@ body {
     width: 60%;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-  .overview .contentWrapper .infoWrapper:nth-child(4),
-  .overview .contentWrapper .infoWrapper:nth-child(5),
-  .overview .contentWrapper .infoWrapper:nth-child(6),
-  .overview .contentWrapper .infoWrapper:nth-child(7),
-  .overview .contentWrapper .infoWrapper:nth-child(8) {
+.overview .contentWrapper .infoWrapper:nth-child(4),
+.overview .contentWrapper .infoWrapper:nth-child(5),
+.overview .contentWrapper .infoWrapper:nth-child(6),
+.overview .contentWrapper .infoWrapper:nth-child(7),
+.overview .contentWrapper .infoWrapper:nth-child(8) {
     display: flex;
     flex-direction: column;
   }
@@ -1029,9 +1023,9 @@ body {
 #Home img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1103,9 +1097,9 @@ body {
 .FitnessSection img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1171,9 +1165,9 @@ body {
 .CoachSection img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1224,9 +1218,9 @@ body {
 .RegisterSection img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1256,19 +1250,6 @@ body {
   margin-top: 20px;
   width: 70%;
   text-align: center;
-}
-
-.formTerms div input {
-  cursor: pointer;
-}
-.formTerms div label {
-  margin-left: 10px;
-}
-.formTerms div label:hover {
-  text-decoration: underline;
-}
-.formTerms div:nth-child(1) {
-  margin-bottom: 10px;
 }
 
 .contentPage {
@@ -1307,9 +1288,9 @@ body {
 .Login img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -1439,9 +1420,9 @@ body {
 #EmailUpdate img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -2222,12 +2203,13 @@ body {
 .buttonInitial {
   width: 180px;
   color: white;
-  background-color: #292727;
+  background-color: rgb(38, 62, 105);
   font-weight: 600;
   font-size: 17px;
   text-transform: uppercase;
   text-align: center;
   padding: 19px 0px;
+  border-radius: 5px;
   transition-property: background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease-out;
@@ -2235,9 +2217,9 @@ body {
 }
 
 .buttonHover {
-  background-color: black;
+  background-color: rgb(10, 21, 88);
   transition-property: background-color;
-  transition-duration: 0.5s;
+  transition-duration: 0.25s;
   transition-timing-function: ease-out;
   margin: 0px;
   border: none;
@@ -2337,70 +2319,7 @@ body {
   margin: 10px auto;
 }
 
-.inputWrapper {
-  width: 100%;
-}
-
-.stringInputHelperRoot {
-  width: 100%;
-}
-
-.stringInputRoot {
-  width: inherit;
-}
-.stringInputRoot input {
-  caret-color: white;
-  color: white;
-  cursor: pointer;
-  height: 60px;
-  width: inherit;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.253);
-}
-
-.stringInputRoot:hover label {
-  color: white;
-}
-.stringInputRoot:hover .stringInputLabelError {
-  color: red;
-}
-
-.stringInputRootFocused label {
-  background: rgba(123, 123, 123, 0.128);
-}
-.stringInputRootFocused input {
-  outline-color: rgba(255, 255, 255, 0.5) !important;
-}
-
-.stringInputLabel {
-  cursor: pointer;
-  color: white;
-  background: rgba(255, 255, 255, 0);
-}
-
-.stringInputHelper {
-  min-height: 15px;
-}
-
-.stringFocusRootError input {
-  outline-color: red !important;
-  outline-width: 1px !important;
-}
-.stringFocusRootError label {
-  font-size: 14px !important;
-  color: white !important;
-}
-
-.stringInputLabelError {
-  color: red;
-  font-size: 16px;
-}
-
-.stringInputError {
-  border: 1px solid red;
-}
-
-button[type="submit"] {
+button[type=submit] {
   width: 100%;
   padding: 20px 0px;
   margin-top: 20px;
@@ -2414,108 +2333,118 @@ button[type="submit"] {
   font-size: 18px;
 }
 
-button[type="submit"]:hover {
+button[type=submit]:hover {
   background: rgb(10, 21, 88);
   transition-property: background;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;
 }
 
-button[type="submit"]:active {
+button[type=submit]:active {
   background: rgb(38, 62, 105);
   transition-property: background;
   transition-duration: 0.1s;
   transition-timing-function: ease-out;
 }
 
-.modalWrapper {
-  background: rgb(42, 42, 42);
-  display: none;
-  justify-items: center;
-  grid-template-rows: 1fr -webkit-min-content -webkit-min-content -webkit-min-content 1fr;
-  grid-template-rows: 1fr min-content min-content min-content 1fr;
-  grid-template-areas: "." "anSection" "msgSection" "button" ".";
-  z-index: 1000;
-  position: fixed;
+.rootModalClass {
+  background: rgba(0, 0, 0, 0.477);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
 }
 
-.animaitonWrapper {
-  grid-area: anSection;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.modalClass {
+  min-width: 340px;
+  width: 60%;
+  max-width: 480px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: rgba(52, 52, 52, 0.774);
+  color: white;
+}
+
+.buttonClass {
+  opacity: 0;
+  background: rgb(38, 62, 105);
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  height: 45px;
+}
+.buttonClass span {
+  line-height: unset;
+}
+
+.buttonClass:hover {
+  background: rgb(10, 21, 88);
+  transition-property: background;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+}
+
+.modalTextClass {
+  opacity: 0;
+  white-space: pre-wrap;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.modalHeader {
+  position: relative;
+  width: 100%;
+}
+
+.successHeader {
+  text-transform: uppercase;
+  opacity: 0;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.errorHeader {
+  text-transform: uppercase;
+  opacity: 0;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .circleContainer {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-.circleContainer .circle {
   display: block;
-  border-radius: 50%;
+  margin: auto;
+}
+.circleContainer circle {
+  stroke-dasharray: 202;
+  stroke-dashoffset: 202;
 }
 
-.svgCross {
-  display: initial;
+.successContainer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  position: absolute;
 }
-.svgCross line:nth-child(1) {
-  stroke-dasharray: 55;
-  stroke-dashoffset: 55;
-}
-.svgCross line:nth-child(2) {
-  stroke-dasharray: 55;
-  stroke-dashoffset: -55;
-}
-
-.svgSucess path {
-  stroke-dasharray: 92;
-  stroke-dashoffset: 92;
+.successContainer path {
+  stroke-dasharray: 91.6324386597;
+  stroke-dashoffset: 91.6324386597;
 }
 
-.msgWrapper {
-  grid-area: msgSection;
-  min-height: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
+.errorCrossContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.msgWrapper .modalSucessObj {
-  width: 100%;
-  opacity: 0;
-}
-.msgWrapper .modalSucessObj .modalSucessContent {
-  margin: 20px 10px;
-  color: rgb(3, 117, 3);
-  font-weight: 600;
-  text-align: center;
-}
-.msgWrapper .modalErrorObj {
-  width: 100%;
-  opacity: 0;
-}
-.msgWrapper .modalErrorObj .modalErrorHeader {
-  color: #ff2c2c;
-  text-align: center;
-  font-weight: 600;
-}
-.msgWrapper .modalErrorObj .modalErrorContent {
-  color: #ff2c2c;
-  text-align: center;
-}
-
-.modalButton {
-  margin-top: 30px;
-  grid-area: button;
-  opacity: 0;
-  cursor: pointer;
-}
-.modalButton .buttonInitial {
-  background-color: #263e69;
-}
-.modalButton .buttonHover {
-  background-color: rgb(10, 21, 88);
+.errorCrossContainer line {
+  stroke-dasharray: 36.5325737;
+  stroke-dashoffset: 36.5325737;
 }
 
 .loadingWrapper {
@@ -2784,24 +2713,24 @@ button[type="submit"]:active {
 
 .errorModalAnimationOn {
   -webkit-animation-name: errorModalOn;
-  animation-name: errorModalOn;
+          animation-name: errorModalOn;
   -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
+          animation-duration: 0.5s;
   -webkit-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
   -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .errorModalAnimationOff {
   -webkit-animation-name: errorModalOff;
-  animation-name: errorModalOff;
+          animation-name: errorModalOff;
   -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
+          animation-duration: 0.5s;
   -webkit-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
   -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes errorModalOn {
@@ -2924,4 +2853,84 @@ button[type="submit"]:active {
   border-width: 5px;
   border-style: solid;
   border-color: rgb(55, 55, 55) transparent transparent transparent;
-} /*# sourceMappingURL=index.css.map */
+}
+
+.checkboxHelper {
+  font-size: 0.8em;
+  height: 23px;
+}
+
+.checkboxClass {
+  width: 18px;
+  height: 18px;
+  border-color: rgb(186, 186, 186);
+}
+
+.checkerClass {
+  background: rgb(60, 97, 164);
+}
+
+.inputWrapper {
+  width: 100%;
+}
+
+.stringInputHelperRoot {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.stringInputRoot {
+  width: inherit;
+}
+.stringInputRoot input {
+  caret-color: white;
+  color: white;
+  cursor: pointer;
+  height: 60px;
+  width: inherit;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.253);
+}
+
+.stringInputRoot:hover label {
+  color: white;
+}
+.stringInputRoot:hover .stringInputLabelError {
+  color: red;
+}
+
+.stringInputRootFocused label {
+  background: rgba(123, 123, 123, 0.128);
+}
+.stringInputRootFocused input {
+  outline-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.stringInputLabel {
+  cursor: pointer;
+  color: white;
+  background: rgba(255, 255, 255, 0);
+}
+
+.stringInputHelper {
+  font-size: 0.8em;
+  height: 23px;
+}
+
+.stringFocusRootError input {
+  outline-color: red !important;
+  outline-width: 1px !important;
+}
+.stringFocusRootError label {
+  font-size: 14px !important;
+  color: white !important;
+}
+
+.stringInputLabelError {
+  color: red;
+  font-size: 16px;
+}
+
+.stringInputError {
+  border: 1px solid red;
+}/*# sourceMappingURL=index.css.map */

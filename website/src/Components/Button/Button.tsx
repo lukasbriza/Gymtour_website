@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 type ButtonProps = {
-    onClick: (e: React.BaseSyntheticEvent) => void,
+    onClick?: (e: React.BaseSyntheticEvent) => void,
     modificationClass?: string,
     initialClass: string,
     hoverClass: string,
@@ -20,7 +20,7 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
         setActive(true)
     }
     function handleTouchEnd(e: React.BaseSyntheticEvent) {
-        onClick(e)
+        onClick?.(e)
         setActive(false)
     }
     function handleMouseEnter() {
@@ -30,7 +30,7 @@ const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificati
         setActive(false)
     }
     function handleClick(e: React.BaseSyntheticEvent) {
-        onClick(e)
+        onClick?.(e)
     }
 
     useEffect(() => {

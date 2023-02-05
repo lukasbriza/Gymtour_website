@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom"
-import { text } from '../../config/textSource'
 import { FC } from "react"
 import clsx from "clsx"
 import { Underliner } from "@components"
 import { footerLinks } from "@config"
 import { FacebookLogo, InstagramLogo, YoutubeLogo } from "@svg"
+import { useTranslation } from "react-i18next"
 
 const Footer: FC = () => {
+    const { t } = useTranslation()
     const gymtourLinks = footerLinks.footerLinks2.map((obj, index) => {
         return (
             <div
                 className="footerLinkWrapper"
                 key={index}
             >
-                <Link to={obj.path} className="link">{obj.name}</Link>
+                <Link to={obj.path} className="link">{t(obj.name)}</Link>
                 <Underliner width={"0%"} />
             </div>)
     })
@@ -24,7 +25,7 @@ const Footer: FC = () => {
                 className="footerLinkWrapper"
                 key={index}
             >
-                <Link to={obj.path} className="link">{obj.name}</Link>
+                <Link to={obj.path} className="link">{t(obj.name)}</Link>
                 <Underliner width={"0"} />
             </div>
         )
@@ -34,7 +35,7 @@ const Footer: FC = () => {
         <footer className={clsx(["footer", "stretchX", "relative", "minorColor1Text", "mainColor"])}>
             <section className={clsx(["followUs", "relative", "centerX"])}>
                 <div className="headerWrapper">
-                    <h3>{text.footer.Section1.header.cz}</h3>
+                    <h3>{t("footer:followUs")}</h3>
                     <Underliner width={"80%"} />
                 </div>
                 <div className={"logoWrapper"}>
@@ -45,14 +46,14 @@ const Footer: FC = () => {
             </section>
             <section className={clsx(["other", "linkCol", "centerX", "relative"])}>
                 <div className="headerWrapper">
-                    <h3>{text.footer.Section2.header.cz}</h3>
+                    <h3>{t("footer:other")}</h3>
                     <Underliner width={"80%"} />
                 </div>
                 {otherLinks}
             </section>
             <section className={clsx(["gymtour", "linkCol", "centerX", "relative"])}>
                 <div className="headerWrapper">
-                    <h3>{text.footer.Section3.header.cz}</h3>
+                    <h3>{t("footer:gymtour")}</h3>
                     <Underliner width={"80%"} />
                 </div>
                 {gymtourLinks}

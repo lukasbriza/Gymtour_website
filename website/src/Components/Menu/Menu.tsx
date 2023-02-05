@@ -6,6 +6,7 @@ import { routes, breakpoints, menuItems } from "@config";
 import { crossOff, crossOn, hideHamburger, hideLayer, hideMenu, hideMenuOffer, showHamburger, showLayer, showMenu, showMenuOffer } from "@animations";
 import { HamburgerProps, MenuLayerProps, MenuOfferProps } from "./_types";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -114,8 +115,9 @@ export const Menu: FC = () => {
 
 
 const MenuOffer: FC<MenuOfferProps> = (props) => {
+  const { t } = useTranslation()
   const { show, className, offer } = props
-  const menuOffer: any = useRef();
+  const menuOffer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     show ? showMenuOffer() : hideMenuOffer()
@@ -124,7 +126,7 @@ const MenuOffer: FC<MenuOfferProps> = (props) => {
   const menuItems = offer.map(
     (obj: { name: string; path: string; component: void }, index) => {
       return (
-        <Link to={obj.path} className={clsx(["stretchX", "relative", "offerItem"])} key={index}>{obj.name}</Link>
+        <Link to={obj.path} className={clsx(["stretchX", "relative", "offerItem"])} key={index}>{t(obj.name as any)}</Link>
       );
     }
   );
@@ -144,6 +146,7 @@ const MenuOffer: FC<MenuOfferProps> = (props) => {
 };
 
 const MenuLayer: FC<MenuLayerProps> = (props) => {
+  const { t } = useTranslation()
   const { show } = props
   const menuLayer = useRef<HTMLDivElement>(null);
 
@@ -158,7 +161,7 @@ const MenuLayer: FC<MenuLayerProps> = (props) => {
     (obj: { name: string; path: string; component: void }, index) => {
       return (
         <Link to={obj.path} className={clsx(["relative", "offerItem", "offerItem-layer"])} key={index}>
-          <p>{obj.name}</p>
+          <p>{t(obj.name as any)}</p>
         </Link>
       );
     }

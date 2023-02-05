@@ -1,4 +1,4 @@
-import { gsap } from "gsap";
+import { gsap, Power3 } from "gsap";
 import { fadeIn, fadeOff } from "./effects";
 
 export const showFormModal = (modal: HTMLElement) => {
@@ -69,34 +69,45 @@ export const loadingError = (circle: HTMLSpanElement, cb: () => void) => {
   return tl;
 };
 
-export const loadingSuccess = (circle: HTMLSpanElement, success: SVGPathElement, cb: () => void) => {
-  gsap.getTweensOf(circle).map((tween) => {
-    return tween.repeat(3);
-  });
-  const tl = gsap.timeline();
-  tl.to(circle, {
-    borderTopColor: "rgb(3, 117, 3)",
-    borderTopWidth: "5px",
-    borderRightColor: "rgb(3, 117, 3)",
-    borderRightWidth: "5px",
-    borderBottomColor: "rgb(3, 117, 3)",
-    borderBottomWidth: "5px",
-    borderLeftColor: "rgb(3, 117, 3)",
-    borderLeftWidth: "5px",
+export const errorAnimation = (error: SVGSVGElement, circle: SVGCircleElement, classes: string[]) => {
+  const line1 = error.firstChild;
+  const line2 = error.lastChild;
 
-    delay: 1.25,
-    duration: 0.5,
+  const lineConfig = {
+    strokeDashoffset: 0,
+    duration: 1,
     ease: Power3.easeOut,
-  })
-    .addLabel("sucessStart")
-    .to(success, {
-      strokeDashoffset: 0,
-      duration: 1,
-      ease: Power3.easeOut,
-      onComplete: () => {
-        cb();
+  };
+
+  const tl = gsap.timeline();
+  tl.addLabel("start")
+    .to(line1, { delay: 1.1, ...lineConfig }, "start")
+    .to(line2, { delay: 1.6, ...lineConfig }, "start")
+    .to(circle, { delay: 0.75, strokeDashoffset: 0, duration: 1, ease: Power3.easeOut }, "start")
+    .add(
+      fadeIn(classes, { displayInitial: "block", displayAfter: "block", stagger: 0, delay: 0.75, duration: 1 }),
+      "start"
+    );
+};
+
+export const successAnimation = (success: SVGPathElement, circle: SVGCircleElement, classes: string[]) => {
+  const tl = gsap.timeline();
+  tl.addLabel("start")
+    .to(circle, { delay: 0.75, strokeDashoffset: 0, duration: 1, ease: Power3.easeOut }, "start")
+    .to(
+      success,
+      {
+        delay: 1.1,
+        strokeDashoffset: 0,
+        duration: 1,
+        ease: Power3.easeOut,
       },
-    });
+      "start"
+    )
+    .add(
+      fadeIn(classes, { displayInitial: "block", displayAfter: "block", stagger: 0, delay: 0.75, duration: 1 }),
+      "start"
+    );
 
   return tl;
 };

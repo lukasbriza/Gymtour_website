@@ -1,15 +1,14 @@
-.checkboxHelperRoot {
-}
-
 .checkboxHelper {
-}
-
-.checkboxRoot {
+  font-size: 0.8em;
+  height: 23px;
 }
 
 .checkboxClass {
-  width: 16px !important;
-  height: 16px !important;
+  width: 18px;
+  height: 18px;
+  border-color: rgb(186, 186, 186);
 }
-.checkboxLabel {
+
+.checkerClass {
+  background: rgb(60, 97, 164);
 }

@@ -135,12 +135,7 @@
 
 .formTerms {
   grid-area: formTerms;
-  font-size: 12px;
-  div {
-    display: flex;
-    align-items: center;
-    height: 18px;
-  }
+
   @include mq($from: tablet) {
     width: 320px;
     font-size: 15px;

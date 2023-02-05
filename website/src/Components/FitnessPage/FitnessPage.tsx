@@ -22,7 +22,6 @@ export const FitnessPage: FC = () => {
                 </div>
                 <Button
                     path={routes.fitness.path}
-                    onClick={() => { console.log("clicked") }}
                     modificationClass={"crossroadButton"}
                     initialClass={'buttonInitial'}
                     hoverClass={'buttonHover'}

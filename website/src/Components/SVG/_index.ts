@@ -6,3 +6,6 @@ export * from "./FacebookLogo/FacebookLogo";
 export * from "./InstagramLogo/InstagramLogo";
 export * from "./YoutubeLogo/YoutubeLogo";
 export * from "./BigText/BigText";
+export * from "./Sucess/Sucess";
+export * from "./Circle/Circle";
+export * from "./Cross/Cross";

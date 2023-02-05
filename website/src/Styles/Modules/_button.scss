@@ -16,13 +16,14 @@
 .buttonInitial {
   width: 180px;
   color: $minorColor1;
-  background-color: $buttonColor;
+  background-color: rgb(38, 62, 105);
 
   font-weight: 600;
   font-size: 17px;
   text-transform: uppercase;
   text-align: center;
   padding: 19px 0px;
+  border-radius: 5px;
 
   transition-property: background-color;
   transition-duration: 0.2s;
@@ -30,9 +31,9 @@
   overflow: hidden;
 }
 .buttonHover {
-  background-color: black;
+  background-color: rgb(10, 21, 88);
   transition-property: background-color;
-  transition-duration: 0.5s;
+  transition-duration: 0.25s;
   transition-timing-function: ease-out;
   margin: 0px;
   border: none;
