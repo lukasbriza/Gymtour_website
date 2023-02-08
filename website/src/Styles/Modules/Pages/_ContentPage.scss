@@ -1,37 +1,18 @@
 .contentPage {
   display: block;
   height: 100%;
+  background: rgb(29, 29, 29);
 }
 
-.headerSection {
-  border-bottom: 1px solid grey;
-
-  h1 {
-    cursor: default;
-    text-transform: uppercase;
-  }
-
-  a {
-    color: black;
-    font-weight: 900;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-}
-
-.searchContentWrapper {
-  width: 100%;
-  padding-top: 150px;
-  padding-bottom: 15px;
-  z-index: -2;
-}
-.searchContent {
-}
-
-.contentPageButton {
-  left: 50%;
-  transform: translateX(-50%);
+.verticalText {
+  position: fixed;
+  color: rgba(253, 246, 246, 0.057);
+  text-transform: uppercase;
+  transform: rotate(90deg) translateY(0px);
+  overflow: hidden;
+  font-weight: 900;
+  font-size: 200px;
+  top: 790px;
+  left: -460px;
+  cursor: default;
 }

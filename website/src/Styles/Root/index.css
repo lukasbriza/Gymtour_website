@@ -94,7 +94,6 @@ body {
   display: grid;
   width: 100%;
   min-width: 360px;
-  grid-template-columns: 15px 1fr -webkit-min-content 1fr 25px;
   grid-template-columns: 15px 1fr min-content 1fr 25px;
   grid-template-areas: ". . logo hamburger .";
 }
@@ -105,7 +104,6 @@ body {
 }
 @media (min-width: 47.5em) {
   .menu {
-    grid-template-columns: 15px -webkit-min-content 1fr -webkit-min-content 15px;
     grid-template-columns: 15px min-content 1fr min-content 15px;
     grid-template-areas: ". logo . menuOffer .";
   }
@@ -156,7 +154,6 @@ body {
   grid-area: mainHeader;
 }
 #homeHeader div .headerWrapper {
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
   margin-left: 30px;
@@ -177,7 +174,6 @@ body {
     width: 90%;
   }
   #homeHeader div .headerWrapper {
-    width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
   }
@@ -252,7 +248,6 @@ body {
 }
 #RegisterSection .layer {
   display: grid;
-  grid-template-rows: 1fr 55px -webkit-min-content -webkit-min-content 1fr;
   grid-template-rows: 1fr 55px min-content min-content 1fr;
   grid-template-areas: "." "header" "paragraph" "form" ".";
 }
@@ -289,7 +284,6 @@ body {
     -moz-column-gap: 15px;
          column-gap: 15px;
     row-gap: 10px;
-    grid-template-rows: 1fr 1fr -webkit-min-content 1fr;
     grid-template-rows: 1fr 1fr min-content 1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "input1 input2" "input3 input3" "formTerms formTerms" "button button";
@@ -345,7 +339,6 @@ body {
 
 .headerSection {
   display: grid;
-  grid-template-rows: 70px -webkit-min-content 15px;
   grid-template-rows: 70px min-content 15px;
   grid-template-columns: 100px 1fr 100px;
   grid-template-areas: ". . ." "filter header backButton" ". . .";
@@ -379,7 +372,6 @@ body {
 .filterHeaderWrapper {
   display: grid;
   grid-template-columns: 5% 1fr 30px 5%;
-  grid-template-rows: 30px -webkit-min-content;
   grid-template-rows: 30px min-content;
   grid-template-areas: ". header arrow ." ". underliner underliner .";
   align-items: end;
@@ -433,7 +425,6 @@ body {
 }
 .searchContentWrapper .searchContent .searchItem .itemBar h3 {
   max-width: 250px;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
@@ -519,21 +510,18 @@ body {
 #Login .layer .loginContentWrapper {
   display: grid;
   justify-items: center;
-  grid-template-rows: 1fr -webkit-min-content -webkit-min-content -webkit-min-content 1fr;
   grid-template-rows: 1fr min-content min-content min-content 1fr;
   grid-template-areas: "." "header" "paragraph" "form" ".";
 }
 #Login .layer .forgetPasswordFormWrapper #forgetPasswordForm {
   display: grid;
   justify-items: center;
-  grid-template-rows: 1fr -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content 1fr;
   grid-template-rows: 1fr min-content min-content min-content min-content min-content min-content min-content 1fr;
   grid-template-areas: "." "header" "forgetPasswordText" "nameHeader" "nameInput" "emailHeader" "emailInput" "button" ".";
 }
 #Login .layer .forgetNameWrapper #forgetNameForm {
   display: grid;
   justify-items: center;
-  grid-template-rows: 1fr -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content 1fr;
   grid-template-rows: 1fr min-content min-content min-content min-content min-content min-content min-content 1fr;
   grid-template-areas: "." "header" "forgetNameText" "emailHeader" "emailInput" "passwordHeader" "passwordInput" "button" ".";
 }
@@ -728,7 +716,6 @@ body {
 }
 .overview .contentWrapper {
   display: grid;
-  grid-template-rows: 30px -webkit-min-content 70px -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content;
   grid-template-rows: 30px min-content 70px min-content min-content min-content min-content;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: ". ." ". id" ". ." "header header" "name email" "fitness businessCondition" "coach termCondition" "button button";
@@ -744,26 +731,25 @@ body {
 }
 @media (max-width: 53.125em) {
   .overview .contentWrapper {
-    grid-template-rows: 30px -webkit-min-content 70px -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content -webkit-min-content;
     grid-template-rows: 30px min-content 70px min-content min-content min-content min-content min-content min-content min-content min-content;
     grid-template-columns: 1fr;
     grid-template-areas: ". " "id" ". " "header" "name" "email" "fitness" "coach" "termCondition" "businessCondition" "button";
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-.overview .contentWrapper .infoWrapper:nth-child(4),
-.overview .contentWrapper .infoWrapper:nth-child(5),
-.overview .contentWrapper .infoWrapper:nth-child(6),
-.overview .contentWrapper .infoWrapper:nth-child(7),
-.overview .contentWrapper .infoWrapper:nth-child(8) {
+  .overview .contentWrapper .infoWrapper:nth-child(4),
+  .overview .contentWrapper .infoWrapper:nth-child(5),
+  .overview .contentWrapper .infoWrapper:nth-child(6),
+  .overview .contentWrapper .infoWrapper:nth-child(7),
+  .overview .contentWrapper .infoWrapper:nth-child(8) {
     display: grid;
     grid-template-columns: 260px auto;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3) .text,
-.overview .contentWrapper .infoWrapper:nth-child(4) .text,
-.overview .contentWrapper .infoWrapper:nth-child(5) .text,
-.overview .contentWrapper .infoWrapper:nth-child(6) .text,
-.overview .contentWrapper .infoWrapper:nth-child(7) .text,
-.overview .contentWrapper .infoWrapper:nth-child(8) .text {
+  .overview .contentWrapper .infoWrapper:nth-child(4) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(5) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(6) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(7) .text,
+  .overview .contentWrapper .infoWrapper:nth-child(8) .text {
     width: 260px;
   }
 }
@@ -772,11 +758,11 @@ body {
     width: 90%;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-.overview .contentWrapper .infoWrapper:nth-child(4),
-.overview .contentWrapper .infoWrapper:nth-child(5),
-.overview .contentWrapper .infoWrapper:nth-child(6),
-.overview .contentWrapper .infoWrapper:nth-child(7),
-.overview .contentWrapper .infoWrapper:nth-child(8) {
+  .overview .contentWrapper .infoWrapper:nth-child(4),
+  .overview .contentWrapper .infoWrapper:nth-child(5),
+  .overview .contentWrapper .infoWrapper:nth-child(6),
+  .overview .contentWrapper .infoWrapper:nth-child(7),
+  .overview .contentWrapper .infoWrapper:nth-child(8) {
     margin-left: 0px !important;
   }
 }
@@ -785,11 +771,11 @@ body {
     width: 60%;
   }
   .overview .contentWrapper .infoWrapper:nth-child(3),
-.overview .contentWrapper .infoWrapper:nth-child(4),
-.overview .contentWrapper .infoWrapper:nth-child(5),
-.overview .contentWrapper .infoWrapper:nth-child(6),
-.overview .contentWrapper .infoWrapper:nth-child(7),
-.overview .contentWrapper .infoWrapper:nth-child(8) {
+  .overview .contentWrapper .infoWrapper:nth-child(4),
+  .overview .contentWrapper .infoWrapper:nth-child(5),
+  .overview .contentWrapper .infoWrapper:nth-child(6),
+  .overview .contentWrapper .infoWrapper:nth-child(7),
+  .overview .contentWrapper .infoWrapper:nth-child(8) {
     display: flex;
     flex-direction: column;
   }
@@ -830,7 +816,6 @@ body {
 }
 .overview .contentWrapper .overviewButton {
   grid-area: button;
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
   position: relative;
@@ -1051,7 +1036,6 @@ body {
 }
 #Home #homeButton {
   width: auto;
-  height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
   opacity: 0;
@@ -1238,7 +1222,6 @@ body {
 }
 
 .registerHeaderWrapper {
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -1255,34 +1238,20 @@ body {
 .contentPage {
   display: block;
   height: 100%;
+  background: rgb(29, 29, 29);
 }
 
-.headerSection {
-  border-bottom: 1px solid grey;
-}
-.headerSection h1 {
-  cursor: default;
+.verticalText {
+  position: fixed;
+  color: rgba(253, 246, 246, 0.057);
   text-transform: uppercase;
-}
-.headerSection a {
-  color: black;
+  transform: rotate(90deg) translateY(0px);
+  overflow: hidden;
   font-weight: 900;
-  text-decoration: none;
-}
-.headerSection a:hover {
-  text-decoration: underline;
-}
-
-.searchContentWrapper {
-  width: 100%;
-  padding-top: 150px;
-  padding-bottom: 15px;
-  z-index: -2;
-}
-
-.contentPageButton {
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: 200px;
+  top: 790px;
+  left: -460px;
+  cursor: default;
 }
 
 .Login img {
@@ -1567,7 +1536,6 @@ body {
 }
 
 .headerWrapper {
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
 }
@@ -1640,7 +1608,6 @@ body {
 .settings .settingsFormButton {
   margin-top: 0px;
   background-color: #292727;
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
   padding: 15px 0px;
@@ -1712,7 +1679,6 @@ body {
     justify-content: space-around;
   }
   .addItem .generalSection .generalSectionWrapper .generalInputWrapper {
-    width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
   }
@@ -1820,7 +1786,6 @@ body {
 .addItem .serviceSection .serviceSectionWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: -webkit-min-content -webkit-min-content;
   grid-template-rows: min-content min-content;
   grid-template-areas: "r1 r2" "r3 .";
   padding-left: 10%;
@@ -1852,7 +1817,6 @@ body {
   color: black;
 }
 .addItem .serviceSection .checkBoxWrapper {
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
   margin-left: 15px;
@@ -1884,14 +1848,11 @@ body {
   transform: translateX(-50%);
 }
 .addItem .workHoursSection .daysWrapper .dayWrapper {
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
   justify-content: center;
   display: grid;
-  grid-template-rows: -webkit-min-content -webkit-min-content;
   grid-template-rows: min-content min-content;
-  grid-template-columns: -webkit-min-content -webkit-min-content;
   grid-template-columns: min-content min-content;
   grid-template-areas: "day ." "from to";
   padding: 0px 10px;
@@ -1912,7 +1873,6 @@ body {
 }
 .addItem .workHoursSection .daysWrapper .dayWrapper .inputWrapper {
   display: flex;
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
   margin: 0px 10px 0px 0px;
@@ -2027,7 +1987,6 @@ body {
 .addItem .addCoachForm .serviceSection .genderRadio .genderInput {
   margin-left: 15px;
   margin-bottom: 5px;
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
   display: flex;
@@ -2605,7 +2564,6 @@ button[type=submit]:active {
 
 .popularityCounter .popularityImgWrapper {
   height: 20px;
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
 }
@@ -2712,40 +2670,17 @@ button[type=submit]:active {
 }
 
 .errorModalAnimationOn {
-  -webkit-animation-name: errorModalOn;
-          animation-name: errorModalOn;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-out;
-          animation-timing-function: ease-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  animation-name: errorModalOn;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 .errorModalAnimationOff {
-  -webkit-animation-name: errorModalOff;
-          animation-name: errorModalOff;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-timing-function: ease-out;
-          animation-timing-function: ease-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes errorModalOn {
-  0% {
-    opacity: 0;
-    z-index: -10000;
-  }
-  1% {
-    opacity: 0;
-    z-index: 10000;
-  }
-  100% {
-    opacity: 1;
-    z-index: 10000;
-  }
+  animation-name: errorModalOff;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes errorModalOn {
@@ -2760,20 +2695,6 @@ button[type=submit]:active {
   100% {
     opacity: 1;
     z-index: 10000;
-  }
-}
-@-webkit-keyframes errorModalOff {
-  0% {
-    opacity: 1;
-    z-index: 10000;
-  }
-  99% {
-    opacity: 0;
-    z-index: 10000;
-  }
-  100% {
-    opacity: 0;
-    z-index: -10000;
   }
 }
 @keyframes errorModalOff {
@@ -2794,7 +2715,6 @@ button[type=submit]:active {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
 }
@@ -2933,4 +2853,65 @@ button[type=submit]:active {
 
 .stringInputError {
   border: 1px solid red;
+}
+
+.contentHeader {
+  padding-top: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.bigLogoContentHeader {
+  position: relative;
+  opacity: 0.3;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bigLogoContentHeader path {
+  fill: white;
+}
+
+.contentHeaderWrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+.contentHeaderWrapper h1 {
+  margin: 0px;
+  opacity: 0;
+  text-transform: uppercase;
+  font-size: 65px;
+  line-height: 65px;
+  color: white;
+  position: relative;
+  transition: all 0.7s ease-in-out;
+  cursor: pointer;
+}
+.contentHeaderWrapper h1:first-child {
+  width: -moz-fit-content;
+  width: fit-content;
+  left: 45%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+}
+.contentHeaderWrapper h1:last-child {
+  width: -moz-fit-content;
+  width: fit-content;
+  left: 55%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  color: rgba(255, 255, 255, 0.306);
+}
+
+.contentHeaderWrapper:hover h1:first-child {
+  top: 48%;
+  left: 40%;
+}
+.contentHeaderWrapper:hover h1:last-child {
+  top: 40%;
+  left: 60%;
 }/*# sourceMappingURL=index.css.map */

@@ -42,14 +42,16 @@ type fadeInConfig = {
   stagger?: number;
   duration?: number;
   delay?: number;
+  opacity?: number;
 };
 export const fadeIn = (target: gsap.TweenTarget, config: fadeInConfig = {}) => {
   const anConfig = {
-    displayInitial: config.displayInitial,
-    displayAfter: config.displayAfter,
+    displayInitial: config.displayInitial ?? "block",
+    displayAfter: config.displayAfter ?? "block",
     stagger: config.stagger ?? 0.2,
     duration: config.duration ?? 0.5,
     delay: config.delay ?? 0,
+    opacity: config.opacity ?? 1,
   };
   const tl = gsap.timeline();
   tl.set(target, { display: anConfig.displayInitial })
@@ -58,7 +60,7 @@ export const fadeIn = (target: gsap.TweenTarget, config: fadeInConfig = {}) => {
       { opacity: 0 },
       {
         duration: anConfig.duration,
-        opacity: 1,
+        opacity: anConfig.opacity,
         delay: anConfig.delay,
         stagger: anConfig.stagger,
         ease: Power3.easeIn,

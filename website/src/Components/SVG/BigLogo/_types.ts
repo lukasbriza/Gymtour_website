@@ -1,4 +1,6 @@
 export type BigLogoProps = {
-  id: string;
+  id?: string;
   className?: string;
+  strokeWidth?: number;
+  scale?: number;
 };

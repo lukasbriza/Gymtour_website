@@ -9,3 +9,4 @@ export * from "./RegisterPage/RegisterPage";
 export * from "./StringInput/StringInput";
 export * from "./Checkbox/Checkbox";
 export * from "./ModalHeader/ModalHeader";
+export * from "./ContentHeader/ContentHeader";

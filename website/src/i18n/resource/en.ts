@@ -46,4 +46,9 @@ export const enTranslation: AppTranslationType = {
     registerHeader: "Zaregistrovat se",
     registerParagraph: "Pro “lajkování„ příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
   },
+
+  fitnessContentPage: {
+    header1: "Fitness",
+    verticalText: "Gymtour",
+  },
 };
