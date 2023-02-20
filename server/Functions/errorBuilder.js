@@ -6,7 +6,6 @@ class ValidationError extends Error {
     this.name = "ValidationError";
     this.message = message;
     this.trace = this.stack;
-    this.date = new Date();
 
     return res.status(this.code).send(this.errBuild());
   }

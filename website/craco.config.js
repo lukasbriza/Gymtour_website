@@ -12,6 +12,8 @@ module.exports = {
       "@animations": path.resolve(__dirname, "./src/animations/_index.ts"),
       "@svg": path.resolve(__dirname, "./src/components/SVG/_index.ts"),
       "@validations": path.resolve(__dirname, "./src/validations/_index.ts"),
+      "@libs": path.resolve(__dirname,"./src/libs/_index.ts"),
+      "@fetchers":path.resolve(__dirname,"./src/fetcher/_index.ts")
     },
   },
 };

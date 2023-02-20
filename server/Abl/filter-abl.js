@@ -15,6 +15,7 @@ class FilterAbl {
     try {
       getRes = await FilterModel.find().exec();
       response.data = getRes;
+      
     } catch (err) {
       if (err instanceof Error) {
         new DatabaseError(

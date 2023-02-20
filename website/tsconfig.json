@@ -26,7 +26,9 @@
       "@hooks": ["src/hooks/_index.ts"],
       "@animations": ["./src/animations/_index.ts"],
       "@svg": ["src/components/SVG/_index.ts"],
-      "@validations": ["./src/validations/_index.ts"]
+      "@validations": ["./src/validations/_index.ts"],
+      "@libs":["./src/libs/_index.ts"],
+      "@fetchers":["./src/fetcher/_index.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "src", "craco.config.js"],
