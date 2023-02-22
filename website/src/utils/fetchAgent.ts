@@ -6,16 +6,15 @@ const fetchAdress = getFetchAdress();
 
 class fetchAgent {
   //////////////////////////////////////////////////////////////////////////
-  //FILTER ROUTEST//
+  //FILTER ROUTEST//    OK
   getFilterData() {
     console.log("getFilterData");
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-filter/get";
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj<getFilterData_FetchCall[]> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/getFilterData",
-      });
+    const fetchErrorObj: feResponseObj<getFilterData_FetchCall[]> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/getFilterData",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<getFilterData_FetchCall[]>(adress, options, fetchErrorObj);
@@ -27,10 +26,9 @@ class fetchAgent {
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-login/login";
     const options = new getOptionObject().setMethod("POST").addBody(data).get();
-    const fetchErrorObj: feResponseObj<registerUser_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/registerUser",
-      });
+    const fetchErrorObj: feResponseObj<registerUser_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/registerUser",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<registerUser_FetchCall>(adress, options, fetchErrorObj);
@@ -39,14 +37,10 @@ class fetchAgent {
     console.log("checkAuthOfUser");
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-login/check";
-    const options = new getOptionObject()
-      .setMethod("POST")
-      .addHeader("Authorization", data.token)
-      .get();
-    const fetchErrorObj: feResponseObj<checkAuthOfUser_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/checkAuthOfUser",
-      });
+    const options = new getOptionObject().setMethod("POST").addHeader("Authorization", data.token).get();
+    const fetchErrorObj: feResponseObj<checkAuthOfUser_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/checkAuthOfUser",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<checkAuthOfUser_FetchCall>(adress, options, fetchErrorObj);
@@ -54,14 +48,11 @@ class fetchAgent {
   loginUser(data: loginUser) {
     console.log("loginUser");
     ///////////////////////////////////////////////////////
-    const adress: string =
-      fetchAdress +
-      `/api-login/login?username=${data.username}&password=${data.password}`;
+    const adress: string = fetchAdress + `/api-login/login?username=${data.username}&password=${data.password}`;
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj<loginUser_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/loginUser",
-      });
+    const fetchErrorObj: feResponseObj<loginUser_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/loginUser",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<loginUser_FetchCall>(adress, options, fetchErrorObj);
@@ -70,52 +61,34 @@ class fetchAgent {
     console.log("getUserInformation");
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + `/api-user/user?id=${data.id}`;
-    const options = new getOptionObject()
-      .setMethod("GET")
-      .addHeader("Authorization", data.token)
-      .get();
-    const fetchErrorObj: feResponseObj<getUserInformation_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/getUserInformation",
-      });
+    const options = new getOptionObject().setMethod("GET").addHeader("Authorization", data.token).get();
+    const fetchErrorObj: feResponseObj<getUserInformation_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/getUserInformation",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall<getUserInformation_FetchCall>(
-      adress,
-      options,
-      fetchErrorObj
-    );
+    return fetchCall<getUserInformation_FetchCall>(adress, options, fetchErrorObj);
   }
   changeUserInformation(data: changeInformation) {
     console.log("changeUserInformation");
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + `/api-user/user`;
-    const options = new getOptionObject()
-      .setMethod("PUT")
-      .addBody(data)
-      .addHeader("Authorization", data.token)
-      .get();
-    const fetchErrorObj: feResponseObj<changeUserInformation_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/changeUserInformation",
-      });
+    const options = new getOptionObject().setMethod("PUT").addBody(data).addHeader("Authorization", data.token).get();
+    const fetchErrorObj: feResponseObj<changeUserInformation_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/changeUserInformation",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    return fetchCall<changeUserInformation_FetchCall>(
-      adress,
-      options,
-      fetchErrorObj
-    );
+    return fetchCall<changeUserInformation_FetchCall>(adress, options, fetchErrorObj);
   }
   emailApprove(data: emailApprove) {
     console.log("emailApprove");
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + `/emailUpdate/call`;
     const options = new getOptionObject().setMethod("POST").addBody(data).get();
-    const fetchErrorObj: feResponseObj<emailApprove_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/emailApprove",
-      });
+    const fetchErrorObj: feResponseObj<emailApprove_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/emailApprove",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<emailApprove_FetchCall>(adress, options, fetchErrorObj);
@@ -132,11 +105,7 @@ class fetchAgent {
     });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
-    const fetchRes: any = await fetchCallWithoutParsing(
-      adress,
-      options,
-      fetchErrorObj
-    );
+    const fetchRes: any = await fetchCallWithoutParsing(adress, options, fetchErrorObj);
     const reader = fetchRes.body.getReader();
 
     let chunks: any = [];
@@ -160,13 +129,11 @@ class fetchAgent {
   getViews(id: string, type: "fitness" | "coach") {
     console.log("getViews");
     ///////////////////////////////////////////////////////
-    const adress: string =
-      fetchAdress + `/api-views/views?type=${type}&_id=${id}`;
+    const adress: string = fetchAdress + `/api-views/views?type=${type}&_id=${id}`;
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj<getViews_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/getViews",
-      });
+    const fetchErrorObj: feResponseObj<getViews_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/getViews",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<getViews_FetchCall>(adress, options, fetchErrorObj);
@@ -176,30 +143,23 @@ class fetchAgent {
     ///////////////////////////////////////////////////////
     const adress: string = fetchAdress + "/api-views/views";
     const options = new getOptionObject().setMethod("POST").addBody(data).get();
-    const fetchErrorObj: feResponseObj<updateViews_FetchCall> =
-      getFrontEndFetchErrObj({
-        trace: "FetchAgent/getViews",
-      });
+    const fetchErrorObj: feResponseObj<updateViews_FetchCall> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/getViews",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<updateViews_FetchCall>(adress, options, fetchErrorObj);
   }
   //////////////////////////////////////////////////////////////////////////
   //CONTENT ROUTES//
-  async getContentBasedOnFilter(
-    body: filterFetchQuery,
-    page: "fitness" | "coach"
-  ) {
+  async getContentBasedOnFilter(body: filterFetchQuery, page: "fitness" | "coach") {
     console.log("getContentBasedOnFilter");
     ///////////////////////////////////////////////////////
-    const adress: string =
-      fetchAdress + `/api-${page}/${page}?get=${JSON.stringify(body.get)}`;
+    const adress: string = fetchAdress + `/api-${page}/${page}?get=${JSON.stringify(body.get)}`;
     const options = new getOptionObject().setMethod("GET").get();
-    const fetchErrorObj: feResponseObj<filteredData[]> = getFrontEndFetchErrObj(
-      {
-        trace: "FetchAgent/getContentBasedOnFilter",
-      }
-    );
+    const fetchErrorObj: feResponseObj<filteredData[]> = getFrontEndFetchErrObj({
+      trace: "FetchAgent/getContentBasedOnFilter",
+    });
     ///////////////////////////////////////////////////////
     //FETCH CALL//
     return fetchCall<filteredData[]>(adress, options, fetchErrorObj);

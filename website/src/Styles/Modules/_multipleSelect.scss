@@ -2,7 +2,6 @@
   position: relative;
   width: fit-content;
   color: white;
-  margin: 5px;
 }
 
 .selectWrapperHovered {
@@ -13,9 +12,8 @@
   position: relative;
   width: fit-content;
   min-width: 150px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   background: rgb(57, 57, 57);
   transition: background 0.25s ease-out;
   border-radius: 5px;
@@ -55,9 +53,8 @@
 .optionsWrapper {
   background: rgb(51, 51, 51);
   border-radius: 0px 0px 5px 5px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   width: 100%;
   position: absolute;
   display: none;
@@ -66,6 +63,7 @@
 
 .show {
   display: block;
+  z-index: +100;
 }
 
 .optionWrapper {

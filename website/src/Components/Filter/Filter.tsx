@@ -1,13 +1,14 @@
 import { FC, useEffect, useState } from "react";
-import { AvoidedFilterType, FilterProps, FilterVariants } from "./_types";
-import { FilterType, getFilter } from "@fetchers";
+import { AvoidedFilterType, FilterProps, FilterVariants, FormType } from "./_types";
+import { FilterType, GetFilterResponse, getFilter } from "@fetchers";
 import { filter } from "@config";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
 import {
   Bullet,
   MultipleSelect,
   MultipleRegionSelectControled,
   Loading,
+  SearchBar,
 } from "@components";
 import { regionMapper, standardMapper } from "./Filter.mapper";
 
@@ -25,15 +26,23 @@ const filterAvoided = (
   return returnObject;
 };
 
-const getFilterComponents = async (type: FilterVariants) => {
-  const rawFilter = await getFilter();
-  const filterCleared = rawFilter?.data
+const GetFilterComponents: FC<{ type: FilterVariants }> = (props) => {
+  const { type } = props
+  const [rawFilter, setFilterData] = useState<GetFilterResponse | undefined>(undefined)
+  const [loading, setLoading] = useState<boolean>(true)
+
+  useEffect(() => {
+    setLoading(true)
+    getFilter().then(value => { setFilterData(value); setLoading(false) })
+  }, [])
+
+  const filterCleared = rawFilter && rawFilter?.data
     ? filterAvoided(
-        rawFilter?.data,
-        type === "coach"
-          ? (filter.avoidFilterTypes.coach as unknown as string[])
-          : (filter.avoidFilterTypes.fitness as unknown as string[])
-      )
+      rawFilter.data[0],
+      type === "coach"
+        ? (filter.avoidFilterTypes.coach as unknown as string[])
+        : (filter.avoidFilterTypes.fitness as unknown as string[])
+    )
     : null;
 
   const regions = filterCleared?.regions && (
@@ -65,56 +74,69 @@ const getFilterComponents = async (type: FilterVariants) => {
       />
     </div>
   );
+  const gender = filterCleared?.gender && (
+    <div className={"gender"}>
+      {standardMapper(filterCleared?.gender).map((gender) => {
+        return (
+          <Bullet
+            name={gender.code === "1" ? "men" : "women"}
+            value={gender.name}
+          />
+        );
+      })}
+    </div>
+  );
+  const specialization = filterCleared?.specialization && (
+    <div className={"specialization"}>
+      <MultipleSelect
+        name="specialization"
+        label="Specializace"
+        options={standardMapper(filterCleared?.specialization)}
+      />
+    </div>
+  );
+  const equipment = filterCleared?.equipment && (
+    <div className="equipment">
+      <MultipleSelect
+        name="equipment"
+        label="Vybavení"
+        options={standardMapper(filterCleared?.equipment)}
+      />
+    </div>
+  );
 
   switch (type) {
     case "coach":
-      const gender = filterCleared?.gender && (
-        <div className={"gender"}>
-          {standardMapper(filterCleared?.gender).map((gender) => {
-            return (
-              <Bullet
-                name={gender.code === "1" ? "men" : "women"}
-                value={gender.name}
-              />
-            );
-          })}
-        </div>
-      );
-
-      const specialization = filterCleared?.specialization && (
-        <div className={"specialization"}>
-          <MultipleSelect
-            name="specialization"
-            label="Specializace"
-            options={standardMapper(filterCleared?.specialization)}
-          />
-        </div>
-      );
       return (
         <>
-          {regions}
-          {general}
-          {specialization}
-          {others}
-          {gender}
+          {loading ?
+            <Loading /> :
+            <>
+              {regions}
+              {general}
+              {specialization}
+              {others}
+              {gender}
+              <SearchBar name="searchBar" />
+            </>
+          }
+
         </>
       );
     case "fitness":
-      const equipment = filterCleared?.equipment && (
-        <div className="equipment">
-          <MultipleSelect
-            name="equipment"
-            label="Vybavení"
-            options={standardMapper(filterCleared?.equipment)}
-          />
-        </div>
-      );
       return (
         <>
-          {regions}
-          {general}
-          {equipment}
-          {others}
+          {
+            loading ?
+              <Loading /> :
+              <>
+                {regions}
+                {general}
+                {equipment}
+                {others}
+                <SearchBar name="searchBar" />
+              </>
+          }
         </>
       );
   }
@@ -122,32 +144,41 @@ const getFilterComponents = async (type: FilterVariants) => {
 
 export const Filter: FC<FilterProps> = (props) => {
   const { type } = props;
-  const methods = useForm({
-    defaultValues: {
+
+  const filterdefaults = type === "coach" ?
+    {
+      general: [],
+      regions: [],
+      specialization: [],
+      others: [],
+      man: false,
+      woman: false,
+      searchBar: ""
+    } : {
+      general: [],
       regions: [],
       equipment: [],
-      general: [],
       others: [],
-      men: false,
-      women: false,
-      specialization: [],
+      searchBar: ""
+    }
+
+  const methods = useForm<FormType, any>({
+    defaultValues: {
+      ...filterdefaults
     },
+    reValidateMode: "onChange"
   });
 
-  const [loading, setLoading] = useState(true);
-  const [component, setComponent] = useState<JSX.Element | null>(null);
 
-  useEffect(() => {
-    setLoading(true);
-    getFilterComponents(type).then((value) => {
-      setComponent(value);
-      setLoading(false);
-    });
-  }, [type]);
+
+  const handleChange = () => {
+    const values = methods.getValues()
+    console.log(values)
+  }
 
   return (
     <FormProvider {...methods}>
-      <div className={"filterWrapper"}>{loading ? <Loading /> : component}</div>
+      <form className={`filterWrapper-${type}`} onChange={handleChange}><GetFilterComponents type={type} /></form>
     </FormProvider>
   );
 };

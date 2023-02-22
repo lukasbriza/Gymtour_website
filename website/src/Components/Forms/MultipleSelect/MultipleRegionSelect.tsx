@@ -67,26 +67,30 @@ export const MultipleRegionSelect: FC<RegionSelectProps> = (props) => {
       </div>
       <div className={clsx(["optionsWrapper", open && "show"])}>
         {options.map((option, i) => {
-          return (
-            <div className={"sectionWrapper"} key={i}>
-              <div className={"optionHeader"}>{option.header}</div>
-              {option.options.map((town, i) => {
-                return (
-                  <div className={"optionWrapper"} key={i + "t"}>
-                    <CheckboxSquared
-                      onChange={(e) => handleCheckboxClick(e, town.code)}
-                      label={town.name}
-                      name={town.code}
-                      className={"optionCheckboxRoot"}
-                      checkboxClass={"multipleOptionInputWrapper"}
-                      labelClass={"multipleOptionLabel"}
-                      checkerClass={"multipleOptionChecker"}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          );
+          //ONLY FOR PILOT PROJECT
+          if (i === 0) {
+            return (
+              <div className={"sectionWrapper"} key={i}>
+                <div className={"optionHeader"}>{option.header}</div>
+                {option.options.map((town, i) => {
+                  return (
+                    <div className={"optionWrapper"} key={i + "t"}>
+                      <CheckboxSquared
+                        onChange={(e) => handleCheckboxClick(e, town.code)}
+                        label={town.name}
+                        name={town.code}
+                        className={"optionCheckboxRoot"}
+                        checkboxClass={"multipleOptionInputWrapper"}
+                        labelClass={"multipleOptionLabel"}
+                        checkerClass={"multipleOptionChecker"}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          }
+
         })}
       </div>
     </div>

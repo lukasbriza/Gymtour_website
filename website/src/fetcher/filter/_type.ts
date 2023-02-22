@@ -1,9 +1,7 @@
 import { CustomErrorResponseObject, ErrorTypesArray } from "@utils";
 
 export type GetFilterRequest = {};
-export type GetFilterResponse =
-  | CustomErrorResponseObject
-  | { data: FilterType; errorMap: ErrorTypesArray };
+export type GetFilterResponse = CustomErrorResponseObject | { data: [FilterType]; errorMap: ErrorTypesArray };
 
 export type FilterType = {
   _id?: { $oid: string };

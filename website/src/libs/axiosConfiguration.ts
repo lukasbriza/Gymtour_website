@@ -9,7 +9,7 @@ export const configureAxios = () => {
     baseURL: getDevState()
       ? process.env.REACT_APP_DEVELOPMENT_FETCH_ADRESS
       : process.env.REACT_APP_PRODUCTION_FETCH_ADRESS,
-    timeout: 10000,
+    timeout: 12000,
     headers: { ...axiosConfig.headers },
   });
 };
@@ -17,6 +17,8 @@ export const configureAxios = () => {
 export const getAxiosInstance = (): AxiosInstance => {
   if (!axiosInstance) {
     configureAxios();
+    console.log(axiosInstance);
   }
+
   return axiosInstance as AxiosInstance;
 };

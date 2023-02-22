@@ -1,12 +1,5 @@
 export type ErrorMapType = CustomError[];
-export type ErrorTypesArray = (
-  | ApiError
-  | DatabaseError
-  | DatabaseError
-  | ValidationError
-  | UnhandledError
-  | Error
-)[];
+export type ErrorTypesArray = (ApiError | DatabaseError | DatabaseError | ValidationError | UnhandledError | Error)[];
 export type CustomErrorResponseObject = {
   data: null;
   errorMap: ErrorTypesArray;

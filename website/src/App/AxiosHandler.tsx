@@ -11,12 +11,11 @@ import {
   ValidationError,
 } from "@utils";
 import { PopUpContext } from "@lukasbriza/lbui-lib";
-import { configureAxios, getAxiosInstance } from "@libs";
+import { getAxiosInstance } from "@libs";
 
 export const AxiosHandler: FC<ErrorHandlerProps> = ({ children }) => {
   const { show, unMount } = useContext(PopUpContext);
 
-  configureAxios();
   const axiosInstance = getAxiosInstance();
 
   axiosInstance.interceptors.response.use(

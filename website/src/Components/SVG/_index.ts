@@ -9,3 +9,4 @@ export * from "./BigText/BigText";
 export * from "./Sucess/Sucess";
 export * from "./Circle/Circle";
 export * from "./Cross/Cross";
+export * from "./SearchIcon/SearchIcon";

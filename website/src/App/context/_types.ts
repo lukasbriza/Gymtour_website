@@ -7,7 +7,7 @@ export interface ContextProviderProps {
 export type setState<T> = React.Dispatch<React.SetStateAction<T>>;
 export type BreakPoints = "toMobile" | "fromMobile" | "fromTablet" | "fromDesktop" | "fromWide";
 
-export interface AppStateContext {
+export type AppStateContext = {
   width?: number;
   actualLocation?: string;
   breakPoint?: BreakPoints;
@@ -24,9 +24,9 @@ export interface AppStateContext {
     setFilteredFitnessData: setState<filteredData[]>;
     setFilteredCoachData: setState<filteredData[]>;
   };
-}
+};
 
-export interface AnimationStateContext {
+export type AnimationStateContext = {
   bigLogoPlayed: boolean;
   smallLogoPlayed: boolean;
   filterOpen: boolean;
@@ -37,9 +37,9 @@ export interface AnimationStateContext {
     setFilterOpen: setState<boolean>;
     setContentPageCross: setState<boolean>;
   };
-}
+};
 
-export interface UserStateContext {
+export type UserStateContext = {
   logged: boolean;
   userId: string;
   userObject: userObjectType | undefined;
@@ -48,4 +48,6 @@ export interface UserStateContext {
     setUserId: setState<string>;
     setUserObject: setState<userObjectType | undefined>;
   };
-}
+};
+
+export type FilterStateContext = {};
