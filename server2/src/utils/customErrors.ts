@@ -1,10 +1,35 @@
-class ValidationError extends Error {
-  constructor(message, res, response) {
+export class ValidationError extends Error {
+  code: string;
+  date: Date;
+  constructor(message) {
     super();
-    this.response = response;
     this.code = "406";
     this.name = "ValidationError";
     this.message = message;
-    this.trace = this.stack;
+    this.date = new Date();
+  }
+}
+
+export class DatabaseError extends Error {
+  code: string;
+  date: Date;
+  constructor(message) {
+    super();
+    this.code = "409";
+    this.name = "DatabaseError";
+    this.message = message;
+    this.date = new Date();
+  }
+}
+
+export class APIError extends Error {
+  code: string;
+  date: Date;
+  constructor(message) {
+    super();
+    this.code = "400";
+    this.name = "APIError";
+    this.message = message;
+    this.date = new Date();
   }
 }
