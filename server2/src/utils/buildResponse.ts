@@ -1,6 +1,6 @@
 import { CustomResponse } from "../types";
 
-export const buildResponse = (): CustomResponse => {
+export const buildResponse = <T>(): CustomResponse<T | null> => {
   return {
     data: null,
     errorMap: [],

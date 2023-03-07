@@ -4,7 +4,7 @@ import xss from "xss-clean";
 import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
-import { connect } from "mongoose";
+import mongoose, { connect } from "mongoose";
 
 import express, { Request, Response } from "express";
 import { config } from "./config/securityOptions";
@@ -34,6 +34,7 @@ app.use("/api", router);
 
 //DB CONNECTION
 try {
+  mongoose.set("strictQuery", true);
   connect(process.env.DB_CONNECTION, () => {
     console.log("Connection created!");
     console.log("URI: " + process.env.DB_CONNECTION);

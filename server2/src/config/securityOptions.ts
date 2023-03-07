@@ -1,4 +1,5 @@
 export const config = {
+  dbUnitLimit: 20,
   jsonLimit: "10kb",
   rateLimit: {
     maxRequests: 200,

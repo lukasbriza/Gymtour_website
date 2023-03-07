@@ -1,15 +1,13 @@
-import { APIError, DatabaseError, ValidationError } from "../utils";
-import { Filter } from "./abl";
-
-export type ErrorType =
-  | typeof ValidationError
-  | typeof DatabaseError
-  | typeof APIError
-  | [];
+import { Coach, Filter } from "./abl";
+import { ErrorType } from "./error";
 
 export type CustomResponse<T = unknown> = {
-  data: T;
+  data: T | null;
   errorMap: ErrorType[];
 };
 
-export type GetFilterResponse = Promise<CustomResponse<Filter>>;
+export type GetFilterResponsePromise = Promise<CustomResponse<Filter>>;
+export type GetFilterResponse = CustomResponse<Filter>;
+
+export type GetCoachResponsePromise = Promise<CustomResponse<Coach[]>>;
+export type GetCoachresponse = CustomResponse<Coach[]>;

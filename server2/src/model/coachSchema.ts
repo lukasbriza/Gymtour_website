@@ -1,7 +1,8 @@
 import { model, Schema } from "mongoose";
 import { ObjectId } from "mongodb";
+import { Coach, Contact } from "../types";
 
-const contactSchema = new Schema({
+const contactSchema = {
   tel: { type: Number, required: false, default: null },
   mobile: { type: Number, required: false, default: null },
   email: { type: String, required: true },
@@ -11,13 +12,13 @@ const contactSchema = new Schema({
   google: { type: String, required: false, default: null },
   instagram: { type: String, required: false, default: null },
   youtube: { type: String, required: false, default: null },
-});
+};
 
-const filtersSchema = new Schema({
+const filtersSchema = {
   gender: { type: String, required: true },
   specialization: [{ type: String, required: true }],
   others: [{ type: String, required: false }],
-});
+};
 
 const picturesIdsSchema = {
   card: { type: String, required: true },
@@ -27,7 +28,7 @@ const picturesIdsSchema = {
   },
 };
 
-const coachSchema = new Schema({
+const coachSchema = new Schema<Coach>({
   _id: { type: ObjectId },
   name: { type: String, required: true },
   alias: { type: String, required: false, default: null },
