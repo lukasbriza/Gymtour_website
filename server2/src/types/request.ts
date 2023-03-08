@@ -1,4 +1,4 @@
-import { GetCoachType, GetFilterType } from "./abl";
+import { GetCoachType, GetFilterType, AddCoachType } from "./abl";
 import { Query } from "express-serve-static-core";
 
 export interface TypedRequestBody<T> extends Express.Request {
@@ -12,3 +12,5 @@ export interface TypedRequestQuery<T extends Query> extends Express.Request {
 export type GetFilterRequest = TypedRequestBody<GetFilterType>;
 
 export type GetCoachRequest = TypedRequestQuery<GetCoachType>;
+
+export type AddCoachRequest = TypedRequestBody<AddCoachType>;

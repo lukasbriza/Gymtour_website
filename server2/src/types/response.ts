@@ -10,4 +10,7 @@ export type GetFilterResponsePromise = Promise<CustomResponse<Filter>>;
 export type GetFilterResponse = CustomResponse<Filter>;
 
 export type GetCoachResponsePromise = Promise<CustomResponse<Coach[]>>;
-export type GetCoachresponse = CustomResponse<Coach[]>;
+export type GetCoachResponse = CustomResponse<Coach[]>;
+
+export type AddCoachResponsePromise = Promise<CustomResponse<boolean>>;
+export type AddCoachResponse = CustomResponse<boolean>;

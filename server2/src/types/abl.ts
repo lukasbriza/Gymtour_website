@@ -12,7 +12,11 @@ export type GetCoachType = {
   projection?: string;
 };
 
-export type FilterQueryParsed = { [key: string]: number[] | [number, number[]][] };
+export type FilterQueryParsed = {
+  [key: string]: number[] | [number, number[]][];
+};
+
+export type AddCoachType = Coach;
 
 export type Contact = {
   tel: number | null;
@@ -32,10 +36,13 @@ export type CoachFilter = {
   others: string[] | [];
 };
 
-export type CoachPictures = { card: string; detail: { main: string; others: string[] | [] } };
+export type CoachPictures = {
+  card: string;
+  detail: { main: string; others: string[] | [] };
+};
 
 export type Coach = {
-  _id: ObjectId;
+  _id?: ObjectId;
   name: string;
   alias: string | null;
   workPlace: string;

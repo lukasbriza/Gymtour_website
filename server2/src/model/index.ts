@@ -1,4 +1,4 @@
 export * from "./coachSchema";
-export * from "./filterModel";
+export * from "./filterSchema";
 export * from "./fitnessSchema";
-export * from "./userModel";
+export * from "./userSchema";

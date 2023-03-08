@@ -1,5 +1,5 @@
 import { Router, Response } from "express";
-import { GetCoachRequest } from "../types";
+import { AddCoachRequest, GetCoachRequest } from "../types";
 import { addCoach, getCoaches } from "../abl";
 import { getStatus } from "../utils";
 
@@ -11,7 +11,7 @@ coach
     const result = await getCoaches(req.query);
     return res.status(getStatus(result.errorMap)).send(result);
   })
-  .post(async (req, res) => {
+  .post(async (req: AddCoachRequest, res: Response) => {
     const result = await addCoach(req.body);
     return res.status(getStatus(result.errorMap)).send(result);
   });

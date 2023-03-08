@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import { ObjectId } from "mongodb";
-import { Coach, Contact } from "../types";
+import { Coach } from "../types";
 
 const contactSchema = {
   tel: { type: Number, required: false, default: null },
