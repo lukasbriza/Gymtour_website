@@ -10,7 +10,7 @@ import { CoachModel } from "../model";
 import { add, get, Option } from "../database";
 import { errorMessages, config } from "../config";
 import { APIError, DatabaseError, buildResponse } from "../utils";
-import { SortOrder } from "mongoose";
+import mongoose, { SortOrder } from "mongoose";
 
 const orderQuery = (order?: number): { [key: string]: SortOrder } => {
   switch (order) {
@@ -55,23 +55,17 @@ const getCoachFilter = (query: FilterQueryParsed) => {
   if (findQuery.region.$in.length === 0) {
     delete findQuery.region;
   }
-
-  console.log(findQuery);
   return findQuery;
 };
 
-export const getCoaches = async (
-  query: GetCoachType
-): GetCoachResponsePromise => {
+export const getCoaches = async (query: GetCoachType): GetCoachResponsePromise => {
   const response = buildResponse<Coach[]>();
   const LIMIT = query.limit ? Number(query.limit) : config.dbUnitLimit;
   const ORDER = query.order ? Number(query.order) : 1;
   const PROJECTION = query.projection ? query.projection : undefined;
   const REGIONS = query.regions ? JSON.parse(query.regions) : undefined;
   const GENDER = query.gender ? JSON.parse(query.gender) : undefined;
-  const SPECIALIZATION = query.specialization
-    ? JSON.parse(query.specialization)
-    : undefined;
+  const SPECIALIZATION = query.specialization ? JSON.parse(query.specialization) : undefined;
   const parsedQuery: FilterQueryParsed = {
     regions: REGIONS,
     gender: GENDER,
@@ -86,11 +80,7 @@ export const getCoaches = async (
     limit: LIMIT,
   };
 
-  const data = await get<Coach>(
-    CoachModel,
-    errorMessages.getCoach.databaseError,
-    option
-  );
+  const data = await get<Coach>(CoachModel, errorMessages.getCoach.databaseError, option);
   if (data instanceof DatabaseError) {
     response.errorMap.push(data);
     return response;
@@ -103,11 +93,10 @@ export const addCoach = async (body: AddCoachType): AddCoachResponsePromise => {
   const response = buildResponse<boolean>();
   const { name, region, town } = body;
 
-  const hasSameEmail = await get<Coach>(
-    CoachModel,
-    errorMessages.getCoach.databaseError,
-    { findQuery: { "contact.email": body.contact.email } }
-  );
+  const hasSameEmail = await get<Coach>(CoachModel, errorMessages.getCoach.databaseError, {
+    findQuery: { "contact.email": body.contact.email },
+  });
+  console.log({ hasSameEmail });
 
   if (hasSameEmail instanceof DatabaseError) {
     response.data = false;
@@ -122,11 +111,11 @@ export const addCoach = async (body: AddCoachType): AddCoachResponsePromise => {
     return response;
   }
 
-  const hasSameName = await get<Coach>(
-    CoachModel,
-    errorMessages.getCoach.databaseError,
-    { findQuery: { name: name, region: region, town: town } }
-  );
+  const hasSameName = await get<Coach>(CoachModel, errorMessages.getCoach.databaseError, {
+    findQuery: { name: name, region: region, town: town },
+  });
+
+  console.log({ hasSameName });
 
   if (hasSameName instanceof DatabaseError) {
     response.data = false;
@@ -140,11 +129,12 @@ export const addCoach = async (body: AddCoachType): AddCoachResponsePromise => {
     response.errorMap.push(err);
   }
 
-  const data = await add<Coach>(
-    CoachModel,
-    body,
-    errorMessages.getCoach.databaseError
-  );
+  const coachObject = body;
+  coachObject._id = new mongoose.Types.ObjectId();
+
+  const data = await add<Coach>(CoachModel, body, errorMessages.getCoach.databaseError);
+
+  console.log({ data });
 
   if (data instanceof DatabaseError) {
     response.data = false;

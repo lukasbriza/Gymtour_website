@@ -29,11 +29,11 @@ export const get = async <T>(
 ): Promise<HydratedDocument<T>[] | DatabaseError> => {
   const { findQuery, projection, order, limit } = options;
 
-  console.log(options);
+  // console.log(options);
 
   try {
     const data = await model.find(findQuery, projection).sort(order).limit(limit).exec();
-    console.log(data);
+    //console.log(data);
     return data;
   } catch (err) {
     const error = new DatabaseError(`${errorMessage} ${err.message}`);
