@@ -29,7 +29,7 @@ const picturesIdsSchema = {
 };
 
 const coachSchema = new Schema<Coach>({
-  _id: { type: ObjectId },
+  _id: { type: ObjectId, required: false, default: new ObjectId() },
   name: { type: String, required: true },
   alias: { type: String, required: false, default: null },
   workPlace: { type: String, required: true },

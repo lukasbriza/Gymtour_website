@@ -5,25 +5,13 @@ import {
   GetCoachResponsePromise,
   AddCoachResponsePromise,
   AddCoachType,
+  User,
 } from "../types";
-import { CoachModel } from "../model";
+import { CoachModel, UserModel } from "../model";
 import { add, get, Option } from "../database";
 import { errorMessages, config } from "../config";
-import { APIError, DatabaseError, buildResponse } from "../utils";
-import mongoose, { SortOrder } from "mongoose";
-
-const orderQuery = (order?: number): { [key: string]: SortOrder } => {
-  switch (order) {
-    case 1:
-      return { popularity: "desc" };
-    case 2:
-      return { name: "asc" };
-    case 3:
-      return { views: "desc" };
-    default:
-      return { popularity: "desc" };
-  }
-};
+import { APIError, DatabaseError, assignError, buildResponse, orderQuery } from "../utils";
+import { getMeta } from "./image";
 
 const getCoachFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -44,10 +32,10 @@ const getCoachFilter = (query: FilterQueryParsed) => {
     findQuery["filters.gender"] = { $in: query.gender };
   }
   if (query?.specialization) {
-    findQuery["filters.specialization"] = query.specialization;
+    findQuery["filters.specialization"] = { $in: query.specialization };
   }
   if (query?.others) {
-    findQuery["filters.others"] = query.others;
+    findQuery["filters.others"] = { $in: query.others };
   }
   if (findQuery.town.$in.length === 0) {
     delete findQuery.town;
@@ -82,8 +70,7 @@ export const getCoaches = async (query: GetCoachType): GetCoachResponsePromise =
 
   const data = await get<Coach>(CoachModel, errorMessages.getCoach.databaseError, option);
   if (data instanceof DatabaseError) {
-    response.errorMap.push(data);
-    return response;
+    return assignError<Coach[]>(null, data, response);
   }
   response.data = data;
   return response;
@@ -91,56 +78,96 @@ export const getCoaches = async (query: GetCoachType): GetCoachResponsePromise =
 
 export const addCoach = async (body: AddCoachType): AddCoachResponsePromise => {
   const response = buildResponse<boolean>();
-  const { name, region, town } = body;
+  const { name, region, town, owner, pictures } = body;
 
   const hasSameEmail = await get<Coach>(CoachModel, errorMessages.getCoach.databaseError, {
     findQuery: { "contact.email": body.contact.email },
   });
-  console.log({ hasSameEmail });
 
   if (hasSameEmail instanceof DatabaseError) {
-    response.data = false;
-    response.errorMap.push(hasSameEmail);
-    return response;
+    return assignError<boolean>(false, hasSameEmail, response);
   }
 
   if (hasSameEmail.length > 0) {
     const err = new APIError(errorMessages.addCoach.duplicitEmailError);
-    response.data = false;
-    response.errorMap.push(err);
-    return response;
+    return assignError<boolean>(false, err, response);
   }
 
-  const hasSameName = await get<Coach>(CoachModel, errorMessages.getCoach.databaseError, {
+  const hasSameName = await get<Coach>(CoachModel, errorMessages.addCoach.databaseError, {
     findQuery: { name: name, region: region, town: town },
   });
 
-  console.log({ hasSameName });
-
   if (hasSameName instanceof DatabaseError) {
-    response.data = false;
-    response.errorMap.push(hasSameName);
-    return response;
+    return assignError<boolean>(false, hasSameName, response);
   }
 
   if (hasSameName.length > 0) {
     const err = new APIError(errorMessages.addCoach.sameNameError);
-    response.data = false;
-    response.errorMap.push(err);
+    return assignError<boolean>(false, err, response);
   }
 
-  const coachObject = body;
-  coachObject._id = new mongoose.Types.ObjectId();
+  const hasUser = await get<User>(UserModel, errorMessages.addCoach.userDatabaseError, { findQuery: { _id: owner } });
+
+  if (hasUser instanceof DatabaseError) {
+    return assignError<boolean>(false, hasUser, response);
+  }
+
+  if (hasUser.length > 1) {
+    const err = new APIError(errorMessages.addCoach.multipleOwners);
+    return assignError<boolean>(false, err, response);
+  }
+
+  if (hasUser.length == 0) {
+    const err = new APIError(errorMessages.addCoach.noOwner);
+    return assignError<boolean>(false, err, response);
+  }
+
+  const { card, detail } = pictures;
+  const { main, others } = detail;
+
+  const cardPicture = await getMeta(card);
+  const mainPicture = await getMeta(main);
+
+  if (cardPicture.errorMap.length > 0) {
+    return assignError<boolean>(false, response.errorMap, response);
+  }
+
+  if (mainPicture.errorMap.length > 0) {
+    return assignError<boolean>(false, response.errorMap, response);
+  }
+
+  if (cardPicture.data.length > 1 || cardPicture.data.length === 0) {
+    const error = new APIError(`${errorMessages.addCoach.desinchronizationError} cardPicture`);
+    return assignError<boolean>(false, error, response);
+  }
+
+  if (mainPicture.data.length > 1 || mainPicture.data.length === 0) {
+    const error = new APIError(`${errorMessages.addCoach.desinchronizationError} mainPicture`);
+    return assignError<boolean>(false, error, response);
+  }
+
+  const error = [];
+  others.forEach(async (picture) => {
+    const otherresult = await getMeta(picture);
+    if (otherresult.data.length > 1 || otherresult.data.length === 0) {
+      const err = new APIError(`${errorMessages.addCoach.desinchronizationError} otherresult - id: ${picture}`);
+      error.push(err);
+    }
+  });
+
+  if (error.length > 0) {
+    return assignError<boolean>(false, error, response);
+  }
 
   const data = await add<Coach>(CoachModel, body, errorMessages.getCoach.databaseError);
 
-  console.log({ data });
-
   if (data instanceof DatabaseError) {
-    response.data = false;
-    response.errorMap.push(data);
-    return response;
+    return assignError<boolean>(false, data, response);
   }
   response.data = true;
   return response;
+};
+
+export const removeCoaches = async (body: any) => {
+  return;
 };

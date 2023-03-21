@@ -1,4 +1,4 @@
-import { DatabaseError, buildResponse } from "../utils";
+import { DatabaseError, assignError, buildResponse } from "../utils";
 import { Filter, GetFilterResponsePromise } from "./../types";
 import { FilterModel } from "../model";
 import { getOne } from "../database";
@@ -7,13 +7,12 @@ import { errorMessages } from "../config";
 export const getFilter = async (): GetFilterResponsePromise => {
   const response = buildResponse<Filter>();
 
-  const data = await getOne<Filter>(FilterModel, errorMessages.getFilter.databaseError);
+  const data = await getOne<Filter>(FilterModel, errorMessages.getFilter.databaseError, {});
 
-  if (!(data instanceof DatabaseError)) {
-    response.data = data;
-    return response;
+  if (data instanceof DatabaseError) {
+    return assignError<Filter>(null, data, response);
   }
 
-  response.errorMap.push(data);
+  response.data = data;
   return response;
 };

@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
 import { ObjectId } from "mongodb";
+import { Fitness } from "../types";
 
-const contactSchema = new Schema({
+const contactSchema = {
   tel: { type: Number, required: false, default: null },
   mobile: { type: Number, required: false, default: null },
   email: { type: String, required: true },
@@ -11,9 +12,9 @@ const contactSchema = new Schema({
   google: { type: String, required: false, default: null },
   instagram: { type: String, required: false, default: null },
   youtube: { type: String, required: false, default: null },
-});
+};
 
-const openHoursSchema = new Schema({
+const openHoursSchema = {
   mon: {
     from: { type: Number, required: true, default: null },
     to: { type: Number, required: true, default: null },
@@ -42,13 +43,13 @@ const openHoursSchema = new Schema({
     from: { type: Number, required: true, default: null },
     to: { type: Number, required: true, default: null },
   },
-});
+};
 
-const filtersSchema = new Schema({
+const filtersSchema = {
   equipment: [{ type: String, required: true }],
   general: [{ type: String, required: false }],
   others: [{ type: String, required: false }],
-});
+};
 
 const picturesIdsSchema = {
   card: { type: String, required: true },
@@ -58,8 +59,8 @@ const picturesIdsSchema = {
   },
 };
 
-const fitnessSchema = new Schema({
-  _id: { type: ObjectId },
+const fitnessSchema = new Schema<Fitness>({
+  _id: { type: ObjectId, required: false, default: new ObjectId() },
   name: { type: String, required: true },
   street: { type: String, required: true },
   town: { type: Number, required: true },

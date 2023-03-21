@@ -1,7 +1,8 @@
 import { ObjectId } from "mongodb";
 import { Schema, model } from "mongoose";
+import { User } from "../types";
 
-const userSchema = new Schema({
+const userSchema = new Schema<User>({
   _id: { type: ObjectId },
   username: { type: String, required: true },
   password: { type: String, required: true },

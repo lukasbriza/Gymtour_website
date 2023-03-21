@@ -1,4 +1,5 @@
-import { Coach, Filter } from "./abl";
+import { GridFSFile } from "mongodb";
+import { Coach, Filter, Fitness, ImageFieldsObject } from "./abl";
 import { ErrorType } from "./error";
 
 export type CustomResponse<T = unknown> = {
@@ -6,11 +7,29 @@ export type CustomResponse<T = unknown> = {
   errorMap: ErrorType[];
 };
 
-export type GetFilterResponsePromise = Promise<CustomResponse<Filter>>;
 export type GetFilterResponse = CustomResponse<Filter>;
+export type GetFilterResponsePromise = Promise<GetFilterResponse>;
 
-export type GetCoachResponsePromise = Promise<CustomResponse<Coach[]>>;
 export type GetCoachResponse = CustomResponse<Coach[]>;
+export type GetCoachResponsePromise = Promise<GetCoachResponse>;
 
-export type AddCoachResponsePromise = Promise<CustomResponse<boolean>>;
 export type AddCoachResponse = CustomResponse<boolean>;
+export type AddCoachResponsePromise = Promise<AddCoachResponse>;
+
+export type GetFitnessResponse = CustomResponse<Fitness[]>;
+export type GetFitnessResponsePromise = Promise<GetFitnessResponse>;
+
+export type AddFitnessResponse = CustomResponse<boolean>;
+export type AddFitnessResponsePromise = Promise<AddFitnessResponse>;
+
+export type RemoveFitnessesResponse = CustomResponse<{ id: string; deleted: boolean }[]>;
+export type RemoveFitnessesResponsePromise = Promise<RemoveFitnessesResponse>;
+
+export type UploadImageResponse = CustomResponse<ImageFieldsObject>;
+export type UploadImageResponsePromise = Promise<UploadImageResponse>;
+
+export type RemoveImageResponse = CustomResponse<boolean>;
+export type RemoveImageResponsePromise = Promise<RemoveImageResponse>;
+
+export type GetImageResponse = CustomResponse<GridFSFile>;
+export type GetImageResponsePromise = Promise<GetImageResponse>;

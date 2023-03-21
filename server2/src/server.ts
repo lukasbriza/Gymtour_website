@@ -4,12 +4,12 @@ import xss from "xss-clean";
 import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
-import mongoose, { connect } from "mongoose";
 
 import express, { Request, Response } from "express";
 import { config } from "./config/securityOptions";
 import { getDevState } from "./utils/getDevState";
 import { router } from "./router";
+import { initDatabase } from "./database";
 
 dotenv.config();
 const app = express();
@@ -33,15 +33,7 @@ app.use("/api", rateLimit({ ...rateLimitConfig }));
 app.use("/api", router);
 
 //DB CONNECTION
-try {
-  mongoose.set("strictQuery", true);
-  connect(process.env.DB_CONNECTION, () => {
-    console.log("Connection created!");
-    console.log("URI: " + process.env.DB_CONNECTION);
-  });
-} catch (error) {
-  throw new Error(error.message);
-}
+initDatabase();
 
 //HANDLER ALL REQUESTS
 app.get("*", (req: Request, res: Response) => {
