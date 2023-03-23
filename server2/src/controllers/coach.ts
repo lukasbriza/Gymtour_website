@@ -1,5 +1,5 @@
 import { Router, Response } from "express";
-import { AddCoachRequest, GetCoachRequest } from "../types";
+import { AddCoachRequest, GetCoachRequest, RemoveCoachesRequest } from "../types";
 import { addCoach, getCoaches, removeCoaches } from "../abl";
 import { getStatus } from "../utils";
 
@@ -15,7 +15,7 @@ coach
     const result = await addCoach(req.body);
     return res.status(getStatus(result.errorMap)).send(result);
   })
-  .delete(async (req: DeleteCoachRequest, res: Response) => {
+  .delete(async (req: RemoveCoachesRequest, res: Response) => {
     const result = await removeCoaches(req.body);
     return res.status(getStatus(result.errorMap)).send(result);
   });

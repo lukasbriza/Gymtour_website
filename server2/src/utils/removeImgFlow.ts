@@ -6,18 +6,18 @@ import { DatabaseError } from "./customErrors";
 
 export const removeImgFlow = async (objecId: string, model: Model<any>) => {
   const filterQuery: FilterQuery<Fitness | Coach> = { _id: objecId };
-  const fitness = await getOne<Fitness | Coach>(
-    model,
-    errorMessages.removeFitness.databaseError,
-    filterQuery,
-    DB.gymtour
-  );
+  const img = await getOne<Fitness | Coach>(model, errorMessages.removeFitness.databaseError, filterQuery, DB.gymtour);
 
-  if (fitness instanceof DatabaseError) {
-    return [fitness];
+  if (img instanceof DatabaseError) {
+    return [img];
   }
 
-  const { pictures } = fitness;
+  if (img === null) {
+    const error = new DatabaseError(errorMessages.removeImgFlow.noImageError + `${objecId}`);
+    return [error];
+  }
+
+  const { pictures } = img;
   const { card, detail } = pictures;
   const imagesSet = new Set<string>();
   imagesSet.add(card);
@@ -30,7 +30,7 @@ export const removeImgFlow = async (objecId: string, model: Model<any>) => {
 
   imagesSet.forEach((id) => {
     const promise = new Promise<id>((resolve) => {
-      removeImg([id], errorMessages.removeFitness.removeImgError + `_id: ${id}`).then((result) => {
+      removeImg([id], errorMessages.removeImgFlow.removeImgError + `_id: ${id}`).then((result) => {
         if (result instanceof DatabaseError || Array.isArray(result)) {
           resolve({ success: false, error: result });
         } else {

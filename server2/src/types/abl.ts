@@ -18,6 +18,10 @@ export type FilterQueryParsed = {
 
 export type AddCoachType = Coach;
 
+export type RemoveCoachType = {
+  id: string | string[];
+};
+
 export type Contact = {
   tel: number | null;
   mobile: number | null;
@@ -180,5 +184,9 @@ export type RemoveImageType = {
 };
 
 export type GetImageType = {
+  id: string;
+};
+
+export type GetUserType = {
   id: string;
 };

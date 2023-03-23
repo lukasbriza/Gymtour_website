@@ -6,11 +6,13 @@ import {
   AddCoachResponsePromise,
   AddCoachType,
   User,
+  RemoveCoachType,
+  RemoveCoachesResponsePromise,
 } from "../types";
 import { CoachModel, UserModel } from "../model";
-import { add, get, Option } from "../database";
+import { add, get, Option, remove } from "../database";
 import { errorMessages, config } from "../config";
-import { APIError, DatabaseError, assignError, buildResponse, orderQuery } from "../utils";
+import { APIError, DatabaseError, assignError, buildResponse, orderQuery, removeImgFlow } from "../utils";
 import { getMeta } from "./image";
 
 const getCoachFilter = (query: FilterQueryParsed) => {
@@ -168,6 +170,58 @@ export const addCoach = async (body: AddCoachType): AddCoachResponsePromise => {
   return response;
 };
 
-export const removeCoaches = async (body: any) => {
-  return;
+export const removeCoaches = async (body: RemoveCoachType): RemoveCoachesResponsePromise => {
+  let response = buildResponse<{ id: string; deleted: boolean }[]>();
+  response.data = [];
+  const { id } = body;
+
+  if (Array.isArray(id)) {
+    for (let i = 0; i < id.length; i++) {
+      const imagesRemoved = await removeImgFlow(id[i], CoachModel);
+
+      if (Array.isArray(imagesRemoved) && imagesRemoved[0] instanceof DatabaseError) {
+        const error = new APIError(errorMessages.removeCoaches.errorDueToRemoveImgError + `${id[i]}`);
+        response = assignError<{ id: string; deleted: boolean }[]>(
+          [...response.data, { id: id[i], deleted: false }],
+          [...response.errorMap, error, ...imagesRemoved],
+          response
+        );
+      }
+
+      if (response.data.includes({ id: id[i], deleted: false })) {
+        continue;
+      }
+
+      const coachRemove = await remove(CoachModel, id[i], errorMessages.removeCoaches.databaseError);
+
+      if (coachRemove instanceof DatabaseError) {
+        response = assignError<{ id: string; deleted: boolean }[]>(
+          [...response.data, { id: id[i], deleted: false }],
+          [...response.errorMap, coachRemove],
+          response
+        );
+        continue;
+      }
+
+      response.data.push({ id: id[i], deleted: true });
+    }
+
+    return response;
+  }
+
+  const imagesRemoved = await removeImgFlow(id, CoachModel);
+
+  if (Array.isArray(imagesRemoved) && imagesRemoved[0] instanceof DatabaseError) {
+    const error = new APIError(errorMessages.removeCoaches.errorDueToRemoveImgError + `${id}`);
+    return assignError([...response.data, { id: id, deleted: false }], [error, ...imagesRemoved], response);
+  }
+
+  const coachRemove = await remove(CoachModel, id, errorMessages.removeFitness.databaseError);
+
+  if (coachRemove instanceof DatabaseError) {
+    return assignError([...response.data, { id: id, deleted: false }], coachRemove, response);
+  }
+
+  response.data.push({ id: id, deleted: true });
+  return response;
 };

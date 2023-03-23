@@ -10,11 +10,10 @@ import {
   RemoveFitnessType,
   RemoveFitnessesResponsePromise,
 } from "../types";
-import { APIError, DatabaseError, assignError, buildResponse, isValidIn, orderQuery } from "../utils";
+import { removeImgFlow, APIError, DatabaseError, assignError, buildResponse, isValidIn, orderQuery } from "../utils";
 import { add, get, Option, remove } from "../database";
 import { FitnessModel, UserModel } from "../model";
 import { getMeta } from "./image";
-import { removeImgFlow } from "../utils/removeImgFlow";
 
 const getFitnessFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -164,6 +163,8 @@ export const addFitness = async (body: AddFitnessType): AddFitnessResponsePromis
     return assignError<boolean>(false, addResult, response);
   }
 
+  //add to users registry
+
   response.data = true;
   return response;
 };
@@ -215,9 +216,8 @@ export const removeFitnesses = async (body: RemoveFitnessType): RemoveFitnessesR
   }
 
   const fitnessRemove = await remove(FitnessModel, id, errorMessages.removeFitness.databaseError);
+
   if (fitnessRemove instanceof DatabaseError) {
-    response.data.push({ id: id, deleted: false });
-    response.errorMap.push(fitnessRemove);
     return assignError([...response.data, { id: id, deleted: false }], fitnessRemove, response);
   }
 

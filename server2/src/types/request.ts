@@ -7,6 +7,8 @@ import {
   RemoveImageType,
   GetImageType,
   RemoveFitnessType,
+  RemoveCoachType,
+  GetUserType,
 } from "./abl";
 import { Query } from "express-serve-static-core";
 
@@ -33,3 +35,7 @@ export type RemoveImageRequest = TypedRequestBody<RemoveImageType>;
 export type GetImageReqest = TypedRequestQuery<GetImageType>;
 
 export type RemoveFitnessesRequest = TypedRequestBody<RemoveFitnessType>;
+
+export type RemoveCoachesRequest = TypedRequestBody<RemoveCoachType>;
+
+export type GetUserRequest = TypedRequestQuery<GetUserType>;

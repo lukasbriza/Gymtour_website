@@ -14,9 +14,17 @@ export const errorMessages = {
     noOwner: "There is no registered user for this coach.",
     desinchronizationError: "There is desinchronization in images:",
   },
-
+  removeCoaches: {
+    databaseError: "Remove operation failed. Please contact administrator.",
+    removeImgError: "Removing of image bounded to this coach failed.",
+    errorDueToRemoveImgError: "Remove operation was not performed due to previous errors. Error on coach id: ",
+  },
   getFitness: {
     databaseError: "Get operation failed. Please contact administrator.",
+  },
+  removeImgFlow: {
+    removeImgError: "Removing of image bounded to this object failed.",
+    noImageError: "In database is no image with that id: ",
   },
   removeFitness: {
     databaseError: "Remove operation failed. Please contact administrator.",
@@ -49,5 +57,9 @@ export const errorMessages = {
   getImage: {
     noImage: "There is no image with that id.",
     pipeError: "Error occured in pipe.",
+  },
+  getUser: {
+    noIdError: "Missing user id in query.",
+    databaseError: "Get user operation failed. Please contact administrator.",
   },
 };

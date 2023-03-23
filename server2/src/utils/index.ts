@@ -5,3 +5,4 @@ export * from "./getStatus";
 export * from "./orderQuery";
 export * from "./isValidIn";
 export * from "./assignError";
+export * from "./removeImgFlow";

@@ -1,5 +1,5 @@
 import { GridFSFile } from "mongodb";
-import { Coach, Filter, Fitness, ImageFieldsObject } from "./abl";
+import { Coach, Filter, Fitness, ImageFieldsObject, User } from "./abl";
 import { ErrorType } from "./error";
 
 export type CustomResponse<T = unknown> = {
@@ -15,6 +15,9 @@ export type GetCoachResponsePromise = Promise<GetCoachResponse>;
 
 export type AddCoachResponse = CustomResponse<boolean>;
 export type AddCoachResponsePromise = Promise<AddCoachResponse>;
+
+export type RemoveCoachesResponse = CustomResponse<{ id: string; deleted: boolean }[]>;
+export type RemoveCoachesResponsePromise = Promise<RemoveCoachesResponse>;
 
 export type GetFitnessResponse = CustomResponse<Fitness[]>;
 export type GetFitnessResponsePromise = Promise<GetFitnessResponse>;
@@ -33,3 +36,6 @@ export type RemoveImageResponsePromise = Promise<RemoveImageResponse>;
 
 export type GetImageResponse = CustomResponse<GridFSFile>;
 export type GetImageResponsePromise = Promise<GetImageResponse>;
+
+export type GetUserResponse = CustomResponse<Omit<User, "password">>;
+export type GetUserResponsePromise = Promise<GetUserResponse>;
