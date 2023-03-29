@@ -12,7 +12,15 @@ import {
 import { CoachModel, UserModel } from "../model";
 import { add, get, Option, remove } from "../database";
 import { errorMessages, config } from "../config";
-import { APIError, DatabaseError, assignError, buildResponse, orderQuery, removeImgFlow } from "../utils";
+import {
+  APIError,
+  DatabaseError,
+  assignError,
+  buildResponse,
+  orderQuery,
+  removeImgFlow,
+  updateOwnerFlow,
+} from "../utils";
 import { getMeta } from "./image";
 
 const getCoachFilter = (query: FilterQueryParsed) => {
@@ -161,11 +169,18 @@ export const addCoach = async (body: AddCoachType): AddCoachResponsePromise => {
     return assignError<boolean>(false, error, response);
   }
 
-  const data = await add<Coach>(CoachModel, body, errorMessages.getCoach.databaseError);
+  const addResult = await add<Coach>(CoachModel, body, errorMessages.getCoach.databaseError);
 
-  if (data instanceof DatabaseError) {
-    return assignError<boolean>(false, data, response);
+  if (addResult instanceof DatabaseError) {
+    return assignError<boolean>(false, addResult, response);
   }
+
+  const updateFlow = await updateOwnerFlow(owner, addResult._id._id.toString(), "coach", "add");
+
+  if (updateFlow instanceof DatabaseError) {
+    return assignError<boolean>(false, updateFlow, response);
+  }
+
   response.data = true;
   return response;
 };
@@ -177,51 +192,62 @@ export const removeCoaches = async (body: RemoveCoachType): RemoveCoachesRespons
 
   if (Array.isArray(id)) {
     for (let i = 0; i < id.length; i++) {
-      const imagesRemoved = await removeImgFlow(id[i], CoachModel);
+      const imagesRemoved = await removeImgFlow(id[i].id, CoachModel);
 
       if (Array.isArray(imagesRemoved) && imagesRemoved[0] instanceof DatabaseError) {
         const error = new APIError(errorMessages.removeCoaches.errorDueToRemoveImgError + `${id[i]}`);
         response = assignError<{ id: string; deleted: boolean }[]>(
-          [...response.data, { id: id[i], deleted: false }],
+          [...response.data, { id: id[i].id, deleted: false }],
           [...response.errorMap, error, ...imagesRemoved],
           response
         );
       }
 
-      if (response.data.includes({ id: id[i], deleted: false })) {
+      if (response.data.includes({ id: id[i].id, deleted: false })) {
         continue;
       }
 
-      const coachRemove = await remove(CoachModel, id[i], errorMessages.removeCoaches.databaseError);
+      const coachRemove = await remove(CoachModel, id[i].id, errorMessages.removeCoaches.databaseError);
 
       if (coachRemove instanceof DatabaseError) {
         response = assignError<{ id: string; deleted: boolean }[]>(
-          [...response.data, { id: id[i], deleted: false }],
+          [...response.data, { id: id[i].id, deleted: false }],
           [...response.errorMap, coachRemove],
           response
         );
         continue;
       }
 
-      response.data.push({ id: id[i], deleted: true });
+      const updateFlow = await updateOwnerFlow(id[i].owner, id[i].id, "coach", "remove");
+
+      if (updateFlow instanceof DatabaseError) {
+        response = assignError<{ id: string; deleted: boolean }[]>(
+          [...response.data, { id: id[i].id, deleted: false }],
+          [...response.errorMap, updateFlow],
+          response
+        );
+        return response;
+      }
+
+      response.data.push({ id: id[i].id, deleted: true });
     }
 
     return response;
   }
 
-  const imagesRemoved = await removeImgFlow(id, CoachModel);
+  const imagesRemoved = await removeImgFlow(id.id, CoachModel);
 
   if (Array.isArray(imagesRemoved) && imagesRemoved[0] instanceof DatabaseError) {
     const error = new APIError(errorMessages.removeCoaches.errorDueToRemoveImgError + `${id}`);
-    return assignError([...response.data, { id: id, deleted: false }], [error, ...imagesRemoved], response);
+    return assignError([...response.data, { id: id.id, deleted: false }], [error, ...imagesRemoved], response);
   }
 
-  const coachRemove = await remove(CoachModel, id, errorMessages.removeFitness.databaseError);
+  const coachRemove = await remove(CoachModel, id.id, errorMessages.removeFitness.databaseError);
 
   if (coachRemove instanceof DatabaseError) {
-    return assignError([...response.data, { id: id, deleted: false }], coachRemove, response);
+    return assignError([...response.data, { id: id.id, deleted: false }], coachRemove, response);
   }
 
-  response.data.push({ id: id, deleted: true });
+  response.data.push({ id: id.id, deleted: true });
   return response;
 };

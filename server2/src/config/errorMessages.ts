@@ -28,11 +28,13 @@ export const errorMessages = {
   },
   removeFitness: {
     databaseError: "Remove operation failed. Please contact administrator.",
+    getOwnerError: "Get owner failed. Please contact administrator",
     removeImgError: "Removing of image bounded to this fitness failed.",
     errorDueToRemoveImgError: "Remove operation was not performed due to previous errors. Error on fitness id: ",
   },
   addFitness: {
     databaseError: "Add operation failed. Please contact administrator.",
+    getOwnerError: "Get owner failed. Please contact administrator",
     sameNameError: "Fitness with this name already exist in this town.",
     userDatabaseError: "Validation of owner existence failed. Please contact administrator.",
     multipleOwners: "There are more than one owner. Contact administrator please.",
@@ -61,5 +63,22 @@ export const errorMessages = {
   getUser: {
     noIdError: "Missing user id in query.",
     databaseError: "Get user operation failed. Please contact administrator.",
+  },
+  removeUser: {
+    noUserError: "There is no user to remove.",
+    databaseError: "Remove user operation failed. Please contact administrator.",
+  },
+  addUser: {
+    databaseError: "Add user operation failed. Please contact administrator.",
+    userExists: "User with that credentials already exists.",
+  },
+  updateUser: {
+    databaseError: "Update user operation failed. Please contact administrator.",
+    userExists: "User with that credentials already exists. Choose another ones.",
+    noUserError: "There is no user to update.",
+  },
+  updateOwner: {
+    databaseError: "Update owner operation failed.",
+    noUserUpdate: "There is no user to update.",
   },
 };

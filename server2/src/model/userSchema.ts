@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 import { User } from "../types";
 
 const userSchema = new Schema<User>({
-  _id: { type: ObjectId },
+  _id: { type: ObjectId, required: false, default: new ObjectId() },
   username: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String, required: true },
@@ -11,21 +11,9 @@ const userSchema = new Schema<User>({
     value: { type: String, default: null },
     validTo: { type: Date, default: new Date() },
   },
-  fitnessOwned: [
-    {
-      _id: false,
-      required: false,
-      fitnessId: { type: String, required: false },
-    },
-  ],
-  coachOwned: [
-    {
-      _id: false,
-      required: false,
-      coachId: { type: String, required: false },
-    },
-  ],
-  isAdmin: { type: Boolean, required: true, default: false },
+  fitnessOwned: [{ type: String, required: false }],
+  coachOwned: [{ type: String, required: false }],
+  isAdmin: { type: Boolean, required: false, default: false },
   agreement: {
     terms: {
       status: { type: Boolean, required: true },

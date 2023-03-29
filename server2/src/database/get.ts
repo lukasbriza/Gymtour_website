@@ -7,13 +7,14 @@ import { GridFSFile } from "mongodb";
 export const getOne = async <T>(
   model: Model<T>,
   errorMessage: string,
-  findQuery: FilterQuery<T>,
+  options: Option<T>,
   database: DB = DB.gymtour
 ): Promise<HydratedDocument<T> | DatabaseError> => {
+  const { findQuery, projection } = options;
   try {
     const conn = await getDatabase(database);
     const Model = conn.model(model.modelName);
-    const data = await Model.findOne(findQuery).exec();
+    const data = await Model.findOne(findQuery, projection).exec();
     return data;
   } catch (err) {
     const error = new DatabaseError(`${errorMessage} ${err.message}`);

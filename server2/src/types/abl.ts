@@ -19,7 +19,7 @@ export type FilterQueryParsed = {
 export type AddCoachType = Coach;
 
 export type RemoveCoachType = {
-  id: string | string[];
+  id: { id: string; owner: string }[] | { id: string; owner: string };
 };
 
 export type Contact = {
@@ -78,18 +78,22 @@ export type User = {
   username: string;
   password: string;
   email: string;
-  emailUpdate: {
+  emailUpdate?: {
     value: string | null;
     validTo: Date;
   };
-  fitnessOwned: { fitnessId: string }[] | [];
-  coachOwned: { coachId: string }[] | [];
-  isAdmin: boolean;
+  fitnessOwned?: string[] | [];
+  coachOwned?: string[] | [];
+  isAdmin?: boolean;
   agreement: {
     terms: { status: boolean; awarded: Date };
     dataProcessingForPropagation: { status: boolean; awarded: Date };
   };
 };
+
+export type AddUserType = User;
+
+export type UpdateUserType = Partial<User> & { _id: string };
 
 export type GetFitnessType = {
   limit?: string;
@@ -154,7 +158,7 @@ export type Fitness = {
 export type AddFitnessType = Fitness;
 
 export type RemoveFitnessType = {
-  id: string[] | string;
+  id: { id: string; owner: string }[] | { id: string; owner: string };
 };
 
 export type ImageObject = {
@@ -188,5 +192,9 @@ export type GetImageType = {
 };
 
 export type GetUserType = {
+  id: string;
+};
+
+export type RemoveUserType = {
   id: string;
 };

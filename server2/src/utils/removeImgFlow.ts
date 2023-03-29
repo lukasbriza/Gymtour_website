@@ -1,12 +1,14 @@
-import { Model, FilterQuery } from "mongoose";
+import { Model } from "mongoose";
 import { DB, errorMessages } from "../config";
-import { getOne, removeImg } from "../database";
+import { getOne, removeImg, Option } from "../database";
 import { Fitness, Coach } from "../types";
 import { DatabaseError } from "./customErrors";
 
 export const removeImgFlow = async (objecId: string, model: Model<any>) => {
-  const filterQuery: FilterQuery<Fitness | Coach> = { _id: objecId };
-  const img = await getOne<Fitness | Coach>(model, errorMessages.removeFitness.databaseError, filterQuery, DB.gymtour);
+  const options: Option<Fitness | Coach> = {
+    findQuery: { _id: objecId },
+  };
+  const img = await getOne<Fitness | Coach>(model, errorMessages.removeFitness.databaseError, options, DB.gymtour);
 
   if (img instanceof DatabaseError) {
     return [img];
