@@ -47,15 +47,15 @@ const openHoursSchema = {
 
 const filtersSchema = {
   equipment: [{ type: String, required: true }],
-  general: [{ type: String, required: false }],
-  others: [{ type: String, required: false }],
+  general: [{ type: String, required: false, default: [] }],
+  others: [{ type: String, required: false, default: [] }],
 };
 
 const picturesIdsSchema = {
   card: { type: String, required: true },
   detail: {
     main: { type: String, required: true },
-    others: { type: [String], required: true, default: [] },
+    others: { type: [String], required: false, default: [] },
   },
 };
 
@@ -76,18 +76,18 @@ const fitnessSchema = new Schema<Fitness>({
   },
   descriptionFull: {
     type: String,
-    required: true,
+    required: false,
     default: null,
   },
   pictures: picturesIdsSchema,
   agreement: {
     terms: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: new Date() },
+      awarded: { type: Date, required: false, default: new Date() },
     },
     dataProcessingForPropagation: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: new Date() },
+      awarded: { type: Date, required: false, default: new Date() },
     },
   },
   owner: { type: String, required: true },
@@ -96,8 +96,8 @@ const fitnessSchema = new Schema<Fitness>({
     toDate: { type: Date, required: false, default: null },
   },
   approved: { type: Boolean, required: true, default: false },
-  views: { type: Number, required: true, default: 0 },
-  popularity: [{ type: String, required: false }],
+  views: { type: Number, required: false, default: 0 },
+  popularity: [{ type: String, required: false, default: [] }],
 });
 
 export const FitnessModel = model("Fitness", fitnessSchema, "fitnesses");

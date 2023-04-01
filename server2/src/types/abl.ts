@@ -86,8 +86,8 @@ export type User = {
   coachOwned?: string[] | [];
   isAdmin?: boolean;
   agreement: {
-    terms: { status: boolean; awarded: Date };
-    dataProcessingForPropagation: { status: boolean; awarded: Date };
+    terms: { status: boolean; awarded?: Date };
+    dataProcessingForPropagation: { status: boolean; awarded?: Date };
   };
 };
 

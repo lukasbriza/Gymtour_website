@@ -1,7 +1,13 @@
+import { addUser } from "./../abl/user";
 import { Router, Response } from "express";
 import { getStatus } from "../utils";
 import { getUser, removeUser, updateUser } from "../abl";
-import { GetUserRequest, RemoveUserRequest, UpdateUserRequest } from "../types";
+import {
+  AddUserRequest,
+  GetUserRequest,
+  RemoveUserRequest,
+  UpdateUserRequest,
+} from "../types";
 
 export const user = Router();
 
@@ -17,5 +23,9 @@ user
   })
   .put(async (req: UpdateUserRequest, res: Response) => {
     const result = await updateUser(req.body);
+    return res.status(getStatus(result.errorMap)).send(result);
+  })
+  .post(async (req: AddUserRequest, res: Response) => {
+    const result = await addUser(req.body);
     return res.status(getStatus(result.errorMap)).send(result);
   });

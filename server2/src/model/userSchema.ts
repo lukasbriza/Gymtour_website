@@ -17,11 +17,11 @@ const userSchema = new Schema<User>({
   agreement: {
     terms: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: new Date() },
+      awarded: { type: Date, default: new Date(), required: false },
     },
     dataProcessingForPropagation: {
       status: { type: Boolean, required: true },
-      awarded: { type: Date, default: new Date() },
+      awarded: { type: Date, default: new Date(), required: false },
     },
   },
 });
