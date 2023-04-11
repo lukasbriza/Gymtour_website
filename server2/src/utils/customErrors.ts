@@ -1,3 +1,15 @@
+export class UnprocesableError extends Error {
+  code: string;
+  date: Date;
+  constructor(message) {
+    super();
+    this.code = "422";
+    this.name = "UnprocesableError";
+    this.message = message;
+    this.date = new Date();
+  }
+}
+
 export class ValidationError extends Error {
   code: string;
   date: Date;

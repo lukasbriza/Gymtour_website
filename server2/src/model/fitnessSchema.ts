@@ -92,10 +92,10 @@ const fitnessSchema = new Schema<Fitness>({
   },
   owner: { type: String, required: true },
   topped: {
-    value: { type: Boolean, reguired: true, default: false },
+    value: { type: Boolean, reguired: false, default: false },
     toDate: { type: Date, required: false, default: null },
   },
-  approved: { type: Boolean, required: true, default: false },
+  approved: { type: Boolean, required: false, default: false },
   views: { type: Number, required: false, default: 0 },
   popularity: [{ type: String, required: false, default: [] }],
 });

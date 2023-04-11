@@ -48,3 +48,12 @@ export type AddUserResponsePromise = Promise<AddUserResponse>;
 
 export type UpdateUserResponse = CustomResponse<boolean>;
 export type UpdateUserResponsePromise = Promise<UpdateUserResponse>;
+
+export type UpdateFitnessResponse = CustomResponse<boolean>;
+export type UpdateFitnessResponsePromise = Promise<UpdateFitnessResponse>;
+
+export type UpdateCoachResponse = CustomResponse<boolean>;
+export type UpdateCoachResponsePromise = Promise<UpdateCoachResponse>;
+
+export type UpdateViewsResponse = CustomResponse<boolean>;
+export type UpdateViewsResponsePromise = Promise<UpdateViewsResponse>;

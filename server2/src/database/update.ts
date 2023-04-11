@@ -13,8 +13,8 @@ export const update = async <T>(
 ): Promise<UpdateResult | DatabaseError> => {
   try {
     const conn = await getDatabase(database);
-    const Model = conn.model(model.modelName);
-    const data = await Model.updateMany(filter, update).exec();
+    const Model = conn.model(model.modelName, model.schema, model.collection.name);
+    const data = await Model.updateMany(filter, update, {}).exec();
     return data as unknown as UpdateResult;
   } catch (err) {
     const error = new DatabaseError(`${errorMessage} ${err.message}`);

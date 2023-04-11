@@ -11,11 +11,7 @@ export const add = async <T>(
 ): Promise<Document<T> | DatabaseError> => {
   try {
     const conn = await getDatabase(database);
-    const Model = conn.model<T>(
-      model.modelName,
-      model.schema,
-      model.collection.name
-    );
+    const Model = conn.model<T>(model.modelName, model.schema, model.collection.name);
     const data = await new Model(doc).save();
     return data;
   } catch (err) {

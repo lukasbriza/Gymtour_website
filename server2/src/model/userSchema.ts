@@ -8,8 +8,8 @@ const userSchema = new Schema<User>({
   password: { type: String, required: true },
   email: { type: String, required: true },
   emailUpdate: {
-    value: { type: String, default: null },
-    validTo: { type: Date, default: new Date() },
+    value: { type: String, required: false, default: null },
+    validTo: { type: Date, required: false, default: new Date() },
   },
   fitnessOwned: [{ type: String, required: false }],
   coachOwned: [{ type: String, required: false }],

@@ -9,6 +9,8 @@ import {
   GetFitnessResponsePromise,
   RemoveFitnessType,
   RemoveFitnessesResponsePromise,
+  UpdateFitnessType,
+  UpdateFitnessResponsePromise,
 } from "../types";
 import {
   removeImgFlow,
@@ -20,9 +22,10 @@ import {
   orderQuery,
   updateOwnerFlow,
 } from "../utils";
-import { add, get, Option, remove } from "../database";
+import { add, get, Option, remove, update } from "../database";
 import { FitnessModel, UserModel } from "../model";
 import { getMeta } from "./image";
+import { constructUpdatePath } from "../utils/constructUpdatePath";
 
 const getFitnessFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -252,5 +255,64 @@ export const removeFitnesses = async (body: RemoveFitnessType): RemoveFitnessesR
   }
 
   response.data.push({ id: id.id, deleted: true });
+  return response;
+};
+
+export const updateFitness = async (body: UpdateFitnessType): UpdateFitnessResponsePromise => {
+  const response = buildResponse<boolean>();
+
+  const { name, town, region, _id } = body;
+
+  if (name && (town === undefined || region === undefined)) {
+    const error = new APIError(errorMessages.updateFitness.noTownAndRegion);
+    return assignError<boolean>(false, error, response);
+  }
+
+  if ((region !== undefined || town !== undefined) && name === undefined) {
+    const error = new APIError(errorMessages.updateFitness.noName);
+    return assignError<boolean>(false, error, response);
+  }
+
+  const options: Option<Fitness> = {};
+  if (name) {
+    options.findQuery.name = name;
+  }
+  if (town) {
+    options.findQuery.town = town;
+  }
+  if (region) {
+    options.findQuery.region = region;
+  }
+
+  if (name || town || region) {
+    const isDuplicitBusiness = await get<Fitness>(FitnessModel, errorMessages.updateFitness.databaseError, options);
+
+    if (isDuplicitBusiness instanceof DatabaseError) {
+      return assignError<boolean>(false, isDuplicitBusiness, response);
+    }
+
+    if (isDuplicitBusiness.filter((value) => value._id.toString() !== _id).length > 0) {
+      const error = new APIError(errorMessages.updateFitness.nameExists);
+      return assignError<boolean>(false, error, response);
+    }
+  }
+
+  const updateResult = await update<Fitness>(
+    FitnessModel,
+    errorMessages.updateFitness.databaseError,
+    { _id: _id },
+    constructUpdatePath(body)
+  );
+
+  if (updateResult instanceof DatabaseError) {
+    return assignError<boolean>(false, updateResult, response);
+  }
+
+  if (updateResult.modifiedCount === 0 || updateResult.matchedCount === 0) {
+    const error = new APIError(errorMessages.updateFitness.noFitnesError);
+    return assignError<boolean>(false, error, response);
+  }
+
+  response.data = true;
   return response;
 };

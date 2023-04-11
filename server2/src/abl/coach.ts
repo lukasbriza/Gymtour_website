@@ -8,9 +8,11 @@ import {
   User,
   RemoveCoachType,
   RemoveCoachesResponsePromise,
+  UpdateCoachType,
+  UpdateCoachResponsePromise,
 } from "../types";
 import { CoachModel, UserModel } from "../model";
-import { add, get, Option, remove } from "../database";
+import { add, get, Option, remove, update } from "../database";
 import { errorMessages, config } from "../config";
 import {
   APIError,
@@ -22,6 +24,7 @@ import {
   updateOwnerFlow,
 } from "../utils";
 import { getMeta } from "./image";
+import { constructUpdatePath } from "../utils/constructUpdatePath";
 
 const getCoachFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -249,5 +252,74 @@ export const removeCoaches = async (body: RemoveCoachType): RemoveCoachesRespons
   }
 
   response.data.push({ id: id.id, deleted: true });
+  return response;
+};
+
+export const updateCoach = async (body: UpdateCoachType): UpdateCoachResponsePromise => {
+  const response = buildResponse<boolean>();
+
+  const { contact, _id } = body;
+
+  if (contact !== undefined) {
+    const { tel, mobile, email } = contact;
+
+    if (tel !== undefined) {
+      const option: Option<Coach> = { findQuery: { contact: { tel: tel } } };
+      const isDuplicitTel = await get<Coach>(CoachModel, errorMessages.updateCoach.databaseError, option);
+
+      if (isDuplicitTel instanceof DatabaseError) {
+        return assignError<boolean>(false, isDuplicitTel, response);
+      }
+
+      if (isDuplicitTel.filter((value) => value._id.toString() !== _id).length > 0) {
+        const error = new APIError(errorMessages.updateCoach.telExists);
+        return assignError<boolean>(false, error, response);
+      }
+    }
+    if (mobile !== undefined) {
+      const option: Option<Coach> = { findQuery: { contact: { mobile: mobile } } };
+      const isDuplicitMobile = await get<Coach>(CoachModel, errorMessages.updateCoach.databaseError, option);
+
+      if (isDuplicitMobile instanceof DatabaseError) {
+        return assignError<boolean>(false, isDuplicitMobile, response);
+      }
+
+      if (isDuplicitMobile.filter((value) => value._id.toString() !== _id).length > 0) {
+        const error = new APIError(errorMessages.updateCoach.mobileExists);
+        return assignError<boolean>(false, error, response);
+      }
+    }
+    if (email !== undefined) {
+      const option: Option<Coach> = { findQuery: { contact: { email: email } } };
+      const isDuplicitEmail = await get<Coach>(CoachModel, errorMessages.updateCoach.databaseError, option);
+
+      if (isDuplicitEmail instanceof DatabaseError) {
+        return assignError<boolean>(false, isDuplicitEmail, response);
+      }
+
+      if (isDuplicitEmail.filter((value) => value._id.toString() !== _id).length > 0) {
+        const error = new APIError(errorMessages.updateCoach.emailExists);
+        return assignError<boolean>(false, error, response);
+      }
+    }
+  }
+
+  const updateResult = await update<Coach>(
+    CoachModel,
+    errorMessages.updateCoach.databaseError,
+    { _id: _id },
+    constructUpdatePath(body)
+  );
+
+  if (updateResult instanceof DatabaseError) {
+    return assignError<boolean>(false, updateResult, response);
+  }
+
+  if (updateResult.modifiedCount === 0 || updateResult.matchedCount === 0) {
+    const error = new APIError(errorMessages.updateCoach.noCoachError);
+    return assignError<boolean>(false, error, response);
+  }
+
+  response.data = true;
   return response;
 };

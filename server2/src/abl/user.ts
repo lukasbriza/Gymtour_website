@@ -155,7 +155,7 @@ export const updateUser = async (body: UpdateUserType): UpdateUserResponsePromis
       return assignError(false, isDuplicit, response);
     }
 
-    if (isDuplicit.length > 0) {
+    if (isDuplicit.length > 0 && isDuplicit.findIndex((value) => value._id.toString() !== _id) === -1 ? false : true) {
       const error = new APIError(errorMessages.updateUser.userExists);
       return assignError(false, error, response);
     }

@@ -43,7 +43,7 @@ export const remove = async <T>(
 ): Promise<DatabaseError | DeleteResult> => {
   try {
     const conn = await getDatabase(database);
-    const Model = conn.model<T>(model.modelName);
+    const Model = conn.model<T>(model.modelName, model.schema, model.collection.name);
     const data: DeleteResult = await Model.deleteOne({ _id: id }).exec();
     return data;
   } catch (err) {

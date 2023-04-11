@@ -17,14 +17,14 @@ const contactSchema = {
 const filtersSchema = {
   gender: { type: String, required: true },
   specialization: [{ type: String, required: true }],
-  others: [{ type: String, required: false }],
+  others: [{ type: String, required: false, default: [] }],
 };
 
 const picturesIdsSchema = {
   card: { type: String, required: true },
   detail: {
     main: { type: String, required: true },
-    others: { type: [String], required: true, default: [] },
+    others: { type: [String], required: false, default: [] },
   },
 };
 
@@ -42,7 +42,6 @@ const coachSchema = new Schema<Coach>({
   descriptionBasic: {
     type: String,
     required: true,
-    default: "No description.",
   },
   descriptionFull: {
     type: String,
@@ -62,12 +61,12 @@ const coachSchema = new Schema<Coach>({
   },
   owner: { type: String, required: true },
   topped: {
-    value: { type: Boolean, reguired: true, default: false },
+    value: { type: Boolean, reguired: false, default: false },
     toDate: { type: Date, required: false, default: null },
   },
-  approved: { type: Boolean, required: true, default: false },
+  approved: { type: Boolean, required: false, default: false },
   views: { type: Number, required: false, default: 0 },
-  popularity: [{ type: String, required: false }],
+  popularity: [{ type: String, required: false, default: [] }],
 });
 
 export const CoachModel = model("Coach", coachSchema, "coaches");

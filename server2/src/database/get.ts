@@ -13,7 +13,7 @@ export const getOne = async <T>(
   const { findQuery, projection } = options;
   try {
     const conn = await getDatabase(database);
-    const Model = conn.model(model.modelName);
+    const Model = conn.model<T>(model.modelName, model.schema, model.collection.name);
     const data = await Model.findOne(findQuery, projection).exec();
     return data;
   } catch (err) {
@@ -40,7 +40,7 @@ export const get = async <T>(
 
   try {
     const conn = await getDatabase(database);
-    const Model = conn.model(model.modelName);
+    const Model = conn.model<T>(model.modelName, model.schema, model.collection.name);
     const data = await Model.find(findQuery, projection).sort(order).limit(limit).exec();
     return data;
   } catch (err) {

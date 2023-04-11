@@ -23,15 +23,15 @@ export type RemoveCoachType = {
 };
 
 export type Contact = {
-  tel: number | null;
-  mobile: number | null;
+  tel?: number | null;
+  mobile?: number | null;
   email: string;
-  web: string | null;
-  facebook: string | null;
-  twitter: string | null;
-  google: string | null;
-  instagram: string | null;
-  youtube: string | null;
+  web?: string | null;
+  facebook?: string | null;
+  twitter?: string | null;
+  google?: string | null;
+  instagram?: string | null;
+  youtube?: string | null;
 };
 
 export type CoachFilter = {
@@ -48,7 +48,7 @@ export type CoachPictures = {
 export type Coach = {
   _id?: ObjectId;
   name: string;
-  alias: string | null;
+  alias?: string | null;
   workPlace: string;
   town: number;
   region: number;
@@ -56,22 +56,24 @@ export type Coach = {
   priceLevel: number;
   contact: Contact;
   filters: CoachFilter;
-  descriptionBasic: string | "No description.";
-  descriptionFull: string | null;
+  descriptionBasic: string;
+  descriptionFull?: string | null;
   pictures: CoachPictures;
   agreement: {
-    terms: { status: boolean; awarded: Date };
-    dataProcessingForPropagation: { status: boolean; awarded: Date };
+    terms: { status: boolean; awarded?: Date };
+    dataProcessingForPropagation: { status: boolean; awarded?: Date };
   };
   owner: string;
-  topped: {
-    vlaue: boolean;
-    toDate: Date | null;
+  topped?: {
+    vlaue?: boolean;
+    toDate?: Date | null;
   };
-  approved: boolean;
-  views: number;
-  popularity: string[] | [];
+  approved?: boolean;
+  views?: number;
+  popularity?: string[] | [];
 };
+
+export type UpdateCoachType = Partial<Coach> & { _id: string };
 
 export type User = {
   _id?: ObjectId;
@@ -133,7 +135,7 @@ export type Fitness = {
   filters: FitnessFilter;
   open: OpenHours;
   descriptionBasic: string;
-  descriptionFull: string | null;
+  descriptionFull?: string | null;
   pictures: {
     card: string;
     detail: {
@@ -142,18 +144,20 @@ export type Fitness = {
     };
   };
   agreement: {
-    terms: { status: boolean; awarded: Date };
-    dataProcessingForPropagation: { status: boolean; awarded: Date };
+    terms: { status: boolean; awarded?: Date };
+    dataProcessingForPropagation: { status: boolean; awarded?: Date };
   };
   owner: string;
-  topped: {
-    value: boolean;
-    toDate: Date | null;
+  topped?: {
+    value?: boolean;
+    toDate?: Date | null;
   };
-  approved: boolean;
-  views: number;
-  popularity: string[] | [];
+  approved?: boolean;
+  views?: number;
+  popularity?: string[] | [];
 };
+
+export type UpdateFitnessType = Partial<Fitness> & { _id: string };
 
 export type AddFitnessType = Fitness;
 
@@ -198,3 +202,5 @@ export type GetUserType = {
 export type RemoveUserType = {
   id: string;
 };
+
+export type UpdateViewsType = { fitness?: string[]; coach?: string[] };

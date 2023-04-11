@@ -75,10 +75,30 @@ export const errorMessages = {
   updateUser: {
     databaseError: "Update user operation failed. Please contact administrator.",
     userExists: "User with that credentials already exists. Choose another ones.",
-    noUserError: "There is no user to update.",
+    noUserError: "There is no user to update. Or its values are already set.",
   },
   updateOwner: {
     databaseError: "Update owner operation failed.",
     noUserUpdate: "There is no user to update.",
+  },
+  updateFitness: {
+    databaseError: "Update fitness operation failed. Please contact administrator.",
+    noTownAndRegion: "If you are changing name, you need to provide also town and region information.",
+    noName: "If you are changing town or region, you need to provide also name information.",
+    nameExists: "Fitness with that name in that town already exists. Choose another one.",
+    noFitnesError: "There is no fitness to update. Or its values are already set.",
+  },
+  updateCoach: {
+    databaseError: "Update coach operation failed. Please contact administrator.",
+    telExists: "Coach with that telephone already exists. Choose another one.",
+    mobileExists: "Coach with that mobile already exists. Choose another one.",
+    emailExists: "Coach with that email already exists. Choose another one.",
+    noCoachError: "There is no coach to update. Or its values are already set.",
+  },
+  views: {
+    databaseErrorFitness: "Update views on one of fitnesses failed. Please contact administrator.",
+    noFitness: "None fitness was updated.",
+    databaseErrorCoches: "Update views on one of coaches failed. Please contact administrator.",
+    noCoach: "No coach was updated.",
   },
 };

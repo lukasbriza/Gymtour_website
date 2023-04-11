@@ -12,6 +12,9 @@ import {
   RemoveUserType,
   AddUserType,
   UpdateUserType,
+  UpdateFitnessType,
+  UpdateCoachType,
+  UpdateViewsType,
 } from "./abl";
 import { Query } from "express-serve-static-core";
 
@@ -48,3 +51,9 @@ export type RemoveUserRequest = TypedRequestBody<RemoveUserType>;
 export type AddUserRequest = TypedRequestBody<AddUserType>;
 
 export type UpdateUserRequest = TypedRequestBody<UpdateUserType>;
+
+export type UpdateFitnessRequest = TypedRequestBody<UpdateFitnessType>;
+
+export type UpdateCoachRequest = TypedRequestBody<UpdateCoachType>;
+
+export type UpdateViewsRequest = TypedRequestBody<UpdateViewsType>;
