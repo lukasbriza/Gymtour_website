@@ -6,10 +6,11 @@ import { FilterContexProvider } from "@app";
 
 const Fitness: FC = () => {
   const { t } = useTranslation();
+  const type = "fitness"
 
 
   return (
-    <FilterContexProvider>
+    <FilterContexProvider type={type}>
       <div
         id="Fitness"
         className={clsx([
@@ -24,8 +25,8 @@ const Fitness: FC = () => {
         <div className={clsx(["verticalText"])}>
           {t("fitnessContentPage:verticalText")}
         </div>
-        <Filter type="fitness" />
-        <FilteredContent />
+        <Filter type={type} />
+        <FilteredContent type={type} />
       </div>
     </FilterContexProvider>
   );

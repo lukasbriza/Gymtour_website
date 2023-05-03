@@ -6,9 +6,9 @@
 .checkboxClass {
   width: 18px;
   height: 18px;
-  border-color: rgb(186, 186, 186);
+  border-color: $checkBoxBorder;
 }
 
 .checkerClass {
-  background: rgb(60, 97, 164);
+  background: $checkBackground;
 }

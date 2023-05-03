@@ -109,7 +109,7 @@ export const RegisterPage: FC = () => {
                                 name={"dataProcessing"}
                             />
                         </div>
-                        <button className="registerFormButton" type="submit" >{t("registerPage:registerButton")}</button>
+                        <button className={clsx(["submitButton", "registerFormButton"])} type="submit" >{t("registerPage:registerButton")}</button>
                     </form>
                 </div>
             </Layer >

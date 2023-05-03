@@ -8,15 +8,15 @@
 .pageButton:disabled {
   cursor: default;
   .buttonInitial {
-    background-color: rgb(83, 83, 83);
-    color: rgb(168, 168, 168);
+    background-color: $buttonDisabled;
+    color: $buttonTextColor;
   }
 }
 
 .buttonInitial {
   width: 180px;
   color: $minorColor1;
-  background-color: rgb(38, 62, 105);
+  background-color: $buttonBackground;
 
   font-weight: 600;
   font-size: 17px;
@@ -31,7 +31,7 @@
   overflow: hidden;
 }
 .buttonHover {
-  background-color: rgb(10, 21, 88);
+  background-color: $buttonBackgroundHover;
   transition-property: background-color;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;

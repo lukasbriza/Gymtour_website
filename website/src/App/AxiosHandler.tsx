@@ -2,12 +2,12 @@ import { FC, useContext } from "react";
 import { ErrorHandlerProps } from "./_types";
 import {
   ApiError,
-  CustomErrorResponseObject,
   DatabaseError,
   ErrorMapType,
   ErrorTypesArray,
   NetworkError,
   UnhandledError,
+  UnprocesableError,
   ValidationError,
 } from "@utils";
 import { PopUpContext } from "@lukasbriza/lbui-lib";
@@ -34,6 +34,7 @@ export const AxiosHandler: FC<ErrorHandlerProps> = ({ children }) => {
       const response = error.response.data;
 
       const errorMap: ErrorMapType = response.errorMap;
+      const data: unknown = response.data
 
       errorMap.forEach((err) => {
         //API ERROR
@@ -51,12 +52,16 @@ export const AxiosHandler: FC<ErrorHandlerProps> = ({ children }) => {
           errorArray.push(new DatabaseError(err));
           return;
         }
+        //UNPROCESSABLE ERROR
+        if (status === 422) {
+          errorArray.push(new UnprocesableError(err))
+        }
         errorArray.push(new UnhandledError(err));
         return;
       });
 
-      const customErrorResponse: CustomErrorResponseObject = {
-        data: null,
+      const customErrorResponse = {
+        data: data,
         errorMap: errorArray,
       };
 

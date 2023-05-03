@@ -1,19 +1,20 @@
 import { Api } from "@config";
 import { getAxiosInstance } from "@libs";
-import { GetFilterResponse } from "./_type";
-import { CustomErrorResponseObject, hasCustomErrorObject } from "@utils";
+import { FilterType, GetFilterResponse } from "./_types";
+import { hasCustomErrorObject } from "@utils";
 import { AxiosResponse } from "axios";
+import { handleFetchError } from "../handleFetchError";
 
-export const getFilter = async () => {
+export const getFilter = () => {
   const instance = getAxiosInstance();
-  try {
-    const response = await instance.get<any, AxiosResponse<GetFilterResponse>>(Api.ApiFilter);
-    return response.data;
-  } catch (error: unknown) {
-    if (hasCustomErrorObject(error)) {
-      (error as CustomErrorResponseObject).errorMap.forEach((err) => {
-        console.error(err);
-      });
+  return async () => {
+    try {
+      const response = await instance.get<any, AxiosResponse<GetFilterResponse>>(Api.ApiFilter);
+      return response.data;
+    } catch (error: unknown) {
+      if (hasCustomErrorObject(error)) {
+        handleFetchError<FilterType>(error as GetFilterResponse);
+      }
     }
-  }
+  };
 };

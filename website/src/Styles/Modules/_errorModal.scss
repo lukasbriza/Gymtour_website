@@ -1,7 +1,7 @@
 .errorModal {
   z-index: -1000;
   opacity: 0;
-  $border: 1px solid rgb(233, 91, 106);
+  $border: 1px solid $error;
   min-width: 375px;
   background: #fff2f2;
   display: flex;
@@ -23,19 +23,19 @@
   margin-bottom: 5px;
   position: relative;
   path {
-    fill: rgb(233, 91, 106);
+    fill: $error;
   }
 }
 
 .errorModalHeader {
   opacity: 1;
   font-size: 20px;
-  color: rgb(233, 91, 106);
+  color: $error;
   margin: 0px 10px 5px 10px;
 }
 .errorModalMessage {
   opacity: 1;
-  color: rgb(233, 91, 106);
+  color: $error;
   margin: 0px 10px 15px 10px;
   text-align: center;
 }
@@ -47,8 +47,8 @@
   padding-top: 7px;
   padding-bottom: 6px;
   background-color: #fff2f2;
-  border: 1px solid rgb(233, 91, 106);
-  color: rgb(233, 91, 106);
+  border: 1px solid $error;
+  color: $error;
   margin-bottom: 15px;
 
   transition-property: color;
@@ -57,8 +57,8 @@
 }
 
 .errorModalButtonHover {
-  color: white;
-  background-color: rgb(233, 91, 106);
+  color: $minorColor1;
+  background-color: $error;
 }
 
 .errorModalAnimationOn {

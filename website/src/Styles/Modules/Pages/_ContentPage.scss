@@ -1,11 +1,21 @@
 .contentPage {
+  position: relative;
   display: block;
   height: 100%;
   background: rgb(29, 29, 29);
+
+  display: grid;
+  grid-template-areas:
+    "contentHeader"
+    "filterBolts"
+    "filter"
+    "content";
+  grid-template-rows: min-content min-content min-content 1fr;
+  grid-template-columns: 1fr;
 }
 
 .verticalText {
-  z-index:  -1;
+  z-index: -1;
   position: fixed;
   color: rgba(253, 246, 246, 0.057);
   text-transform: uppercase;
@@ -16,4 +26,12 @@
   top: 790px;
   left: -460px;
   cursor: default;
+}
+
+.filteredContent {
+  grid-area: content;
+  position: relative;
+  width: 100%;
+}
+.loadingFilteredContent {
 }

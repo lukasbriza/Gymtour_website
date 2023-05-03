@@ -2,18 +2,14 @@ import { ReactLazyPreload } from "../utils/ReactLazyPreload";
 
 const Home = ReactLazyPreload(() => import("../pages/Home"));
 const Crossroad = ReactLazyPreload(() => import("../pages/Crossroad"));
-const Fitness = ReactLazyPreload(() => import("../pages/Fitness"));
-const Coach = ReactLazyPreload(() => import("../pages/Coach"));
+const Fitness = ReactLazyPreload(() => import("../pages/content/Fitness"));
+const Coach = ReactLazyPreload(() => import("../pages/content/Coach"));
 const NotFound = ReactLazyPreload(() => import("../pages/NotFound"));
 const About = ReactLazyPreload(() => import("../pages/About"));
 const CoOp = ReactLazyPreload(() => import("../pages/CoOp"));
 const Contact = ReactLazyPreload(() => import("../pages/Contact"));
-const BusinessConditions = ReactLazyPreload(
-  () => import("../pages/BusinessConditions")
-);
-const DataProcessing = ReactLazyPreload(
-  () => import("../pages/DataProcessing")
-);
+const BusinessConditions = ReactLazyPreload(() => import("../pages/BusinessConditions"));
+const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"));
 
 const Login = ReactLazyPreload(() => import("../pages/login/Login"));
 const Dashboard = ReactLazyPreload(() => import("../pages/Dashboard"));
@@ -119,19 +115,5 @@ export const filter = {
     fitness: ["gender", "specialization"],
     coach: ["equipment", "general"],
   },
-  filterTypes: {
-    checkbox: ["equipment", "general", "specialization", "others", "gender"],
-    radio: ["order", "regions"],
-    range: [],
-  },
-
-  typesHeight: {
-    order: 43,
-    regions: 88,
-    equipment: 172,
-    general: 86,
-    specialization: 86,
-    others: 65,
-    gender: 43,
-  },
+  defaultLimit: 20,
 } as const;

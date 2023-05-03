@@ -155,66 +155,66 @@ const Login: FC = () => {
             >
                 <img src={register} alt="LoginBckgImg" />
                 <Layer className={clsx(["stretchY", "stretchX"])}>
-                            <div className={clsx(["stretchY", "stretchX", "loginContentWrapper"])}>
-                                <div className={clsx(["relative", "loginHeaderWrapper"])}>
-                                    <h2>{text.login.Form.header.cz}</h2>
-                                    <Underliner width={"80%"} />
-                                </div>
-                                <div className={clsx(["loginFormWrapper", "relative"])}>
-                                    <form action="#Login" id="loginForm" onSubmit={handleSubmit}>
-                                        <FormStringInput
-                                            className={"formInput"}
-                                            type={"text"}
-                                            name={"nameInput"}
-                                            formId={"loginForm"}
-                                            placeholder={text.login.Form.input1.placeholder.cz}
-                                            onChange={(canSubmit) => { handleChange(canSubmit) }}
-                                            required={true}
-                                            pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
-                                            errorMessage={text.login.Form.input1.errorMessage.cz}
-                                            errorStyle={errorStyle}
-                                            sucessStyle={sucessStyle}
-                                            minLength={1}
-                                        />
-                                        <FormStringInput
-                                            className={"formInput"}
-                                            type={"password"}
-                                            name={"passwordInput"}
-                                            formId={"registerForm"}
-                                            placeholder={text.login.Form.input2.placeholder.cz}
-                                            onChange={(canSubmit) => { handleChange(canSubmit) }}
-                                            required={true}
-                                            errorMessage={text.login.Form.input2.errorMessage.cz}
-                                            errorStyle={errorStyle}
-                                            sucessStyle={sucessStyle}
-                                            minLength={1}
-                                        />
-                                        <Link to="/login/forgetPassword" className={clsx(["link", "forgetPassword"])}>
-                                            {text.login.Form.link1.cz}
-                                        </Link>
-                                        <Link to="/login/forgetName" className={clsx(["link", "forgetPassword"])}>
-                                            {text.login.Form.link2.cz}
-                                        </Link>
-                                        <button
-                                            className="registerFormButton loginFormButton"
-                                            type="submit"
-                                            onClick={handleSubmit}
-                                        >
-                                            {text.login.Form.button.cz}
-                                        </button>
-
-                                    </form>
-                                </div>
-                                <FormModal
-                                    loading={modal.loading}
-                                    sucess={modal.sucess}
-                                    msg={modal.msg}
-                                    buttonMsg={modalBtnText}
-                                    callbackTiming={0}
-                                    callback={() => { if (userContext?.logged === true) { redirectToDashboard() }; handleModalDefault() }}
-                                    clearForm={clearForm}
+                    <div className={clsx(["stretchY", "stretchX", "loginContentWrapper"])}>
+                        <div className={clsx(["relative", "loginHeaderWrapper"])}>
+                            <h2>{text.login.Form.header.cz}</h2>
+                            <Underliner width={"80%"} />
+                        </div>
+                        <div className={clsx(["loginFormWrapper", "relative"])}>
+                            <form action="#Login" id="loginForm" onSubmit={handleSubmit}>
+                                <FormStringInput
+                                    className={"formInput"}
+                                    type={"text"}
+                                    name={"nameInput"}
+                                    formId={"loginForm"}
+                                    placeholder={text.login.Form.input1.placeholder.cz}
+                                    onChange={(canSubmit) => { handleChange(canSubmit) }}
+                                    required={true}
+                                    pattern={'[ |!()*ˇ^´˘°˛`˙´˝¨¸ß×¤÷]'}
+                                    errorMessage={text.login.Form.input1.errorMessage.cz}
+                                    errorStyle={errorStyle}
+                                    sucessStyle={sucessStyle}
+                                    minLength={1}
                                 />
-                            </div>
+                                <FormStringInput
+                                    className={"formInput"}
+                                    type={"password"}
+                                    name={"passwordInput"}
+                                    formId={"registerForm"}
+                                    placeholder={text.login.Form.input2.placeholder.cz}
+                                    onChange={(canSubmit) => { handleChange(canSubmit) }}
+                                    required={true}
+                                    errorMessage={text.login.Form.input2.errorMessage.cz}
+                                    errorStyle={errorStyle}
+                                    sucessStyle={sucessStyle}
+                                    minLength={1}
+                                />
+                                <Link to="/login/forgetPassword" className={clsx(["link", "forgetPassword"])}>
+                                    {text.login.Form.link1.cz}
+                                </Link>
+                                <Link to="/login/forgetName" className={clsx(["link", "forgetPassword"])}>
+                                    {text.login.Form.link2.cz}
+                                </Link>
+                                <button
+                                    className={clsx(["registerFormButton", "loginFormButton", "submitButton"])}
+                                    type="submit"
+                                    onClick={handleSubmit}
+                                >
+                                    {text.login.Form.button.cz}
+                                </button>
+
+                            </form>
+                        </div>
+                        <FormModal
+                            loading={modal.loading}
+                            sucess={modal.sucess}
+                            msg={modal.msg}
+                            buttonMsg={modalBtnText}
+                            callbackTiming={0}
+                            callback={() => { if (userContext?.logged === true) { redirectToDashboard() }; handleModalDefault() }}
+                            clearForm={clearForm}
+                        />
+                    </div>
                 </Layer>
             </section>
             <Footer />

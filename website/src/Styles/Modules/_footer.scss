@@ -61,7 +61,7 @@
   a {
     font-size: 0.7rem;
     text-decoration: none;
-    color: white;
+    color: $minorColor1;
   }
 }
 
@@ -85,5 +85,5 @@
 }
 
 .icon:hover {
-  background: white;
+  background: $textContrastColor;
 }

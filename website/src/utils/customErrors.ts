@@ -1,7 +1,7 @@
 export type ErrorMapType = CustomError[];
 export type ErrorTypesArray = (ApiError | DatabaseError | DatabaseError | ValidationError | UnhandledError | Error)[];
-export type CustomErrorResponseObject = {
-  data: null;
+export type CustomErrorResponseObject<T> = {
+  data: null | T;
   errorMap: ErrorTypesArray;
 };
 
@@ -14,6 +14,20 @@ export type CustomError = {
     trace: string;
   };
 };
+
+export class UnprocesableError extends Error {
+  code: string;
+  trace: string;
+  date: string;
+  constructor(error: CustomError) {
+    super();
+    this.name = error.Error.name;
+    this.code = error.Error.code;
+    this.message = error.Error.message;
+    this.trace = error.Error.trace;
+    this.date = error.Error.date;
+  }
+}
 
 export class ApiError extends Error {
   code: string;

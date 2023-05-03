@@ -6,12 +6,13 @@ import clsx from "clsx";
 import { selectShowAnimation } from "@animations";
 
 export const MultipleSelect: FC<SelectProps> = (props) => {
-  const { label, options, name } = props;
+  const { label, options, name, checkboxClick, syncWithWatch = false } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState<boolean>(false);
   const [hovered, setHovered] = useState(false);
   const { outside } = useClickOutside(ref);
-  const methods = useFormContext();
+  const { getValues, setValue, watch } = useFormContext();
+  const watchedValue: string[] = watch(name)
 
   useEffect(() => {
     open && setHovered(true);
@@ -27,16 +28,19 @@ export const MultipleSelect: FC<SelectProps> = (props) => {
     setOpen(!open);
   };
 
-  const handleCheckboxClick = (e: React.BaseSyntheticEvent, code: string) => {
-    const fieldValue: string[] = methods.getValues(name);
+  const handleCheckboxClick = (e: React.BaseSyntheticEvent, code: string, boxName: string) => {
+    const fieldValue: string[] = getValues(name);
+
+    checkboxClick?.(e.target.checked, `${code}-${name}`, boxName, name)
 
     if (e.target.checked === true) {
       fieldValue.push(code);
-      methods.setValue(name, fieldValue);
+      setValue(name, fieldValue);
       return;
     }
     const filteredArray = fieldValue.filter((value) => value !== code);
-    methods.setValue(name, filteredArray);
+    setValue(name, filteredArray);
+
     return;
   };
 
@@ -66,10 +70,12 @@ export const MultipleSelect: FC<SelectProps> = (props) => {
       </div>
       <div className={clsx(["optionsWrapper", open && "show"])}>
         {options.map((option, i) => {
+          const sync = syncWithWatch ? { checked: watchedValue.includes(option.code) } : {}
           return (
             <div className={"optionWrapper"} key={i + "t"}>
               <CheckboxSquared
-                onChange={(e) => handleCheckboxClick(e, option.code)}
+                {...sync}
+                onChange={(e) => handleCheckboxClick(e, option.code, option.name)}
                 label={option.name}
                 name={option.code}
                 className={"optionCheckboxRoot"}

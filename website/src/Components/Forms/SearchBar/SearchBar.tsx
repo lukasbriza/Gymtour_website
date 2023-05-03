@@ -19,8 +19,6 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
         String(e.target.value).length > 0 ? setFilled(true) : setFilled(false)
     }
 
-    const handleSearch = (e: React.BaseSyntheticEvent) => { }
-
     return (
         <div
             className={clsx([
@@ -36,9 +34,9 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
                 placeholder={t("contentPage:search")}
                 onChange={handleChange}
             />
-            <div className={"searchIconWrapper"} onClick={handleSearch}>
+            <button className={clsx(["submitButton", "searchIconWrapper"])} type="submit">
                 <SearchIcon className={"searchIcon"} />
-            </div>
+            </button>
         </div>
     )
 }

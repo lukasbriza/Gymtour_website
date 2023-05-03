@@ -47,7 +47,7 @@
   height: 70%;
   width: 1px;
   opacity: 0.5;
-  background: white;
+  background: $minorColor1;
 }
 
 .optionsWrapper {
@@ -102,7 +102,7 @@
 }
 
 .multipleOptionChecker {
-  background: rgb(44, 86, 171);
+  background: $bulletActive;
 }
 
 .hookInput {
@@ -126,19 +126,19 @@ $translate2: ($arrowWidth/4);
   div {
     width: $arrowWidth;
     height: 2px;
-    background: white;
+    background: $minorColor1;
     position: absolute;
   }
 
   .line1 {
-    background: white;
+    background: $minorColor1;
     transform: translateX($translate1) rotate(-50deg);
     transition: transform 0.35s ease-out;
     transform-origin: center;
   }
 
   .line2 {
-    background: white;
+    background: $minorColor1;
     transform: translateX($translate2) rotate(+50deg);
     transition: transform 0.35s ease-out;
     transform-origin: center;

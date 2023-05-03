@@ -6,12 +6,13 @@ import { selectRegionShowAnimation } from "@animations";
 import { useFormContext } from "react-hook-form";
 
 export const MultipleRegionSelect: FC<RegionSelectProps> = (props) => {
-  const { label, options, name } = props;
+  const { label, options, name, checkboxClick, syncWithWatch = false } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState<boolean>(false);
   const [hovered, setHovered] = useState(false);
   const { outside } = useClickOutside(ref);
-  const methods = useFormContext();
+  const { getValues, setValue, watch } = useFormContext();
+  const watchedValue: string[] = watch(name)
 
   useEffect(() => {
     open && setHovered(true);
@@ -30,17 +31,19 @@ export const MultipleRegionSelect: FC<RegionSelectProps> = (props) => {
   const handleMouseLeave = () => !open && setHovered(false);
   const handleMouseEnter = () => !open && setHovered(true);
 
-  const handleCheckboxClick = (e: React.BaseSyntheticEvent, code: string) => {
-    const fieldValue: string[] = methods.getValues(name);
+  const handleCheckboxClick = (e: React.BaseSyntheticEvent, code: string, boxName: string) => {
+    const fieldValue: string[] = getValues(name);
+
+    checkboxClick?.(e.target.checked, `${code}-${name}`, boxName, name)
 
     if (e.target.checked === true) {
       fieldValue.push(code);
-      methods.setValue(name, fieldValue);
+      setValue(name, fieldValue);
       return;
     }
 
     const filteredArray = fieldValue.filter((value) => value !== code);
-    methods.setValue(name, filteredArray);
+    setValue(name, filteredArray);
     return;
   };
 
@@ -73,10 +76,12 @@ export const MultipleRegionSelect: FC<RegionSelectProps> = (props) => {
               <div className={"sectionWrapper"} key={i}>
                 <div className={"optionHeader"}>{option.header}</div>
                 {option.options.map((town, i) => {
+                  const sync = syncWithWatch ? { checked: watchedValue.includes(town.code) } : {}
                   return (
                     <div className={"optionWrapper"} key={i + "t"}>
                       <CheckboxSquared
-                        onChange={(e) => handleCheckboxClick(e, town.code)}
+                        {...sync}
+                        onChange={(e) => handleCheckboxClick(e, town.code, town.name)}
                         label={town.name}
                         name={town.code}
                         className={"optionCheckboxRoot"}
@@ -90,7 +95,7 @@ export const MultipleRegionSelect: FC<RegionSelectProps> = (props) => {
               </div>
             );
           }
-
+          return null
         })}
       </div>
     </div>

@@ -7,6 +7,7 @@ import { bigLogoAnimation, showHeader, smallLogoShow } from '@animations'
 import { BigLogo, BigText } from '@svg'
 import { routes } from '@config'
 import { useAnimationContext } from '@hooks'
+import { useTranslation } from 'react-i18next'
 
 //TODO! - change linf for button
 const Home: FC = () => {
@@ -47,6 +48,7 @@ const PageHeader: FC = () => {
 
 const MainSection: FC = () => {
     const [showLogo, setShowLogo] = useState<boolean>(false)
+    const { t } = useTranslation()
     const { bigLogoPlayed, smallLogoPlayed, fn } = useAnimationContext()
     const { setBigLogoPlayed, setSmallLogoPlayed } = fn
 
@@ -128,13 +130,13 @@ const MainSection: FC = () => {
             >
                 <div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{text.home.Header.part1.cz}</h1>
+                        <h1 className={"homeHeader"}>{t("home:header.part1")}</h1>
                     </div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{text.home.Header.part2.cz}</h1>
+                        <h1 className={"homeHeader"}>{t("home:header.part2")}</h1>
                     </div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{text.home.Header.part3.cz}</h1>
+                        <h1 className={"homeHeader"}>{t("home:header.part3")}</h1>
                     </div>
                 </div>
             </div>

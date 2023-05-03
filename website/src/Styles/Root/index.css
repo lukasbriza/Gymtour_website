@@ -1135,9 +1135,14 @@ body {
 }
 
 .contentPage {
+  position: relative;
   display: block;
   height: 100%;
   background: rgb(29, 29, 29);
+  display: grid;
+  grid-template-areas: "contentHeader" "filterBolts" "filter" "content";
+  grid-template-rows: min-content min-content min-content 1fr;
+  grid-template-columns: 1fr;
 }
 
 .verticalText {
@@ -1152,6 +1157,12 @@ body {
   top: 790px;
   left: -460px;
   cursor: default;
+}
+
+.filteredContent {
+  grid-area: content;
+  position: relative;
+  width: 100%;
 }
 
 .Login img {
@@ -1904,7 +1915,7 @@ body {
 
 .menu {
   height: 60px;
-  background-color: rgb(0, 0, 0);
+  background-color: black;
   background: linear-gradient(180deg, rgb(0, 0, 0) 21%, rgba(0, 0, 0, 0.24) 100%);
   position: fixed;
   top: 0px;
@@ -2178,7 +2189,7 @@ body {
   margin: 10px auto;
 }
 
-button[type=submit] {
+.submitButton {
   width: 100%;
   padding: 20px 0px;
   margin-top: 20px;
@@ -2192,14 +2203,14 @@ button[type=submit] {
   font-size: 18px;
 }
 
-button[type=submit]:hover {
+.submitButton:hover {
   background: rgb(10, 21, 88);
   transition-property: background;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;
 }
 
-button[type=submit]:active {
+.submitButton:active {
   background: rgb(38, 62, 105);
   transition-property: background;
   transition-duration: 0.1s;
@@ -2659,6 +2670,7 @@ button[type=submit]:active {
 }
 
 .contentHeader {
+  grid-area: contentHeader;
   padding-top: 40px;
   position: relative;
   width: 100%;
@@ -2951,12 +2963,14 @@ button[type=submit]:active {
 
 .searchBarActive input {
   border: 1px inset rgb(0, 0, 0);
+  border-right: 0px;
 }
 
 .searchIconWrapper {
   grid-area: input;
   cursor: pointer;
   position: absolute;
+  margin-top: 0px;
   height: 37px;
   width: 33px;
   right: 0px;
@@ -2975,6 +2989,10 @@ button[type=submit]:active {
   background: rgb(5, 5, 5);
 }
 
+.filterWrapper {
+  grid-area: filter;
+}
+
 .filterWrapper-fitness {
   display: grid;
   position: relative;
@@ -2983,7 +3001,7 @@ button[type=submit]:active {
   row-gap: 5px;
   max-width: 1200px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "general general others others search search" "equipment equipment equipment regions regions regions";
+  grid-template-areas: "general general others others search search" "regions regions equipment equipment order order";
   align-items: center;
 }
 @media (min-width: 75em) {
@@ -3001,7 +3019,7 @@ button[type=submit]:active {
 @media (max-width: 43.75em) {
   .filterWrapper-fitness {
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "search search" "general others" "equipment regions";
+    grid-template-areas: "order search" "general others" "equipment regions";
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -3009,15 +3027,15 @@ button[type=submit]:active {
 @media (max-width: 31.25em) {
   .filterWrapper-fitness {
     grid-template-columns: 1fr;
-    grid-template-areas: "search" "general" "others" "equipment" "regions";
+    grid-template-areas: "search" "order" "general" "others" "equipment" "regions";
     padding-left: 5%;
     padding-right: 5%;
   }
 }
-@media (min-width: 68.75em) {
+@media (min-width: 75em) {
   .filterWrapper-fitness {
-    grid-template-areas: "general others equipment regions search";
-    grid-template-columns: 1fr 1fr 1fr 1fr 300px;
+    grid-template-areas: "general others equipment regions order search";
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 300px;
   }
 }
 .filterWrapper-fitness .selectAllWrapper {
@@ -3028,6 +3046,41 @@ button[type=submit]:active {
 }
 .filterWrapper-fitness .selectAllWrapper .optionsWrapper {
   width: inherit;
+}
+
+.filterActiveBoltsSection {
+  grid-area: filterBolts;
+  position: relative;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  padding-bottom: 10px;
+  height: 50px;
+  max-width: 1200px;
+}
+@media (min-width: 75em) {
+  .filterActiveBoltsSection {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 74.9375em) {
+  .filterActiveBoltsSection {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media (max-width: 43.75em) {
+  .filterActiveBoltsSection {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media (max-width: 31.25em) {
+  .filterActiveBoltsSection {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 
 .regions {
@@ -3058,4 +3111,66 @@ button[type=submit]:active {
   position: relative;
   margin: 5px;
   grid-area: search;
+}
+
+.order {
+  position: relative;
+  margin: 5px;
+  grid-area: order;
+}
+
+.selectOption {
+  cursor: pointer;
+  padding-left: 15px;
+}
+
+.bolt {
+  opacity: 0;
+  cursor: pointer;
+  color: white;
+  background: #111111;
+  width: -moz-min-content;
+  width: min-content;
+  white-space: nowrap;
+  padding: 10px 15px 10px 15px;
+  border-radius: 20px;
+  transition: background 0.2s ease-in-out, width 0.2s ease-in-out;
+  transition-delay: 450ms;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.bolt:hover {
+  background: black;
+  transition: background 0.2s ease-in-out;
+}
+
+.boltCrossWrapper {
+  display: none;
+  margin-top: 1px;
+  position: relative;
+  width: 0px;
+  height: 0px;
+}
+
+.boltCrossLine {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.boltLine1 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+  border-radius: 2px;
+}
+
+.boltLine2 {
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 2px;
+  width: 50%;
 }/*# sourceMappingURL=index.css.map */

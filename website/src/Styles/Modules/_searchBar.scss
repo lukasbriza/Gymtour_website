@@ -34,6 +34,7 @@
 .searchBarActive {
   input {
     border: 1px inset rgb(0, 0, 0);
+    border-right: 0px;
   }
 }
 
@@ -41,6 +42,7 @@
   grid-area: input;
   cursor: pointer;
   position: absolute;
+  margin-top: 0px;
   height: 37px;
   width: 33px;
   right: 0px;

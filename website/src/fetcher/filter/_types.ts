@@ -1,7 +1,7 @@
-import { CustomErrorResponseObject, ErrorTypesArray } from "@utils";
+import { CustomErrorResponseObject } from "@utils";
 
 export type GetFilterRequest = {};
-export type GetFilterResponse = CustomErrorResponseObject | { data: [FilterType]; errorMap: ErrorTypesArray };
+export type GetFilterResponse = CustomErrorResponseObject<FilterType>;
 
 export type FilterType = {
   _id?: { $oid: string };

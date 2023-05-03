@@ -36,6 +36,14 @@ export const enTranslation: AppTranslationType = {
     gymtour: "Gymtour",
   },
 
+  home: {
+    header: {
+      part1: "Choose",
+      part2: "Your",
+      part3: "Opportunity!",
+    },
+  },
+
   crossroad: {
     fitness: {
       header: "Fitness",
@@ -53,6 +61,22 @@ export const enTranslation: AppTranslationType = {
 
   contentPage: {
     search: "Hledat...",
+    filter: {
+      regions: "Regiony",
+      general: "Hlavní",
+      others: "Ostatní",
+      mens: "Muži",
+      womens: "Ženy",
+      specialization: "Specializace",
+      equipment: "Vybavení",
+      order: "Seřadit",
+      orderSelect: {
+        popularity: "Dle popularity",
+        name: "Dle jména",
+        views: "Dle zobrazení",
+        clear: "(Smazat)",
+      },
+    },
   },
 
   registerPage: {
@@ -68,6 +92,11 @@ export const enTranslation: AppTranslationType = {
 
   fitnessContentPage: {
     header1: "Fitness",
+    verticalText: "Gymtour",
+  },
+
+  coachContentPage: {
+    header1: "Trenéři",
     verticalText: "Gymtour",
   },
 };

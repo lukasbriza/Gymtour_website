@@ -321,7 +321,7 @@ const Settings = () => {
                         </div>
                         <div className="buttonWrapper">
                             <button
-                                className="changeNameFormButton settingsFormButton"
+                                className="changeNameFormButton settingsFormButton submitButton"
                                 type="submit"
                                 onClick={nameSubmit}
                                 disabled={usernameDisabledButton}
@@ -369,7 +369,7 @@ const Settings = () => {
                         </div>
                         <div className="buttonWrapper">
                             <button
-                                className="changePasswordFormButton settingsFormButton"
+                                className="changePasswordFormButton settingsFormButton submitButton"
                                 type="submit"
                                 onClick={passwordSubmit}
                                 disabled={passwordDisabledButton}
@@ -399,7 +399,7 @@ const Settings = () => {
                         </div>
                         <div className="buttonWrapper">
                             <button
-                                className="changeEmailFormButton settingsFormButton"
+                                className="changeEmailFormButton settingsFormButton submitButton"
                                 type="submit"
                                 onClick={emailSubmit}
                                 disabled={emailDisabledButton}

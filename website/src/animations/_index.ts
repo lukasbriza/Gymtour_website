@@ -10,3 +10,4 @@ export * from "./filterSection";
 export * from "./formModal";
 export * from "./loading";
 export * from "./multipleSelect";
+export * from "./bolt";

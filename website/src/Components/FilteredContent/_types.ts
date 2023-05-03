@@ -1,1 +1,1 @@
-export type FilteredContentProps = {};
+export type FilteredContentProps = { type: "coach" | "fitness" };

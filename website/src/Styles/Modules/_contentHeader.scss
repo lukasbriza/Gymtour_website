@@ -1,4 +1,5 @@
 .contentHeader {
+  grid-area: contentHeader;
   padding-top: 40px;
   position: relative;
   width: 100%;
@@ -11,7 +12,7 @@
   transform: translateX(-50%);
 
   path {
-    fill: white;
+    fill: $minorColor1;
   }
 }
 
@@ -28,7 +29,7 @@
     text-transform: uppercase;
     font-size: $line;
     line-height: $line;
-    color: white;
+    color: $minorColor1;
     position: relative;
     transition: all 0.7s ease-in-out;
     cursor: pointer;

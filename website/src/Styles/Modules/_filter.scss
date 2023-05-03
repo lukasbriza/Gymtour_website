@@ -1,3 +1,7 @@
+.filterWrapper {
+  grid-area: filter;
+}
+
 .filterWrapper-fitness {
   display: grid;
   position: relative;
@@ -7,7 +11,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "general general others others search search"
-    "equipment equipment equipment regions regions regions";
+    "regions regions equipment equipment order order";
   align-items: center;
 
   @include mq($from: 1200px) {
@@ -23,7 +27,7 @@
   @include mq($until: 700px) {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "search search"
+      "order search"
       "general others"
       "equipment regions";
     padding-left: 60px;
@@ -34,6 +38,7 @@
     grid-template-columns: 1fr;
     grid-template-areas:
       "search"
+      "order"
       "general"
       "others"
       "equipment"
@@ -42,9 +47,9 @@
     padding-right: 5%;
   }
 
-  @include mq($from: 1100px) {
-    grid-template-areas: "general others equipment regions search";
-    grid-template-columns: 1fr 1fr 1fr 1fr 300px;
+  @include mq($from: 1200px) {
+    grid-template-areas: "general others equipment regions order search";
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 300px;
   }
 
   .selectAllWrapper {
@@ -56,6 +61,35 @@
     .optionsWrapper {
       width: inherit;
     }
+  }
+}
+
+.filterActiveBoltsSection {
+  grid-area: filterBolts;
+  position: relative;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  padding-bottom: 10px;
+  height: 50px;
+  max-width: 1200px;
+
+  @include mq($from: 1200px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @include mq($until: 1199px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @include mq($until: 700px) {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  @include mq($until: 500px) {
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }
 
@@ -87,4 +121,10 @@
   position: relative;
   margin: 5px;
   grid-area: search;
+}
+
+.order {
+  position: relative;
+  margin: 5px;
+  grid-area: order;
 }

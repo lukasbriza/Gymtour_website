@@ -43,6 +43,7 @@ type fadeInConfig = {
   duration?: number;
   delay?: number;
   opacity?: number;
+  ease?: string | gsap.EaseFunction;
 };
 export const fadeIn = (target: gsap.TweenTarget, config: fadeInConfig = {}) => {
   const anConfig = {
@@ -52,6 +53,7 @@ export const fadeIn = (target: gsap.TweenTarget, config: fadeInConfig = {}) => {
     duration: config.duration ?? 0.5,
     delay: config.delay ?? 0,
     opacity: config.opacity ?? 1,
+    ease: config.ease ?? Power3.easeIn,
   };
   const tl = gsap.timeline();
   tl.set(target, { display: anConfig.displayInitial })
@@ -63,7 +65,7 @@ export const fadeIn = (target: gsap.TweenTarget, config: fadeInConfig = {}) => {
         opacity: anConfig.opacity,
         delay: anConfig.delay,
         stagger: anConfig.stagger,
-        ease: Power3.easeIn,
+        ease: anConfig.ease,
       }
     )
     .set(target, { display: anConfig.displayAfter });
@@ -77,6 +79,7 @@ type fadeOffConfig = {
   startOpacity?: number;
   duration?: number;
   stagger?: number;
+  ease?: string | gsap.EaseFunction;
 };
 export const fadeOff = (target: gsap.TweenTarget, config: fadeOffConfig = {}) => {
   const anConfig = {
@@ -86,6 +89,7 @@ export const fadeOff = (target: gsap.TweenTarget, config: fadeOffConfig = {}) =>
     startOpacity: config.startOpacity ?? 1,
     displayInitial: config.displayInitial ?? "initial",
     displayAfter: config.displayAfter ?? "none",
+    ease: config.ease ?? Power3.easeIn,
   };
 
   const tl = gsap.timeline();
@@ -93,7 +97,7 @@ export const fadeOff = (target: gsap.TweenTarget, config: fadeOffConfig = {}) =>
     .fromTo(
       target,
       { opacity: anConfig.startOpacity },
-      { opacity: 0, delay: anConfig.delay, duration: anConfig.duration, stagger: anConfig.stagger, ease: Power3.easeIn }
+      { opacity: 0, delay: anConfig.delay, duration: anConfig.duration, stagger: anConfig.stagger, ease: anConfig.ease }
     )
     .set(target, { display: config.displayAfter });
   return tl;

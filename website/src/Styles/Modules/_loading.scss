@@ -1,17 +1,17 @@
-.loadingWrapper{
-  position:relative;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  display:flex;
+.loadingWrapper {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
   align-items: flex-end;
 }
 
-.loadingLine{
-  position:relative;
-  bottom:0px;
-  background:white;
+.loadingLine {
+  position: relative;
+  bottom: 0px;
+  background: $minorColor1;
   margin-left: 1px;
-  width:3px;
-  height:2px;
+  width: 3px;
+  height: 2px;
 }

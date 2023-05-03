@@ -1,184 +1,83 @@
-import { FC, useEffect, useState } from "react";
-import { AvoidedFilterType, FilterProps, FilterVariants, FormType } from "./_types";
-import { FilterType, GetFilterResponse, getFilter } from "@fetchers";
-import { filter } from "@config";
-import { FormProvider, useForm, useWatch } from "react-hook-form";
-import {
-  Bullet,
-  MultipleSelect,
-  MultipleRegionSelectControled,
-  Loading,
-  SearchBar,
-} from "@components";
-import { regionMapper, standardMapper } from "./Filter.mapper";
+import { FC, useEffect } from "react";
+import { CoachFilter, FilterProps, FitnessFilter, FormType } from "./_types";
 
-const filterAvoided = (
-  rawFilter: FilterType,
-  avoid: string[]
-): AvoidedFilterType => {
-  const returnObject = rawFilter;
-  for (const key in rawFilter) {
-    if (avoid.indexOf(key) !== -1) {
-      delete returnObject[key];
-    }
-  }
-  delete returnObject._id;
-  return returnObject;
-};
+import { FormProvider, useForm } from "react-hook-form";
+import { FilterComponents } from "./FilterComponents";
+import { useCoachFilterContext, useFitnessFilterContext, useServerData, useServerdataLazy } from "@hooks";
+import { getCoaches, getFilter, getFitnesses } from "@fetchers";
+import { coachFormToApi, fitnessFormToApi } from "./Filter.mapper";
+import { FilterActiveBolts } from "./FilterActiveBolts";
 
-const GetFilterComponents: FC<{ type: FilterVariants }> = (props) => {
-  const { type } = props
-  const [rawFilter, setFilterData] = useState<GetFilterResponse | undefined>(undefined)
-  const [loading, setLoading] = useState<boolean>(true)
-
-  useEffect(() => {
-    setLoading(true)
-    getFilter().then(value => { setFilterData(value); setLoading(false) })
-  }, [])
-
-  const filterCleared = rawFilter && rawFilter?.data
-    ? filterAvoided(
-      rawFilter.data[0],
-      type === "coach"
-        ? (filter.avoidFilterTypes.coach as unknown as string[])
-        : (filter.avoidFilterTypes.fitness as unknown as string[])
-    )
-    : null;
-
-  const regions = filterCleared?.regions && (
-    <div className={"regions"}>
-      <MultipleRegionSelectControled
-        name="regions"
-        label="Regiony"
-        options={regionMapper(filterCleared?.regions)}
-      />
-    </div>
-  );
-
-  const general = filterCleared?.general && (
-    <div className={"general"}>
-      <MultipleSelect
-        name="general"
-        label="Hlavní"
-        options={standardMapper(filterCleared?.general)}
-      />
-    </div>
-  );
-
-  const others = filterCleared?.regions && (
-    <div className={"others"}>
-      <MultipleSelect
-        name="others"
-        label="Ostatní"
-        options={standardMapper(filterCleared?.others)}
-      />
-    </div>
-  );
-  const gender = filterCleared?.gender && (
-    <div className={"gender"}>
-      {standardMapper(filterCleared?.gender).map((gender) => {
-        return (
-          <Bullet
-            name={gender.code === "1" ? "men" : "women"}
-            value={gender.name}
-          />
-        );
-      })}
-    </div>
-  );
-  const specialization = filterCleared?.specialization && (
-    <div className={"specialization"}>
-      <MultipleSelect
-        name="specialization"
-        label="Specializace"
-        options={standardMapper(filterCleared?.specialization)}
-      />
-    </div>
-  );
-  const equipment = filterCleared?.equipment && (
-    <div className="equipment">
-      <MultipleSelect
-        name="equipment"
-        label="Vybavení"
-        options={standardMapper(filterCleared?.equipment)}
-      />
-    </div>
-  );
-
-  switch (type) {
-    case "coach":
-      return (
-        <>
-          {loading ?
-            <Loading /> :
-            <>
-              {regions}
-              {general}
-              {specialization}
-              {others}
-              {gender}
-              <SearchBar name="searchBar" />
-            </>
-          }
-
-        </>
-      );
-    case "fitness":
-      return (
-        <>
-          {
-            loading ?
-              <Loading /> :
-              <>
-                {regions}
-                {general}
-                {equipment}
-                {others}
-                <SearchBar name="searchBar" />
-              </>
-          }
-        </>
-      );
-  }
-};
 
 export const Filter: FC<FilterProps> = (props) => {
   const { type } = props;
+  const { limit: coachLimit, setLoading: setCoachLoading } = useCoachFilterContext()
+  const { limit: fitnessLimit, setLoading: setFitnessLoading } = useFitnessFilterContext()
+  const { data: rawFilter, loading: filterLoading } = useServerData(getFilter())
+  const { fetchCall: getFitnessCall, loading: fitnessLoading, data: fitnessData } = useServerdataLazy(getFitnesses)
+  const { fetchCall: getCoachCall, loading: coachLoading, data: coachData } = useServerdataLazy(getCoaches)
 
-  const filterdefaults = type === "coach" ?
+  const dataEffectDeps = type === "coach" ? coachData : fitnessData
+  const loadingEffectDeps = type === "coach" ? [coachLoading, setCoachLoading] : [fitnessLoading, setFitnessLoading]
+
+  useEffect(() => {
+    type === "coach" ? setCoachLoading(coachLoading) : setFitnessLoading(fitnessLoading)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...loadingEffectDeps])
+
+  useEffect(() => {
+    // type === "coach" ?
+  }, [dataEffectDeps])
+
+  const filterdefaults: FormType = type === "coach" ?
     {
-      general: [],
       regions: [],
       specialization: [],
       others: [],
-      man: false,
-      woman: false,
-      searchBar: ""
+      gender: [],
+      searchBar: "",
+      order: undefined
     } : {
       general: [],
       regions: [],
       equipment: [],
       others: [],
-      searchBar: ""
+      searchBar: "",
+      order: undefined
     }
 
   const methods = useForm<FormType, any>({
     defaultValues: {
       ...filterdefaults
     },
-    reValidateMode: "onChange"
   });
 
+  const { handleSubmit } = methods
 
 
-  const handleChange = () => {
-    const values = methods.getValues()
-    console.log(values)
+  const coachSubmit = async (values: FormType) => {
+    if (rawFilter) {
+      const apiQuery = coachFormToApi(values as unknown as CoachFilter, rawFilter)
+      apiQuery.limit = coachLimit
+      getCoachCall(apiQuery)
+    }
+
+  }
+
+  const fitnessSubmit = async (values: FormType) => {
+    if (rawFilter) {
+      const apiQuery = fitnessFormToApi(values as unknown as FitnessFilter, rawFilter)
+      apiQuery.limit = fitnessLimit
+      getFitnessCall(apiQuery)
+    }
   }
 
   return (
     <FormProvider {...methods}>
-      <form className={`filterWrapper-${type}`} onChange={handleChange}><GetFilterComponents type={type} /></form>
+      <FilterActiveBolts type={type} />
+      <form className={`filterWrapper-${type}`} onSubmit={handleSubmit(type === "coach" ? coachSubmit : fitnessSubmit)}>
+        <FilterComponents type={type} rawFilter={rawFilter} loading={filterLoading} />
+      </form>
     </FormProvider>
   );
 };

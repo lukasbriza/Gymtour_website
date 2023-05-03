@@ -12,13 +12,13 @@
   padding-top: 30px;
   padding-bottom: 30px;
   background: rgba(52, 52, 52, 0.774);
-  color: white;
+  color: $textContrastColor;
 }
 
 .buttonClass {
   opacity: 0;
-  background: rgb(38, 62, 105);
-  color: white;
+  background: $modalBtn;
+  color: $textContrastColor;
   border: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -33,7 +33,7 @@
 }
 
 .buttonClass:hover {
-  background: rgb(10, 21, 88);
+  background: $modalBtnHover;
   transition-property: background;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;

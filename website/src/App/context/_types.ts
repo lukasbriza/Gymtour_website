@@ -1,3 +1,5 @@
+import { BoltProps, FilterVariants } from "@components";
+import { Coach, Fitness } from "@fetchers";
 import React from "react";
 
 export interface ContextProviderProps {
@@ -11,18 +13,11 @@ export type AppStateContext = {
   width?: number;
   actualLocation?: string;
   breakPoint?: BreakPoints;
-  fitnessSearch: searchFitnessData;
-  coachSearch: searchCoachData;
-  filteredFitnessData: filteredData[] | [];
-  filteredCoachData: filteredData[] | [];
   fn: {
     setActualLocation: setState<string>;
     preloadCrossroadImg: (timeout: number) => Promise<void>;
     preloadHomeImg: (timeout: number) => Promise<void>;
     preloadMenuImg: (timeout: number) => Promise<void>;
-    handleSearchData: (data: dataTypeSearch) => void;
-    setFilteredFitnessData: setState<filteredData[]>;
-    setFilteredCoachData: setState<filteredData[]>;
   };
 };
 
@@ -50,4 +45,27 @@ export type UserStateContext = {
   };
 };
 
-export type FilterStateContext = {};
+export type CoachFilterContext = {
+  limit: number;
+  filteredContent: Coach[];
+  contentLoading: boolean;
+  bolts: BoltProps[];
+  setContent: setState<Coach[]>;
+  setLimit: setState<number>;
+  setLoading: setState<boolean>;
+  register: (state: boolean, code: string, text: string, fieldName: string) => void;
+  removeBolt: (code: string) => void;
+  addBolt: (text: string, code: string, name?: string) => void;
+};
+export type FitnessFilterContext = {
+  limit: number;
+  filteredContent: Fitness[];
+  contentLoading: boolean;
+  bolts: BoltProps[];
+  setContent: setState<Fitness[]>;
+  setLimit: setState<number>;
+  setLoading: setState<boolean>;
+  register: (state: boolean, code: string, text: string, fieldName: string) => void;
+  removeBolt: (code: string) => void;
+  addBolt: (text: string, code: string, name?: string) => void;
+};

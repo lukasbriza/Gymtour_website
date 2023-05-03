@@ -9,12 +9,16 @@ export type RegionSelectProps = {
       code: string;
     }[];
   }[];
+  checkboxClick?: (state: boolean, code: string, text: string, fieldName: string) => void;
+  syncWithWatch?: boolean;
 };
 
 export type SelectProps = {
   name: string;
   label: string;
   options: { name: string; code: string }[];
+  checkboxClick?: (state: boolean, code: string, text: string, fieldName: string) => void;
+  syncWithWatch?: boolean;
 };
 
 export type ControlledSelectProps = RegionSelectProps;

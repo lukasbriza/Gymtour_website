@@ -1,4 +1,4 @@
-import { gsap, Power2 } from "gsap";
+import { gsap } from "gsap";
 
 type StartLoadingConfig = {
   height?: number;
@@ -6,10 +6,7 @@ type StartLoadingConfig = {
   ease?: gsap.EaseFunction | string;
   stagger?: number;
 };
-export const startLoading = (
-  lines: HTMLDivElement[],
-  config: StartLoadingConfig = {}
-) => {
+export const startLoading = (lines: HTMLDivElement[], config: StartLoadingConfig = {}) => {
   const anConfig = {
     height: config.height ?? 12,
     duration: config.duration ?? 0.6,
