@@ -80,7 +80,7 @@ export const Menu: FC = () => {
   return (
     <nav
       id={smallerOrEqualThenTablet ? "menu-mob" : "menu-pc"}
-      className={clsx(["absolute", "topZ", "menu"])}
+      className={clsx(["absolute", "menu"])}
       style={{ backgroundColor: background, background: background }}
       ref={menuRef}
     >

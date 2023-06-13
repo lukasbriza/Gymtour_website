@@ -1,5 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
-import fetchAgent from '../../../utils/fetchAgent'
+import { useEffect, useState } from 'react'
 //FUNCTIONS//
 import { classListMaker } from '../../../utils/classListMaker'
 //TEXTS//
@@ -31,25 +30,7 @@ const RegionSection = ({ onChange, onError }: { onChange: (data: { regionCode: s
     //////////////////////////////////////////////////
     //FUNCTIONS//
     const fetchDataFn = async () => {
-        const fetchData = await fetchAgent.getFilterData()
-        if (fetchData.errorMap.length > 0) {
-            onError(fetchData.errorMap)
-            return null
-        }
-        if (fetchData.data) {
-            setFilterData(fetchData.data[0])
-            //CLEAN OF FROM REGIONS WITHOUT TOWNS
-            let regionList = fetchData.data[0].regions.filter((value) => {
-                if (value.towns!.length > 0) {
-                    return value
-                }
-                return null
-            })
-            let mappedArray = regionList.map((value) => {
-                return { name: value.name, code: value.code }
-            })
-            setRegionDropDown(mappedArray)
-        }
+
     }
     //////////////////////////////////////////////////
     //EFFECTS//

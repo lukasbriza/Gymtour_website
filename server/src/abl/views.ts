@@ -4,17 +4,18 @@ import { update } from "../database";
 import { CoachModel, FitnessModel } from "../model";
 import { Coach, Fitness, UpdateViewsResponsePromise, UpdateViewsType } from "../types";
 import { APIError, DatabaseError, assignError, buildResponse } from "../utils";
+import { ObjectId } from "mongodb";
 
 export const updateViews = async (body: UpdateViewsType): UpdateViewsResponsePromise => {
   const response = buildResponse<boolean>();
   const { fitness, coach } = body;
-
+  console.log(fitness, coach);
   const updateRule = {
     $inc: { views: 1 },
   };
 
   if (fitness) {
-    const filter: FilterQuery<Fitness> = { _id: { $in: { fitness } } };
+    const filter: FilterQuery<Fitness> = { _id: { $in: fitness.map((value) => new ObjectId(value)) } };
     const fitnesUpdate = await update(FitnessModel, errorMessages.views.databaseErrorFitness, filter, updateRule);
 
     if (fitnesUpdate instanceof DatabaseError) {
@@ -28,7 +29,7 @@ export const updateViews = async (body: UpdateViewsType): UpdateViewsResponsePro
   }
 
   if (coach) {
-    const filter: FilterQuery<Coach> = { _id: { $in: { coach } } };
+    const filter: FilterQuery<Coach> = { _id: { $in: coach.map((value) => new ObjectId(value)) } };
     const coachUpdate = await update(CoachModel, errorMessages.views.databaseErrorCoches, filter, updateRule);
 
     if (coachUpdate instanceof DatabaseError) {

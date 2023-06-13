@@ -1,10 +1,10 @@
-import { BoltProps, FilterVariants } from "@components";
+import { BoltProps } from "@components";
 import { Coach, Fitness } from "@fetchers";
 import React from "react";
 
-export interface ContextProviderProps {
+export type ContextProviderProps = {
   children: React.ReactNode;
-}
+};
 
 export type setState<T> = React.Dispatch<React.SetStateAction<T>>;
 export type BreakPoints = "toMobile" | "fromMobile" | "fromTablet" | "fromDesktop" | "fromWide";
@@ -68,4 +68,11 @@ export type FitnessFilterContext = {
   register: (state: boolean, code: string, text: string, fieldName: string) => void;
   removeBolt: (code: string) => void;
   addBolt: (text: string, code: string, name?: string) => void;
+};
+
+export type ImageStoreContextType = {
+  images: { [id: string]: string }[];
+  addToStore: (id: string, data: Blob) => string | undefined;
+  removeFromStore: (id: string) => void;
+  getFromStore: (id: string) => string | undefined;
 };

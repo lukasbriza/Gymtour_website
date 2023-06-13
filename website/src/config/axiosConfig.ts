@@ -13,6 +13,6 @@ export enum Api {
   ApiFitness = "/api/fitness",
   ApiCoach = "/api/coach",
   ApiFilter = "/api/filter",
-  ApiImages = "/api/image",
+  ApiImages = "/api/images",
   ApiViews = "/api/views",
 }

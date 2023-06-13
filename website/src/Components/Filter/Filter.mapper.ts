@@ -95,12 +95,23 @@ const mapOrderToPath = (order: OrderTypes) => {
   }
 };
 
-export const fitnessFormToApi = (value: FitnessFilter, rawFilter: GetFilterResponse): FitnesFilterQuery => {
+const mapProjection = (arr: string[]): string => {
+  return arr.join(" ");
+};
+
+export const fitnessFormToApi = (
+  value: FitnessFilter,
+  rawFilter: GetFilterResponse,
+  projection?: string[]
+): FitnesFilterQuery => {
   const { general, equipment, others, searchBar, regions, order } = value;
   let cleanedFilter: FitnesFilterQuery = {};
 
-  //TODO projection
   const regionsQuerry = mapRegionsToQuerry(regions, rawFilter);
+
+  if (projection) {
+    cleanedFilter.projection = mapProjection(projection);
+  }
 
   if (regions.length > 0 && regionsQuerry) {
     cleanedFilter.regions = regionsQuerry;

@@ -1,4 +1,4 @@
-import { FC, createContext, useCallback, useEffect, useMemo, useState } from "react"
+import { FC, createContext, useCallback, useState, useMemo } from "react"
 import { CoachFilterContext, ContextProviderProps, FitnessFilterContext } from "./_types"
 import { filter } from "@config"
 import { BoltProps, FilterVariants } from "@components"
@@ -47,24 +47,19 @@ export const FilterContexProvider: FC<ContextProviderProps & { type: "coach" | "
     const [coachBolts, setCoachBolts] = useState<BoltProps[]>([])
     const [filteredCoaches, setFilteredCoaches] = useState<Coach[]>([])
 
-
     const addBolt = useCallback((text: string, code: string, fieldName?: string,) => {
         type === "coach" ? setCoachBolts((value) => [...value, { code, text, fieldName }]) : setFitnessBolts((value) => [...value, { code, text, fieldName }])
     }, [type])
 
     const removeBolt = useCallback((code: string) => {
-        const boltArr = type === "coach" ? coachBolts : fitnessBolts
-        const index = boltArr.findIndex((value) => value.code === code)
-        if (index !== -1) {
-            boltArr.splice(index, 1)
-            type === "coach" ? setCoachBolts(boltArr) : setFitnessBolts(boltArr)
-            return
-        }
-
+        const arr = type === "coach" ? coachBolts : fitnessBolts
+        const newArr = arr.filter((bolt) => bolt.code !== code)
+        type === "coach" ? setCoachBolts(newArr) : setFitnessBolts(newArr)
     }, [coachBolts, fitnessBolts, type])
 
     const registerBoltsFilter = useCallback((type: FilterVariants) => (state: boolean, code: string, text: string, fieldName: string) => {
         const boltArr = type === "coach" ? coachBolts : fitnessBolts
+
         if (state) {
             const index = boltArr.findIndex((value) => value.code === code)
             if (index !== -1 && boltArr[index].text !== text) {
@@ -75,8 +70,9 @@ export const FilterContexProvider: FC<ContextProviderProps & { type: "coach" | "
                 addBolt(text, code, fieldName)
             }
             return
+        } else {
+            removeBolt(code)
         }
-        removeBolt(code)
     }, [addBolt, coachBolts, fitnessBolts, removeBolt])
 
     const coachFilterContext: CoachFilterContext = useMemo(() => ({

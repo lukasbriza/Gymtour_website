@@ -1,0 +1,147 @@
+.contentCard {
+  cursor: pointer;
+  position: relative;
+  background: rgb(51, 51, 51);
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 16px 16px;
+}
+
+.imgSection {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .loading {
+    top: 45%;
+  }
+}
+
+.infoSection {
+  width: 100%;
+  height: 45px;
+  bottom: 0px;
+  left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background: rgba(0, 0, 0, 0.573);
+}
+
+.infoElement {
+  position: relative;
+  margin: auto;
+}
+
+.infoNumber {
+  position: relative;
+  font-size: 12px;
+  line-height: 12px;
+  color: $minorColor1;
+}
+
+.likeNumber {
+  top: 16px;
+  padding-left: 4px;
+}
+.viewNumber {
+  padding-left: 4px;
+  padding-right: 4px;
+  margin-left: 5px;
+}
+
+.heartWrapper {
+  padding-left: 10px;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+
+  svg {
+    position: relative;
+    top: 13px;
+  }
+}
+
+.cardNameWrapper {
+  width: 100%;
+  line-height: 45px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 17px;
+  font-family: $primaryFont;
+  color: $minorColor1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topped {
+  position: absolute;
+  right: 13px;
+  top: 13px;
+  cursor: pointer;
+}
+
+.viewed {
+  color: $minorColor1;
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, top 0.5s ease-out;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  path {
+    fill: $minorColor1;
+  }
+}
+
+$color: #c41111;
+.heart {
+  cursor: pointer;
+  stroke: $color;
+  stroke-width: 2px;
+  fill: rgba(0, 0, 0, 0);
+  transition: stroke 250ms ease-out;
+
+  path {
+    transition: fill 250ms ease-out;
+  }
+}
+
+.heart:hover {
+  stroke: #ff1b1b;
+  path {
+    fill: #ff1b1b;
+  }
+}
+
+.filledHeart {
+  path {
+    fill: $color;
+  }
+}
+
+.contentCard:hover {
+  will-change: transform;
+  transform: translate(-2px, -2px);
+  .viewed {
+    opacity: 1;
+    top: 13px;
+  }
+}
+
+.cardTooltip {
+  position: absolute;
+  z-index: 100;
+  background: $buttonTextColor;
+  margin: 0px;
+  padding: 3px 10px;
+  border-radius: 4px;
+}

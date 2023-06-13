@@ -85,7 +85,7 @@ export const fadeOff = (target: gsap.TweenTarget, config: fadeOffConfig = {}) =>
   const anConfig = {
     delay: config.delay ?? 0,
     stagger: config.stagger ?? 0,
-    duration: config.duration ?? 0,
+    duration: config.duration ?? 0.5,
     startOpacity: config.startOpacity ?? 1,
     displayInitial: config.displayInitial ?? "initial",
     displayAfter: config.displayAfter ?? "none",

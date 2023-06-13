@@ -59,7 +59,7 @@ export type Fitness = {
   };
   approved?: boolean;
   views?: number;
-  popularity?: string[] | [];
+  popularity?: string[];
 };
 
 export type FitnesFilterQuery = {

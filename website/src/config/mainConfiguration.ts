@@ -14,6 +14,12 @@ const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"))
 const Login = ReactLazyPreload(() => import("../pages/login/Login"));
 const Dashboard = ReactLazyPreload(() => import("../pages/Dashboard"));
 const EmailUpdate = ReactLazyPreload(() => import("../pages/EmailUpdate"));
+const Detail = ReactLazyPreload(() => import("../pages/content/Detail"));
+
+export const card = {
+  width: 250,
+  height: 250,
+};
 
 export const breakpoints = {
   mobile: 360,
@@ -35,6 +41,7 @@ export const routes = {
     component: Fitness,
   },
   coach: { name: "routes:coach", path: "/coach", component: Coach },
+  detail: { name: "routes:detail", path: "/detail/:id", component: Detail },
   aboutUs: { name: "routes:aboutUs", path: "/about", component: About },
   coOp: { name: "routes:coOp", path: "/coop", component: CoOp },
   contact: {

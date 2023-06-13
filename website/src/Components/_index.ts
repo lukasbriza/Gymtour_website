@@ -11,6 +11,9 @@ export * from "./ContentHeader/ContentHeader";
 export * from "./Filter/Filter";
 export * from "./Filter/_types";
 export * from "./Loading/Loading";
+export * from "./Card/Card";
+export * from "./FilteredContent/FilteredContent";
+export * from "./Tooltip/Tooltip";
 
 export * from "./Forms/StringInput/StringInput";
 export * from "./Forms/Checkbox/Checkbox";
@@ -22,5 +25,3 @@ export * from "./Forms/SearchBar/SearchBar";
 export * from "./Forms/Select/Select";
 export * from "./Forms/Bolt/Bolt";
 export * from "./Forms/Bolt/_types";
-
-export * from "./FilteredContent/FilteredContent";

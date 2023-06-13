@@ -34,13 +34,13 @@ const getFitnessFilter = (query: FilterQueryParsed) => {
     return {};
   }
 
-  query.regions.forEach((region) => {
-    findQuery.region?.$in.push(region[0]);
+  findQuery.region?.$in.push(query.regions[0]);
 
-    region[1].forEach((town) => {
+  if (Array.isArray(query.regions[1])) {
+    query.regions[1].forEach((town) => {
       findQuery.town.$in.push(Number(town));
     });
-  });
+  }
 
   if (query?.general) {
     findQuery["filters.general"] = { $in: query.general };

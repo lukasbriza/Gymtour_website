@@ -2,8 +2,7 @@ import { useEffect, useState, useContext, useRef } from 'react'
 import { Underliner } from '../Underliner/Underliner'
 import { Button } from '../Button/Button'
 import { ErrorModal } from '../ErrorModal'
-import fetchAgent from '../../utils/fetchAgent'
-import { getToken } from '../../utils/loginLogic'
+
 import { classListMaker } from '../../utils/classListMaker'
 import { text } from '../../config/textSource'
 
@@ -36,24 +35,7 @@ const Overview = () => {
             userContext.userObject === undefined
         ) {
 
-            const token = getToken()
-            token.then(token => {
-                if (token !== null) {
-                    const fetchResult = fetchAgent.getUserInformation({ id: userContext?.userId, token: token })
-                    fetchResult.then((result) => {
-                        userReqSended.current = true
-                        if (result.errorMap.length === 0 && result.data !== null) {
-                            setUserObject(result.data)
-                        } else {
-                            //ERROR MODAL
-                            setErrorHeader(text.errorModal.headers.overview.cz)
-                            const message = (result.errorMap.map((error) => error.Error?.message) + text.errorModal.contactMessage.cz)
-                            setErrorMessage(message)
-                            setErrorModal(true)
-                        }
-                    })
-                }
-            })
+
         }
     }, [userContext?.userId, userContext?.logged, userContext?.userObject])
     useEffect(() => {

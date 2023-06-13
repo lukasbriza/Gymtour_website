@@ -1,12 +1,16 @@
-const SmallLogo = (props:SmallLogo) => {
+import { FC } from "react";
+import { SmallLogoProps } from "./_types";
+
+const SmallLogo: FC<SmallLogoProps> = (props) => {
+  const { scale, ...otherProps } = props
 
   return (
     <svg
-      {...props}
+      {...otherProps}
       id="smallLogo"
       viewBox="0 0 300 332"
-      width={300 * props.scale}
-      height={332 * props.scale}
+      width={300 * (scale ? scale : 1)}
+      height={332 * (scale ? scale : 1)}
       xmlns="http://www.w3.org/2000/svg"
     >
       <mask id="path-1-inside-1" fill="white">

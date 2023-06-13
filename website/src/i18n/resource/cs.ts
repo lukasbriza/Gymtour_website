@@ -26,6 +26,7 @@ export const csTranslation = {
     businessConditions: "Obchodní podmínky",
     dataProcessing: "Zpracování údajů",
     emailUpdate: "Změna emailu",
+    detail: "Detail",
   },
 
   footer: {
@@ -75,6 +76,10 @@ export const csTranslation = {
         clear: "(Smazat)",
       },
     },
+    popUp: {
+      cantLikeHeader: "Nelze přidat lajk",
+      cantLikeText: "Přidávat lajky můžou jen přihlášení uživatelé.",
+    },
   },
 
   registerPage: {
@@ -97,6 +102,8 @@ export const csTranslation = {
     header1: "Trenéři",
     verticalText: "Gymtour",
   },
+
+  detail: {},
 };
 
 export type AppTranslationType = typeof csTranslation;

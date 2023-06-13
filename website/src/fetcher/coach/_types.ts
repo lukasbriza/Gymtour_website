@@ -43,12 +43,12 @@ export type Coach = {
   };
   owner: string;
   topped?: {
-    vlaue?: boolean;
+    value?: boolean;
     toDate?: Date | null;
   };
   approved?: boolean;
   views?: number;
-  popularity?: string[] | [];
+  popularity?: string[];
 };
 
 export type GetCoach = Coach[];

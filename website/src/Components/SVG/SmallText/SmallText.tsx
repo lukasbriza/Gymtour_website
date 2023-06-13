@@ -1,4 +1,6 @@
-const SmallText = (props:SmallText) => {
+import { SmallTextProps } from "./_types";
+
+const SmallText = (props: SmallTextProps) => {
   return (
     <svg
       {...props}

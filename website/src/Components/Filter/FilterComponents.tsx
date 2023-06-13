@@ -1,6 +1,7 @@
 import {
     AvoidedFilterType,
     Bullet,
+    Button,
     FilterComponentsProps,
     Loading,
     MultipleRegionSelectControled,
@@ -135,16 +136,18 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
         case "coach":
             return (
                 <>
-                    {loading ?
-                        <Loading /> :
-                        <>
-                            {regions}
-                            {specialization}
-                            {gender}
-                            {others}
-                            {order}
-                            <SearchBar name="searchBar" />
-                        </>
+                    {
+                        loading ?
+                            <Loading /> :
+                            <>
+                                {regions}
+                                {specialization}
+                                {gender}
+                                {others}
+                                {order}
+                                <SearchBar name="searchBar" />
+                                <Button className="filterButton" initialClass={"buttonInitial"} hoverClass={"buttonHover"} text={"Filter"} />
+                            </>
                     }
 
                 </>
@@ -162,6 +165,7 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
                                 {others}
                                 {order}
                                 <SearchBar name="searchBar" />
+                                <Button className="filterButton" initialClass={"buttonInitial"} hoverClass={"buttonHover"} text={"Filter"} />
                             </>
                     }
                 </>

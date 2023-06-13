@@ -4,8 +4,7 @@ import { CoachForm } from './CoachForm'
 import { Underliner } from '../Underliner/Underliner'
 import { ErrorModal } from '../ErrorModal'
 //FUNCTIONS//
-import fetchAgent from '../../utils/fetchAgent'
-import { getToken } from '../../utils/loginLogic'
+
 import { classListMaker } from '../../utils/classListMaker'
 //CONFIG//
 import { text } from '../../config/textSource'

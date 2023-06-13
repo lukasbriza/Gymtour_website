@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FilteredContentProps } from "./_types";
 import { useCoachFilterContext, useFitnessFilterContext } from "@hooks";
-import { Loading } from "@components";
+import { Loading, Card } from "@components";
 import clsx from "clsx";
 import { Coach, Fitness } from "@fetchers";
 
@@ -26,9 +26,24 @@ export const FilteredContent: FC<FilteredContentProps> = ({ type }) => {
 }
 
 const FitnessCards: FC<{ contentArray: Fitness[] }> = ({ contentArray }) => {
-    return (<>{contentArray.map((fitness) => { })}</>)
+    return (
+        <>
+            {
+                contentArray.map((fitness, i) => {
+                    return <Card  {...fitness} key={`${i}-fitness`} type="fitness" />
+                })
+            }
+        </>
+    )
 }
 
 const CoachCards: FC<{ contentArray: Coach[] }> = ({ contentArray }) => {
-    return (<>{contentArray.map((coach) => { })}</>)
+    return (
+        <>
+            {
+                contentArray.map((coach, i) => {
+                    return <Card {...coach} key={`${i}-coach`} type="coach" />
+                })
+            }
+        </>)
 }

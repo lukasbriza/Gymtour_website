@@ -4,7 +4,6 @@ import { FormModal } from '../components/FormModal'
 import { Button } from '../components/Button/Button'
 import { Underliner } from '../components/Underliner/Underliner'
 import { Footer } from '../components/Footer/Footer'
-import fetchAgent from '../utils/fetchAgent'
 import { classListMaker } from '../utils/classListMaker'
 import { text } from '../config/textSource'
 import register from '../assets/register.webp'
@@ -49,41 +48,9 @@ const EmailUpdate = () => {
         showModal({ loading: true, sucess: undefined, msg: undefined })
 
         //FETCH CALL//
-        const fetchResult = await fetchAgent.emailApprove({ token: _id })
-        console.log(fetchResult)
-        //HANDLE FETCH ERROR MAP ARRAY//
-        if (fetchResult.errorMap.length > 0) {
-            let msgText = fetchResult.errorMap.map((err, index: number) => {
-                const errorHtml = (
-                    <div className="modalErrorObj" key={index}>
-                        <p className="modalErrorHeader" key={index + "a"}>{err.Error?.code + "- " + err.Error?.name}</p>
-                        <p className="modalErrorContent" key={index + "b"}>{err.Error?.message}</p>
-                    </div>
-                )
-                return errorHtml;
-            })
-            showModal({ loading: false, sucess: false, msg: msgText })
-            showContent(<FailureComponent />)
-            return
-        }
-        //HANDLE SUCESS APPROVE//
-        if (fetchResult.data?.approved === true && fetchResult.data?.changeMade === true) {
-            showModal({ loading: false, sucess: true, msg: emailApproveSucess })
-            showContent(<SucessComponent />)
-            return
-        }
-        //HANDLE FAILED APPROVE//
-        if (fetchResult.data?.approved === false && fetchResult.data.changeMade === false) {
-            showModal({ loading: false, sucess: false, msg: emailApproveErrorHtml })
-            showContent(<FailureComponent />)
-            return
-        }
-        //HANDLE DUPLICIT TRY FOR APPROVE//
-        if (fetchResult.data?.approved === true && fetchResult.data.changeMade === false) {
-            showModal({ loading: false, sucess: true, msg: emailApprovedEarlierSucess })
-            showContent(<AlreadyApprovedComponent />)
-            return
-        }
+
+
+
     }
     //////////////////////////////////////////////////
     //EFFECTS//

@@ -1,5 +1,5 @@
-export * from "./SmallLogo";
-export * from "./SmallText";
+export * from "./SmallLogo/SmallLogo";
+export * from "./SmallText/SmallText";
 export * from "./LoginButton";
 export * from "./BigLogo/BigLogo";
 export * from "./FacebookLogo/FacebookLogo";
@@ -10,3 +10,6 @@ export * from "./Sucess/Sucess";
 export * from "./Circle/Circle";
 export * from "./Cross/Cross";
 export * from "./SearchIcon/SearchIcon";
+export * from "./Heart/Heart";
+export * from "./Topped/Topped";
+export * from "./Viewed/Viewed";

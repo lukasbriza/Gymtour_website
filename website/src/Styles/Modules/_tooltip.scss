@@ -1,0 +1,59 @@
+$trianglecolor: white;
+$width: 15px;
+$height: 10px;
+
+.tooltip {
+  display: initial;
+  opacity: 1;
+  position: fixed;
+  z-index: 100;
+  background: $trianglecolor;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+.tooltipTriangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: calc($width / 2) solid transparent;
+  border-top: $height solid $trianglecolor;
+  border-bottom: 0px;
+}
+
+.tooltipPosition-left {
+  .tooltipTriangle {
+    border: calc($width / 2) solid transparent;
+    border-right: 0px;
+    border-left: $height solid $trianglecolor;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 100%;
+  }
+}
+.tooltipPosition-top {
+  .tooltipTriangle {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.tooltipPosition-right {
+  .tooltipTriangle {
+    border: calc($width / 2) solid transparent;
+    border-right: $height solid $trianglecolor;
+    border-left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -$height;
+  }
+}
+.tooltipPosition-bottom {
+  .tooltipTriangle {
+    top: -$height;
+    border-top: 0px;
+    border-bottom: $height solid $trianglecolor;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

@@ -28,6 +28,7 @@ export const enTranslation: AppTranslationType = {
     businessConditions: "Obchodní podmínky",
     dataProcessing: "Zpracování údajů",
     emailUpdate: "Změna emailu",
+    detail: "Detail",
   },
 
   footer: {
@@ -77,6 +78,10 @@ export const enTranslation: AppTranslationType = {
         clear: "(Smazat)",
       },
     },
+    popUp: {
+      cantLikeHeader: "Nelze přidat lajk",
+      cantLikeText: "Přidávat lajky můžou jen přihlášení uživatelé.",
+    },
   },
 
   registerPage: {
@@ -99,4 +104,6 @@ export const enTranslation: AppTranslationType = {
     header1: "Trenéři",
     verticalText: "Gymtour",
   },
+
+  detail: {},
 };

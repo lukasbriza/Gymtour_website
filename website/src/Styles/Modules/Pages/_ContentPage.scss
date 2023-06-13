@@ -3,6 +3,8 @@
   display: block;
   height: 100%;
   background: rgb(29, 29, 29);
+  padding-left: 25px;
+  padding-right: 25px;
 
   display: grid;
   grid-template-areas:
@@ -32,6 +34,11 @@
   grid-area: content;
   position: relative;
   width: 100%;
+  padding-top: 25px;
+  padding-left: 4px;
+  padding-right: 4px;
+  z-index: -1;
 }
+
 .loadingFilteredContent {
 }

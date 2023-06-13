@@ -2,9 +2,7 @@ import { useState, useRef, useEffect, FC } from 'react'
 import { Route, Link, Routes, useNavigate } from 'react-router-dom'
 import { AddItem } from '../components/Dashboard/AddItem'
 import { UpdateItem } from '../components/Dashboard/UpdateItem'
-import { Settings } from '../components/Dashboard/Settings'
 import { Overview } from '../components/Dashboard/Overview'
-import { removeToken } from '../utils/loginLogic'
 import { text } from '../config/textSource'
 import { useAppContext, useUsercontext } from 'src/hooks/_index'
 import { hamburgerOff, hamburgerOn, menuShiftOff, menuShiftOn } from '@animations'
@@ -18,7 +16,7 @@ const Dashboard: FC = () => {
         { path: "", component: <Overview />, name: text.dahboard.Sidebar.routes[0].cz }, //summary účtu - přehled účtu
         { path: "/add", component: <AddItem />, name: text.dahboard.Sidebar.routes[1].cz }, //přidat fitness nebo coache
         { path: "/update", component: <UpdateItem />, name: text.dahboard.Sidebar.routes[2].cz }, // seznam všeho co uživatel má + proklik na update + možnost delete 
-        { path: "/settings", component: <Settings />, name: text.dahboard.Sidebar.routes[3].cz } //změna hesla, změna emailu kontaktního
+
     ]
 
     const sideBarRef = useRef(null)
@@ -33,9 +31,7 @@ const Dashboard: FC = () => {
     const logOut = () => {
         userContext?.fn.setLogged(false);
         userContext?.fn.setUserId("")
-        removeToken().then(() => {
-            navigate("/login")
-        })
+
     }
 
     useEffect(() => {

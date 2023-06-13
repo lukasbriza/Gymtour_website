@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Props } from '@lukasbriza/lbui-lib'
+import clsx from 'clsx'
+import React, { useState, FC } from 'react'
+import { useNavigate } from 'react-router'
+
 
 type ButtonProps = {
     onClick?: (e: React.BaseSyntheticEvent) => void,
@@ -9,79 +12,50 @@ type ButtonProps = {
     transitionClass?: string,
     path?: string,
     text: string,
-    disabled?: boolean
-}
+    disabled?: boolean,
+} & Props<HTMLButtonElement>
 
-const Button = ({ onClick, initialClass, hoverClass, transitionClass, modificationClass, text, disabled = false, ...props }: ButtonProps) => {
+export const Button: FC<ButtonProps> = (props) => {
+    const { onClick, initialClass, hoverClass, transitionClass, modificationClass, text, disabled = false, path, ...otherProps } = props
     const [isActive, setActive] = useState(false)
-    const [buttonClass, setClass] = useState<string>(initialClass)
+    const navigate = useNavigate()
 
-    function handleTouchStart() {
-        setActive(true)
+    const handleRedirect = () => {
+        if (path) {
+            navigate(path)
+        }
     }
-    function handleTouchEnd(e: React.BaseSyntheticEvent) {
+
+    const handleTouchStart = () => setActive(true)
+    const handleTouchEnd = (e: React.BaseSyntheticEvent) => {
+        handleRedirect()
         onClick?.(e)
         setActive(false)
     }
-    function handleMouseEnter() {
-        setActive(true)
-    }
-    function handleMouseLeave() {
-        setActive(false)
-    }
-    function handleClick(e: React.BaseSyntheticEvent) {
+    const handleMouseEnter = () => setActive(true)
+    const handleMouseLeave = () => setActive(false)
+    const handleClick = (e: React.BaseSyntheticEvent) => {
+        handleRedirect()
         onClick?.(e)
     }
 
-    useEffect(() => {
-        if (isActive === true) {
-            setClass(`${initialClass} ${hoverClass}`)
-        }
-        if (isActive === false) {
-            setClass(initialClass)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isActive])
+    return (
+        <button
+            onClick={handleClick}
+            className={clsx([modificationClass, "pageButton"])}
+            disabled={disabled}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
 
-    if (props.path !== undefined) {
-        return (
-            <Link
-                to={props.path}
-                onClick={handleClick}
-                className={`${modificationClass ? modificationClass : ''}`}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            {...otherProps}
+        >
+            <div
+                className={clsx([initialClass, isActive && hoverClass, transitionClass])}
             >
-                <div
-                    className={`${buttonClass} ${transitionClass ? transitionClass : ''}`}
-                >
-                    {text}
-                </div>
-            </Link>
-        )
-    } else {
-        return (
-            <button
-                onClick={handleClick}
-                className={`${modificationClass ? modificationClass : ''} pageButton`}
-                disabled={disabled}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-            >
-                <div
-                    className={`${buttonClass} ${transitionClass ? transitionClass : ''}`}
-                >
-                    {text}
-                </div>
-            </button>
-        )
-    }
+                {text}
+            </div>
+        </button>
+    )
 }
-
-export { Button }

@@ -1,5 +1,5 @@
 .bolt {
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
   color: $minorColor1;
   background: $bolt;
@@ -24,11 +24,31 @@
 .boltCrossWrapper {
   display: none;
   margin-top: 1px;
-
   position: relative;
   width: 0px;
   height: 0px;
 }
+
+.boltCrossWrapper::before {
+  content: "";
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.3s ease-in-out;
+}
+
+.boltCrossWrapper:hover::before {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  content: "";
+  background: rgba(255, 255, 255, 0.193);
+  transition: background 0.3s ease-in-out;
+  width: 20px;
+  height: 20px;
+}
+
 .boltCrossLine {
   position: absolute;
   width: 100%;

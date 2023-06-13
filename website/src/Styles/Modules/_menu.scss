@@ -4,6 +4,7 @@
   background: linear-gradient(180deg, rgba(0, 0, 0, 1) 21%, rgba(0, 0, 0, 0.24) 100%);
   position: fixed;
   top: 0px;
+  z-index: 1;
 }
 
 #hamburger-wrapper {
@@ -79,27 +80,6 @@
     stroke: $textContrastColor;
     stroke-width: 1px;
   }
-}
-
-.loginButton:hover {
-  .tooltip {
-    visibility: visible;
-  }
-}
-.tooltip {
-  visibility: hidden;
-  width: 50px;
-  color: $textContrastColor;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  position: absolute;
-  z-index: 1;
-  top: 65%;
-  font-size: 12px;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 #menuLayer {

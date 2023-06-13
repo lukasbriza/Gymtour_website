@@ -1,5 +1,5 @@
 import { useEffect, useState, FC } from 'react'
-import { Link, Route, Routes, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { gsap } from 'gsap'
 import { Layer } from '../../components/Layer'
 import { Underliner } from '../../components/Underliner/Underliner'
@@ -8,8 +8,7 @@ import { FormModal } from '../../components/FormModal'
 import { Footer } from '../../components/Footer/Footer'
 import { Button } from '../../components/Button/Button'
 import { text } from '../../config/textSource'
-import fetchAgent from '../../utils/fetchAgent'
-import { isLogged, saveToken } from '../../utils/loginLogic'
+
 import register from '@assets/register.webp'
 import { useAnimationContext, useUsercontext } from 'src/hooks/_index'
 import { smallLogoShow } from '@animations'
@@ -38,13 +37,7 @@ const Login: FC = () => {
     const location = useLocation()
 
     const checkLogged = async () => {
-        const logged = await isLogged()
-        if (logged?.logged === true) {
-            userContext?.fn.setLogged(true)
-            userContext?.fn.setUserId(logged.userId)
-            //REDIRECT TO DASHBOARD
-            redirectToDashboard()
-        }
+
     }
     const handleModalDefault = () => {
         showModal({ loading: false, sucess: undefined, msg: undefined })
@@ -75,41 +68,7 @@ const Login: FC = () => {
                 password.canSubmit === true
             ) {
                 //SEND RQ TO SERVER
-                const fetchResult: any = await fetchAgent.loginUser({ username: name.value, password: password.value })
-                //SUCESS SCENARIO
-                if (fetchResult.errorMap.length === 0 && fetchResult.data !== null) {
-                    if (fetchResult.data.authenticated === true) {
-                        //CHANGE STATE IN APP
-                        userContext?.fn.setLogged(true)
-                        //SAVE TOKEN TO BROWSER
-                        await saveToken(fetchResult.data.token)
-                        //SAVE USER ID TO CONTEXT
-                        userContext?.fn.setUserId(fetchResult.data.userId)
-                        //MODAL - SUCESS
-                        setModalBtnText(text.login.modal.buttonSucess.cz)
-                        showModal({ loading: false, sucess: true, msg: sucessHtml })
-                    }
-                    if (fetchResult.data.authenticated === false) {
-                        userContext?.fn.setLogged(false)
-                        //MODAL - FAIL
-                        setModalBtnText(text.login.modal.buttonFail.cz)
-                        showModal({ loading: false, sucess: false, msg: failHtml })
-                    }
 
-                } else {
-                    //HANDLE UNEXPECTED SCENARIOS
-                    let msgText = fetchResult.errorMap.map((obj: errorMapObj, index: number) => {
-                        const errorHtml = (
-                            <div className="modalErrorObj" key={index}>
-                                <p className="modalErrorHeader" key={index + "a"}>{obj.Error.code + "- " + obj.Error.name}</p>
-                                <p className="modalErrorContent" key={index + "b"}>{obj.Error.message}</p>
-                            </div>
-                        )
-                        return errorHtml;
-                    })
-                    setModalBtnText(text.login.modal.buttonFail.cz)
-                    showModal({ loading: false, sucess: false, msg: msgText })
-                }
             } else {
                 //NAME AND PASSWORD DONT MET CONDITIONS
                 setModalBtnText(text.login.modal.buttonFail.cz)

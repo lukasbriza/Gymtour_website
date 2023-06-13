@@ -28,6 +28,7 @@ images
   .get(getImageMW, async (req: Request, res: Response) => {
     const request = req as unknown as GetImageReqest;
     const result = await getImage(request.query);
+    console.log(result.data);
 
     if (result.errorMap.length > 0) {
       return res.status(getStatus(result.errorMap)).send(result);
@@ -35,6 +36,7 @@ images
 
     const bucket = getBucket();
     const stream: GridFSBucketReadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(request.query.id));
+    res.setHeader("Content-Type", result.data.contentType);
     stream.pipe(res);
     stream.on("error", (err) => {
       const error = new APIError(`${errorMessages.getImage.pipeError} ${err.message}`);

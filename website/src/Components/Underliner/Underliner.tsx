@@ -1,10 +1,7 @@
-import { Props } from "@lukasbriza/lbui-lib";
 import { FC } from "react";
+import { UnderlinerProps } from "./_types";
 
-type UnderlinerProps = {
-    width: string;
-    color?: string;
-} & Props<HTMLDivElement>
+
 export const Underliner: FC<UnderlinerProps> = (props) => {
     const { width, color, id, ...otherProps } = props
 

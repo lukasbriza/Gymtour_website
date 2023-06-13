@@ -6,5 +6,5 @@ export type BoltProps = {
   code?: string;
   type?: FilterVariants;
   fieldName?: string;
-  remove?: (code: string, fieldName: string) => void;
+  id?: string;
 };
