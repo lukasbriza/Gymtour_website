@@ -1,0 +1,65 @@
+.contentHeader {
+  grid-area: contentHeader;
+  padding-top: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.bigLogoContentHeader {
+  position: relative;
+  opacity: 0.3;
+  left: 50%;
+  transform: translateX(-50%);
+
+  path {
+    fill: $minorColor1;
+  }
+}
+
+.contentHeaderWrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  h1 {
+    $line: 65px;
+    margin: 0px;
+    opacity: 0;
+    text-transform: uppercase;
+    font-size: $line;
+    line-height: $line;
+    color: $minorColor1;
+    position: relative;
+    transition: all 0.7s ease-in-out;
+    cursor: pointer;
+  }
+
+  h1:first-child {
+    width: fit-content;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+  }
+
+  h1:last-child {
+    width: fit-content;
+    left: 55%;
+    top: 38%;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    color: rgba(255, 255, 255, 0.306);
+  }
+}
+
+.contentHeaderWrapper:hover {
+  h1:first-child {
+    top: 48%;
+    left: 40%;
+  }
+  h1:last-child {
+    top: 40%;
+    left: 60%;
+  }
+}

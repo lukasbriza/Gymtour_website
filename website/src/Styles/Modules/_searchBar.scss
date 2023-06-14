@@ -1,0 +1,61 @@
+.searchBar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: "input";
+  height: min-content;
+  position: relative;
+  grid-area: input;
+  z-index: 1;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+
+  input {
+    appearance: none;
+    border: none;
+    height: 37px;
+    min-width: 100px;
+    background: rgb(57, 57, 57);
+    color: white;
+    padding-left: 15px;
+    padding-right: 30px;
+    border-radius: 5px;
+  }
+}
+
+.searchBarFilled {
+  input {
+    background: rgb(51, 51, 51);
+    border: 1px inset black;
+  }
+}
+
+.searchBarActive {
+  input {
+    border: 1px inset rgb(0, 0, 0);
+    border-right: 0px;
+  }
+}
+
+.searchIconWrapper {
+  grid-area: input;
+  cursor: pointer;
+  position: absolute;
+  margin-top: 0px;
+  height: 37px;
+  width: 33px;
+  right: 0px;
+  background: rgb(24, 24, 24);
+  transition: background 0.2s ease-in;
+}
+.searchIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+}
+
+.searchIconWrapper:hover {
+  background: rgb(5, 5, 5);
+}

@@ -1,4 +1,4 @@
-button[type="submit"] {
+.submitButton {
   width: 100%;
   padding: 20px 0px;
   margin-top: 20px;
@@ -12,7 +12,7 @@ button[type="submit"] {
   font-size: 18px;
 }
 
-button[type="submit"]:hover {
+.submitButton:hover {
   background: rgb(10, 21, 88);
 
   transition-property: background;
@@ -20,7 +20,7 @@ button[type="submit"]:hover {
   transition-timing-function: ease-out;
 }
 
-button[type="submit"]:active {
+.submitButton:active {
   background: $submitButton;
   transition-property: background;
   transition-duration: 0.1s;

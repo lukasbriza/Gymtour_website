@@ -24,13 +24,19 @@
 @import "../Framework/mediaQueries";
 @import "../Framework/Layout/layout";
 @import "../Framework/modificationClasses";
-@import "../Framework/PageTranstition";
 
 /*MODULES - Re-usable site elements.*/
 
 @import "../Modules/Pages/Home";
 @import "../Modules/Pages/Crossroad";
+@import "../Modules/Pages/ContentPage";
 @import "../Modules/Pages/NotFound";
+@import "../Modules//Pages/Login";
+@import "../Modules/Pages/EmailUpdate";
+@import "../Modules/Pages/Dashboard/Dashboard";
+@import "../Modules/Pages/Dashboard/Overview";
+@import "../Modules/Pages/Dashboard/Settings";
+@import "../Modules/Pages/Dashboard/AddItem";
 
 @import "../Modules/menu";
 @import "../Modules/logo";
@@ -38,11 +44,22 @@
 @import "../Modules/layer";
 @import "../Modules/footer";
 @import "../Modules/underliner";
-@import "../Modules/formInput";
 @import "../Modules/submitButton";
 @import "../Modules/modal";
 @import "../Modules/loading";
 @import "../Modules/filterIcon";
-@import "../Modules/Pages/ContentPage";
-@import "../Modules/contetFilter";
 @import "../Modules/searchItem";
+@import "../Modules/errorModal";
+@import "../Modules/priceLevelSection";
+@import "../Modules/checkBox";
+@import "../Modules/stringInput";
+@import "../Modules/contentHeader";
+@import "../Modules/bullet";
+@import "../Modules/multipleSelect";
+@import "../Modules/searchBar";
+@import "../Modules/filter";
+@import "../Modules/select";
+@import "../Modules/bolt";
+@import "../Modules/card";
+@import "../Modules/popUp";
+@import "../Modules/tooltip";

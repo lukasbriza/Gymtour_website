@@ -88,6 +88,8 @@
   @include mq($from: tablet) {
     #registerForm {
       display: grid;
+      column-gap: 15px;
+      row-gap: 10px;
       grid-template-rows: 1fr 1fr min-content 1fr;
       grid-template-columns: 1fr 1fr;
       grid-template-areas:
@@ -98,35 +100,42 @@
     }
     width: 85%;
     max-width: 900px;
+
+    .input1 {
+      grid-area: input1;
+    }
+    .input2 {
+      grid-area: input2;
+    }
+    .input3 {
+      grid-area: input3;
+    }
   }
 }
 
-.inputWrapper:nth-child(1) {
-  @include mq($from: tablet) {
-    padding-right: 10px;
-    grid-area: input1;
+#registerForm {
+  .inputWrapper:nth-child(1) {
+    @include mq($from: tablet) {
+      padding-right: 10px;
+      grid-area: input1;
+    }
   }
-}
-.inputWrapper:nth-child(2) {
-  @include mq($from: tablet) {
-    padding-left: 10px;
-    grid-area: input2;
+  .inputWrapper:nth-child(2) {
+    @include mq($from: tablet) {
+      padding-left: 10px;
+      grid-area: input2;
+    }
   }
-}
-.inputWrapper:nth-child(3) {
-  @include mq($from: tablet) {
-    grid-area: input3;
+  .inputWrapper:nth-child(3) {
+    @include mq($from: tablet) {
+      grid-area: input3;
+    }
   }
 }
 
 .formTerms {
   grid-area: formTerms;
-  font-size: 12px;
-  div {
-    display: flex;
-    align-items: center;
-    height: 18px;
-  }
+
   @include mq($from: tablet) {
     width: 320px;
     font-size: 15px;

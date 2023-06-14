@@ -1,5 +1,16 @@
 HOC withLoading, HOC withRouter 
 
-1) refacror cross animaiton
-2) make filter querry to change dinamically
-3) modal on error in fetch call
+
+1) refacror cross animation
+2) logo in dashboard menu
+3) dashboard menu => zobrazená stránka zvíraznit
+4) admin redirect from dashboard - new page external > new app??
+5) scroll bar dat absolute aby při přechodu neovlivňoval
+6) menu animace - played...
+7) add coach a fitness v dashboard
+8) upravit zaznam
+9) footer repair + animace
+10) stránky - o nás, spolupráce, kontakt
+11) stránky - detail coach/fitness
+12) log system
+13) spustit script v určitý čas - naplánovat spuštění

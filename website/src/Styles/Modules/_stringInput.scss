@@ -1,0 +1,71 @@
+.inputWrapper {
+  width: 100%;
+}
+
+.stringInputHelperRoot {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.stringInputRoot {
+  width: inherit;
+  input {
+    caret-color: white;
+    color: white;
+    cursor: pointer;
+    height: 60px;
+    width: inherit;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.253);
+  }
+}
+
+.stringInputRoot:hover {
+  label {
+    color: white;
+  }
+
+  .stringInputLabelError {
+    color: red;
+  }
+}
+
+.stringInputRootFocused {
+  label {
+    background: rgba(123, 123, 123, 0.128);
+  }
+  input {
+    outline-color: rgba(255, 255, 255, 0.5) !important;
+  }
+}
+
+.stringInputLabel {
+  cursor: pointer;
+  color: white;
+  background: rgba(255, 255, 255, 0);
+}
+
+.stringInputHelper {
+  font-size: 0.8em;
+  height: 23px;
+}
+
+.stringFocusRootError {
+  input {
+    outline-color: red !important;
+    outline-width: 1px !important;
+  }
+  label {
+    font-size: 14px !important;
+    color: white !important;
+  }
+}
+
+.stringInputLabelError {
+  color: red;
+  font-size: 16px;
+}
+
+.stringInputError {
+  border: 1px solid red;
+}

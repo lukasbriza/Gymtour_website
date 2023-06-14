@@ -2,8 +2,27 @@
 $mainColor: black;
 $minorColor1: white;
 $minorColor2: #707070;
+$dashboardColor: rgb(240, 240, 240);
+$textContrastColor: white;
+$error: rgb(233, 91, 106);
+
+//BULLETS CHECKBOXES BOLTS
+$bulletActive: rgb(44, 86, 171);
+$bulletActiveHover: rgb(53, 99, 185);
+$checkBoxBorder: rgb(186, 186, 186);
+$checkBackground: rgb(60, 97, 164);
+$bolt: #111111;
+
+$modalBtn: rgb(38, 62, 105);
+$modalBtnHover: rgb(10, 21, 88);
+
+//BUTTONS
 $buttonColor: #292727;
 $submitButton: rgb(38, 62, 105);
+$buttonDisabled: rgb(83, 83, 83);
+$buttonTextColor: rgb(168, 168, 168);
+$buttonBackground: rgb(38, 62, 105);
+$buttonBackgroundHover: rgb(10, 21, 88);
 
 //LAYOUT FONTS//
 $primaryFont: "Open Sans", sans-serif;

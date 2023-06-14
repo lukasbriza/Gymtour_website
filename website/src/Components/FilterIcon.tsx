@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { gsap, Power2, Power1, Power3 } from 'gsap'
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { classListMaker } from '../utils/classListMaker'
+import { useAnimationContext } from 'src/hooks/_index'
 
-const FilterIcon = React.memo((props: { onClick: () => void }) => {
+const FilterIcon = React.memo((props: { onClick: () => void, crossed: boolean | undefined }) => {
     //////////////////////////////////////////////////
     //STATE//
     const [active, setActive] = useState(false)
@@ -16,6 +16,8 @@ const FilterIcon = React.memo((props: { onClick: () => void }) => {
     const ref1 = useRef<HTMLDivElement>(null)
     const ref2 = useRef<HTMLDivElement>(null)
     const ref3 = useRef<HTMLDivElement>(null)
+
+    const anContext = useAnimationContext()
     //////////////////////////////////////////////////
     //ANIMATIONS//
     const hoverInAnimation = () => {
@@ -144,6 +146,13 @@ const FilterIcon = React.memo((props: { onClick: () => void }) => {
             return
         }
     }
+
+    useEffect(() => {
+        if (props.crossed === true) {
+            clickHandler(!active)
+            anContext?.fn.setContentPageCross(false)
+        }
+    }, [props.crossed, active, anContext?.fn])
     //////////////////////////////////////////////////
     //SETUP//
     return (

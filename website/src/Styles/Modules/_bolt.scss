@@ -1,0 +1,70 @@
+.bolt {
+  opacity: 1;
+  cursor: pointer;
+  color: $minorColor1;
+  background: $bolt;
+  width: min-content;
+  white-space: nowrap;
+  padding: 10px 15px 10px 15px;
+  border-radius: 20px;
+
+  transition: background 0.2s ease-in-out, width 0.2s ease-in-out;
+  transition-delay: 450ms;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.bolt:hover {
+  background: $mainColor;
+  transition: background 0.2s ease-in-out;
+}
+
+.boltCrossWrapper {
+  display: none;
+  margin-top: 1px;
+  position: relative;
+  width: 0px;
+  height: 0px;
+}
+
+.boltCrossWrapper::before {
+  content: "";
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.3s ease-in-out;
+}
+
+.boltCrossWrapper:hover::before {
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  content: "";
+  background: rgba(255, 255, 255, 0.193);
+  transition: background 0.3s ease-in-out;
+  width: 20px;
+  height: 20px;
+}
+
+.boltCrossLine {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: $minorColor1;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.boltLine1 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+  border-radius: 2px;
+}
+.boltLine2 {
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 2px;
+  width: 50%;
+}

@@ -1,36 +1,26 @@
-import { useEffect, useContext } from 'react'
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
+import { useEffect, FC } from 'react'
 import { text } from '../config/textSource'
-//CONTEXT//
-import { AppContext, AnimationContext } from "../App/Context"
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { useAnimationContext, useAppContext } from 'src/hooks/_index'
+import { smallLogoShow } from '@animations'
+import clsx from 'clsx'
 
-const CoOp = () => {
+const CoOp: FC = () => {
     console.log("loaded")
-    //////////////////////////////////////////////////
-    //STATE//
 
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const appContext = useContext(AppContext);
-    const anContext = useContext(AnimationContext);
+    const appContext = useAppContext()
+    const anContext = useAnimationContext()
 
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
         anContext?.fn.setBigLogoPlayed(true)
-        animationStore.menu.logo.logoIn();
-        setTimeout(() => {
-            animationStore.menu.logo.logoTextIn();
-        }, 200);
+        smallLogoShow()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="CoOp" className={config.basePageClassList}>
+        <div id="CoOp" className={clsx(["relative", "stretch", "minorColor2"])}>
 
         </div>
     )

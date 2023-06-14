@@ -1,13 +1,10 @@
 .menu {
   height: 60px;
-  background-color: rgb(0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 1) 21%,
-    rgba(0, 0, 0, 0.24) 100%
-  );
+  background-color: $mainColor;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 21%, rgba(0, 0, 0, 0.24) 100%);
   position: fixed;
   top: 0px;
+  z-index: 1;
 }
 
 #hamburger-wrapper {
@@ -57,13 +54,13 @@
   text-decoration: none;
   align-self: center;
   justify-self: center;
-  color: white;
+  color: $textContrastColor;
   height: 100%;
   align-items: center;
 
   p {
     text-decoration: none;
-    color: white;
+    color: $textContrastColor;
     margin-top: auto;
     margin-bottom: auto;
   }
@@ -71,6 +68,18 @@
 
 .offerItem:hover {
   background-color: rgba(114, 114, 114, 0.733);
+}
+
+.loginButton {
+  svg {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  svg > path {
+    stroke: $textContrastColor;
+    stroke-width: 1px;
+  }
 }
 
 #menuLayer {

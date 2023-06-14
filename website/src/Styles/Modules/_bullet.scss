@@ -1,0 +1,58 @@
+.bulletWrapper {
+  border: 1px solid $mainColor;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  color: $textContrastColor;
+  border: none;
+  border-radius: 8px;
+  margin: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease-out;
+
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .bulletText {
+    padding: 10px 15px;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+      rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+      rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    background: rgb(87, 87, 87);
+    transition: background 0.25s ease-out;
+  }
+
+  .bulletText::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.bulletWrapper:hover {
+  transform: translate(-1px, -1px);
+  .bulletText {
+    background: rgb(77, 76, 76);
+  }
+}
+
+.bulletActiweWrapper {
+  .bulletText {
+    background: $bulletActive;
+  }
+}
+
+.bulletActiweWrapper:hover {
+  .bulletText {
+    background: $bulletActiveHover;
+  }
+}

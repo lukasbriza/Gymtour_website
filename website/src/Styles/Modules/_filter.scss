@@ -1,0 +1,183 @@
+.filterWrapper {
+  grid-area: filter;
+}
+
+.filterWrapper-fitness {
+  display: grid;
+  position: relative;
+  column-gap: 5px;
+  row-gap: 5px;
+  max-width: 1200px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "general general others others search search"
+    "regions regions equipment equipment order order"
+    "filter filter filter filter filter filter";
+  align-items: center;
+
+  @include mq($from: 1200px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @include mq($until: 700px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "order search"
+      "general others"
+      "equipment regions"
+      "filter filter";
+  }
+
+  @include mq($until: 500px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "search"
+      "order"
+      "general"
+      "others"
+      "equipment"
+      "regions"
+      "filter";
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  @include mq($from: 1200px) {
+    grid-template-areas:
+      "general others equipment regions order search"
+      "filter filter filter filter filter filter";
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 300px;
+  }
+
+  .selectAllWrapper {
+    width: 100%;
+
+    .selectWrapper {
+      width: inherit;
+    }
+    .optionsWrapper {
+      width: inherit;
+    }
+  }
+}
+
+.filterActiveBoltsSection {
+  grid-area: filterBolts;
+  position: relative;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  padding-bottom: 10px;
+  max-width: 1200px;
+  min-height: 50px;
+  flex-wrap: wrap;
+
+  @include mq($from: 1200px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.regions {
+  position: relative;
+  margin: 5px;
+  grid-area: regions;
+}
+
+.general {
+  position: relative;
+  margin: 5px;
+  grid-area: general;
+}
+
+.equipment {
+  position: relative;
+  margin: 5px;
+  grid-area: equipment;
+}
+
+.others {
+  position: relative;
+  margin: 5px;
+  grid-area: others;
+}
+
+.searchBar {
+  position: relative;
+  margin: 5px;
+  grid-area: search;
+}
+
+.order {
+  position: relative;
+  margin: 5px;
+  grid-area: order;
+}
+
+.specialization {
+  position: relative;
+  margin: 5px;
+  grid-area: specialization;
+}
+
+.gender {
+  position: relative;
+  margin: 5px;
+  grid-area: gender;
+  display: flex;
+
+  .bulletWrapper {
+    width: 100%;
+
+    .bulletText {
+      text-align: center;
+    }
+  }
+  .bulletWrapper:first-of-type {
+    margin-left: 0px;
+  }
+  .bulletWrapper:last-of-type {
+    margin-right: 0px;
+  }
+}
+
+.filterWrapper-coach {
+  display: grid;
+  position: relative;
+  column-gap: 5px;
+  row-gap: 5px;
+  max-width: 1200px;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "regions order  search"
+    "gender  specialization others"
+    ". filter .";
+
+  @include mq($from: 1200px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @include mq($until: 700px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "search search"
+      "gender gender"
+      "order regions"
+      "specialization others"
+      "filter filter";
+  }
+
+  .selectAllWrapper {
+    width: 100%;
+
+    .selectWrapper {
+      width: inherit;
+    }
+    .optionsWrapper {
+      width: inherit;
+    }
+  }
+}

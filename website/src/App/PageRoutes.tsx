@@ -1,49 +1,28 @@
-import { useEffect, useContext, Suspense } from 'react'
-import { Switch, Route, useLocation } from 'react-router-dom'
-import { Loading } from "../Components/Loading"
-//TRANSITION//
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-//CONFIG//
-import { config } from '../config/mainConfiguration'
-//CONTEXT//
-import { AppContext } from './Context'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { routes } from '../config/mainConfiguration'
+import { FC } from 'react'
+import { routeArrayType, routeType } from './_types'
 
 
 
-const PageRoutes = () => {
-
-    const appContext = useContext(AppContext)
+export const PageRoutes: FC = () => {
     const location = useLocation()
-
-
-    useEffect(() => {
-        appContext?.fn.setActualLocation(location.pathname)
-    }, [appContext?.fn, location])
-
+    const routeArr: routeArrayType = []
+    for (const route in routes) {
+        routeArr.push(route as unknown as routeType)
+    }
     return (
-        <TransitionGroup
-            component={null}
-        >
-            <CSSTransition
-                timeout={config.transitionTimeout}
-                key={location.key}
-                classNames={"contextclasses"}
-            >
-                <Suspense fallback={<Loading />}>
-                    <Switch location={location}>
-                        <Route exact path={config.routes.mainPage.path} component={config.routes.mainPage.component} />
-                        <Route path={config.routes.crossroad.path} component={config.routes.crossroad.component} />
-                        <Route path={config.routes.fitness.path} component={config.routes.fitness.component} />
-                        <Route path={config.routes.coach.path} component={config.routes.coach.component} />
-                        <Route path={config.routes.businessConditions.path} component={config.routes.businessConditions.component} />
-                        <Route path={config.routes.dataProcessing.path} component={config.routes.dataProcessing.component} />
-                        <Route path={config.routes.notFound.path} component={config.routes.notFound.component} />
-                    </Switch>
-                </Suspense>
-
-            </CSSTransition>
-        </TransitionGroup>
+        <Routes location={location}>
+            <Route path={routes.mainPage.path} element={<routes.mainPage.component />} />
+            <Route path={routes.crossroad.path} element={<routes.crossroad.component />} />
+            <Route path={routes.fitness.path} element={<routes.fitness.component />} />
+            <Route path={routes.coach.path} element={<routes.coach.component />} />
+            <Route path={routes.login.path} element={<routes.login.component />} />
+            <Route path={routes.businessConditions.path} element={<routes.businessConditions.component />} />
+            <Route path={routes.dataProcessing.path} element={<routes.dataProcessing.component />} />
+            <Route path={routes.emailUpdate.path} element={<routes.emailUpdate.component />} />
+            <Route path={routes.detail.path} element={<routes.detail.component />} />
+            <Route path={routes.notFound.path} element={<routes.notFound.component />} />
+        </Routes>
     )
 }
-
-export { PageRoutes }

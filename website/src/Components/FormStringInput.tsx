@@ -15,7 +15,7 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
     const emailRegexp = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}$/gi
     //////////////////////////////////////////////////
     //FUNCTIONS//
-    const verification = (e: React.BaseSyntheticEvent) => {
+    const verification = (e: any) => {
         let value = e.target.value
         let result = globalRegExp.test(value)
         let emailResult = emailRegexp.test(value)
@@ -23,26 +23,29 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
         if (props.minLength !== undefined && value.length < props.minLength && value.length > 0) {
             setCorrectValue(false)
             setShowError(true)
+            onChange({ canSubmit: false, value: value, name: props.name })
             return
         } else if (props.minLength !== undefined && value.length === 0) {
             setShowError(false)
             setStyle(undefined)
+            onChange({ canSubmit: false, value: value, name: props.name })
         }
 
         //email type?
         if (type === "email" && emailResult === true) {
             setShowError(false)
             setCorrectValue(true)
-            onChange!({ canSubmit: true, value: value, name: props.name })
+            onChange({ canSubmit: true, value: value, name: props.name })
             return
         } else if (type === "email" && emailResult === false) {
             if (value.length === 0) {
                 setShowError(false)
+                onChange({ canSubmit: false, value: value, name: props.name })
                 return
             }
             setShowError(true)
             setCorrectValue(false)
-            onChange!({ canSubmit: false, value: value, name: props.name })
+            onChange({ canSubmit: false, value: value, name: props.name })
             return
         }
 
@@ -51,16 +54,16 @@ const FormStringInput = ({ formId, type, errorMessage, errorStyle, sucessStyle, 
             if (result === false) {
                 setShowError(false)
                 setCorrectValue(true)
-                onChange!({ canSubmit: true, value: value, name: props.name })
+                onChange({ canSubmit: true, value: value, name: props.name })
                 return
             } else {
                 setShowError(true)
                 setCorrectValue(false)
-                onChange!({ canSubmit: false, value: value, name: props.name })
+                onChange({ canSubmit: false, value: value, name: props.name })
                 return
             }
         } else {
-            onChange!({ canSubmit: true, value: value, name: props.name })
+            onChange({ canSubmit: true, value: value, name: props.name })
             setCorrectValue(true)
             setShowError(false)
             return

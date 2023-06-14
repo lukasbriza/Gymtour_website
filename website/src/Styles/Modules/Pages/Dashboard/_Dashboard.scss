@@ -1,0 +1,75 @@
+.sideBar {
+  background: $mainColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  height: 100%;
+  width: 0%;
+}
+
+.logoutButton {
+  border-color: none;
+  border: none;
+  cursor: pointer;
+}
+.sideBarItem {
+  //default state
+  opacity: 0;
+  display: none;
+
+  position: relative;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  font-weight: 600;
+  color: $minorColor1;
+  border-bottom: 1px solid $minorColor2;
+  background-color: transparent;
+
+  transition-property: background-color;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+}
+
+.sideBarItem:nth-child(2) {
+  border-top: 1px solid $minorColor2;
+  margin-top: 60px;
+}
+.sideBarItem:hover {
+  background-color: rgb(83, 83, 83);
+}
+.sideBarItem:active {
+  background-color: transparent;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}
+.sideMenuTrigger {
+  position: absolute;
+  display: grid;
+  align-items: center;
+  grid-template-rows: 10px 10px 10px;
+  right: -70px;
+  top: 10px;
+
+  background-color: $minorColor1;
+  padding: 13px;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  .line {
+    position: relative;
+
+    height: 5px;
+    width: 30px;
+    border-radius: 5px;
+    background-color: $mainColor;
+  }
+}
