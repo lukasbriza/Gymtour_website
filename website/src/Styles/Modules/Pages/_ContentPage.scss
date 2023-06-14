@@ -1,37 +1,44 @@
 .contentPage {
+  position: relative;
   display: block;
   height: 100%;
+  background: rgb(29, 29, 29);
+  padding-left: 25px;
+  padding-right: 25px;
+
+  display: grid;
+  grid-template-areas:
+    "contentHeader"
+    "filterBolts"
+    "filter"
+    "content";
+  grid-template-rows: min-content min-content min-content 1fr;
+  grid-template-columns: 1fr;
 }
 
-.headerSection {
-  border-bottom: 1px solid grey;
-
-  h1 {
-    cursor: default;
-    text-transform: uppercase;
-  }
-
-  a {
-    color: black;
-    font-weight: 900;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
+.verticalText {
+  z-index: -1;
+  position: fixed;
+  color: rgba(253, 246, 246, 0.057);
+  text-transform: uppercase;
+  transform: rotate(90deg) translateY(0px);
+  overflow: hidden;
+  font-weight: 900;
+  font-size: 200px;
+  top: 790px;
+  left: -460px;
+  cursor: default;
 }
 
-.searchContentWrapper {
+.filteredContent {
+  grid-area: content;
+  position: relative;
   width: 100%;
-  padding-top: 150px;
-  padding-bottom: 15px;
-  z-index: -2;
-}
-.searchContent {
+  padding-top: 25px;
+  padding-left: 4px;
+  padding-right: 4px;
+  z-index: -1;
 }
 
-.contentPageButton {
-  left: 50%;
-  transform: translateX(-50%);
+.loadingFilteredContent {
 }

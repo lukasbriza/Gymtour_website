@@ -1,18 +1,17 @@
 .loadingWrapper {
   position: relative;
-  height: 100%;
-  width: 100%;
-  background: rgb(17, 17, 17);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
-.loadingCircle {
-  $size: 2vw;
-  width: $size;
-  height: $size;
-  margin: 5px;
-  border-radius: 50%;
+.loadingLine {
+  position: relative;
+  bottom: 0px;
   background: $minorColor1;
+  margin-left: 1px;
+  width: 3px;
+  height: 2px;
 }

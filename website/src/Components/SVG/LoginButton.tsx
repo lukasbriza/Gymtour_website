@@ -1,6 +1,6 @@
-import { SVGProps } from "react"
+import { FC, SVGProps } from "react"
 
-const LoginButton = (props: SVGProps<SVGSVGElement>) => (
+const LoginButton:FC = (props: SVGProps<SVGSVGElement>) => (
     <svg
         width={24}
         height={24}

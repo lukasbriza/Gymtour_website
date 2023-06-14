@@ -1,7 +1,7 @@
 /* eslint-disable no-loop-func */
 import React, { useEffect, useState, FC, CSSProperties, useCallback } from 'react'
 //FUNCTIONS//
-import { classListMaker } from '../../../Functions/classListMaker'
+import { classListMaker } from '../../../utils/classListMaker'
 //TEXTS//
 import { text } from '../../../config/textSource'
 

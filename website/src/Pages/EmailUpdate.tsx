@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Layer } from '../Components/Layer'
-import { FormModal } from '../Components/FormModal'
-import { Button } from '../Components/Button'
-import { Underliner } from '../Components/Underliner'
-import { useHistory } from "react-router-dom"
-import { Footer } from '../Components/Footer'
-//FUNCTIONS//
-import fetchAgent from '../Functions/fetchAgent'
-import { classListMaker } from '../Functions/classListMaker'
-//CONFIG//
+import { Layer } from '../components/Layer'
+import { FormModal } from '../components/FormModal'
+import { Button } from '../components/Button/Button'
+import { Underliner } from '../components/Underliner/Underliner'
+import { Footer } from '../components/Footer/Footer'
+import { classListMaker } from '../utils/classListMaker'
 import { text } from '../config/textSource'
-import { animationStore } from '../config/mainConfiguration'
-//IMAGES//
-import register from '../Images/register.webp'
+import register from '../assets/register.webp'
+import { emailUpdateShow } from '@animations'
+import { useNavigate } from 'react-router'
 
 const EmailUpdate = () => {
     //////////////////////////////////////////////////
@@ -46,48 +42,15 @@ const EmailUpdate = () => {
             <p className="modalErrorContent">{text.emailUpdate.modal.approveError.text.cz}</p>
         </div>
     )
-    //////////////////////////////////////////////////
-    //FUNCTIONS//
+
     const emailApproval = async (_id: string) => {
         //START LOADING ANIMATION//
         showModal({ loading: true, sucess: undefined, msg: undefined })
 
         //FETCH CALL//
-        const fetchResult = await fetchAgent.emailApprove({ token: _id })
-        console.log(fetchResult)
-        //HANDLE FETCH ERROR MAP ARRAY//
-        if (fetchResult.errorMap.length > 0) {
-            let msgText = fetchResult.errorMap.map((err, index: number) => {
-                const errorHtml = (
-                    <div className="modalErrorObj" key={index}>
-                        <p className="modalErrorHeader" key={index + "a"}>{err.Error?.code + "- " + err.Error?.name}</p>
-                        <p className="modalErrorContent" key={index + "b"}>{err.Error?.message}</p>
-                    </div>
-                )
-                return errorHtml;
-            })
-            showModal({ loading: false, sucess: false, msg: msgText })
-            showContent(<FailureComponent />)
-            return
-        }
-        //HANDLE SUCESS APPROVE//
-        if (fetchResult.data?.approved === true && fetchResult.data?.changeMade === true) {
-            showModal({ loading: false, sucess: true, msg: emailApproveSucess })
-            showContent(<SucessComponent />)
-            return
-        }
-        //HANDLE FAILED APPROVE//
-        if (fetchResult.data?.approved === false && fetchResult.data.changeMade === false) {
-            showModal({ loading: false, sucess: false, msg: emailApproveErrorHtml })
-            showContent(<FailureComponent />)
-            return
-        }
-        //HANDLE DUPLICIT TRY FOR APPROVE//
-        if (fetchResult.data?.approved === true && fetchResult.data.changeMade === false) {
-            showModal({ loading: false, sucess: true, msg: emailApprovedEarlierSucess })
-            showContent(<AlreadyApprovedComponent />)
-            return
-        }
+
+
+
     }
     //////////////////////////////////////////////////
     //EFFECTS//
@@ -104,11 +67,10 @@ const EmailUpdate = () => {
 
     useEffect(() => {
         if (effect === true) {
-            animationStore.emailUpdate.content.show(".emailUpdateWrapper")
+            emailUpdateShow()
         }
     }, [effect])
-    //////////////////////////////////////////////////
-    //SETUP//
+
     return (
         <>
             <section
@@ -135,7 +97,7 @@ const EmailUpdate = () => {
 }
 
 function SucessComponent() {
-    const history = useHistory()
+    const navigate = useNavigate()
     return (
         <div className="emailUpdateWrapper stretchX stretchY">
             <div className="headerWrapper">
@@ -147,7 +109,7 @@ function SucessComponent() {
                 <br />{text.emailUpdate.sucessComponent.content.pt2.cz}
             </p>
             <Button
-                onClick={() => { history.push("/") }}
+                onClick={() => { navigate("/") }}
                 initialClass={"buttonInitial"}
                 modificationClass={"emailUpdateBtnModification"}
                 hoverClass={"emailUpdateBtnHover"}
@@ -158,7 +120,7 @@ function SucessComponent() {
 }
 
 function FailureComponent() {
-    const history = useHistory()
+    const navigate = useNavigate()
     return (
         <div className="emailUpdateWrapper stretchX stretchY">
             <div className="headerWrapper">
@@ -170,7 +132,7 @@ function FailureComponent() {
                 <br />{text.emailUpdate.failureComponent.content.pt2.cz}
             </p>
             <Button
-                onClick={() => { history.push("/") }}
+                onClick={() => { navigate("/") }}
                 initialClass={"buttonInitial"}
                 modificationClass={"emailUpdateBtnModification"}
                 hoverClass={"emailUpdateBtnHover"}
@@ -181,7 +143,7 @@ function FailureComponent() {
 }
 
 function AlreadyApprovedComponent() {
-    const history = useHistory()
+    const navigate = useNavigate()
     return (
         <div className="emailUpdateWrapper stretchX stretchY">
             <div className="headerWrapper">
@@ -193,7 +155,7 @@ function AlreadyApprovedComponent() {
                 <br />{text.emailUpdate.alreadyApprovedComponent.content.pt2.cz}
             </p>
             <Button
-                onClick={() => { history.push("/") }}
+                onClick={() => { navigate("/") }}
                 initialClass={"buttonInitial"}
                 modificationClass={"emailUpdateBtnModification"}
                 hoverClass={"emailUpdateBtnHover"}
@@ -204,7 +166,7 @@ function AlreadyApprovedComponent() {
 }
 
 function MissinIdComponent() {
-    const history = useHistory()
+    const navigate = useNavigate()
     return (
         <div className="emailUpdateWrapper stretchX stretchY">
             <div className="headerWrapper">
@@ -216,7 +178,7 @@ function MissinIdComponent() {
                 <br />{text.emailUpdate.missingIdComponent.content.pt2.cz}
             </p>
             <Button
-                onClick={() => { history.push("/") }}
+                onClick={() => { navigate("/") }}
                 initialClass={"buttonInitial"}
                 modificationClass={"emailUpdateBtnModification"}
                 hoverClass={"emailUpdateBtnHover"}

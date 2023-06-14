@@ -1,26 +1,26 @@
 //SMALL LOGO//
-.logo-wrapper{
-    cursor:pointer;
-    display: flex;
-    z-index: +1;
+.logo-wrapper {
+  cursor: pointer;
+  display: flex;
+  z-index: +1;
 }
-#smallLogo{
-    cursor: pointer;
-    overflow: visible;
-    margin-right: 10px;
-    .logoPath{
-        fill:white;
-        opacity: 0;
-    }
+#smallLogo {
+  cursor: pointer;
+  overflow: visible;
+  margin-right: 10px;
+  .logoPath {
+    fill: $minorColor1;
+    opacity: 0;
+  }
 }
 
-#smallText{
-    cursor: pointer;
-    overflow: visible;
+#smallText {
+  cursor: pointer;
+  overflow: visible;
 
-    .logoText{
-       opacity:0;
-    }
+  .logoText {
+    opacity: 0;
+  }
 }
 
 //BIG LOGO//

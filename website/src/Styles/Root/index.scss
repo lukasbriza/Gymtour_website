@@ -24,7 +24,6 @@
 @import "../Framework/mediaQueries";
 @import "../Framework/Layout/layout";
 @import "../Framework/modificationClasses";
-@import "../Framework/PageTranstition";
 
 /*MODULES - Re-usable site elements.*/
 
@@ -45,12 +44,22 @@
 @import "../Modules/layer";
 @import "../Modules/footer";
 @import "../Modules/underliner";
-@import "../Modules/formInput";
 @import "../Modules/submitButton";
 @import "../Modules/modal";
 @import "../Modules/loading";
 @import "../Modules/filterIcon";
-@import "../Modules/contetFilter";
 @import "../Modules/searchItem";
 @import "../Modules/errorModal";
 @import "../Modules/priceLevelSection";
+@import "../Modules/checkBox";
+@import "../Modules/stringInput";
+@import "../Modules/contentHeader";
+@import "../Modules/bullet";
+@import "../Modules/multipleSelect";
+@import "../Modules/searchBar";
+@import "../Modules/filter";
+@import "../Modules/select";
+@import "../Modules/bolt";
+@import "../Modules/card";
+@import "../Modules/popUp";
+@import "../Modules/tooltip";

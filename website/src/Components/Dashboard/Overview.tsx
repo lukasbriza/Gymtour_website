@@ -1,16 +1,13 @@
 import { useEffect, useState, useContext, useRef } from 'react'
-import { Underliner } from '../Underliner'
-import { Button } from '../Button'
+import { Underliner } from '../Underliner/Underliner'
+import { Button } from '../Button/Button'
 import { ErrorModal } from '../ErrorModal'
-import { useHistory } from 'react-router-dom'
-//FUNCTIONS//
-import fetchAgent from '../../Functions/fetchAgent'
-import { getToken } from '../../Functions/loginLogic'
-import { classListMaker } from '../../Functions/classListMaker'
+
+import { classListMaker } from '../../utils/classListMaker'
 import { text } from '../../config/textSource'
 
-//CONTEXT//
-import { UserContext } from '../../App/Context'
+import { useNavigate } from 'react-router'
+import { useUsercontext } from 'src/hooks/_index'
 
 const Overview = () => {
     //////////////////////////////////////////////////
@@ -23,8 +20,8 @@ const Overview = () => {
     //VARIABLES//
     const overviewClasses = classListMaker(["overview", "dashboardSection"])
 
-    const userContext = useContext(UserContext)
-    const history = useHistory()
+    const userContext = useUsercontext()
+    const navigate = useNavigate()
     const userReqSended = useRef(false)
     //////////////////////////////////////////////////
     //EFFECTS//
@@ -38,24 +35,7 @@ const Overview = () => {
             userContext.userObject === undefined
         ) {
 
-            const token = getToken()
-            token.then(token => {
-                if (token !== null) {
-                    const fetchResult = fetchAgent.getUserInformation({ id: userContext?.userId, token: token })
-                    fetchResult.then((result) => {
-                        userReqSended.current = true
-                        if (result.errorMap.length === 0 && result.data !== null) {
-                            setUserObject(result.data)
-                        } else {
-                            //ERROR MODAL
-                            setErrorHeader(text.errorModal.headers.overview.cz)
-                            const message = (result.errorMap.map((error) => error.Error?.message) + text.errorModal.contactMessage.cz)
-                            setErrorMessage(message)
-                            setErrorModal(true)
-                        }
-                    })
-                }
-            })
+
         }
     }, [userContext?.userId, userContext?.logged, userContext?.userObject])
     useEffect(() => {
@@ -64,8 +44,7 @@ const Overview = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userObject])
-    //////////////////////////////////////////////////
-    //SETUP//
+
     return (
         <>
             <section className={overviewClasses}>
@@ -123,7 +102,7 @@ const Overview = () => {
                         </div>
                     </div>
                     <Button
-                        onClick={() => { history.push("/dashboard/settings") }}
+                        onClick={() => { navigate("/dashboard/settings") }}
                         modificationClass={"overviewButton"}
                         initialClass={"buttonInitial"}
                         hoverClass={"buttonHover"}

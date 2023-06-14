@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FormStringInput } from '../../FormStringInput'
 //FUNCTIONS//
-import { classListMaker } from '../../../Functions/classListMaker'
+import { classListMaker } from '../../../utils/classListMaker'
 //TEXTS//
 import { text } from '../../../config/textSource'
 

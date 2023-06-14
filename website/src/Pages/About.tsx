@@ -1,35 +1,23 @@
-import { useEffect, useContext } from 'react'
-//CONFIG//
-import { config, animationStore } from '../config/mainConfiguration'
+import { useEffect } from 'react'
 import { text } from '../config/textSource'
-//CONTEXT//
-import { AppContext, AnimationContext } from "../App/Context"
-//FUNCTUION//
-import { classListMaker } from '../Functions/classListMaker'
+import { useAnimationContext } from 'src/hooks/_index'
+import { smallLogoShow } from '@animations'
+import clsx from 'clsx'
+
 
 const About = () => {
-    console.log("loaded")
-    //////////////////////////////////////////////////
-    //STATE//
-
-    //////////////////////////////////////////////////
-    //VARIABLES//
-    const appContext = useContext(AppContext);
-    const anContext = useContext(AnimationContext);
+    const anContext = useAnimationContext()
 
     //////////////////////////////////////////////////
     //ANIMATIONS//
     useEffect(() => {
         anContext?.fn.setBigLogoPlayed(true)
-        animationStore.menu.logo.logoIn();
-        setTimeout(() => {
-            animationStore.menu.logo.logoTextIn();
-        }, 200);
-    }, [])
+        smallLogoShow();
+    }, [anContext?.fn])
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="About" className={config.basePageClassList}>
+        <div id="About" className={clsx(["relative", "stretch", "minorColor2"])}>
 
         </div>
     )

@@ -1,0 +1,14 @@
+.checkboxHelper {
+  font-size: 0.8em;
+  height: 23px;
+}
+
+.checkboxClass {
+  width: 18px;
+  height: 18px;
+  border-color: $checkBoxBorder;
+}
+
+.checkerClass {
+  background: $checkBackground;
+}

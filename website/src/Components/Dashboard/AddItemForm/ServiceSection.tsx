@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
-import fetchAgent from '../../../Functions/fetchAgent'
 //FUNCTIONS//
-import { classListMaker } from '../../../Functions/classListMaker'
+import { classListMaker } from '../../../utils/classListMaker'
 //TEXTS//
 import { text } from '../../../config/textSource'
 
@@ -89,14 +88,7 @@ const ServiceSection = ({ service, onChange, onError }: { service: "fitness" | "
     //////////////////////////////////////////////////
     //FUNCTIONS//
     const fetchDataFn = async () => {
-        const fetchData = await fetchAgent.getFilterData()
-        if (fetchData.errorMap.length > 0) {
-            onError(fetchData.errorMap)
-            return
-        }
-        if (fetchData.data) {
-            setFilterData(fetchData.data[0])
-        }
+
     }
     function getInputs(
         type: "radio" | "checkbox",
