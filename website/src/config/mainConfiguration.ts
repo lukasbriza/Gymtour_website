@@ -11,7 +11,7 @@ const Contact = ReactLazyPreload(() => import("../pages/Contact"));
 const BusinessConditions = ReactLazyPreload(() => import("../pages/BusinessConditions"));
 const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"));
 
-const Login = ReactLazyPreload(() => import("../pages/login/Login"));
+const Login = ReactLazyPreload(() => import("../pages/Login"));
 const Dashboard = ReactLazyPreload(() => import("../pages/Dashboard"));
 const EmailUpdate = ReactLazyPreload(() => import("../pages/EmailUpdate"));
 const Detail = ReactLazyPreload(() => import("../pages/content/Detail"));

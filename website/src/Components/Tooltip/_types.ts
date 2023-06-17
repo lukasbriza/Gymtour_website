@@ -1,8 +1,8 @@
-import { Props } from "@lukasbriza/lbui-lib";
-
 export type TooltipProps = {
-  children: React.ReactElement;
-  text: string;
-  show?: boolean;
-  position?: "left" | "top" | "right" | "bottom";
-} & Props<HTMLDivElement>;
+  id: string;
+  content: string;
+  hidden?: boolean;
+  isOpen?: boolean;
+  place?: "top" | "left" | "right" | "bottom";
+  variant?: "dark" | "light" | "success" | "warning" | "error" | "info";
+};

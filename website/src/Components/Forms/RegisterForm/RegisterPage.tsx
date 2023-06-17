@@ -6,11 +6,13 @@ import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
 import { formValidationSchema } from "./RegisterPage.validation"
 import { RegisterFormValues } from "./_types"
-import { useModal } from "@hooks"
+import { useModal, useServerData } from "@hooks"
+import { addUser } from "@fetcher"
 
 export const RegisterPage: FC = () => {
     const { t } = useTranslation()
     const { showModal } = useModal()
+    const { fetchCall: registerUser } = useServerData(addUser)
     const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormValues>({
         defaultValues: {
             name: "",
@@ -24,7 +26,8 @@ export const RegisterPage: FC = () => {
         resolver: formValidationSchema(t)
     })
 
-    const onSubmit = (values: RegisterFormValues) => {
+    const onSubmit = async (values: RegisterFormValues) => {
+        const result = await registerUser(values)
         //sucess ?? error
         /*const fetchResult: any = await fetchAgent.registerUser({
             username: name.value,
@@ -35,13 +38,14 @@ export const RegisterPage: FC = () => {
         })*/
 
         const register = false //call
-        //SUCCESS MODAL
         if (register) {
+            //SUCCESS MODAL
             const header = <ModalHeader header={t("registerPage:modalHeader")} />
             const text = t("registerPage:modalText", { email: values.email })
             const button = t("registerPage:modalButton")
             showModal(header, text, button, clearForm)
         } else {
+            //ERROR MODAL
             const errorHeader = <ErrorModalHeader header={t("registerPage:modalErrorHeader")} />
             const errorText = t("registerPage:modalErrorText")
             const button = t("registerPage:modalButton")

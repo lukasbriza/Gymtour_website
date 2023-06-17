@@ -24,6 +24,7 @@ const userSchema = new Schema<User>({
       awarded: { type: Date, default: new Date(), required: false },
     },
   },
+  activated: { type: Boolean, required: false, default: false },
 });
 
 export const UserModel = model("User", userSchema, "users");

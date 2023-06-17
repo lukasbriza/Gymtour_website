@@ -1,11 +1,8 @@
 export * from "./Menu/Menu";
 export * from "./Footer/Footer";
-export * from "./FitnessPage/FitnessPage";
 export * from "./Layer";
 export * from "./Button/Button";
-export * from "./CoachPage/CoachPage";
 export * from "./Underliner/Underliner";
-export * from "./RegisterPage/RegisterPage";
 export * from "./ModalHeader/ModalHeader";
 export * from "./ContentHeader/ContentHeader";
 export * from "./Filter/Filter";
@@ -15,6 +12,7 @@ export * from "./Card/Card";
 export * from "./FilteredContent/FilteredContent";
 export * from "./Tooltip/Tooltip";
 
+export * from "./Forms/RegisterForm/RegisterPage";
 export * from "./Forms/StringInput/StringInput";
 export * from "./Forms/Checkbox/Checkbox";
 export * from "./Forms/Bullet/Bullet";

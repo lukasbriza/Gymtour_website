@@ -1,6 +1,12 @@
 import { Router, Response, Request } from "express";
-import { AddCoachRequest, GetCoachRequest, RemoveCoachesRequest, UpdateCoachRequest } from "../types";
-import { addCoach, getCoaches, removeCoaches, updateCoach } from "../abl";
+import {
+  AddCoachLikeRequest,
+  AddCoachRequest,
+  GetCoachRequest,
+  RemoveCoachesRequest,
+  UpdateCoachRequest,
+} from "../types";
+import { addCoach, addCoachLike, getCoaches, removeCoaches, updateCoach } from "../abl";
 import { getStatus } from "../utils";
 import { validationMiddleware } from "../middleware";
 import { deleteCoachValidation, getCoachValidation, postCoachValidation, putCoachValidation } from "../validations";
@@ -31,3 +37,10 @@ coach
     const result = await updateCoach(req.body);
     return res.status(getStatus(result.errorMap)).send(result);
   });
+
+//TODO login validation + query validation
+coach.route("/like").get(async (req: Request, res: Response) => {
+  const request = req as unknown as AddCoachLikeRequest;
+  const result = await addCoachLike(request.query);
+  return res.status(getStatus(result.errorMap)).send(result);
+});

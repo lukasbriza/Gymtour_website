@@ -71,6 +71,7 @@ export type FitnesFilterQuery = {
   others?: string[];
   projection?: string;
   search?: string;
+  id?: string;
 };
 
 export type GetFitness = Fitness[];
@@ -87,3 +88,9 @@ export type UpdateFitnessResponse = CustomErrorResponseObject<boolean>;
 
 export type AddFitnessBody = Fitness;
 export type AddFitnessResponse = CustomErrorResponseObject<boolean>;
+
+export type AddFitnessLikeQuery = {
+  id: string;
+  target: string;
+};
+export type AddFitnessLikeResponse = CustomErrorResponseObject<boolean>;

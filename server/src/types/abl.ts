@@ -10,6 +10,7 @@ export type GetCoachType = {
   gender?: string;
   specialization?: string;
   projection?: string;
+  id?: string;
 };
 
 export type FilterQueryParsed = {
@@ -17,6 +18,8 @@ export type FilterQueryParsed = {
 };
 
 export type AddCoachType = Coach;
+
+export type AddCoachLikeType = { id: string; target: string };
 
 export type RemoveCoachType = {
   id: { id: string; owner: string }[] | { id: string; owner: string };
@@ -70,7 +73,7 @@ export type Coach = {
   };
   approved?: boolean;
   views?: number;
-  popularity?: string[] | [];
+  popularity?: string[];
 };
 
 export type UpdateCoachType = Partial<Coach> & { _id: string };
@@ -91,6 +94,7 @@ export type User = {
     terms: { status: boolean; awarded?: Date };
     dataProcessingForPropagation: { status: boolean; awarded?: Date };
   };
+  activated?: boolean;
 };
 
 export type AddUserType = User;
@@ -105,6 +109,7 @@ export type GetFitnessType = {
   general?: string;
   others?: string;
   projection?: string;
+  id?: string;
 };
 
 export type FitnessFilter = {
@@ -154,7 +159,7 @@ export type Fitness = {
   };
   approved?: boolean;
   views?: number;
-  popularity?: string[] | [];
+  popularity?: string[];
 };
 
 export type UpdateFitnessType = Partial<Fitness> & { _id: string };
@@ -163,6 +168,11 @@ export type AddFitnessType = Fitness;
 
 export type RemoveFitnessType = {
   id: { id: string; owner: string }[] | { id: string; owner: string };
+};
+
+export type AddFitnessLikeType = {
+  id: string;
+  target: string;
 };
 
 export type ImageObject = {

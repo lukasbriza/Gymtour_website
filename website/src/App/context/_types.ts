@@ -56,6 +56,7 @@ export type CoachFilterContext = {
   register: (state: boolean, code: string, text: string, fieldName: string) => void;
   removeBolt: (code: string) => void;
   addBolt: (text: string, code: string, name?: string) => void;
+  updateCoach: (coach: Coach) => void;
 };
 export type FitnessFilterContext = {
   limit: number;
@@ -68,6 +69,7 @@ export type FitnessFilterContext = {
   register: (state: boolean, code: string, text: string, fieldName: string) => void;
   removeBolt: (code: string) => void;
   addBolt: (text: string, code: string, name?: string) => void;
+  updateFitness: (fitness: Fitness) => void;
 };
 
 export type ImageStoreContextType = {

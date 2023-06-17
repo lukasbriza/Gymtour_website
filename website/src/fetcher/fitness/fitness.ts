@@ -4,6 +4,8 @@ import { handleFetchError } from "../handleFetchError";
 import { AxiosResponse } from "axios";
 import {
   AddFitnessBody,
+  AddFitnessLikeQuery,
+  AddFitnessLikeResponse,
   AddFitnessResponse,
   FitnesFilterQuery,
   GetFitness,
@@ -62,6 +64,20 @@ export const addFitness = (body: AddFitnessBody) => {
       return response.data;
     } catch (error: unknown) {
       handleFetchError<boolean>(error as AddFitnessResponse);
+    }
+  };
+};
+
+export const addFitnessLike = (query: AddFitnessLikeQuery) => {
+  const instance = getAxiosInstance();
+  return async () => {
+    try {
+      const response = await instance.get<any, AxiosResponse<AddFitnessLikeResponse>>(
+        `${Api.ApiFitnessLike}?${querySerialize(query)}`
+      );
+      return response.data;
+    } catch (error: unknown) {
+      handleFetchError<boolean>(error as AddFitnessLikeResponse);
     }
   };
 };

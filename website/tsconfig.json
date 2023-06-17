@@ -9,13 +9,13 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "incremental": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "@app": ["src/app/_index.ts"],
@@ -27,8 +27,8 @@
       "@animations": ["./src/animations/_index.ts"],
       "@svg": ["src/components/SVG/_index.ts"],
       "@validations": ["./src/validations/_index.ts"],
-      "@libs":["./src/libs/_index.ts"],
-      "@fetchers":["./src/fetcher/_index.ts"]
+      "@libs": ["./src/libs/_index.ts"],
+      "@fetchers": ["./src/fetcher/_index.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "src", "craco.config.js"],

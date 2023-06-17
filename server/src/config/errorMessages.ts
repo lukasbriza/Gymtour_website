@@ -14,6 +14,11 @@ export const errorMessages = {
     noOwner: "There is no registered user for this coach.",
     desinchronizationError: "There is desinchronization in images:",
   },
+  addCoachLike: {
+    databaseError: "Get operation failed. Please contact administrator.",
+    userDoesntExists: "User with this id does not exists.",
+    userAlreadyLiked: "This user already liked this subject.",
+  },
   removeCoaches: {
     databaseError: "Remove operation failed. Please contact administrator.",
     removeImgError: "Removing of image bounded to this coach failed.",
@@ -21,6 +26,11 @@ export const errorMessages = {
   },
   getFitness: {
     databaseError: "Get operation failed. Please contact administrator.",
+  },
+  addFitnessLike: {
+    databaseError: "Get operation failed. Please contact administrator.",
+    userDoesntExists: "User with this id does not exists.",
+    userAlreadyLiked: "This user already liked this subject.",
   },
   removeImgFlow: {
     removeImgError: "Removing of image bounded to this object failed.",

@@ -11,6 +11,8 @@ import {
   RemoveFitnessesResponsePromise,
   UpdateFitnessType,
   UpdateFitnessResponsePromise,
+  AddFitnessLikeType,
+  AddFitnessLikeRepsonsePromise,
 } from "../types";
 import {
   removeImgFlow,
@@ -26,6 +28,7 @@ import { add, get, Option, remove, update } from "../database";
 import { FitnessModel, UserModel } from "../model";
 import { getMeta } from "./image";
 import { constructUpdatePath } from "../utils/constructUpdatePath";
+import mongoose from "mongoose";
 
 const getFitnessFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -63,6 +66,7 @@ const getFitnessFilter = (query: FilterQueryParsed) => {
 
 export const getFitnesses = async (query: GetFitnessType): GetFitnessResponsePromise => {
   const response = buildResponse<Fitness[]>();
+  const ID = query.id ? query.id : undefined;
   const LIMIT = query.limit ? Number(query.limit) : config.dbUnitLimit;
   const ORDER = query.order ? Number(query.order) : 1;
   const PROJECTION = query.projection ? query.projection : undefined;
@@ -79,7 +83,7 @@ export const getFitnesses = async (query: GetFitnessType): GetFitnessResponsePro
 
   const order = orderQuery(ORDER);
   const option: Option<Fitness> = {
-    findQuery: getFitnessFilter(parsedQuery),
+    findQuery: ID ? { _id: new mongoose.Types.ObjectId(ID) } : getFitnessFilter(parsedQuery),
     projection: PROJECTION,
     order: order,
     limit: LIMIT,
@@ -315,4 +319,59 @@ export const updateFitness = async (body: UpdateFitnessType): UpdateFitnessRespo
 
   response.data = true;
   return response;
+};
+
+export const addFitnessLike = async (query: AddFitnessLikeType): AddFitnessLikeRepsonsePromise => {
+  const response = buildResponse<boolean>();
+  const ID = new mongoose.Types.ObjectId(query.id);
+  const TARGET = new mongoose.Types.ObjectId(query.target);
+  const option = { findQuery: { _id: ID } };
+  const fitnessOption = { findQuery: { _id: TARGET } };
+
+  const userData = await get<User>(UserModel, errorMessages.addFitnessLike.databaseError, option);
+
+  if (userData instanceof DatabaseError) {
+    return assignError<boolean>(false, userData, response);
+  }
+
+  if (userData.length === 1 && userData[0].id === ID.toString()) {
+    const updateObject = await get<Fitness>(FitnessModel, errorMessages.addFitnessLike.databaseError, fitnessOption);
+
+    if (updateObject instanceof DatabaseError) {
+      return assignError<boolean>(false, updateObject, response);
+    }
+
+    if (updateObject.length === 1) {
+      const popularityArray = updateObject[0].popularity;
+
+      if (popularityArray.includes(userData[0].id)) {
+        const alreadyLikedError = new APIError(errorMessages.addFitnessLike.userAlreadyLiked);
+        return assignError<boolean>(false, alreadyLikedError, response);
+      }
+
+      popularityArray.push(userData[0].id);
+
+      const data = await update<Fitness>(
+        FitnessModel,
+        errorMessages.addFitnessLike.databaseError,
+        { _id: TARGET },
+        constructUpdatePath({ popularity: popularityArray })
+      );
+
+      if (data instanceof DatabaseError) {
+        return assignError<boolean>(false, data, response);
+      }
+
+      if (data.modifiedCount !== 1) {
+        response.data = false;
+        return response;
+      }
+
+      response.data = true;
+      return response;
+    }
+  }
+
+  const error = new APIError(errorMessages.addFitnessLike.userDoesntExists);
+  return assignError<boolean>(false, error, response);
 };

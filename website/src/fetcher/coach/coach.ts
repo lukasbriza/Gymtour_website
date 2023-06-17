@@ -1,6 +1,8 @@
 import { getAxiosInstance } from "@libs";
 import {
   AddCoachBody,
+  AddCoachLikeQuery,
+  AddCoachLikeResponse,
   AddCoachResponse,
   CoachFilterQuery,
   GetCoach,
@@ -62,6 +64,20 @@ export const updateCoach = (body: UpdateCoachBody) => {
       return response.data;
     } catch (error: unknown) {
       handleFetchError<boolean>(error as UpdateCoachResponse);
+    }
+  };
+};
+
+export const addCoachLike = (query: AddCoachLikeQuery) => {
+  const instance = getAxiosInstance();
+  return async () => {
+    try {
+      const response = await instance.get<any, AxiosResponse<AddCoachLikeResponse>>(
+        `${Api.ApiCoachLike}?${querySerialize(query)}`
+      );
+      return response.data;
+    } catch (error: unknown) {
+      handleFetchError<boolean>(error as AddCoachLikeResponse);
     }
   };
 };
