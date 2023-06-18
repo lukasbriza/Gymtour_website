@@ -119,12 +119,15 @@ export const addUser = async (body: AddUserType): AddUserResponsePromise => {
   const hashedPassword = await bcrypt.hash(password, salt);
   const user = body;
   user.password = hashedPassword;
+  user.activated = false;
 
   const addUser = await add(UserModel, user, errorMessages.addUser.databaseError);
 
   if (addUser instanceof DatabaseError) {
     return assignError(false, addUser, response);
   }
+  //TODO: implement keycloak
+  //TODO: send email with url and code to activate user
 
   response.data = true;
   return response;

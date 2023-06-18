@@ -10,6 +10,8 @@ import {
   RemoveCoachesResponsePromise,
   UpdateCoachType,
   UpdateCoachResponsePromise,
+  AddCoachLikeResponsePromise,
+  AddCoachLikeType,
 } from "../types";
 import { CoachModel, UserModel } from "../model";
 import { add, get, Option, remove, update } from "../database";
@@ -25,6 +27,7 @@ import {
 } from "../utils";
 import { getMeta } from "./image";
 import { constructUpdatePath } from "../utils/constructUpdatePath";
+import mongoose from "mongoose";
 
 const getCoachFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -61,6 +64,7 @@ const getCoachFilter = (query: FilterQueryParsed) => {
 
 export const getCoaches = async (query: GetCoachType): GetCoachResponsePromise => {
   const response = buildResponse<Coach[]>();
+  const ID = query.id ? query.id : undefined;
   const LIMIT = query.limit ? Number(query.limit) : config.dbUnitLimit;
   const ORDER = query.order ? Number(query.order) : 1;
   const PROJECTION = query.projection ? query.projection : undefined;
@@ -75,7 +79,7 @@ export const getCoaches = async (query: GetCoachType): GetCoachResponsePromise =
 
   const order = orderQuery(ORDER);
   const option: Option<Coach> = {
-    findQuery: getCoachFilter(parsedQuery),
+    findQuery: ID ? { _id: new mongoose.Types.ObjectId(ID) } : getCoachFilter(parsedQuery),
     projection: PROJECTION,
     order: order,
     limit: LIMIT,
@@ -322,4 +326,59 @@ export const updateCoach = async (body: UpdateCoachType): UpdateCoachResponsePro
 
   response.data = true;
   return response;
+};
+
+export const addCoachLike = async (query: AddCoachLikeType): AddCoachLikeResponsePromise => {
+  const response = buildResponse<boolean>();
+  const ID = new mongoose.Types.ObjectId(query.id);
+  const TARGET = new mongoose.Types.ObjectId(query.target);
+  const option = { findQuery: { _id: ID } };
+  const coachOption = { findQuery: { _id: TARGET } };
+
+  const userData = await get<User>(UserModel, errorMessages.addCoachLike.databaseError, option);
+
+  if (userData instanceof DatabaseError) {
+    return assignError<boolean>(false, userData, response);
+  }
+
+  if (userData.length === 1 && userData[0].id === ID.toString()) {
+    const updateObject = await get<Coach>(CoachModel, errorMessages.addCoachLike.databaseError, coachOption);
+
+    if (updateObject instanceof DatabaseError) {
+      return assignError<boolean>(false, updateObject, response);
+    }
+
+    if (updateObject.length === 1) {
+      const popularityArray = updateObject[0].popularity;
+
+      if (popularityArray.includes(userData[0].id)) {
+        const alreadyLikedError = new APIError(errorMessages.addCoachLike.userAlreadyLiked);
+        return assignError<boolean>(false, alreadyLikedError, response);
+      }
+
+      popularityArray.push(userData[0].id);
+
+      const data = await update<Coach>(
+        CoachModel,
+        errorMessages.addCoachLike.databaseError,
+        { _id: TARGET },
+        constructUpdatePath({ popularity: popularityArray })
+      );
+
+      if (data instanceof DatabaseError) {
+        return assignError<boolean>(false, data, response);
+      }
+
+      if (data.modifiedCount !== 1) {
+        response.data = false;
+        return response;
+      }
+
+      response.data = true;
+      return response;
+    }
+  }
+
+  const error = new APIError(errorMessages.addCoachLike.userDoesntExists);
+  return assignError<boolean>(false, error, response);
 };

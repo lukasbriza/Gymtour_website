@@ -6,19 +6,7 @@ export type CustomResponse<T = unknown> = {
   data: T | null;
   errorMap: ErrorType[];
 };
-
-export type GetFilterResponse = CustomResponse<Filter>;
-export type GetFilterResponsePromise = Promise<GetFilterResponse>;
-
-export type GetCoachResponse = CustomResponse<Coach[]>;
-export type GetCoachResponsePromise = Promise<GetCoachResponse>;
-
-export type AddCoachResponse = CustomResponse<boolean>;
-export type AddCoachResponsePromise = Promise<AddCoachResponse>;
-
-export type RemoveCoachesResponse = CustomResponse<{ id: string; deleted: boolean }[]>;
-export type RemoveCoachesResponsePromise = Promise<RemoveCoachesResponse>;
-
+//FITNESS
 export type GetFitnessResponse = CustomResponse<Fitness[]>;
 export type GetFitnessResponsePromise = Promise<GetFitnessResponse>;
 
@@ -28,15 +16,29 @@ export type AddFitnessResponsePromise = Promise<AddFitnessResponse>;
 export type RemoveFitnessesResponse = CustomResponse<{ id: string; deleted: boolean }[]>;
 export type RemoveFitnessesResponsePromise = Promise<RemoveFitnessesResponse>;
 
-export type UploadImageResponse = CustomResponse<ImageFieldsObject>;
-export type UploadImageResponsePromise = Promise<UploadImageResponse>;
+export type UpdateFitnessResponse = CustomResponse<boolean>;
+export type UpdateFitnessResponsePromise = Promise<UpdateFitnessResponse>;
 
-export type RemoveImageResponse = CustomResponse<boolean>;
-export type RemoveImageResponsePromise = Promise<RemoveImageResponse>;
+export type AddFitnessLikeResponse = CustomResponse<boolean>;
+export type AddFitnessLikeRepsonsePromise = Promise<AddFitnessLikeResponse>;
 
-export type GetImageResponse = CustomResponse<GridFSFile>;
-export type GetImageResponsePromise = Promise<GetImageResponse>;
+//COACH
+export type GetCoachResponse = CustomResponse<Coach[]>;
+export type GetCoachResponsePromise = Promise<GetCoachResponse>;
 
+export type AddCoachResponse = CustomResponse<boolean>;
+export type AddCoachResponsePromise = Promise<AddCoachResponse>;
+
+export type RemoveCoachesResponse = CustomResponse<{ id: string; deleted: boolean }[]>;
+export type RemoveCoachesResponsePromise = Promise<RemoveCoachesResponse>;
+
+export type UpdateCoachResponse = CustomResponse<boolean>;
+export type UpdateCoachResponsePromise = Promise<UpdateCoachResponse>;
+
+export type AddCoachLikeResponse = CustomResponse<boolean>;
+export type AddCoachLikeResponsePromise = Promise<AddCoachLikeResponse>;
+
+//USER
 export type GetUserResponse = CustomResponse<Omit<User, "password">>;
 export type GetUserResponsePromise = Promise<GetUserResponse>;
 
@@ -49,11 +51,18 @@ export type AddUserResponsePromise = Promise<AddUserResponse>;
 export type UpdateUserResponse = CustomResponse<boolean>;
 export type UpdateUserResponsePromise = Promise<UpdateUserResponse>;
 
-export type UpdateFitnessResponse = CustomResponse<boolean>;
-export type UpdateFitnessResponsePromise = Promise<UpdateFitnessResponse>;
+//IMAGE
+export type UploadImageResponse = CustomResponse<ImageFieldsObject>;
+export type UploadImageResponsePromise = Promise<UploadImageResponse>;
 
-export type UpdateCoachResponse = CustomResponse<boolean>;
-export type UpdateCoachResponsePromise = Promise<UpdateCoachResponse>;
+export type RemoveImageResponse = CustomResponse<boolean>;
+export type RemoveImageResponsePromise = Promise<RemoveImageResponse>;
+
+export type GetImageResponse = CustomResponse<GridFSFile>;
+export type GetImageResponsePromise = Promise<GetImageResponse>;
+
+export type GetFilterResponse = CustomResponse<Filter>;
+export type GetFilterResponsePromise = Promise<GetFilterResponse>;
 
 export type UpdateViewsResponse = CustomResponse<boolean>;
 export type UpdateViewsResponsePromise = Promise<UpdateViewsResponse>;
