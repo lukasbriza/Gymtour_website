@@ -1,4 +1,4 @@
-import { CustomErrorResponseObject } from "@utils";
+import { CustomErrorResponseObject } from "src/utils/_index";
 import { Contact } from "../fitness/_types";
 
 export type CoachFilterQuery = {

@@ -6,7 +6,8 @@ import { FC } from "react";
 import { Layout } from "./Layout";
 import { ModalProvider, PopUpProvider } from "@lukasbriza/lbui-lib";
 import { AxiosHandler } from "./AxiosHandler";
-import { AnimationContextProvider, AppContextProvider, ImageStoreProvider, UserContextProvider } from "@app";
+import { AnimationContextProvider, AppContextProvider, ImageStoreProvider, UserContextProvider } from "./_index";
+
 import "../i18n/i18n"
 
 export const App: FC = () => {

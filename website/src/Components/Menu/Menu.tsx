@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, FC } from "react";
 import { Link } from "react-router-dom";
-import { SmallLogo, SmallText, LoginButton } from "@svg";
-import { useAppContext } from "@hooks"
-import { routes, breakpoints, menuItems } from "@config";
-import { crossOff, crossOn, hideHamburger, hideLayer, hideMenu, hideMenuOffer, showHamburger, showLayer, showMenu, showMenuOffer } from "@animations";
+import { useAppContext } from "../../hooks/_index"
+import { menuItems, breakpoints, routes } from "../../config/_index"
+import { showMenu, hideMenu, showMenuOffer, hideMenuOffer, crossOn, showLayer, hideLayer, crossOff, showHamburger, hideHamburger } from "../../animations/_index"
+import { SmallLogo, SmallText, LoginButton } from "../../components/SVG/_index"
 import { HamburgerProps, MenuLayerProps, MenuOfferProps } from "./_types";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";

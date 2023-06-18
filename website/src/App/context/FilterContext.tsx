@@ -1,8 +1,8 @@
 import { FC, createContext, useCallback, useState, useMemo } from "react"
 import { CoachFilterContext, ContextProviderProps, FitnessFilterContext } from "./_types"
-import { filter } from "@config"
-import { BoltProps, FilterVariants } from "@components"
-import { Coach, Fitness } from "@fetchers"
+import { BoltProps, FilterVariants } from "src/components/_index"
+import { Coach, Fitness } from "src/fetcher/_index"
+import { filter } from "src/config/_index"
 
 const fitnessInitialState: FitnessFilterContext = {
     limit: filter.defaultLimit,

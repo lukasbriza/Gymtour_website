@@ -29,44 +29,44 @@ export const breakpoints = {
 } as const;
 
 export const routes = {
-  mainPage: { name: "routes:mainPage", path: "/", component: Home },
+  mainPage: { name: "routes.mainPage", path: "/", component: Home },
   crossroad: {
-    name: "routes:crossroad",
+    name: "routes.crossroad",
     path: "/crossroad",
     component: Crossroad,
   },
   fitness: {
-    name: "routes:fitness",
+    name: "routes.fitness",
     path: "/fitness",
     component: Fitness,
   },
-  coach: { name: "routes:coach", path: "/coach", component: Coach },
-  detail: { name: "routes:detail", path: "/detail/:id", component: Detail },
-  aboutUs: { name: "routes:aboutUs", path: "/about", component: About },
-  coOp: { name: "routes:coOp", path: "/coop", component: CoOp },
+  coach: { name: "routes.coach", path: "/coach", component: Coach },
+  detail: { name: "routes.detail", path: "/detail/:id", component: Detail },
+  aboutUs: { name: "routes.aboutUs", path: "/about", component: About },
+  coOp: { name: "routes.coOp", path: "/coop", component: CoOp },
   contact: {
-    name: "routes:contact",
+    name: "routes.contact",
     path: "/contact",
     component: Contact,
   },
-  login: { name: "routes:login", path: "/login", component: Login },
+  login: { name: "routes.login", path: "/login", component: Login },
   dashboard: {
-    name: "routes:dashboard",
+    name: "routes.dashboard",
     path: "/dashboard",
     component: Dashboard,
   },
   businessConditions: {
-    name: "routes:businessConditions",
+    name: "routes.businessConditions",
     path: "/businessconditions",
     component: BusinessConditions,
   },
   dataProcessing: {
-    name: "routes:dataProcessing",
+    name: "routes.dataProcessing",
     path: "/dataprocessing",
     component: DataProcessing,
   },
   emailUpdate: {
-    name: "routes:emailUpdate",
+    name: "routes.emailUpdate",
     path: "/emailUpdate",
     component: EmailUpdate,
   },

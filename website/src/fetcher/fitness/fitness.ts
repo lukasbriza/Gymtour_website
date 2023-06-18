@@ -1,5 +1,3 @@
-import { getAxiosInstance } from "@libs";
-import { Api } from "@config";
 import { handleFetchError } from "../handleFetchError";
 import { AxiosResponse } from "axios";
 import {
@@ -17,6 +15,8 @@ import {
   UpdateFitnessResponse,
 } from "./_types";
 import { querySerialize } from "../querySerialize";
+import { getAxiosInstance } from "src/libs/_index";
+import { Api } from "src/config/_index";
 
 export const getFitnesses = (query: FitnesFilterQuery) => {
   const instance = getAxiosInstance();

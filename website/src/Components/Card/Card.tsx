@@ -1,15 +1,15 @@
 import { FC, forwardRef, useEffect, useRef, useState } from "react"
 import { CardProps } from "./_types"
-import { Heart, Topped, Viewed } from "@svg"
 import { Props } from "@lukasbriza/lbui-lib"
 import clsx from "clsx"
 import { Loading } from "../Loading/Loading"
-import { Coach, Fitness, addCoachLike, addFitnessLike, getCoaches, getFitnesses, getImage, updateViews } from "@fetchers"
-import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, usePopUpContext, useServerdataLazy, useUsercontext } from "@hooks"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { card } from "@config"
-import { Tooltip } from "@components"
+import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, usePopUpContext, useServerdataLazy, useUsercontext } from "src/hooks/_index"
+import { Coach, Fitness, addCoachLike, addFitnessLike, getCoaches, getFitnesses, getImage, updateViews } from "src/fetcher/_index"
+import { Heart, Topped, Viewed } from "../SVG/_index"
+import { card } from "src/config/_index"
+import { Tooltip } from "react-tooltip"
 
 export const Card: FC<CardProps> = (props) => {
     const nameref = useRef<HTMLDivElement>(null)
@@ -56,7 +56,7 @@ export const Card: FC<CardProps> = (props) => {
 
     const handleHeartClick = async () => {
         if (!logged) {
-            warning({ header: t("contentPage:popUp.cantLikeHeader"), text: t("contentPage:popUp.cantLikeText") })
+            warning({ header: t("contentPage.popUp.cantLikeHeader"), text: t("contentPage.popUp.cantLikeText") })
             return
         }
         if (_id) {

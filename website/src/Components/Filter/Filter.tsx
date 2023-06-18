@@ -3,8 +3,8 @@ import { CoachFilter, FilterProps, FitnessFilter, FormType } from "./_types";
 
 import { FormProvider, useForm } from "react-hook-form";
 import { FilterComponents } from "./FilterComponents";
-import { useCoachFilterContext, useFitnessFilterContext, useServerData, useServerdataLazy } from "@hooks";
-import { getCoaches, getFilter, getFitnesses } from "@fetchers";
+import { useCoachFilterContext, useFitnessFilterContext, useServerData, useServerdataLazy } from "src/hooks/_index";
+import { getCoaches, getFilter, getFitnesses } from "src/fetcher/_index";
 import { coachFormToApi, fitnessFormToApi } from "./Filter.mapper";
 import { FilterActiveBolts } from "./FilterActiveBolts";
 

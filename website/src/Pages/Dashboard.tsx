@@ -5,7 +5,7 @@ import { UpdateItem } from '../components/Dashboard/UpdateItem'
 import { Overview } from '../components/Dashboard/Overview'
 import { text } from '../config/textSource'
 import { useAppContext, useUsercontext } from 'src/hooks/_index'
-import { hamburgerOff, hamburgerOn, menuShiftOff, menuShiftOn } from '@animations'
+import { hamburgerOff, hamburgerOn, menuShiftOff, menuShiftOn } from 'src/animations/_index'
 import clsx from 'clsx'
 
 const Dashboard: FC = () => {

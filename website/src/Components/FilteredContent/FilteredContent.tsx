@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { FilteredContentProps } from "./_types";
-import { useCoachFilterContext, useFitnessFilterContext } from "@hooks";
-import { Loading, Card } from "@components";
 import clsx from "clsx";
-import { Coach, Fitness } from "@fetchers";
+import { useCoachFilterContext, useFitnessFilterContext } from "src/hooks/_index";
+import { Card, Loading } from "../_index";
+import { Coach, Fitness } from "src/fetcher/_index";
+
 
 export const FilteredContent: FC<FilteredContentProps> = ({ type }) => {
     const { contentLoading: fitnessLoading, filteredContent: fitnessFilteredContent } = useFitnessFilterContext()

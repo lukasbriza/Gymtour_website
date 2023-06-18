@@ -1,36 +1,38 @@
-
-import { Footer } from '@components'
-import { Layer } from '../components/Layer'
-
-
-import register from '@assets/register.webp'
-import clsx from 'clsx'
 import { FC } from 'react'
-import { useForm } from 'react-hook-form'
 
-export type LoginForm = {}
+import { Layer } from '../components/Layer'
+import { Underliner } from '../components/Underliner/Underliner'
+import { Footer } from '../components/Footer/Footer'
+import { text } from '../config/textSource'
 
+import register from '../assets/register.webp'
+import clsx from 'clsx'
+
+
+
+type canSubmitObj = { canSubmit: boolean, value: string }
 const Login: FC = () => {
-    const { handleSubmit } = useForm<any, any>({
-        defaultValues: {
-
-        },
-    });
-
-    const loginSubmit = async (values: LoginForm) => { }
 
 
     return (
         <>
             <section
                 id="Login"
-                className={"Login"}
+                className={clsx(["stretchX", "stretchVH", "relative", "Login"])}
             >
                 <img src={register} alt="LoginBckgImg" />
                 <Layer className={clsx(["stretchY", "stretchX"])}>
-                    <form className={"loginForm"} onSubmit={handleSubmit(loginSubmit)}>
+                    <div className={clsx(["stretchY", "stretchX", "loginContentWrapper"])}>
+                        <div className={clsx(["relative", "loginHeaderWrapper"])}>
+                            <h2>{text.login.Form.header.cz}</h2>
+                            <Underliner width={"80%"} />
+                        </div>
+                        <div className={clsx(["loginFormWrapper", "relative"])}>
+                            <form action="#Login" id="loginForm" onSubmit={() => { }}>
 
-                    </form>
+                            </form>
+                        </div>
+                    </div>
                 </Layer>
             </section>
             <Footer />

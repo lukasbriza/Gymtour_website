@@ -1,4 +1,4 @@
-import { CustomErrorResponseObject, hasCustomErrorObject } from "@utils";
+import { CustomErrorResponseObject, hasCustomErrorObject } from "src/utils/_index";
 
 export const handleFetchError = <T>(error: CustomErrorResponseObject<T>) => {
   if (hasCustomErrorObject(error)) {

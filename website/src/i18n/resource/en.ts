@@ -5,7 +5,7 @@ export const enTranslation: AppTranslationType = {
     min: "Minimální délka je {{min}} znaků.",
     max: "Je povoleno maximálně {{max}} znaků.",
     required: "Pole je povinné.",
-    nooBoolean: "Nesprávná hodnota.",
+    noBoolean: "Nesprávná hodnota.",
   },
   common: {
     email: "Email",
@@ -30,13 +30,11 @@ export const enTranslation: AppTranslationType = {
     emailUpdate: "Změna emailu",
     detail: "Detail",
   },
-
   footer: {
     followUs: "Sledujte nás",
     other: "Ostatní",
     gymtour: "Gymtour",
   },
-
   home: {
     header: {
       part1: "Choose",
@@ -44,7 +42,6 @@ export const enTranslation: AppTranslationType = {
       part3: "Opportunity!",
     },
   },
-
   crossroad: {
     fitness: {
       header: "Fitness",
@@ -59,7 +56,6 @@ export const enTranslation: AppTranslationType = {
       button: "Vyhledat",
     },
   },
-
   contentPage: {
     search: "Hledat...",
     filter: {
@@ -83,7 +79,6 @@ export const enTranslation: AppTranslationType = {
       cantLikeText: "Přidávat lajky můžou jen přihlášení uživatelé.",
     },
   },
-
   registerPage: {
     modalHeader: "Vítejte!",
     modalText: "Na email  “{{email}}„  Vám byly zaslány instrukce pro aktivaci účtu.",
@@ -94,12 +89,10 @@ export const enTranslation: AppTranslationType = {
     registerHeader: "Zaregistrovat se",
     registerParagraph: "Pro “lajkování„ příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
   },
-
   fitnessContentPage: {
     header1: "Fitness",
     verticalText: "Gymtour",
   },
-
   coachContentPage: {
     header1: "Trenéři",
     verticalText: "Gymtour",

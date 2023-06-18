@@ -1,6 +1,6 @@
-import { SearchIcon } from "@svg"
 import { FC, useRef, useState } from "react"
 import { useFormContext } from "react-hook-form"
+import { SearchIcon } from "../../SVG/_index"
 import { SearchBarProps } from "./_types"
 import clsx from "clsx"
 import { useClickOutside } from "@lukasbriza/lbui-lib"
@@ -31,7 +31,7 @@ export const SearchBar: FC<SearchBarProps> = (props) => {
         >
             <input
                 type="text"
-                placeholder={t("contentPage:search")}
+                placeholder={t("contentPage.search")}
                 onChange={handleChange}
             />
             <button className={clsx(["submitButton", "searchIconWrapper"])} type="submit">

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { FC, useEffect, useRef } from "react";
 import { LoadingProps } from "./_types";
-import { startLoading } from "@animations";
+import { startLoading } from "../../animations/_index"
 
 const baseWidth = 16
 const baseHeight = 15

@@ -1,4 +1,4 @@
-import { CustomErrorResponseObject } from "@utils";
+import { CustomErrorResponseObject } from "src/utils/_index";
 
 type OpenHours = {
   mon: { from: number | null; to: number | null };

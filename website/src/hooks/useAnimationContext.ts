@@ -1,4 +1,4 @@
-import { AnimationContext } from "@app";
+import { AnimationContext } from "src/app/_index";
 import { useContext } from "react";
 
 export const useAnimationContext = () => {

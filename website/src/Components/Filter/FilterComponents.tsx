@@ -1,21 +1,11 @@
-import {
-    AvoidedFilterType,
-    Bullet,
-    Button,
-    FilterComponentsProps,
-    Loading,
-    MultipleRegionSelectControled,
-    MultipleSelect,
-    OrderTypes,
-    SearchBar,
-    Select
-} from "@components";
-import { filter } from "@config";
-import { FilterType } from "@fetchers";
 import { useTranslation } from "react-i18next";
 import { regionMapper, standardMapper } from "./Filter.mapper";
 import { FC } from "react";
-import { useCoachFilterContext, useFitnessFilterContext } from "@hooks";
+import { FilterType } from "src/fetcher/_index";
+import { AvoidedFilterType, FilterComponentsProps, OrderTypes } from "./_types";
+import { useCoachFilterContext, useFitnessFilterContext } from "src/hooks/_index";
+import { filter } from "src/config/_index";
+import { Bullet, Button, Loading, MultipleRegionSelectControled, MultipleSelect, SearchBar, Select } from "../_index";
 
 const filterAvoided = (
     rawFilter: FilterType,
@@ -55,7 +45,7 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
                 syncWithWatch={true}
                 checkboxClick={registerFn}
                 name="regions"
-                label={t("contentPage:filter.regions")}
+                label={t("contentPage.filter.regions")}
                 options={regionMapper(filterCleared?.regions)}
             />
         </div>
@@ -67,7 +57,7 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
                 syncWithWatch={true}
                 checkboxClick={registerFn}
                 name="general"
-                label={t("contentPage:filter.general")}
+                label={t("contentPage.filter.general")}
                 options={standardMapper(filterCleared?.general)}
             />
         </div>
@@ -79,7 +69,7 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
                 syncWithWatch={true}
                 checkboxClick={registerFn}
                 name="others"
-                label={t("contentPage:filter.others")}
+                label={t("contentPage.filter.others")}
                 options={standardMapper(filterCleared?.others)}
             />
         </div>
@@ -91,7 +81,7 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
                     <Bullet
                         key={i}
                         name={gender.code === "1" ? "men" : "women"}
-                        value={gender.code === "1" ? t("contentPage:filter.mens") : t("contentPage:filter.womens")}
+                        value={gender.code === "1" ? t("contentPage.filter.mens") : t("contentPage.filter.womens")}
                     />
                 );
             })}
@@ -103,7 +93,7 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
                 syncWithWatch={true}
                 checkboxClick={registerFn}
                 name="specialization"
-                label={t("contentPage:filter.specialization")}
+                label={t("contentPage.filter.specialization")}
                 options={standardMapper(filterCleared?.specialization)}
             />
         </div>
@@ -114,7 +104,7 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
                 syncWithWatch={true}
                 checkboxClick={registerFn}
                 name="equipment"
-                label={t("contentPage:filter.equipment")}
+                label={t("contentPage.filter.equipment")}
                 options={standardMapper(filterCleared?.equipment)}
             />
         </div>
@@ -123,11 +113,11 @@ export const FilterComponents: FC<FilterComponentsProps> = (props) => {
         <div className="order">
             <Select
                 name="order"
-                label={t("contentPage:filter.order")}
+                label={t("contentPage.filter.order")}
                 options={[
-                    { name: t("contentPage:filter.orderSelect.popularity"), code: OrderTypes.Popularity },
-                    { name: t("contentPage:filter.orderSelect.views"), code: OrderTypes.Views },
-                    { name: t("contentPage:filter.orderSelect.name"), code: OrderTypes.Name }
+                    { name: t("contentPage.filter.orderSelect.popularity"), code: OrderTypes.Popularity },
+                    { name: t("contentPage.filter.orderSelect.views"), code: OrderTypes.Views },
+                    { name: t("contentPage.filter.orderSelect.name"), code: OrderTypes.Name }
                 ]} />
         </div>
     )

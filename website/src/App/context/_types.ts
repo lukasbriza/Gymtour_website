@@ -1,6 +1,6 @@
-import { BoltProps } from "@components";
-import { Coach, Fitness } from "@fetchers";
 import React from "react";
+import { BoltProps } from "src/components/_index";
+import { Coach, Fitness } from "src/fetcher/_index";
 
 export type ContextProviderProps = {
   children: React.ReactNode;

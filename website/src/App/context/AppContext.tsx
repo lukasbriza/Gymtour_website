@@ -3,10 +3,10 @@ import { AppStateContext, BreakPoints, ContextProviderProps } from "./_types";
 import { getBreakPoint, preloadImg } from 'src/utils/_index'
 
 //IMAGES//
-import main from '@assets/main.webp'
-import fitness from '@assets/fitness.webp'
-import trainer from '@assets/trainer.webp'
-import register from '@assets/register.webp'
+import main from '../../assets/main.webp'
+import fitness from '../../assets/fitness.webp'
+import trainer from '../../assets/trainer.webp'
+import register from '../../assets/register.webp'
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 

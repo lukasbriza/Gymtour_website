@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { FC, useEffect, useState, useRef } from "react";
 import { ArrowProps, RegionSelectProps } from "./_types";
 import { CheckboxSquared, useClickOutside } from "@lukasbriza/lbui-lib";
-import { selectRegionShowAnimation } from "@animations";
 import { useFormContext } from "react-hook-form";
+import { selectRegionShowAnimation } from "src/animations/_index";
 
 export const MultipleRegionSelect: FC<RegionSelectProps> = (props) => {
   const { label, options, name, checkboxClick, syncWithWatch = false } = props;

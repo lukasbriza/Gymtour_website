@@ -1,5 +1,5 @@
-import { CoachFilter, FitnessFilter, OrderTypes } from "@components";
-import { CoachFilterQuery, FilterObject, FitnesFilterQuery, GetFilterResponse, Region } from "@fetchers";
+import { CoachFilterQuery, FilterObject, FitnesFilterQuery, GetFilterResponse, Region } from "src/fetcher/_index";
+import { CoachFilter, FitnessFilter, OrderTypes } from "./_types";
 
 export const standardMapper = (filterOptions: FilterObject[]): { name: string; code: string }[] => {
   const returnValue = filterOptions.map((option) => {
