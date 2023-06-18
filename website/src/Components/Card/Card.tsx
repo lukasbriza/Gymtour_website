@@ -1,27 +1,38 @@
 import { FC, forwardRef, useEffect, useRef, useState } from "react"
 import { CardProps } from "./_types"
-import { Heart, Topped, Viewed } from "@svg"
 import { Props } from "@lukasbriza/lbui-lib"
 import clsx from "clsx"
 import { Loading } from "../Loading/Loading"
-import { getImage, updateViews } from "@fetchers"
-import { useImageStoreContext, usePopUpContext, useServerdataLazy, useUsercontext } from "@hooks"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { card } from "@config"
-import { Tooltip } from "@components"
-
+import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, usePopUpContext, useServerdataLazy, useUsercontext } from "src/hooks/_index"
+import { Coach, Fitness, addCoachLike, addFitnessLike, getCoaches, getFitnesses, getImage, updateViews } from "src/fetcher/_index"
+import { Heart, Topped, Viewed } from "../SVG/_index"
+import { card } from "src/config/_index"
+import { Tooltip } from "react-tooltip"
 
 export const Card: FC<CardProps> = (props) => {
     const nameref = useRef<HTMLDivElement>(null)
+    const heart = useRef<SVGSVGElement>(null)
     const { t } = useTranslation()
     const navigate = useNavigate()
     const { addToStore, getFromStore } = useImageStoreContext()
+
     const { fetchCall: updateViewsCall } = useServerdataLazy(updateViews)
     const { fetchCall: getImageCall, loading: getImageLoading } = useServerdataLazy(getImage)
+    const { fetchCall: fitnessLike } = useServerdataLazy(addFitnessLike)
+    const { fetchCall: coachLike } = useServerdataLazy(addCoachLike)
+    const { fetchCall: fetchCoach } = useServerdataLazy(getCoaches)
+    const { fetchCall: fetchFitness } = useServerdataLazy(getFitnesses)
+
     const [imageSrc, setImageSrc] = useState<string | undefined>(undefined)
-    const [showFullName, setShowFullName] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(true)
+
+    const { updateFitness } = useFitnessFilterContext()
+    const { updateCoach } = useCoachFilterContext()
+    const { userId, logged } = useUsercontext()
+    const { warning } = usePopUpContext()
+
     const {
         _id,
         topped,
@@ -33,31 +44,41 @@ export const Card: FC<CardProps> = (props) => {
     } = props
 
     const allowTooltip = nameref.current && (nameref.current.scrollWidth > nameref.current.clientWidth)
-
-    const { userId, logged } = useUsercontext()
-    const { warning } = usePopUpContext()
     const isLoading = loading || getImageLoading
 
-    const handleClick = async () => {
-        const updateProps = type === "coach" ? { coach: [_id || ""] } : { fitness: [_id || ""] }
-        updateViewsCall(updateProps)
-        navigate(`/detail/${_id}`)
-    }
-
-    const handleShowFullName = () => {
-        if (allowTooltip) {
-            setShowFullName(true)
+    const handleClick = async (e: React.BaseSyntheticEvent) => {
+        if (!heart.current?.contains(e.target)) {
+            const updateProps = type === "coach" ? { coach: [_id || ""] } : { fitness: [_id || ""] }
+            updateViewsCall(updateProps)
+            navigate(`/detail/${_id}`)
         }
     }
 
-    const handleHideFullName = () => setShowFullName(false)
-
-    const handleHeartClick = () => {
+    const handleHeartClick = async () => {
         if (!logged) {
-            warning({ header: t("contentPage:popUp.cantLikeHeader"), text: t("contentPage:popUp.cantLikeText") })
+            warning({ header: t("contentPage.popUp.cantLikeHeader"), text: t("contentPage.popUp.cantLikeText") })
             return
         }
-        //TODO
+        if (_id) {
+            const callQuery = { id: userId, target: _id }
+            const likeResponse = type === "coach" ? await coachLike(callQuery) : await fitnessLike(callQuery)
+
+            if (likeResponse?.data) {
+                const query = { id: _id }
+                const cardDataresult = type === "coach" ? await fetchCoach(query) : await fetchFitness(query)
+
+                if (cardDataresult?.data && type === "coach") {
+                    const coach = cardDataresult.data[0] as Coach
+                    updateCoach(coach)
+                    return
+                }
+                if (cardDataresult?.data && type === "fitness") {
+                    const fitness = cardDataresult.data[0] as Fitness
+                    updateFitness(fitness)
+                    return
+                }
+            }
+        }
     }
 
 
@@ -82,6 +103,9 @@ export const Card: FC<CardProps> = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect(() => {
+        console.log(popularity?.length)
+    }, [popularity])
     return (
         <div className="contentCard" id={_id} onClick={handleClick} style={{ width: card.width, height: card.height }}>
             <InfoElement className="viewed">
@@ -102,13 +126,13 @@ export const Card: FC<CardProps> = (props) => {
                 }
             </div>
             <div className="infoSection">
-                <Tooltip text={name}>
-                    <InfoElement className="cardNameWrapper">
-                        {/*name*/}123456789 123456789 123asdasda
-                    </InfoElement>
-                </Tooltip>
+                <InfoElement className="cardNameWrapper" data-tooltip-id="nameTooltip" ref={nameref}>
+                    {name}
+                </InfoElement>
+                <Tooltip id="nameTooltip" content={name} hidden={!allowTooltip} />
                 <InfoElement className="heartWrapper">
                     <Heart
+                        ref={heart}
                         className={clsx(["heart", ((logged && popularity && popularity.includes(userId)) || !logged) && "filledHeart"])}
                         width={20}
                         height={18}

@@ -1,10 +1,10 @@
 import { FC, useLayoutEffect, useRef } from "react";
 import { BoltProps } from "./_types";
 import clsx from "clsx";
-import { fadeInBolt, fadeOffBolt, hideBoltCross, showBoltCross } from "@animations";
 import { useFormContext } from "react-hook-form";
-import { useCoachFilterContext, useFitnessFilterContext } from "@hooks";
 import { gsap } from "gsap";
+import { useCoachFilterContext, useFitnessFilterContext } from "src/hooks/_index";
+import { fadeInBolt, fadeOffBolt, hideBoltCross, showBoltCross } from "src/animations/_index";
 
 export const Bolt: FC<BoltProps> = (props) => {
     const { text, code, fieldName, type, id, ...otherProps } = props

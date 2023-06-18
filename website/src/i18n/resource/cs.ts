@@ -3,7 +3,7 @@ export const csTranslation = {
     min: "Minimální délka je {{min}} znaků.",
     max: "Je povoleno maximálně {{max}} znaků.",
     required: "Pole je povinné.",
-    nooBoolean: "Nesprávná hodnota.",
+    noBoolean: "Nesprávná hodnota.",
   },
   common: {
     email: "Email",
@@ -28,13 +28,11 @@ export const csTranslation = {
     emailUpdate: "Změna emailu",
     detail: "Detail",
   },
-
   footer: {
     followUs: "Sledujte nás",
     other: "Ostatní",
     gymtour: "Gymtour",
   },
-
   home: {
     header: {
       part1: "Choose",
@@ -42,7 +40,6 @@ export const csTranslation = {
       part3: "Opportunity!",
     },
   },
-
   crossroad: {
     fitness: {
       header: "Fitness",
@@ -57,7 +54,6 @@ export const csTranslation = {
       button: "Vyhledat",
     },
   },
-
   contentPage: {
     search: "Hledat...",
     filter: {
@@ -81,7 +77,6 @@ export const csTranslation = {
       cantLikeText: "Přidávat lajky můžou jen přihlášení uživatelé.",
     },
   },
-
   registerPage: {
     modalHeader: "Vítejte!",
     modalText: "Na email  “{{email}}„  Vám byly zaslány instrukce pro aktivaci účtu.",
@@ -92,17 +87,14 @@ export const csTranslation = {
     registerHeader: "Zaregistrovat se",
     registerParagraph: "Pro “lajkování„ příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
   },
-
   fitnessContentPage: {
     header1: "Fitness",
     verticalText: "Gymtour",
   },
-
   coachContentPage: {
     header1: "Trenéři",
     verticalText: "Gymtour",
   },
-
   detail: {},
 };
 

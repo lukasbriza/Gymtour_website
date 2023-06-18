@@ -1,4 +1,4 @@
-import { CustomErrorResponseObject } from "@utils";
+import { CustomErrorResponseObject } from "src/utils/_index";
 
 export type User = {
   _id?: string;

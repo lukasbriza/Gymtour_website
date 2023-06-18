@@ -2,9 +2,10 @@ import { FC, Suspense, useEffect } from "react";
 import { LayoutProps } from "./_types";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu } from "@components";
-import { useUsercontext } from "@hooks";
-import { transitionSetup } from "@config";
+import { useUsercontext } from "src/hooks/_index";
+import { Menu } from "src/components/_index";
+import { transitionSetup } from "src/config/_index";
+
 
 export const Layout: FC<LayoutProps> = (props) => {
     const { logged, userId } = useUsercontext()

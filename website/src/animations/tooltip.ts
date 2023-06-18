@@ -1,4 +1,4 @@
-import { fadeIn, fadeOff } from "@animations";
+import { fadeIn, fadeOff } from "./effects";
 import { gsap } from "gsap";
 
 export const showTooltip = (tooltip: gsap.TweenTarget) => {

@@ -66,7 +66,6 @@ html {
 body {
   overflow: auto;
   width: 100vw;
-  height: 100%;
   min-height: 667px;
   min-width: 375px;
 }
@@ -1172,6 +1171,7 @@ body {
 }
 
 .Login img {
+  position: absolute;
   background-position: center;
   -o-object-fit: cover;
      object-fit: cover;
@@ -1179,128 +1179,6 @@ body {
      object-position: center;
   width: 100%;
   height: 100%;
-}
-
-.Login::before {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  content: "";
-  background: rgb(0, 0, 0);
-  background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 50%, rgb(0, 0, 0) 100%);
-}
-
-.loginHeaderWrapper {
-  cursor: default;
-}
-.loginHeaderWrapper h2 {
-  color: white;
-}
-
-.forgetPassword::after {
-  position: absolute;
-  content: " ";
-  height: 1px;
-  width: 142px;
-  background: white;
-  margin-top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  transition-property: width;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-in;
-}
-
-.forgetPassword:hover:after {
-  width: 0px;
-}
-
-#forgetPasswordForm {
-  color: white;
-}
-#forgetPasswordForm .forgetPasswordHeader {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-#forgetPasswordForm .forgetPasswordHeader .underliner {
-  margin-top: 2px;
-}
-#forgetPasswordForm .forgetPasswordText {
-  margin-bottom: 25px;
-}
-#forgetPasswordForm .nameHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-#forgetPasswordForm .inputWrapper:nth-of-type(2) {
-  margin-bottom: 10px;
-}
-#forgetPasswordForm .emailHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-#forgetPasswordForm .inputWrapper:nth-of-type(3) {
-  margin-bottom: 20px;
-}
-#forgetPasswordForm .pageButton .buttonInitial {
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background: rgb(38, 62, 105);
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 18px;
-}
-#forgetPasswordForm .pageButton .buttonHover {
-  background: rgb(10, 21, 88);
-  transition-property: background;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-out;
-}
-
-#forgetNameForm {
-  color: white;
-}
-#forgetNameForm .forgetNameHeader {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-#forgetNameForm .forgetNameHeader .underliner {
-  margin-top: 2px;
-}
-#forgetNameForm .forgetNameText {
-  margin-bottom: 25px;
-}
-#forgetNameForm .emailHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-#forgetNameForm .inputWrapper:nth-of-type(2) {
-  margin-bottom: 10px;
-}
-#forgetNameForm .passwordHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-#forgetNameForm .inputWrapper:nth-of-type(3) {
-  margin-bottom: 20px;
-}
-#forgetNameForm .pageButton .buttonInitial {
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background: rgb(38, 62, 105);
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 18px;
-}
-#forgetNameForm .pageButton .buttonHover {
-  background: rgb(10, 21, 88);
-  transition-property: background;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-out;
 }
 
 #EmailUpdate img {
@@ -3329,7 +3207,7 @@ body {
   left: 5px;
   top: 4px;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out, top 0.5s ease-out;
+  transition: opacity 0.4s ease-out, top 0.4s ease-out;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -3383,55 +3261,4 @@ body {
 }
 .popupBase .lbui-PopUp-header {
   padding-bottom: 8px;
-}
-
-.tooltip {
-  display: initial;
-  opacity: 1;
-  position: fixed;
-  z-index: 100;
-  background: white;
-  border-radius: 4px;
-  padding: 4px 10px;
-}
-
-.tooltipTriangle {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 7.5px solid transparent;
-  border-top: 10px solid white;
-  border-bottom: 0px;
-}
-
-.tooltipPosition-left .tooltipTriangle {
-  border: 7.5px solid transparent;
-  border-right: 0px;
-  border-left: 10px solid white;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 100%;
-}
-
-.tooltipPosition-top .tooltipTriangle {
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.tooltipPosition-right .tooltipTriangle {
-  border: 7.5px solid transparent;
-  border-right: 10px solid white;
-  border-left: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  left: -10px;
-}
-
-.tooltipPosition-bottom .tooltipTriangle {
-  top: -10px;
-  border-top: 0px;
-  border-bottom: 10px solid white;
-  left: 50%;
-  transform: translateX(-50%);
 }/*# sourceMappingURL=index.css.map */

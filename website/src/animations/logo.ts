@@ -1,6 +1,7 @@
 import { setState } from "src/app/_index";
-import { fadeIn, fadeOff, fill, stroke } from "@animations";
+
 import { gsap } from "gsap";
+import { fadeIn, fadeOff, fill, stroke } from "./effects";
 
 export const bigLogoAnimation = (
   bigLogoWrapper: gsap.TweenTarget,

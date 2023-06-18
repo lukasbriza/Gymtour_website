@@ -1,4 +1,4 @@
-import { CustomErrorResponseObject } from "@utils";
+import { CustomErrorResponseObject } from "src/utils/_index";
 import { Contact } from "../fitness/_types";
 
 export type CoachFilterQuery = {
@@ -10,6 +10,7 @@ export type CoachFilterQuery = {
   specialization?: string[];
   projection?: string;
   search?: string;
+  id?: string;
 };
 
 export type CoachFilter = {
@@ -63,3 +64,9 @@ export type AddCoachResponse = CustomErrorResponseObject<boolean>;
 
 export type UpdateCoachBody = Partial<Coach> & { _id: string };
 export type UpdateCoachResponse = CustomErrorResponseObject<boolean>;
+
+export type AddCoachLikeQuery = {
+  id: string;
+  target: string;
+};
+export type AddCoachLikeResponse = CustomErrorResponseObject<boolean>;

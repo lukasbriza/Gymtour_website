@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { FilterActiveBoltsProps } from "./_types";
 import clsx from "clsx";
-import { Bolt } from "@components";
-import { useCoachFilterContext, useFitnessFilterContext } from "@hooks";
+import { FilterActiveBoltsProps } from "./_types";
+import { useCoachFilterContext, useFitnessFilterContext } from "src/hooks/_index";
+import { Bolt } from "../_index";
 
 export const FilterActiveBolts: FC<FilterActiveBoltsProps> = (props) => {
     const { type } = props

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { text } from '../config/textSource'
 import { useAnimationContext } from 'src/hooks/_index'
-import { smallLogoShow } from '@animations'
+import { smallLogoShow } from 'src/animations/_index'
 import clsx from 'clsx'
 
 

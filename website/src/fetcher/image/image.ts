@@ -1,9 +1,9 @@
-import { getAxiosInstance } from "@libs";
+import { getAxiosInstance } from "src/libs/_index";
 import { GetImage, GetImageResponse } from "./_types";
-import { getFetchAdress } from "@utils";
-import { Api } from "@config";
+import { getFetchAdress } from "src/utils/_index";
+import { Api } from "src/config/_index";
 import { AxiosResponse } from "axios";
-import { handleFetchError } from "@fetchers";
+import { handleFetchError } from "src/fetcher/_index";
 
 export const getImage = ({ id }: GetImage) => {
   const instance = getAxiosInstance();

@@ -1,7 +1,7 @@
 import { useEffect, FC } from 'react'
 import { text } from '../config/textSource'
 import { useAnimationContext, useAppContext } from 'src/hooks/_index'
-import { smallLogoShow } from '@animations'
+import { smallLogoShow } from 'src/animations/_index'
 import clsx from 'clsx'
 
 const CoOp: FC = () => {

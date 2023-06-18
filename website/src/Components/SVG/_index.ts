@@ -13,3 +13,4 @@ export * from "./SearchIcon/SearchIcon";
 export * from "./Heart/Heart";
 export * from "./Topped/Topped";
 export * from "./Viewed/Viewed";
+export * from "./LoginButton";

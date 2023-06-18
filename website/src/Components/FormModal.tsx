@@ -8,7 +8,7 @@ import { text } from '../config/textSource'
 //CONTEXT//
 //FUNCTUION//
 import { classListMaker } from '../utils/classListMaker'
-import { hideFormModal, infiniteRotation, loadingError, showFormModal, showMessageButton } from '@animations'
+import { hideFormModal, infiniteRotation, loadingError, showFormModal, showMessageButton } from 'src/animations/_index'
 
 const FormModal = (props: formModalProps) => {
     //////////////////////////////////////////////////

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { ContentHeader, Filter, FilteredContent } from "@components";
-import { FilterContexProvider } from "@app";
+import { ContentHeader, Filter, FilteredContent } from "src/components/_index";
+import { FilterContexProvider } from "src/app/_index";
 
 const Fitness: FC = () => {
   const { t } = useTranslation();
@@ -21,9 +21,9 @@ const Fitness: FC = () => {
           "relative",
         ])}
       >
-        <ContentHeader text={t("fitnessContentPage:header1")} />
+        <ContentHeader text={t("fitnessContentPage.header1")} />
         <div className={clsx(["verticalText"])}>
-          {t("fitnessContentPage:verticalText")}
+          {t("fitnessContentPage.verticalText")}
         </div>
         <Filter type={type} />
         <FilteredContent type={type} />

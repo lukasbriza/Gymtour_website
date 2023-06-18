@@ -1,3 +1,5 @@
+import Joi from "joi";
+import { TFunction } from "i18next";
 import { joiResolver } from "@hookform/resolvers/joi";
 import {
   optionalBooleanValidation,
@@ -5,9 +7,7 @@ import {
   requiredEmailValidaiton,
   requiredMinMaxValidation,
   requiredStringValidation,
-} from "@validations";
-import { TFunction } from "i18next";
-import Joi from "joi";
+} from "../../../validations/_index";
 
 const schema = (t: TFunction) => {
   return Joi.object({

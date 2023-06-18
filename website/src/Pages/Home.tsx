@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import main from '../assets/main.webp'
 import { text } from '../config/textSource'
-import { bigLogoAnimation, showHeader, smallLogoShow } from '@animations'
-import { BigLogo, BigText } from '@svg'
-import { routes } from '@config'
-import { useAnimationContext } from '@hooks'
+import { bigLogoAnimation, showHeader, smallLogoShow } from 'src/animations/_index'
+import { BigLogo, BigText } from 'src/components/SVG/_index'
+import { routes } from 'src/config/_index'
+import { useAnimationContext } from 'src/hooks/_index'
 import { useTranslation } from 'react-i18next'
 
 //TODO! - change linf for button
@@ -130,13 +130,13 @@ const MainSection: FC = () => {
             >
                 <div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{t("home:header.part1")}</h1>
+                        <h1 className={"homeHeader"}>{t("home.header.part1")}</h1>
                     </div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{t("home:header.part2")}</h1>
+                        <h1 className={"homeHeader"}>{t("home.header.part2")}</h1>
                     </div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{t("home:header.part3")}</h1>
+                        <h1 className={"homeHeader"}>{t("home.header.part3")}</h1>
                     </div>
                 </div>
             </div>

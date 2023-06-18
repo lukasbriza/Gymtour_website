@@ -1,16 +1,20 @@
-import { Layer, Underliner, StringInput, Checkbox, ModalHeader, ErrorModalHeader } from "@components"
-import clsx from "clsx"
 import { FC } from "react"
-import registerImg from '@assets/register.webp'
-import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-import { formValidationSchema } from "./RegisterPage.validation"
+import { useTranslation } from "react-i18next"
 import { RegisterFormValues } from "./_types"
-import { useModal } from "@hooks"
+import clsx from "clsx"
+import { formValidationSchema } from "./validation"
+import { useModal, useServerdataLazy } from "src/hooks/_index"
+import { addUser } from "src/fetcher/_index"
+import { Checkbox, ErrorModalHeader, Layer, ModalHeader, StringInput, Underliner } from "src/components/_index"
+import registerImg from "../../../assets/register.webp"
+
+
 
 export const RegisterPage: FC = () => {
     const { t } = useTranslation()
     const { showModal } = useModal()
+    const { fetchCall: registerUser } = useServerdataLazy(addUser)
     const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormValues>({
         defaultValues: {
             name: "",
@@ -24,27 +28,22 @@ export const RegisterPage: FC = () => {
         resolver: formValidationSchema(t)
     })
 
-    const onSubmit = (values: RegisterFormValues) => {
-        //sucess ?? error
-        /*const fetchResult: any = await fetchAgent.registerUser({
-            username: name.value,
-            password: password.value,
-            email: email.value,
-            terms: terms,
-            dataProcessing: dataProcessing
-        })*/
+    const onSubmit = async (values: RegisterFormValues) => {
+        /* const result = await registerUser(values)*/
+
 
         const register = false //call
-        //SUCCESS MODAL
         if (register) {
-            const header = <ModalHeader header={t("registerPage:modalHeader")} />
-            const text = t("registerPage:modalText", { email: values.email })
-            const button = t("registerPage:modalButton")
+            //SUCCESS MODAL
+            const header = <ModalHeader header={t("registerPage.modalHeader")} />
+            const text: string = t("registerPage.modalText", { email: values.email })
+            const button: string = t("registerPage.modalButton")
             showModal(header, text, button, clearForm)
         } else {
-            const errorHeader = <ErrorModalHeader header={t("registerPage:modalErrorHeader")} />
-            const errorText = t("registerPage:modalErrorText")
-            const button = t("registerPage:modalButton")
+            //ERROR MODAL
+            const errorHeader = <ErrorModalHeader header={t("registerPage.modalErrorHeader")} />
+            const errorText: string = t("registerPage.modalErrorText")
+            const button: string = t("registerPage.modalButton")
             showModal(errorHeader, errorText, button, clearForm)
         }
     }
@@ -59,17 +58,17 @@ export const RegisterPage: FC = () => {
             <img src={registerImg} alt="RegisterBckgImg" />
             <Layer className={clsx(["stretchY", "stretchX"])}>
                 <div className={clsx(["centerX", "relative", "registerHeaderWrapper"])}>
-                    <h2>{t("registerPage:registerHeader")}</h2>
+                    <h2>{t("registerPage.registerHeader")}</h2>
                     <Underliner width={"80%"} />
                 </div>
                 <div className={clsx(["registerParagraph", "relative", "centerX"])}>
-                    {t("registerPage:registerParagraph")}
+                    {t("registerPage.registerParagraph")}
                 </div>
                 <div className={clsx(["registerFormWrapper", "centerX", "relative"])}>
                     <form action="#RegisterSection" id="registerForm" onSubmit={handleSubmit(onSubmit)}>
                         <StringInput
                             className={"input1"}
-                            label={t("common:name")}
+                            label={t("common.name")}
                             control={control}
                             errorText={errors.name?.message}
                             isError={errors.name !== undefined}
@@ -77,7 +76,7 @@ export const RegisterPage: FC = () => {
                         />
                         <StringInput
                             className={"input2"}
-                            label={t("common:password")}
+                            label={t("common.password")}
                             control={control}
                             errorText={errors.password?.message}
                             isError={errors.password !== undefined}
@@ -85,7 +84,7 @@ export const RegisterPage: FC = () => {
                         />
                         <StringInput
                             className={"input3"}
-                            label={t("common:email")}
+                            label={t("common.email")}
                             control={control}
                             errorText={errors.email?.message}
                             isError={errors.email !== undefined}
@@ -97,7 +96,7 @@ export const RegisterPage: FC = () => {
                                 control={control}
                                 isError={errors.terms !== undefined}
                                 errorText={errors.terms?.message}
-                                label={t("common:businessTermsAgreement")}
+                                label={t("common.businessTermsAgreement")}
                                 name={"terms"}
                             />
                             <Checkbox
@@ -105,11 +104,11 @@ export const RegisterPage: FC = () => {
                                 errorText={errors.dataProcessing?.message}
                                 control={control}
                                 isError={errors.dataProcessing !== undefined}
-                                label={t("common:dataProcessingAgreement")}
+                                label={t("common.dataProcessingAgreement")}
                                 name={"dataProcessing"}
                             />
                         </div>
-                        <button className={clsx(["submitButton", "registerFormButton"])} type="submit" >{t("registerPage:registerButton")}</button>
+                        <button className={clsx(["submitButton", "registerFormButton"])} type="submit" >{t("registerPage.registerButton")}</button>
                     </form>
                 </div>
             </Layer >

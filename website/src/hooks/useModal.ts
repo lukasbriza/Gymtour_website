@@ -1,4 +1,4 @@
-import { hideMenu, showMenu } from "@animations";
+import { hideMenu, showMenu } from "src/animations/_index";
 import { ModalContext } from "@lukasbriza/lbui-lib";
 import { ReactNode, useContext } from "react";
 

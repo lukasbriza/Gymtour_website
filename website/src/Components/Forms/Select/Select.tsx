@@ -1,10 +1,10 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { ArrowProps, SelectProps, SelectTypes } from "./_types";
 import { useClickOutside } from "@lukasbriza/lbui-lib";
-import { selectShowAnimation } from "@animations";
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { selectShowAnimation } from "../../../animations/_index"
 
 
 
@@ -18,7 +18,7 @@ export const Select: FC<SelectProps> = (props) => {
     const { t } = useTranslation()
     const methods = useFormContext();
 
-    const clearTranslation = t("contentPage:filter.orderSelect.clear")
+    const clearTranslation = t("contentPage.filter.orderSelect.clear")
 
     const handleMouseLeave = () => !open && setHovered(false);
     const handleMouseEnter = () => !open && setHovered(true);

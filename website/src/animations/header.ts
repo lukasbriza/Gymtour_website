@@ -1,5 +1,5 @@
-import { fadeIn } from "@animations";
 import { gsap } from "gsap";
+import { fadeIn } from "./effects";
 
 export const showHeader = () => {
   const homeHeader = gsap.utils.toArray(".homeHeader");
