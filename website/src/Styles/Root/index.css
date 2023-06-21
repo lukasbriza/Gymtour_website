@@ -247,9 +247,9 @@ body {
 #Home img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -411,9 +411,9 @@ body {
 .FitnessSection img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -482,9 +482,9 @@ body {
 .CoachSection img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -546,9 +546,9 @@ body {
 .RegisterSection img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -601,7 +601,7 @@ body {
   .registerFormWrapper #registerForm {
     display: grid;
     -moz-column-gap: 15px;
-    column-gap: 15px;
+         column-gap: 15px;
     row-gap: 10px;
     grid-template-rows: 1fr 1fr min-content 1fr min-content;
     grid-template-columns: 1fr 1fr;
@@ -705,9 +705,9 @@ body {
   position: absolute;
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -731,7 +731,7 @@ body {
   align-items: center;
   justify-items: center;
   -moz-column-gap: 20px;
-  column-gap: 20px;
+       column-gap: 20px;
 }
 @media (min-width: 47.5em) {
   .loginFormWrapper form {
@@ -763,7 +763,7 @@ body {
   align-items: center;
   justify-items: center;
   -moz-column-gap: 20px;
-  column-gap: 20px;
+       column-gap: 20px;
 }
 
 .headerWrapper {
@@ -874,9 +874,9 @@ body {
 #EmailUpdate img {
   background-position: center;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   -o-object-position: center;
-  object-position: center;
+     object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -1689,8 +1689,7 @@ body {
   grid-area: filter;
   margin: 5px;
   transition: transform 200ms ease-out;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 .filterButton div {
   width: 100%;
@@ -1940,7 +1939,7 @@ body {
 .rootModalClass {
   background: rgba(0, 0, 0, 0.477);
   -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
 }
 
 .modalClass {
@@ -2480,9 +2479,7 @@ body {
 .bulletWrapper .bulletText {
   padding: 10px 15px;
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
-    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   background: rgb(87, 87, 87);
   transition: background 0.25s ease-out;
 }
@@ -2521,8 +2518,7 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   min-width: 150px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   background: rgb(57, 57, 57);
   transition: background 0.25s ease-out;
   border-radius: 5px;
@@ -2561,8 +2557,7 @@ body {
 .optionsWrapper {
   background: rgb(51, 51, 51);
   border-radius: 0px 0px 5px 5px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   width: 100%;
   position: absolute;
   display: none;
@@ -2664,13 +2659,12 @@ body {
   z-index: 1;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 .searchBar input {
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: none;
   height: 37px;
   min-width: 100px;
@@ -2722,7 +2716,7 @@ body {
   display: grid;
   position: relative;
   -moz-column-gap: 5px;
-  column-gap: 5px;
+       column-gap: 5px;
   row-gap: 5px;
   max-width: 1200px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -2848,7 +2842,7 @@ body {
   display: grid;
   position: relative;
   -moz-column-gap: 5px;
-  column-gap: 5px;
+       column-gap: 5px;
   row-gap: 5px;
   max-width: 1200px;
   align-items: center;
@@ -2959,8 +2953,7 @@ body {
   background: rgb(51, 51, 51);
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 16px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 16px 16px;
 }
 
 .imgSection {
@@ -3101,4 +3094,4 @@ body {
 }
 .popupBase .lbui-PopUp-header {
   padding-bottom: 8px;
-} /*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

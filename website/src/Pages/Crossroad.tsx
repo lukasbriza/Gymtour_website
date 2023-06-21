@@ -1,12 +1,11 @@
 import { FC } from 'react'
-import { Layer, Button, Footer, RegisterPage } from "src/components/_index";
 import clsx from 'clsx'
+import { Layer, Button, Footer, RegisterPage } from "src/components/_index";
 import { useTranslation } from 'react-i18next'
 import { routes } from 'src/config/_index';
 import fitness from "../assets/fitness.webp";
 import trainer from "../assets/trainer.webp";
 
-import clsx from 'clsx'
 
 const Crossroad: FC = () => {
     return (
