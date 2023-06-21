@@ -1,5 +1,14 @@
 #Crossroad {
+  max-width: $maxWidth;
   overflow: auto;
+
+  #crossroadSectionWrapper {
+    @include mq($from: desktop) {
+      display: grid;
+      grid-template-columns: 1fr 10px 1fr;
+      grid-template-areas: "fitnessSection divider coachSection";
+    }
+  }
 }
 .layer {
   display: grid;
@@ -9,7 +18,30 @@
   grid-area: button;
   align-self: center;
 }
+#crossroadDivider {
+  display: none;
+
+  @include mq($from: desktop) {
+    grid-area: divider;
+    display: initial;
+  }
+}
 //FITNESS SECTION//
+#FitnessSection {
+  @include mq($from: desktop) {
+    grid-area: fitnessSection;
+  }
+  .layer {
+    grid-template-rows: 90px 1fr 3fr 1fr 90px;
+    grid-template-areas:
+      "."
+      "header"
+      "paragraph"
+      "button"
+      ".";
+  }
+}
+
 .FitnessSection {
   color: $minorColor1;
   background: $minorColor2;
@@ -49,32 +81,42 @@
   align-self: center;
 }
 
+.divider {
+  background: rgb(255, 255, 255);
+}
+
 @include mq($from: desktop) {
   .FitnessSection::before {
     width: 100%;
     height: 100%;
     position: absolute;
     content: "";
-    background: rgb(0, 0, 0);
+    background: $mainColor;
     background: linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0) 20%);
   }
-}
 
-.divider {
-  background: rgb(255, 255, 255);
-}
-
-@include mq($from: desktop) {
   .divider::before {
     width: 30px;
     height: 100vh;
     position: absolute;
     content: "";
-    background: rgb(0, 0, 0);
+    background: $mainColor;
     background: linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0) 20%);
   }
 }
+
 //COACH SECTION//
+#CoachSection {
+  .layer {
+    grid-template-rows: 90px 1fr 3fr 1fr 90px;
+    grid-template-areas:
+      "."
+      "header"
+      "paragraph"
+      "button"
+      ".";
+  }
+}
 .CoachSection {
   color: $minorColor1;
   background: $minorColor2;
@@ -120,10 +162,26 @@
   height: 100%;
   position: absolute;
   content: "";
-  background: rgb(0, 0, 0);
+  background: $mainColor;
   background: linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0) 20%);
 }
 
+//REGISTER SECTION
+#RegisterSection {
+  max-width: $maxWidth;
+  @include minHeightWidth;
+
+  .layer {
+    display: grid;
+    grid-template-rows: 1fr 55px min-content min-content 1fr;
+    grid-template-areas:
+      "."
+      "header"
+      "paragraph"
+      "form"
+      ".";
+  }
+}
 .RegisterSection {
   color: $minorColor1;
   background: $minorColor2;
@@ -148,19 +206,104 @@
   height: 100%;
   position: absolute;
   content: "";
-  background: rgb(0, 0, 0);
+  background: $mainColor;
   background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 1) 100%);
 }
 
 .registerHeaderWrapper {
   width: fit-content;
+  grid-area: header;
   h2 {
+    font-size: clamp(18px, 7vw, 40px);
     text-transform: uppercase;
   }
 }
 
 .registerParagraph {
   margin-top: 20px;
+  margin-bottom: 50px;
+  padding-top: 20px;
   width: 70%;
   text-align: center;
+  font-size: clamp(15px, 3vw, 17px);
+  grid-area: paragraph;
+}
+
+.registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-self: center;
+
+  width: 70%;
+  grid-area: form;
+
+  @include mq($from: tablet) {
+    #registerForm {
+      display: grid;
+      column-gap: 15px;
+      row-gap: 10px;
+      grid-template-rows: 1fr 1fr min-content 1fr min-content;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "input1 input2"
+        "input3 input3"
+        "formTerms formTerms"
+        "button button"
+        "loginLink loginLink";
+    }
+    width: 85%;
+    max-width: 900px;
+
+    .input1 {
+      grid-area: input1;
+    }
+    .input2 {
+      grid-area: input2;
+    }
+    .input3 {
+      grid-area: input3;
+    }
+
+    .hadAccount {
+      grid-area: loginLink;
+    }
+  }
+}
+
+.formTerms {
+  grid-area: formTerms;
+
+  @include mq($from: tablet) {
+    width: 320px;
+    font-size: 15px;
+  }
+}
+
+.registerFormButton {
+  @include mq($from: tablet) {
+    grid-area: button;
+  }
+}
+
+.hadAccount {
+  margin-left: auto;
+  margin-right: auto;
+  width: min-content;
+  white-space: nowrap;
+  margin-top: 30px;
+
+  a {
+    text-decoration: none;
+    color: $linkAlternative;
+    font-weight: 600;
+    margin-left: 10px;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: $linkAlternativeHover;
+  }
+
+  color: $minorColor1;
 }

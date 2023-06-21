@@ -1,19 +1,3 @@
-type modalType = {
-  loading: boolean;
-  sucess: boolean | undefined;
-  msg: ReactElement<any, any> | undefined;
-};
-
-type errorMapObj = {
-  Error: {
-    code: number;
-    name: string;
-    message: string;
-    trace: string;
-    date: string;
-  };
-};
-
 type formModalProps = {
   loading: boolean;
   sucess: boolean | undefined;
@@ -39,14 +23,6 @@ type formStringInputProps = {
   maxLength?: number;
   minLength?: number;
 };
-
-interface checkAuthOfUser {
-  token: string;
-}
-interface checkAuthOfUser {
-  username: string;
-  password: string;
-}
 
 interface getFilterData_FetchCall {
   _id: string;
@@ -75,41 +51,6 @@ interface getFilterData_FetchCall {
     name: { cz: string; eng: string };
     code: string;
   }[];
-}
-
-interface registerUser_FetchCall {
-  registered: boolean;
-  email: string;
-}
-
-interface checkAuthOfUser_FetchCall {
-  authenticated: boolean;
-  tokenExpired: boolean;
-  userData: {
-    username: string;
-    isAdmin: boolean;
-    userId: string;
-    iat: number;
-    exp: number;
-  };
-}
-
-interface loginUser_FetchCall {
-  authenticated: boolean;
-  token: string;
-  userId: string;
-}
-interface getUserInformation_FetchCall {
-  agreement: {
-    terms: { awarded: string; status: boolean };
-    dataProcessingForPropagation: { awarded: string; status: boolean };
-  };
-  _id: string;
-  isAdmin: boolean;
-  username: string;
-  email: string;
-  fitnessOwned: string[] | [];
-  coachOwned: string[] | [];
 }
 
 interface getViews_FetchCall {

@@ -11,7 +11,7 @@ const Contact = ReactLazyPreload(() => import("../pages/Contact"));
 const BusinessConditions = ReactLazyPreload(() => import("../pages/BusinessConditions"));
 const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"));
 
-const Login = ReactLazyPreload(() => import("../pages/Login"));
+const Login = ReactLazyPreload(() => import("../pages/login/Login"));
 const Dashboard = ReactLazyPreload(() => import("../pages/Dashboard"));
 const EmailUpdate = ReactLazyPreload(() => import("../pages/EmailUpdate"));
 const Detail = ReactLazyPreload(() => import("../pages/content/Detail"));
@@ -124,3 +124,9 @@ export const filter = {
   },
   defaultLimit: 20,
 } as const;
+
+export const links = {
+  fb: "https://www.facebook.com/",
+  ig: "https://www.instagram.cz/",
+  yb: "https://www.youtube.cz/",
+};

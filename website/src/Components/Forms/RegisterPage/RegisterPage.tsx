@@ -6,10 +6,10 @@ import clsx from "clsx"
 import { formValidationSchema } from "./validation"
 import { useModal, useServerdataLazy } from "src/hooks/_index"
 import { addUser } from "src/fetcher/_index"
-import { Checkbox, ErrorModalHeader, Layer, ModalHeader, StringInput, Underliner } from "src/components/_index"
+import { Checkbox, Layer, ModalHeader, StringInput, Underliner } from "src/components/_index"
 import registerImg from "../../../assets/register.webp"
-
-
+import { Link } from "react-router-dom"
+import { routes } from "src/config/mainConfiguration"
 
 export const RegisterPage: FC = () => {
     const { t } = useTranslation()
@@ -17,7 +17,7 @@ export const RegisterPage: FC = () => {
     const { fetchCall: registerUser } = useServerdataLazy(addUser)
     const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormValues>({
         defaultValues: {
-            name: "",
+            username: "",
             password: "",
             email: "",
             terms: false,
@@ -29,22 +29,24 @@ export const RegisterPage: FC = () => {
     })
 
     const onSubmit = async (values: RegisterFormValues) => {
-        /* const result = await registerUser(values)*/
+        const { email, username, terms, dataProcessing, password } = values
 
+        const result = await registerUser({
+            email,
+            password,
+            username,
+            agreement: {
+                terms: { status: terms },
+                dataProcessingForPropagation: { status: dataProcessing }
+            }
+        })
 
-        const register = false //call
-        if (register) {
+        if (result?.data) {
             //SUCCESS MODAL
             const header = <ModalHeader header={t("registerPage.modalHeader")} />
             const text: string = t("registerPage.modalText", { email: values.email })
             const button: string = t("registerPage.modalButton")
             showModal(header, text, button, clearForm)
-        } else {
-            //ERROR MODAL
-            const errorHeader = <ErrorModalHeader header={t("registerPage.modalErrorHeader")} />
-            const errorText: string = t("registerPage.modalErrorText")
-            const button: string = t("registerPage.modalButton")
-            showModal(errorHeader, errorText, button, clearForm)
         }
     }
 
@@ -70,9 +72,9 @@ export const RegisterPage: FC = () => {
                             className={"input1"}
                             label={t("common.name")}
                             control={control}
-                            errorText={errors.name?.message}
-                            isError={errors.name !== undefined}
-                            name={"name"}
+                            errorText={errors.username?.message}
+                            isError={errors.username !== undefined}
+                            name={"username"}
                         />
                         <StringInput
                             className={"input2"}
@@ -109,6 +111,12 @@ export const RegisterPage: FC = () => {
                             />
                         </div>
                         <button className={clsx(["submitButton", "registerFormButton"])} type="submit" >{t("registerPage.registerButton")}</button>
+                        <div className="hadAccount">
+                            {t("registerPage.hadAccount1")}
+                            <Link to={routes.login.path}>
+                                {t("registerPage.hadAccount2")}
+                            </Link>
+                        </div>
                     </form>
                 </div>
             </Layer >

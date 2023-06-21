@@ -1,6 +1,6 @@
 import { Props } from "@lukasbriza/lbui-lib";
 
 export type YoutubeLogoProps = {
-  fill: string;
+  fill?: string;
   scale: number;
 } & Props<SVGElement>;

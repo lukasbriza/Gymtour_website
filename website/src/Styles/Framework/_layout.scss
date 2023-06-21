@@ -1,6 +1,5 @@
-@import "../mq";
-/////////////////////////////////////////////////////////////
-//MAIN LAYOUT SETTINGS//
+@import "./mq";
+
 * {
   margin: 0px;
   padding: 0px;
@@ -38,7 +37,7 @@ html {
 body {
   overflow: auto;
   width: 100vw;
-  //height: 100%;
+  height: 100%;
 
   @include minHeightWidth;
 }
@@ -58,13 +57,3 @@ body {
   @include minHeightWidth;
   max-width: $maxWidth;
 }
-
-@import "./SubLayouts/menuLayout";
-@import "./SubLayouts/homeLayout";
-@import "./SubLayouts/crossroadLayout";
-@import "./SubLayouts/contentpagesLayout";
-@import "./SubLayouts/footerLayout";
-@import "./SubLayouts/loginLayout";
-@import "./SubLayouts/dashboardLayout";
-@import "./SubLayouts/overviewLayout";
-@import "./SubLayouts/settingsLayout";

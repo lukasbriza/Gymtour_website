@@ -12,3 +12,4 @@ export * from "./loading";
 export * from "./multipleSelect";
 export * from "./bolt";
 export * from "./tooltip";
+export * from "./loginPage";

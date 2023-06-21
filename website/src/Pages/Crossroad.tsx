@@ -12,7 +12,7 @@ const Crossroad: FC = () => {
         <div id="Crossroad" className={clsx(["relative", "stretch", "minorColor2"])}>
             <div id="crossroadSectionWrapper">
                 <FitnessPage />
-                <div id="divider" className="divider"></div>
+                <div id="crossroadDivider" className="divider"></div>
                 <CoachPage />
             </div>
             <RegisterPage />

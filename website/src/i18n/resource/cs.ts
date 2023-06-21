@@ -10,6 +10,7 @@ export const csTranslation = {
     name: "Jméno",
     username: "Uživatelské jméno",
     password: "Heslo",
+    login: "Přihlásit",
     businessTermsAgreement: "Souhlas s obchodními podmínkami",
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
   },
@@ -86,6 +87,8 @@ export const csTranslation = {
     registerButton: "Registrovat",
     registerHeader: "Zaregistrovat se",
     registerParagraph: "Pro “lajkování„ příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
+    hadAccount1: "Máte již účet?",
+    hadAccount2: "Přihlásit se",
   },
   fitnessContentPage: {
     header1: "Fitness",
@@ -95,7 +98,15 @@ export const csTranslation = {
     header1: "Trenéři",
     verticalText: "Gymtour",
   },
-  detail: {},
+  loginPage: {
+    header: "Přihlásit se",
+    header2: "Obnova údajů",
+    loginButton: "Příhlásit",
+    changeButton: "Odeslat",
+    changeBackButton: "Zpět",
+    changeLink: "Zapomněl jsem jméno nebo heslo.",
+  },
+  detailPage: {},
 };
 
 export type AppTranslationType = typeof csTranslation;
