@@ -16,21 +16,8 @@
     "noEmit": true,
     "incremental": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@app": ["src/app/_index.ts"],
-      "@components": ["src/components/_index.ts"],
-      "@config": ["src/config/_index.ts"],
-      "@utils": ["src/utils/_index.ts"],
-      "@assets": ["./src/assets"],
-      "@hooks": ["src/hooks/_index.ts"],
-      "@animations": ["./src/animations/_index.ts"],
-      "@svg": ["src/components/SVG/_index.ts"],
-      "@validations": ["./src/validations/_index.ts"],
-      "@libs":["./src/libs/_index.ts"],
-      "@fetchers":["./src/fetcher/_index.ts"]
-    }
+    "baseUrl": "."
   },
-  "include": ["**/*.ts", "**/*.tsx", "src", "craco.config.js"],
+  "include": ["**/*.ts", "**/*.tsx", "src"],
   "exclude": ["node_modules"]
 }

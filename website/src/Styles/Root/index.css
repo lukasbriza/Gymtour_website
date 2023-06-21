@@ -89,672 +89,6 @@ body {
   max-width: 2500px;
 }
 
-.menu {
-  max-width: 2500px;
-  display: grid;
-  width: 100%;
-  min-width: 360px;
-  grid-template-columns: 15px 1fr min-content 1fr 25px;
-  grid-template-areas: ". . logo hamburger .";
-}
-@media (max-width: 156.25em) {
-  .menu {
-    width: 100vw;
-  }
-}
-@media (min-width: 47.5em) {
-  .menu {
-    grid-template-columns: 15px min-content 1fr min-content 15px;
-    grid-template-areas: ". logo . menuOffer .";
-  }
-}
-
-.logoGrid {
-  grid-area: logo;
-}
-
-.menuOfferGrid {
-  grid-area: menuOffer;
-}
-
-.hamburgerGrid {
-  grid-area: hamburger;
-}
-
-.menuOfferGrid {
-  grid-area: menuOffer;
-}
-
-#Home {
-  max-width: 2500px;
-  display: grid;
-  grid-template-rows: 50px 1fr 4fr 1fr;
-  grid-template-areas: "." "pageHeader" "mainHeader" "button";
-}
-
-#pageHeader {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  grid-area: pageHeader;
-}
-
-#bigLogoWrapper {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  grid-area: mainHeader;
-}
-
-#homeHeader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-area: mainHeader;
-}
-#homeHeader div .headerWrapper {
-  width: -moz-min-content;
-  width: min-content;
-  margin-left: 30px;
-}
-#homeHeader div .headerWrapper:nth-child(1) {
-  margin-right: auto;
-}
-#homeHeader div .headerWrapper:nth-child(2) {
-  margin-top: 25px;
-  margin-bottom: 25px;
-  margin-right: auto;
-}
-#homeHeader div .headerWrapper:nth-child(3) {
-  margin-right: auto;
-}
-@media (min-width: 47.5em) {
-  #homeHeader div {
-    width: 90%;
-  }
-  #homeHeader div .headerWrapper {
-    width: -moz-min-content;
-    width: min-content;
-  }
-  #homeHeader div .headerWrapper:nth-child(1) {
-    margin-right: auto;
-  }
-  #homeHeader div .headerWrapper:nth-child(2) {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-right: auto;
-    margin-left: calc(50vw - 280px);
-  }
-  #homeHeader div .headerWrapper:nth-child(3) {
-    margin-left: auto;
-    margin-right: 0px;
-  }
-}
-@media (min-width: 81.25em) {
-  #homeHeader div {
-    width: 1170px;
-  }
-  #homeHeader div .headerWrapper:nth-child(2) {
-    margin-right: auto;
-    margin-left: 370px;
-  }
-}
-
-#homeButton {
-  grid-area: button;
-}
-
-#Crossroad {
-  max-width: 2500px;
-}
-@media (min-width: 61.25em) {
-  #Crossroad #crossroadSectionWrapper {
-    display: grid;
-    grid-template-columns: 1fr 10px 1fr;
-    grid-template-areas: "fitnessSection divider coachSection";
-  }
-}
-
-@media (min-width: 61.25em) {
-  #FitnessSection {
-    grid-area: fitnessSection;
-  }
-}
-#FitnessSection .layer {
-  grid-template-rows: 90px 1fr 3fr 1fr 90px;
-  grid-template-areas: "." "header" "paragraph" "button" ".";
-}
-
-#divider {
-  display: none;
-}
-@media (min-width: 61.25em) {
-  #divider {
-    grid-area: divider;
-    display: initial;
-  }
-}
-
-#CoachSection .layer {
-  grid-template-rows: 90px 1fr 3fr 1fr 90px;
-  grid-template-areas: "." "header" "paragraph" "button" ".";
-}
-
-#RegisterSection {
-  max-width: 2500px;
-  min-height: 667px;
-  min-width: 375px;
-}
-#RegisterSection .layer {
-  display: grid;
-  grid-template-rows: 1fr 55px min-content min-content 1fr;
-  grid-template-areas: "." "header" "paragraph" "form" ".";
-}
-
-.registerHeaderWrapper {
-  grid-area: header;
-}
-.registerHeaderWrapper h2 {
-  font-size: clamp(18px, 7vw, 40px);
-}
-
-.registerParagraph {
-  font-size: clamp(15px, 3vw, 17px);
-  margin-bottom: 50px;
-  padding-top: 20px;
-  grid-area: paragraph;
-}
-
-.registerFormWrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-self: center;
-  width: 70%;
-  grid-area: form;
-}
-@media (min-width: 47.5em) {
-  .registerFormWrapper {
-    width: 85%;
-    max-width: 900px;
-  }
-  .registerFormWrapper #registerForm {
-    display: grid;
-    -moz-column-gap: 15px;
-         column-gap: 15px;
-    row-gap: 10px;
-    grid-template-rows: 1fr 1fr min-content 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "input1 input2" "input3 input3" "formTerms formTerms" "button button";
-  }
-  .registerFormWrapper .input1 {
-    grid-area: input1;
-  }
-  .registerFormWrapper .input2 {
-    grid-area: input2;
-  }
-  .registerFormWrapper .input3 {
-    grid-area: input3;
-  }
-}
-
-@media (min-width: 47.5em) {
-  #registerForm .inputWrapper:nth-child(1) {
-    padding-right: 10px;
-    grid-area: input1;
-  }
-}
-@media (min-width: 47.5em) {
-  #registerForm .inputWrapper:nth-child(2) {
-    padding-left: 10px;
-    grid-area: input2;
-  }
-}
-@media (min-width: 47.5em) {
-  #registerForm .inputWrapper:nth-child(3) {
-    grid-area: input3;
-  }
-}
-
-.formTerms {
-  grid-area: formTerms;
-}
-@media (min-width: 47.5em) {
-  .formTerms {
-    width: 320px;
-    font-size: 15px;
-  }
-}
-
-@media (min-width: 47.5em) {
-  .registerFormButton {
-    grid-area: button;
-  }
-}
-
-.contentPage {
-  z-index: 0;
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-@media (max-width: 47.49em) {
-  .footer section {
-    left: unset;
-    transform: unset;
-  }
-}
-@media (min-width: 47.5em) {
-  .footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 60px;
-    grid-template-areas: "section1 section2 section3" "copyright copyright copyright";
-    align-items: start;
-  }
-}
-
-.followUs .logoWrapper {
-  display: flex;
-  justify-content: center;
-}
-@media (min-width: 47.5em) {
-  .followUs {
-    grid-area: section1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.other {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-@media (min-width: 47.5em) {
-  .other {
-    grid-area: section2;
-  }
-}
-
-.gymtour {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-@media (min-width: 47.5em) {
-  .gymtour {
-    grid-area: section3;
-  }
-}
-
-@media (min-width: 47.5em) {
-  .copyRight {
-    grid-area: copyright;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-#Login {
-  max-width: 2500px;
-  min-height: 667px;
-  min-width: 375px;
-}
-#Login .layer .loginContentWrapper {
-  display: grid;
-  justify-items: center;
-  grid-template-rows: 1fr min-content min-content min-content 1fr;
-  grid-template-areas: "." "header" "paragraph" "form" ".";
-}
-#Login .layer .forgetPasswordFormWrapper #forgetPasswordForm {
-  display: grid;
-  justify-items: center;
-  grid-template-rows: 1fr min-content min-content min-content min-content min-content min-content min-content 1fr;
-  grid-template-areas: "." "header" "forgetPasswordText" "nameHeader" "nameInput" "emailHeader" "emailInput" "button" ".";
-}
-#Login .layer .forgetNameWrapper #forgetNameForm {
-  display: grid;
-  justify-items: center;
-  grid-template-rows: 1fr min-content min-content min-content min-content min-content min-content min-content 1fr;
-  grid-template-areas: "." "header" "forgetNameText" "emailHeader" "emailInput" "passwordHeader" "passwordInput" "button" ".";
-}
-
-.loginHeaderWrapper {
-  padding-bottom: 15px;
-  grid-area: header;
-}
-.loginHeaderWrapper h2 {
-  font-size: clamp(18px, 7vw, 40px);
-}
-.loginHeaderWrapper .underliner {
-  margin-top: 0px;
-}
-
-.loginFormWrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-self: center;
-  width: 70%;
-  grid-area: form;
-  max-width: 600px;
-  min-width: 320px;
-}
-.loginFormWrapper .inputWrapper {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-.loginFormWrapper #loginForm {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
-}
-.loginFormWrapper .forgetPassword {
-  margin-bottom: 5px;
-}
-.loginFormWrapper .loginFormButton {
-  width: 200px;
-  height: 60px;
-  padding: 0px;
-}
-
-#forgetPasswordForm {
-  width: 70%;
-  max-width: 600px;
-  min-width: 320px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-#forgetPasswordForm .forgetPasswordHeader {
-  grid-area: header;
-}
-@media (max-width: 31.25em) {
-  #forgetPasswordForm .forgetPasswordHeader {
-    font-size: 18px;
-  }
-}
-#forgetPasswordForm .forgetPasswordText {
-  text-align: center;
-  grid-area: forgetPasswordText;
-}
-@media (max-width: 31.25em) {
-  #forgetPasswordForm .forgetPasswordText {
-    font-size: 15px;
-  }
-}
-#forgetPasswordForm .nameHeader {
-  justify-self: left;
-  grid-area: nameHeader;
-}
-@media (max-width: 31.25em) {
-  #forgetPasswordForm .nameHeader {
-    font-size: 16px !important;
-  }
-}
-#forgetPasswordForm .inputWrapper:nth-of-type(2) {
-  grid-area: nameInput;
-}
-#forgetPasswordForm .emailHeader {
-  justify-self: left;
-  grid-area: emailHeader;
-}
-@media (max-width: 31.25em) {
-  #forgetPasswordForm .emailHeader {
-    font-size: 16px !important;
-  }
-}
-#forgetPasswordForm .inputWrapper:nth-of-type(3) {
-  grid-area: emailInput;
-}
-#forgetPasswordForm .pageButton {
-  grid-area: button;
-}
-
-#forgetNameForm {
-  width: 70%;
-  max-width: 600px;
-  min-width: 320px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-#forgetNameForm .forgetNameHeader {
-  grid-area: header;
-}
-#forgetNameForm .forgetNameText {
-  grid-area: forgetNameText;
-  text-align: center;
-}
-#forgetNameForm .emailHeader {
-  justify-self: left;
-  grid-area: emailHeader;
-}
-@media (max-width: 31.25em) {
-  #forgetNameForm .emailHeader {
-    font-size: 16px !important;
-  }
-}
-#forgetNameForm .inputWrapper:nth-of-type(2) {
-  grid-area: emailInput;
-}
-#forgetNameForm .passwordHeader {
-  justify-self: left;
-  grid-area: passwordHeader;
-}
-@media (max-width: 31.25em) {
-  #forgetNameForm .passwordHeader {
-    font-size: 16px !important;
-  }
-}
-#forgetNameForm .inputWrapper:nth-of-type(3) {
-  grid-area: passwordInput;
-}
-#forgetNameForm .pageButton {
-  grid-area: button;
-}
-
-.Dashboard {
-  display: grid;
-}
-.Dashboard .sideBar {
-  position: absolute;
-  z-index: 1;
-}
-@media (min-width: 61.25em) {
-  .Dashboard {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-  .Dashboard .dashboardSection {
-    position: relative;
-    width: 100%;
-  }
-  .Dashboard .sideMenuTrigger {
-    display: none !important;
-  }
-  .Dashboard .sideBar {
-    width: 300px !important;
-    position: relative;
-  }
-  .Dashboard .sideBarItem {
-    text-align: center;
-    opacity: 1 !important;
-    display: initial !important;
-    padding: 25px 0px;
-    width: 100%;
-  }
-  .Dashboard .sideBarItem:nth-child(2) {
-    margin-top: 0px;
-  }
-}
-
-.overview {
-  z-index: 0;
-}
-.overview .infoWrapper {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 8px;
-}
-.overview .infoWrapper .text {
-  padding-right: 10px;
-  text-decoration: underline;
-  white-space: nowrap;
-}
-.overview .infoWrapper .infoHolder {
-  white-space: nowrap;
-}
-.overview .contentWrapper {
-  display: grid;
-  grid-template-rows: 30px min-content 70px min-content min-content min-content min-content;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: ". ." ". id" ". ." "header header" "name email" "fitness businessCondition" "coach termCondition" "button button";
-  max-width: 780px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-@media (max-width: 61.25em) {
-  .overview .contentWrapper {
-    width: 80%;
-  }
-}
-@media (max-width: 53.125em) {
-  .overview .contentWrapper {
-    grid-template-rows: 30px min-content 70px min-content min-content min-content min-content min-content min-content min-content min-content;
-    grid-template-columns: 1fr;
-    grid-template-areas: ". " "id" ". " "header" "name" "email" "fitness" "coach" "termCondition" "businessCondition" "button";
-  }
-  .overview .contentWrapper .infoWrapper:nth-child(3),
-  .overview .contentWrapper .infoWrapper:nth-child(4),
-  .overview .contentWrapper .infoWrapper:nth-child(5),
-  .overview .contentWrapper .infoWrapper:nth-child(6),
-  .overview .contentWrapper .infoWrapper:nth-child(7),
-  .overview .contentWrapper .infoWrapper:nth-child(8) {
-    display: grid;
-    grid-template-columns: 260px auto;
-  }
-  .overview .contentWrapper .infoWrapper:nth-child(3) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(4) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(5) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(6) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(7) .text,
-  .overview .contentWrapper .infoWrapper:nth-child(8) .text {
-    width: 260px;
-  }
-}
-@media (max-width: 37.5em) {
-  .overview .contentWrapper {
-    width: 90%;
-  }
-  .overview .contentWrapper .infoWrapper:nth-child(3),
-  .overview .contentWrapper .infoWrapper:nth-child(4),
-  .overview .contentWrapper .infoWrapper:nth-child(5),
-  .overview .contentWrapper .infoWrapper:nth-child(6),
-  .overview .contentWrapper .infoWrapper:nth-child(7),
-  .overview .contentWrapper .infoWrapper:nth-child(8) {
-    margin-left: 0px !important;
-  }
-}
-@media (max-width: 26.875em) {
-  .overview .contentWrapper {
-    width: 60%;
-  }
-  .overview .contentWrapper .infoWrapper:nth-child(3),
-  .overview .contentWrapper .infoWrapper:nth-child(4),
-  .overview .contentWrapper .infoWrapper:nth-child(5),
-  .overview .contentWrapper .infoWrapper:nth-child(6),
-  .overview .contentWrapper .infoWrapper:nth-child(7),
-  .overview .contentWrapper .infoWrapper:nth-child(8) {
-    display: flex;
-    flex-direction: column;
-  }
-}
-.overview .contentWrapper .infoWrapper:nth-child(1) {
-  grid-area: id;
-  justify-self: end;
-  margin-right: 30px;
-}
-.overview .contentWrapper .headerWrapper {
-  grid-area: header;
-  justify-self: center;
-  margin-bottom: 30px;
-}
-.overview .contentWrapper .infoWrapper:nth-child(3) {
-  grid-area: name;
-  margin-left: 50px;
-}
-.overview .contentWrapper .infoWrapper:nth-child(4) {
-  grid-area: email;
-  margin-left: 50px;
-}
-.overview .contentWrapper .infoWrapper:nth-child(5) {
-  grid-area: fitness;
-  margin-left: 50px;
-}
-.overview .contentWrapper .infoWrapper:nth-child(6) {
-  grid-area: coach;
-  margin-left: 50px;
-}
-.overview .contentWrapper .infoWrapper:nth-child(7) {
-  grid-area: businessCondition;
-  margin-left: 50px;
-}
-.overview .contentWrapper .infoWrapper:nth-child(8) {
-  grid-area: termCondition;
-  margin-left: 50px;
-}
-.overview .contentWrapper .overviewButton {
-  grid-area: button;
-  width: -moz-min-content;
-  width: min-content;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
-  margin-top: 30px;
-}
-.overview .contentWrapper .overviewButton div {
-  padding: 15px 0px;
-  width: 120px;
-}
-
-.settings .settingsText {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.settings .settingsForm {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-@media (min-width: 75em) {
-  .settings #changePasswordForm {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .settings #changePasswordForm .buttonWrapper button {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
 .center {
   top: 50%;
   left: 50%;
@@ -904,22 +238,43 @@ body {
 }
 
 /*MODULES - Re-usable site elements.*/
+#Home {
+  max-width: 2500px;
+  display: grid;
+  grid-template-rows: 50px 1fr 4fr 1fr;
+  grid-template-areas: "." "pageHeader" "mainHeader" "button";
+}
 #Home img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
 #Home #pageHeader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  grid-area: pageHeader;
   font-size: clamp(18px, 3vw, 30px);
   font-weight: bold;
   cursor: default;
   opacity: 0;
 }
+#Home #bigLogoWrapper {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-area: mainHeader;
+}
 #Home .homeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: mainHeader;
   font-size: clamp(35px, 7vmin, 75px);
   margin: clamp(15px, 5vh, 100px);
   text-transform: uppercase;
@@ -929,6 +284,53 @@ body {
   transition-duration: 1s;
   transition-timing-function: "ease-out";
 }
+#Home .homeHeader div .headerWrapper {
+  width: -moz-min-content;
+  width: min-content;
+  margin-left: 30px;
+}
+#Home .homeHeader div .headerWrapper:nth-child(1) {
+  margin-right: auto;
+}
+#Home .homeHeader div .headerWrapper:nth-child(2) {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: auto;
+}
+#Home .homeHeader div .headerWrapper:nth-child(3) {
+  margin-right: auto;
+}
+@media (min-width: 47.5em) {
+  #Home .homeHeader div {
+    width: 90%;
+  }
+  #Home .homeHeader div .headerWrapper {
+    width: -moz-min-content;
+    width: min-content;
+  }
+  #Home .homeHeader div .headerWrapper:nth-child(1) {
+    margin-right: auto;
+  }
+  #Home .homeHeader div .headerWrapper:nth-child(2) {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: auto;
+    margin-left: calc(50vw - 280px);
+  }
+  #Home .homeHeader div .headerWrapper:nth-child(3) {
+    margin-left: auto;
+    margin-right: 0px;
+  }
+}
+@media (min-width: 81.25em) {
+  #Home .homeHeader div {
+    width: 1170px;
+  }
+  #Home .homeHeader div .headerWrapper:nth-child(2) {
+    margin-right: auto;
+    margin-left: 370px;
+  }
+}
 #Home .homeHeader:hover {
   text-shadow: 5.5rem 0px 0px rgba(255, 255, 255, 0.3);
   transform-origin: center;
@@ -937,6 +339,7 @@ body {
   width: auto;
   height: -moz-min-content;
   height: min-content;
+  grid-area: button;
   opacity: 0;
   font-size: clamp(15px, 2vw, 25px);
   font-weight: bold;
@@ -957,7 +360,15 @@ body {
 }
 
 #Crossroad {
+  max-width: 2500px;
   overflow: auto;
+}
+@media (min-width: 61.25em) {
+  #Crossroad #crossroadSectionWrapper {
+    display: grid;
+    grid-template-columns: 1fr 10px 1fr;
+    grid-template-areas: "fitnessSection divider coachSection";
+  }
 }
 
 .layer {
@@ -970,6 +381,26 @@ body {
   align-self: center;
 }
 
+#crossroadDivider {
+  display: none;
+}
+@media (min-width: 61.25em) {
+  #crossroadDivider {
+    grid-area: divider;
+    display: initial;
+  }
+}
+
+@media (min-width: 61.25em) {
+  #FitnessSection {
+    grid-area: fitnessSection;
+  }
+}
+#FitnessSection .layer {
+  grid-template-rows: 90px 1fr 3fr 1fr 90px;
+  grid-template-areas: "." "header" "paragraph" "button" ".";
+}
+
 .FitnessSection {
   color: white;
   background: #707070;
@@ -980,9 +411,9 @@ body {
 .FitnessSection img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1014,30 +445,33 @@ body {
   }
 }
 
+.divider {
+  background: rgb(255, 255, 255);
+}
+
 @media (min-width: 61.25em) {
   .FitnessSection::before {
     width: 100%;
     height: 100%;
     position: absolute;
     content: "";
-    background: rgb(0, 0, 0);
+    background: black;
     background: linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0) 20%);
   }
-}
-.divider {
-  background: rgb(255, 255, 255);
-}
-
-@media (min-width: 61.25em) {
   .divider::before {
     width: 30px;
     height: 100vh;
     position: absolute;
     content: "";
-    background: rgb(0, 0, 0);
+    background: black;
     background: linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0) 20%);
   }
 }
+#CoachSection .layer {
+  grid-template-rows: 90px 1fr 3fr 1fr 90px;
+  grid-template-areas: "." "header" "paragraph" "button" ".";
+}
+
 .CoachSection {
   color: white;
   background: #707070;
@@ -1048,9 +482,9 @@ body {
 .CoachSection img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1087,8 +521,19 @@ body {
   height: 100%;
   position: absolute;
   content: "";
-  background: rgb(0, 0, 0);
+  background: black;
   background: linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0) 20%);
+}
+
+#RegisterSection {
+  max-width: 2500px;
+  min-height: 667px;
+  min-width: 375px;
+}
+#RegisterSection .layer {
+  display: grid;
+  grid-template-rows: 1fr 55px min-content min-content 1fr;
+  grid-template-areas: "." "header" "paragraph" "form" ".";
 }
 
 .RegisterSection {
@@ -1101,9 +546,9 @@ body {
 .RegisterSection img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100vh;
 }
@@ -1116,22 +561,100 @@ body {
   height: 100%;
   position: absolute;
   content: "";
-  background: rgb(0, 0, 0);
+  background: black;
   background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 50%, rgb(0, 0, 0) 100%);
 }
 
 .registerHeaderWrapper {
   width: -moz-fit-content;
   width: fit-content;
+  grid-area: header;
 }
 .registerHeaderWrapper h2 {
+  font-size: clamp(18px, 7vw, 40px);
   text-transform: uppercase;
 }
 
 .registerParagraph {
   margin-top: 20px;
+  margin-bottom: 50px;
+  padding-top: 20px;
   width: 70%;
   text-align: center;
+  font-size: clamp(15px, 3vw, 17px);
+  grid-area: paragraph;
+}
+
+.registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-self: center;
+  width: 70%;
+  grid-area: form;
+}
+@media (min-width: 47.5em) {
+  .registerFormWrapper {
+    width: 85%;
+    max-width: 900px;
+  }
+  .registerFormWrapper #registerForm {
+    display: grid;
+    -moz-column-gap: 15px;
+    column-gap: 15px;
+    row-gap: 10px;
+    grid-template-rows: 1fr 1fr min-content 1fr min-content;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "input1 input2" "input3 input3" "formTerms formTerms" "button button" "loginLink loginLink";
+  }
+  .registerFormWrapper .input1 {
+    grid-area: input1;
+  }
+  .registerFormWrapper .input2 {
+    grid-area: input2;
+  }
+  .registerFormWrapper .input3 {
+    grid-area: input3;
+  }
+  .registerFormWrapper .hadAccount {
+    grid-area: loginLink;
+  }
+}
+
+.formTerms {
+  grid-area: formTerms;
+}
+@media (min-width: 47.5em) {
+  .formTerms {
+    width: 320px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 47.5em) {
+  .registerFormButton {
+    grid-area: button;
+  }
+}
+
+.hadAccount {
+  margin-left: auto;
+  margin-right: auto;
+  width: -moz-min-content;
+  width: min-content;
+  white-space: nowrap;
+  margin-top: 30px;
+  color: white;
+}
+.hadAccount a {
+  text-decoration: none;
+  color: rgb(68, 106, 177);
+  font-weight: 600;
+  margin-left: 10px;
+  text-decoration: underline;
+}
+.hadAccount a:hover {
+  color: rgb(86, 130, 213);
 }
 
 .contentPage {
@@ -1148,7 +671,7 @@ body {
 }
 
 .verticalText {
-  z-index: -1;
+  z-index: 0;
   position: fixed;
   color: rgba(253, 246, 246, 0.057);
   text-transform: uppercase;
@@ -1168,147 +691,192 @@ body {
   padding-top: 25px;
   padding-left: 4px;
   padding-right: 4px;
-  z-index: -1;
+  z-index: 1;
 }
 
+.Login {
+  position: relative;
+  max-width: 2500px;
+  overflow-x: hidden;
+  min-height: 667px;
+  min-width: 375px;
+}
 .Login img {
+  position: absolute;
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100%;
 }
 
-.Login::before {
+.loginFormWrapper {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
-  content: "";
-  background: rgb(0, 0, 0);
-  background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 50%, rgb(0, 0, 0) 100%);
 }
-
-.loginHeaderWrapper {
-  cursor: default;
-}
-.loginHeaderWrapper h2 {
-  color: white;
-}
-
-.forgetPassword::after {
-  position: absolute;
-  content: " ";
-  height: 1px;
-  width: 142px;
-  background: white;
-  margin-top: 18px;
+.loginFormWrapper form {
+  position: relative;
   left: 50%;
-  transform: translateX(-50%);
-  transition-property: width;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-in;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: -moz-min-content;
+  width: min-content;
+  display: grid;
+  grid-template-rows: min-content min-content min-content min-content min-content;
+  grid-template-columns: 1fr;
+  grid-template-areas: "header" "username" "password" "button" "link";
+  align-items: center;
+  justify-items: center;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+}
+@media (min-width: 47.5em) {
+  .loginFormWrapper form {
+    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-columns: min-content min-content;
+    grid-template-areas: "header header" "username password" "button button" "link link";
+  }
 }
 
-.forgetPassword:hover:after {
-  width: 0px;
+.changeFormWrapper {
+  position: absolute;
+  display: none;
+  left: 100%;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+.changeFormWrapper form {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: -moz-min-content;
+  width: min-content;
+  display: grid;
+  grid-template-rows: min-content min-content min-content;
+  grid-template-columns: min-content min-content;
+  grid-template-areas: "header header" "email email" "button backButton";
+  align-items: center;
+  justify-items: center;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
 }
 
-#forgetPasswordForm {
+.headerWrapper {
   color: white;
+  white-space: nowrap;
+  margin-bottom: 30px;
+  grid-area: header;
 }
-#forgetPasswordForm .forgetPasswordHeader {
-  font-size: 20px;
-  margin-bottom: 10px;
+
+.usernameInput {
+  width: 300px !important;
+  grid-area: username;
 }
-#forgetPasswordForm .forgetPasswordHeader .underliner {
-  margin-top: 2px;
+@media (min-width: 29.375em) {
+  .usernameInput {
+    width: 400px !important;
+  }
 }
-#forgetPasswordForm .forgetPasswordText {
-  margin-bottom: 25px;
+@media (min-width: 47.5em) {
+  .usernameInput {
+    width: 320px !important;
+  }
 }
-#forgetPasswordForm .nameHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
+
+.passwordInput {
+  width: 300px !important;
+  grid-area: password;
 }
-#forgetPasswordForm .inputWrapper:nth-of-type(2) {
-  margin-bottom: 10px;
+@media (min-width: 29.375em) {
+  .passwordInput {
+    width: 400px !important;
+  }
 }
-#forgetPasswordForm .emailHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
+@media (min-width: 47.5em) {
+  .passwordInput {
+    width: 320px !important;
+  }
 }
-#forgetPasswordForm .inputWrapper:nth-of-type(3) {
-  margin-bottom: 20px;
-}
-#forgetPasswordForm .pageButton .buttonInitial {
-  border: none;
-  border-radius: 5px;
+
+.changeLink {
+  color: white;
   cursor: pointer;
-  background: rgb(38, 62, 105);
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 18px;
+  text-decoration: underline;
+  font-size: 15px;
+  margin-top: 30px;
+  grid-area: link;
 }
-#forgetPasswordForm .pageButton .buttonHover {
-  background: rgb(10, 21, 88);
-  transition-property: background;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-out;
+@media (min-width: 29.375em) {
+  .changeLink {
+    font-size: 17px;
+  }
 }
 
-#forgetNameForm {
-  color: white;
+.loginFormButton {
+  margin-top: 0px !important;
+  grid-area: button;
 }
-#forgetNameForm .forgetNameHeader {
-  font-size: 20px;
-  margin-bottom: 10px;
+
+.changeInput {
+  width: 350px !important;
+  grid-area: email;
 }
-#forgetNameForm .forgetNameHeader .underliner {
-  margin-top: 2px;
+@media (max-width: 26.875em) {
+  .changeInput {
+    width: 320px !important;
+  }
 }
-#forgetNameForm .forgetNameText {
-  margin-bottom: 25px;
+@media (min-width: 30.625em) {
+  .changeInput {
+    width: 400px !important;
+  }
 }
-#forgetNameForm .emailHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
+
+.changeSubmitFormButton {
+  margin-top: 0px !important;
+  width: 165px !important;
+  grid-area: button;
+  justify-self: end;
 }
-#forgetNameForm .inputWrapper:nth-of-type(2) {
-  margin-bottom: 10px;
+@media (max-width: 26.875em) {
+  .changeSubmitFormButton {
+    width: 150px !important;
+  }
 }
-#forgetNameForm .passwordHeader {
-  font-size: 18px;
-  margin-bottom: 10px;
+@media (min-width: 30.625em) {
+  .changeSubmitFormButton {
+    width: 190px !important;
+  }
 }
-#forgetNameForm .inputWrapper:nth-of-type(3) {
-  margin-bottom: 20px;
+
+.changeBackFormButton {
+  margin-top: 0px !important;
+  width: 165px !important;
+  grid-area: backButton;
+  justify-self: start;
 }
-#forgetNameForm .pageButton .buttonInitial {
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background: rgb(38, 62, 105);
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 18px;
+@media (max-width: 26.875em) {
+  .changeBackFormButton {
+    width: 150px !important;
+  }
 }
-#forgetNameForm .pageButton .buttonHover {
-  background: rgb(10, 21, 88);
-  transition-property: background;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-out;
+@media (min-width: 30.625em) {
+  .changeBackFormButton {
+    width: 190px !important;
+  }
 }
 
 #EmailUpdate img {
   background-position: center;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -1920,12 +1488,29 @@ body {
 }
 
 .menu {
+  max-width: 2500px;
+  display: grid;
+  width: 100%;
+  min-width: 360px;
+  grid-template-columns: 15px 1fr min-content 1fr 25px;
+  grid-template-areas: ". . logo hamburger .";
   height: 60px;
   background-color: black;
   background: linear-gradient(180deg, rgb(0, 0, 0) 21%, rgba(0, 0, 0, 0.24) 100%);
   position: fixed;
   top: 0px;
   z-index: 1;
+}
+@media (max-width: 156.25em) {
+  .menu {
+    width: 100vw;
+  }
+}
+@media (min-width: 47.5em) {
+  .menu {
+    grid-template-columns: 15px min-content 1fr min-content 15px;
+    grid-template-areas: ". logo . menuOffer .";
+  }
 }
 
 #hamburger-wrapper {
@@ -2018,6 +1603,18 @@ body {
   border-bottom: white 1px solid;
 }
 
+.logoGrid {
+  grid-area: logo;
+}
+
+.menuOfferGrid {
+  grid-area: menuOffer;
+}
+
+.hamburgerGrid {
+  grid-area: hamburger;
+}
+
 .logo-wrapper {
   cursor: pointer;
   display: flex;
@@ -2092,7 +1689,8 @@ body {
   grid-area: filter;
   margin: 5px;
   transition: transform 200ms ease-out;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 .filterButton div {
   width: 100%;
@@ -2113,10 +1711,36 @@ body {
 
 .footer {
   border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (max-width: 47.49em) {
+  .footer section {
+    left: unset;
+    transform: unset;
+  }
+}
+@media (min-width: 47.5em) {
+  .footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 60px;
+    grid-template-areas: "section1 section2 section3" "copyright copyright copyright";
+    align-items: start;
+  }
 }
 
 .followUs {
   margin-top: 25px;
+}
+@media (min-width: 47.5em) {
+  .followUs {
+    grid-area: section1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .followUs h3 {
   white-space: nowrap;
@@ -2129,6 +1753,8 @@ body {
 }
 .followUs .logoWrapper {
   width: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .linkCol {
@@ -2167,26 +1793,112 @@ body {
   margin-top: 25px;
   margin-bottom: 10px;
 }
+@media (min-width: 47.5em) {
+  .copyRight {
+    grid-area: copyright;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 .copyRight a {
   font-size: 0.7rem;
   text-decoration: none;
   color: white;
 }
 
+.other {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 47.5em) {
+  .other {
+    grid-area: section2;
+  }
+}
+
+.gymtour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 47.5em) {
+  .gymtour {
+    grid-area: section3;
+  }
+}
+
+.loginHeader {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
 .icon {
-  margin: 15px 5px;
+  margin: 0px 10px;
+  margin-bottom: 15px;
   cursor: pointer;
+  position: relative;
   overflow: visible;
+}
+.icon div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 250ms ease-out;
+}
+.icon path {
+  fill: white;
+  transition: fill 250ms ease-out;
 }
 
 .icon:nth-child(1) {
-  width: 23px;
+  width: 22px;
   height: 23px;
-  border-radius: 6px;
+}
+.icon:nth-child(1) svg {
+  right: 1px !important;
 }
 
-.icon:hover {
+.icon:nth-child(1):hover div {
   background: white;
+  width: 15px;
+  height: 20px;
+}
+.icon:nth-child(1):hover path {
+  fill: rgb(8, 121, 233);
+  transition: fill 250ms ease-out;
+}
+
+.icon:nth-child(2) {
+  height: 23px;
+  border-radius: 50%;
+}
+
+.icon:nth-child(2):hover div {
+  background: white;
+  width: 15px;
+  height: 20px;
+}
+.icon:nth-child(2):hover path {
+  fill: rgb(255, 0, 0);
+  transition: fill 250ms ease-out;
+}
+
+.icon:nth-child(3) {
+  width: 23px;
+  height: 23px;
+  border-radius: 4px;
+}
+
+.icon:nth-child(3):hover div {
+  background: white;
+  width: 18px;
+  height: 20px;
+}
+.icon:nth-child(3):hover path {
+  fill: unset;
+  transition: fill 250ms ease-out;
 }
 
 .underliner {
@@ -2228,7 +1940,7 @@ body {
 .rootModalClass {
   background: rgba(0, 0, 0, 0.477);
   -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 }
 
 .modalClass {
@@ -2768,7 +2480,9 @@ body {
 .bulletWrapper .bulletText {
   padding: 10px 15px;
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   background: rgb(87, 87, 87);
   transition: background 0.25s ease-out;
 }
@@ -2807,7 +2521,8 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   min-width: 150px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   background: rgb(57, 57, 57);
   transition: background 0.25s ease-out;
   border-radius: 5px;
@@ -2846,7 +2561,8 @@ body {
 .optionsWrapper {
   background: rgb(51, 51, 51);
   border-radius: 0px 0px 5px 5px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   width: 100%;
   position: absolute;
   display: none;
@@ -2948,12 +2664,13 @@ body {
   z-index: 1;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 .searchBar input {
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: none;
   height: 37px;
   min-width: 100px;
@@ -3005,7 +2722,7 @@ body {
   display: grid;
   position: relative;
   -moz-column-gap: 5px;
-       column-gap: 5px;
+  column-gap: 5px;
   row-gap: 5px;
   max-width: 1200px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -3131,7 +2848,7 @@ body {
   display: grid;
   position: relative;
   -moz-column-gap: 5px;
-       column-gap: 5px;
+  column-gap: 5px;
   row-gap: 5px;
   max-width: 1200px;
   align-items: center;
@@ -3242,7 +2959,8 @@ body {
   background: rgb(51, 51, 51);
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 16px 16px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 16px 16px;
 }
 
 .imgSection {
@@ -3329,7 +3047,7 @@ body {
   left: 5px;
   top: 4px;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out, top 0.5s ease-out;
+  transition: opacity 0.4s ease-out, top 0.4s ease-out;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -3383,55 +3101,4 @@ body {
 }
 .popupBase .lbui-PopUp-header {
   padding-bottom: 8px;
-}
-
-.tooltip {
-  display: initial;
-  opacity: 1;
-  position: fixed;
-  z-index: 100;
-  background: white;
-  border-radius: 4px;
-  padding: 4px 10px;
-}
-
-.tooltipTriangle {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 7.5px solid transparent;
-  border-top: 10px solid white;
-  border-bottom: 0px;
-}
-
-.tooltipPosition-left .tooltipTriangle {
-  border: 7.5px solid transparent;
-  border-right: 0px;
-  border-left: 10px solid white;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 100%;
-}
-
-.tooltipPosition-top .tooltipTriangle {
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.tooltipPosition-right .tooltipTriangle {
-  border: 7.5px solid transparent;
-  border-right: 10px solid white;
-  border-left: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  left: -10px;
-}
-
-.tooltipPosition-bottom .tooltipTriangle {
-  top: -10px;
-  border-top: 0px;
-  border-bottom: 10px solid white;
-  left: 50%;
-  transform: translateX(-50%);
-}/*# sourceMappingURL=index.css.map */
+} /*# sourceMappingURL=index.css.map */

@@ -1,4 +1,4 @@
-import { FilterVariants } from "@components";
+import { FilterVariants } from "src/components/_index";
 
 export type BoltProps = {
   text: string;

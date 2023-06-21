@@ -1,5 +1,5 @@
-import { axiosConfig } from "@config";
-import { getDevState } from "@utils";
+import { axiosConfig } from "src/config/_index";
+import { getDevState } from "src/utils/_index";
 import axios, { AxiosInstance } from "axios";
 
 let axiosInstance: undefined | AxiosInstance = undefined;

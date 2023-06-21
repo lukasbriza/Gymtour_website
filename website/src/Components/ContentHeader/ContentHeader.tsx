@@ -1,7 +1,7 @@
-import { fadeIn } from "@animations";
-import { BigLogo } from "@svg";
 import { FC, useEffect, useRef } from "react";
 import { ContentHeaderProps } from "./_types";
+import { fadeIn } from "src/animations/_index";
+import { BigLogo } from "../SVG/_index";
 
 export const ContentHeader: FC<ContentHeaderProps> = (props) => {
     const { text, ...other } = props

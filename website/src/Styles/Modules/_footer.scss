@@ -1,9 +1,36 @@
 .footer {
   border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mq($until: tablet) {
+    section {
+      left: unset;
+      transform: unset;
+    }
+  }
+
+  @include mq($from: tablet) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 60px;
+    grid-template-areas:
+      "section1 section2 section3"
+      "copyright copyright copyright";
+    align-items: start;
+  }
 }
 
 .followUs {
   margin-top: 25px;
+  @include mq($from: tablet) {
+    grid-area: section1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   h3 {
     white-space: nowrap;
     font-size: 1.2rem;
@@ -15,6 +42,8 @@
   }
   .logoWrapper {
     width: auto;
+    display: flex;
+    justify-content: center;
   }
 }
 .linkCol {
@@ -58,6 +87,13 @@
 .copyRight {
   margin-top: 25px;
   margin-bottom: 10px;
+
+  @include mq($from: tablet) {
+    grid-area: copyright;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   a {
     font-size: 0.7rem;
     text-decoration: none;
@@ -65,25 +101,103 @@
   }
 }
 
+.other {
+  @include mq($from: tablet) {
+    grid-area: section2;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gymtour {
+  @include mq($from: tablet) {
+    grid-area: section3;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginHeader {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
 .icon {
-  margin: 15px 5px;
+  margin: 0px 10px;
+  margin-bottom: 15px;
   cursor: pointer;
+  position: relative;
   overflow: visible;
+
+  div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: background 250ms ease-out;
+  }
+  path {
+    fill: white;
+    transition: fill 250ms ease-out;
+  }
 }
 
 //FB
 .icon:nth-child(1) {
-  width: 23px;
+  width: 22px;
   height: 23px;
-  border-radius: 6px;
+
+  svg {
+    right: 1px !important;
+  }
 }
-//YB
-.icon:nth-child(1) {
-}
-//ING
-.icon:nth-child(1) {
+.icon:nth-child(1):hover {
+  div {
+    background: white;
+    width: 15px;
+    height: 20px;
+  }
+  path {
+    fill: rgb(8, 121, 233);
+    transition: fill 250ms ease-out;
+  }
 }
 
-.icon:hover {
-  background: $textContrastColor;
+//YB
+.icon:nth-child(2) {
+  height: 23px;
+  border-radius: 50%;
+}
+.icon:nth-child(2):hover {
+  div {
+    background: white;
+    width: 15px;
+    height: 20px;
+  }
+  path {
+    fill: rgb(255, 0, 0);
+    transition: fill 250ms ease-out;
+  }
+}
+
+//ING
+.icon:nth-child(3) {
+  width: 23px;
+  height: 23px;
+  border-radius: 4px;
+}
+
+.icon:nth-child(3):hover {
+  div {
+    background: white;
+    width: 18px;
+    height: 20px;
+  }
+  path {
+    fill: unset;
+    transition: fill 250ms ease-out;
+  }
 }

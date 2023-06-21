@@ -3,7 +3,7 @@ import { ArrowProps, SelectProps } from "./_types";
 import { useFormContext } from "react-hook-form";
 import { CheckboxSquared, useClickOutside } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
-import { selectShowAnimation } from "@animations";
+import { selectShowAnimation } from "src/animations/_index";
 
 export const MultipleSelect: FC<SelectProps> = (props) => {
   const { label, options, name, checkboxClick, syncWithWatch = false } = props;

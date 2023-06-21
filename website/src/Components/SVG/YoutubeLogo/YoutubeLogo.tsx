@@ -1,7 +1,7 @@
-import {FC} from "react"
+import { FC } from "react"
 import { YoutubeLogoProps } from "./_types"
 
-export const YoutubeLogo:FC<YoutubeLogoProps> = (props) => {
+export const YoutubeLogo: FC<YoutubeLogoProps> = (props) => {
     const { fill, scale = 1 } = props
     const style = {
         transform: 'scale(' + scale + ')'

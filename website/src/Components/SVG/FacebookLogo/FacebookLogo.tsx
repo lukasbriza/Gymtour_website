@@ -1,7 +1,7 @@
-import {FC} from "react"
+import { FC } from "react"
 import { FacebookLogoProps } from "./_types"
 
-export const FacebookLogo:FC<FacebookLogoProps> = (props) => {
+export const FacebookLogo: FC<FacebookLogoProps> = (props) => {
     const { fill, scale = 1 } = props
     const style = {
         transform: 'scale(' + scale + ')'

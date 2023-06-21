@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { InstagramLogoProps } from "./_types"
 
-export const InstagramLogo:FC<InstagramLogoProps> = (props) => {
+export const InstagramLogo: FC<InstagramLogoProps> = (props) => {
     const { fill, scale = 1 } = props
     const style = {
         transform: 'scale(' + scale + ')'

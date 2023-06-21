@@ -1,17 +1,8 @@
 import { FC, useContext } from "react";
 import { ErrorHandlerProps } from "./_types";
-import {
-  ApiError,
-  DatabaseError,
-  ErrorMapType,
-  ErrorTypesArray,
-  NetworkError,
-  UnhandledError,
-  UnprocesableError,
-  ValidationError,
-} from "@utils";
 import { PopUpContext } from "@lukasbriza/lbui-lib";
-import { getAxiosInstance } from "@libs";
+import { getAxiosInstance } from "src/libs/_index";
+import { ApiError, DatabaseError, ErrorMapType, ErrorTypesArray, NetworkError, UnhandledError, UnprocesableError, ValidationError } from "src/utils/_index";
 
 export const AxiosHandler: FC<ErrorHandlerProps> = ({ children }) => {
   const { show, unMount } = useContext(PopUpContext);

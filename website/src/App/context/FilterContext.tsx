@@ -1,8 +1,8 @@
 import { FC, createContext, useCallback, useState, useMemo } from "react"
 import { CoachFilterContext, ContextProviderProps, FitnessFilterContext } from "./_types"
-import { filter } from "@config"
-import { BoltProps, FilterVariants } from "@components"
-import { Coach, Fitness } from "@fetchers"
+import { BoltProps, FilterVariants } from "src/components/_index"
+import { Coach, Fitness } from "src/fetcher/_index"
+import { filter } from "src/config/_index"
 
 const fitnessInitialState: FitnessFilterContext = {
     limit: filter.defaultLimit,
@@ -15,6 +15,7 @@ const fitnessInitialState: FitnessFilterContext = {
     register: () => { throw new Error('Context does not have a matching provider!') },
     addBolt: () => { throw new Error('Context does not have a matching provider!') },
     removeBolt: () => { throw new Error('Context does not have a matching provider!') },
+    updateFitness: () => { throw new Error('Context does not have a matching provider!') }
 }
 
 const coachInitialState: CoachFilterContext = {
@@ -28,6 +29,7 @@ const coachInitialState: CoachFilterContext = {
     register: () => { throw new Error('Context does not have a matching provider!') },
     addBolt: () => { throw new Error('Context does not have a matching provider!') },
     removeBolt: () => { throw new Error('Context does not have a matching provider!') },
+    updateCoach: () => { throw new Error('Context does not have a matching provider!') },
 }
 
 export const CoachContext = createContext<CoachFilterContext>(coachInitialState)
@@ -75,6 +77,16 @@ export const FilterContexProvider: FC<ContextProviderProps & { type: "coach" | "
         }
     }, [addBolt, coachBolts, fitnessBolts, removeBolt])
 
+    const updateFitness = useCallback((fitness: Fitness) => {
+        const updatedFitness = filteredFitnesses.map((item) => (item._id === fitness._id ? fitness : item))
+        setFilteredFitnesses(updatedFitness)
+    }, [filteredFitnesses])
+
+    const updateCoach = useCallback((coach: Coach) => {
+        const updatedCoaches = filteredCoaches.map((item) => (item._id === coach._id ? coach : item))
+        setFilteredCoaches(updatedCoaches)
+    }, [filteredCoaches])
+
     const coachFilterContext: CoachFilterContext = useMemo(() => ({
         limit: coachLimit,
         filteredContent: filteredCoaches,
@@ -85,8 +97,9 @@ export const FilterContexProvider: FC<ContextProviderProps & { type: "coach" | "
         setLoading: setCoachLoading,
         addBolt: addBolt,
         removeBolt: removeBolt,
-        register: registerBoltsFilter(type)
-    }), [addBolt, coachBolts, coachLimit, coachLoading, filteredCoaches, registerBoltsFilter, removeBolt, type])
+        register: registerBoltsFilter(type),
+        updateCoach: updateCoach
+    }), [addBolt, coachBolts, coachLimit, coachLoading, filteredCoaches, registerBoltsFilter, removeBolt, type, updateCoach])
 
     const fitnessFiterContext: FitnessFilterContext = useMemo(() => ({
         limit: fitnessLimit,
@@ -98,8 +111,9 @@ export const FilterContexProvider: FC<ContextProviderProps & { type: "coach" | "
         setLoading: setFitnessLoading,
         addBolt: addBolt,
         removeBolt: removeBolt,
-        register: registerBoltsFilter(type)
-    }), [addBolt, filteredFitnesses, fitnessBolts, fitnessLimit, fitnessLoading, registerBoltsFilter, removeBolt, type])
+        register: registerBoltsFilter(type),
+        updateFitness: updateFitness
+    }), [addBolt, filteredFitnesses, fitnessBolts, fitnessLimit, fitnessLoading, registerBoltsFilter, removeBolt, type, updateFitness])
 
     return type === "coach" ?
         (

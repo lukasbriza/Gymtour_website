@@ -15,6 +15,8 @@ import {
   UpdateFitnessType,
   UpdateCoachType,
   UpdateViewsType,
+  AddFitnessLikeType,
+  AddCoachLikeType,
 } from "./abl";
 import { Query } from "express-serve-static-core";
 
@@ -25,35 +27,30 @@ export interface TypedRequestBody<T> extends Express.Request {
 export interface TypedRequestQuery<T extends Query> extends Express.Request {
   query: T;
 }
-
-export type GetFilterRequest = TypedRequestBody<GetFilterType>;
-
-export type GetCoachRequest = TypedRequestQuery<GetCoachType>;
-
-export type AddCoachRequest = TypedRequestBody<AddCoachType>;
-
+//FITNESS
 export type GetFitnessRequest = TypedRequestQuery<GetFitnessType>;
-
 export type AddFitnessRequest = TypedRequestBody<AddFitnessType>;
+export type RemoveFitnessesRequest = TypedRequestBody<RemoveFitnessType>;
+export type UpdateFitnessRequest = TypedRequestBody<UpdateFitnessType>;
+export type AddFitnessLikeRequest = TypedRequestQuery<AddFitnessLikeType>;
 
+//COACH
+export type GetCoachRequest = TypedRequestQuery<GetCoachType>;
+export type AddCoachRequest = TypedRequestBody<AddCoachType>;
+export type RemoveCoachesRequest = TypedRequestBody<RemoveCoachType>;
+export type UpdateCoachRequest = TypedRequestBody<UpdateCoachType>;
+export type AddCoachLikeRequest = TypedRequestQuery<AddCoachLikeType>;
+
+//IMAGE
 export type RemoveImageRequest = TypedRequestBody<RemoveImageType>;
-
 export type GetImageReqest = TypedRequestQuery<GetImageType>;
 
-export type RemoveFitnessesRequest = TypedRequestBody<RemoveFitnessType>;
-
-export type RemoveCoachesRequest = TypedRequestBody<RemoveCoachType>;
-
+//USER
 export type GetUserRequest = TypedRequestQuery<GetUserType>;
-
 export type RemoveUserRequest = TypedRequestBody<RemoveUserType>;
-
 export type AddUserRequest = TypedRequestBody<AddUserType>;
-
 export type UpdateUserRequest = TypedRequestBody<UpdateUserType>;
 
-export type UpdateFitnessRequest = TypedRequestBody<UpdateFitnessType>;
-
-export type UpdateCoachRequest = TypedRequestBody<UpdateCoachType>;
+export type GetFilterRequest = TypedRequestBody<GetFilterType>;
 
 export type UpdateViewsRequest = TypedRequestBody<UpdateViewsType>;

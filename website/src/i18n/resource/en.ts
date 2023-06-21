@@ -1,17 +1,16 @@
-import { AppTranslationType } from "./cs";
-
-export const enTranslation: AppTranslationType = {
+export const enTranslation = {
   validation: {
     min: "Minimální délka je {{min}} znaků.",
     max: "Je povoleno maximálně {{max}} znaků.",
     required: "Pole je povinné.",
-    nooBoolean: "Nesprávná hodnota.",
+    noBoolean: "Nesprávná hodnota.",
   },
   common: {
     email: "Email",
     name: "Jméno",
     username: "Uživatelské jméno",
     password: "Heslo",
+    login: "Přihlásit",
     businessTermsAgreement: "Souhlas s obchodními podmínkami",
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
   },
@@ -30,13 +29,11 @@ export const enTranslation: AppTranslationType = {
     emailUpdate: "Změna emailu",
     detail: "Detail",
   },
-
   footer: {
     followUs: "Sledujte nás",
     other: "Ostatní",
     gymtour: "Gymtour",
   },
-
   home: {
     header: {
       part1: "Choose",
@@ -44,7 +41,6 @@ export const enTranslation: AppTranslationType = {
       part3: "Opportunity!",
     },
   },
-
   crossroad: {
     fitness: {
       header: "Fitness",
@@ -59,7 +55,6 @@ export const enTranslation: AppTranslationType = {
       button: "Vyhledat",
     },
   },
-
   contentPage: {
     search: "Hledat...",
     filter: {
@@ -83,7 +78,6 @@ export const enTranslation: AppTranslationType = {
       cantLikeText: "Přidávat lajky můžou jen přihlášení uživatelé.",
     },
   },
-
   registerPage: {
     modalHeader: "Vítejte!",
     modalText: "Na email  “{{email}}„  Vám byly zaslány instrukce pro aktivaci účtu.",
@@ -93,17 +87,24 @@ export const enTranslation: AppTranslationType = {
     registerButton: "Registrovat",
     registerHeader: "Zaregistrovat se",
     registerParagraph: "Pro “lajkování„ příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
+    hadAccount1: "Máte již účet?",
+    hadAccount2: "Přihlásit se",
   },
-
   fitnessContentPage: {
     header1: "Fitness",
     verticalText: "Gymtour",
   },
-
   coachContentPage: {
     header1: "Trenéři",
     verticalText: "Gymtour",
   },
-
-  detail: {},
+  loginPage: {
+    header: "Přihlásit se",
+    header2: "Obnova údajů",
+    loginButton: "Příhlásit",
+    changeButton: "Odeslat",
+    changeBackButton: "Zpět",
+    changeLink: "Zapomněl jsem jméno nebo heslo.",
+  },
+  detailPage: {},
 };

@@ -1,7 +1,13 @@
 import { Router, Response, Request } from "express";
-import { addFitness, getFitnesses, removeFitnesses, updateFitness } from "../abl";
+import { addFitness, addFitnessLike, getFitnesses, removeFitnesses, updateFitness } from "../abl";
 import { getStatus } from "../utils";
-import { AddFitnessRequest, GetFitnessRequest, RemoveFitnessesRequest, UpdateFitnessRequest } from "../types";
+import {
+  AddFitnessLikeRequest,
+  AddFitnessRequest,
+  GetFitnessRequest,
+  RemoveFitnessesRequest,
+  UpdateFitnessRequest,
+} from "../types";
 import { validationMiddleware } from "../middleware";
 import {
   deleteFitnessValidation,
@@ -36,3 +42,10 @@ fitness
     const result = await updateFitness(req.body);
     return res.status(getStatus(result.errorMap)).send(result);
   });
+
+//TODO login validation + query validation
+fitness.route("/like").get(async (req: Request, res: Response) => {
+  const request = req as unknown as AddFitnessLikeRequest;
+  const result = await addFitnessLike(request.query);
+  return res.status(getStatus(result.errorMap)).send(result);
+});

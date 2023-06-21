@@ -1,5 +1,11 @@
 .Login {
+  position: relative;
+  max-width: $maxWidth;
+  overflow-x: hidden;
+
+  @include minHeightWidth;
   img {
+    position: absolute;
     background-position: center;
     object-fit: cover;
     object-position: center;
@@ -8,139 +14,160 @@
   }
 }
 
-.Login::before {
+//WRAPPERS
+.loginFormWrapper {
+  position: absolute;
   width: 100%;
   height: 100%;
+
+  form {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min-content;
+
+    display: grid;
+
+    grid-template-rows: min-content min-content min-content min-content min-content;
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "username" "password" "button" "link";
+
+    @include mq($from: tablet) {
+      grid-template-rows: min-content min-content min-content min-content;
+      grid-template-columns: min-content min-content;
+      grid-template-areas:
+        "header header"
+        "username password"
+        "button button"
+        "link link";
+    }
+    align-items: center;
+    justify-items: center;
+    column-gap: 20px;
+  }
+}
+
+.changeFormWrapper {
   position: absolute;
-  content: "";
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(0, 0, 0, 1) 100%
-  );
-}
-.loginHeaderWrapper {
-  cursor: default;
+  display: none;
+  left: 100%;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
 
-  h2 {
-    color: white;
-  }
-}
+  form {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
-.forgetPassword::after {
-  position: absolute;
-  content: " ";
-  height: 1px;
-  width: 142px;
-  background: white;
+    width: min-content;
+    display: grid;
 
-  margin-top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
+    grid-template-rows: min-content min-content min-content;
+    grid-template-columns: min-content min-content;
+    grid-template-areas: "header header" "email email" "button backButton";
 
-  transition-property: width;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-in;
-}
-
-.forgetPassword:hover:after {
-  width: 0px;
-}
-
-#forgetPasswordForm {
-  color: white;
-  .forgetPasswordHeader {
-    font-size: 20px;
-    .underliner {
-      margin-top: 2px;
-    }
-    margin-bottom: 10px;
-  }
-
-  .forgetPasswordText {
-    margin-bottom: 25px;
-  }
-  .nameHeader {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  .inputWrapper:nth-of-type(2) {
-    margin-bottom: 10px;
-  }
-
-  .emailHeader {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  .inputWrapper:nth-of-type(3) {
-    margin-bottom: 20px;
-  }
-  .pageButton {
-    .buttonInitial {
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background: rgb(38, 62, 105);
-      color: white;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .buttonHover {
-      background: rgb(10, 21, 88);
-      transition-property: background;
-      transition-duration: 0.25s;
-      transition-timing-function: ease-out;
-    }
+    align-items: center;
+    justify-items: center;
+    column-gap: 20px;
   }
 }
 
-#forgetNameForm {
-  color: white;
-  .forgetNameHeader {
-    font-size: 20px;
-    .underliner {
-      margin-top: 2px;
-    }
-    margin-bottom: 10px;
+//
+
+.headerWrapper {
+  color: $textContrastColor;
+  white-space: nowrap;
+  margin-bottom: 30px;
+  grid-area: header;
+}
+
+.usernameInput {
+  width: 300px !important;
+
+  @include mq($from: 470px) {
+    width: 400px !important;
   }
 
-  .forgetNameText {
-    margin-bottom: 25px;
+  @include mq($from: tablet) {
+    width: 320px !important;
   }
-  .emailHeader {
-    font-size: 18px;
-    margin-bottom: 10px;
+  grid-area: username;
+}
+
+.passwordInput {
+  width: 300px !important;
+
+  @include mq($from: 470px) {
+    width: 400px !important;
   }
-  .inputWrapper:nth-of-type(2) {
-    margin-bottom: 10px;
+  @include mq($from: tablet) {
+    width: 320px !important;
+  }
+  grid-area: password;
+}
+
+.changeLink {
+  color: $textContrastColor;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 15px;
+  @include mq($from: 470px) {
+    font-size: 17px;
+  }
+  margin-top: 30px;
+  grid-area: link;
+}
+
+.loginFormButton {
+  margin-top: 0px !important;
+  grid-area: button;
+}
+
+.changeInput {
+  width: 350px !important;
+
+  @include mq($until: 430px) {
+    width: 320px !important;
   }
 
-  .passwordHeader {
-    font-size: 18px;
-    margin-bottom: 10px;
+  @include mq($from: 490px) {
+    width: 400px !important;
   }
-  .inputWrapper:nth-of-type(3) {
-    margin-bottom: 20px;
+
+  grid-area: email;
+}
+
+.changeSubmitFormButton {
+  margin-top: 0px !important;
+  width: 165px !important;
+
+  @include mq($until: 430px) {
+    width: 150px !important;
   }
-  .pageButton {
-    .buttonInitial {
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background: rgb(38, 62, 105);
-      color: white;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .buttonHover {
-      background: rgb(10, 21, 88);
-      transition-property: background;
-      transition-duration: 0.25s;
-      transition-timing-function: ease-out;
-    }
+
+  @include mq($from: 490px) {
+    width: 190px !important;
   }
+
+  grid-area: button;
+  justify-self: end;
+}
+
+.changeBackFormButton {
+  margin-top: 0px !important;
+  width: 165px !important;
+
+  @include mq($until: 430px) {
+    width: 150px !important;
+  }
+
+  @include mq($from: 490px) {
+    width: 190px !important;
+  }
+
+  grid-area: backButton;
+  justify-self: start;
 }

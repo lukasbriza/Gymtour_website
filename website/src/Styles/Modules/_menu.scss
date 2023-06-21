@@ -1,10 +1,26 @@
 .menu {
+  max-width: $maxWidth;
+  display: grid;
+  width: 100%;
+  min-width: 360px;
+  grid-template-columns: 15px 1fr min-content 1fr 25px;
+  grid-template-areas: ". . logo hamburger .";
+
   height: 60px;
   background-color: $mainColor;
   background: linear-gradient(180deg, rgba(0, 0, 0, 1) 21%, rgba(0, 0, 0, 0.24) 100%);
   position: fixed;
   top: 0px;
   z-index: 1;
+
+  @include mq($until: $maxWidth) {
+    width: 100vw;
+  }
+
+  @include mq($from: tablet) {
+    grid-template-columns: 15px min-content 1fr min-content 15px;
+    grid-template-areas: ". logo . menuOffer .";
+  }
 }
 
 #hamburger-wrapper {
@@ -109,4 +125,14 @@
       border-bottom: $minorColor1 1px solid;
     }
   }
+}
+
+.logoGrid {
+  grid-area: logo;
+}
+.menuOfferGrid {
+  grid-area: menuOffer;
+}
+.hamburgerGrid {
+  grid-area: hamburger;
 }

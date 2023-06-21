@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { ModalHeaderProps } from "./_types"
-import { Circle, Cross, Sucess } from "@svg";
-import { errorAnimation, successAnimation } from "@animations";
+import { ModalHeaderProps } from "./_types";
+import { Circle, Cross, Sucess } from "src/components/SVG/_index";
+import { errorAnimation, successAnimation } from "src/animations/_index";
 
 export const ModalHeader = (props: ModalHeaderProps) => {
     const success = useRef<SVGPathElement>(null)

@@ -1,4 +1,4 @@
-import { FilterObject, GetFilterResponse, Region, Town } from "@fetchers";
+import { FilterObject, GetFilterResponse, Region, Town } from "src/fetcher/_index";
 
 export enum OrderTypes {
   Popularity = "P",

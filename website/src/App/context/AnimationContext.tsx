@@ -1,8 +1,7 @@
 import { FC, createContext, useEffect, useMemo, useState } from "react";
 import { AnimationStateContext, ContextProviderProps } from "./_types";
-import { useAppContext } from "@hooks";
-import { smallLogoShow } from "@animations";
 import { useLocation } from "react-router-dom";
+import { smallLogoShow } from "src/animations/_index";
 
 const defaultState: AnimationStateContext = {
     bigLogoPlayed: false,
