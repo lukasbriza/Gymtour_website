@@ -1,63 +1,43 @@
-import { FC, useState, useRef, useEffect } from 'react'
-import { Layer, Footer, StringInput, Underliner } from "../../components/_index"
-import { handleSecondState, handleFirstState } from "../../animations/_index"
-import { useForm } from "react-hook-form"
+import { FC, useRef } from 'react'
+import { Layer, Footer } from "../../components/_index"
+import { slideFromLeft, slideFromRight } from "../../animations/_index"
 import register from '../../assets/register.webp'
 import clsx from 'clsx'
-import { loginFormValidationSchema, changePwdOrNameFormValidationSchema } from "./login.validation"
-import { LoginFormValues, ForgetPasswordFormValues } from "./_types"
-import { t } from 'i18next'
+import { LoginForm } from './LoginForm'
+import { ChangeForm } from './ChangeForm'
+import { RegisterForm } from './RegisterForm'
 
 const Login: FC = () => {
     const login = useRef<HTMLElement>(null)
     const changePwdOrName = useRef<HTMLElement>(null)
-    const [formType, setFormType] = useState<1 | 2>(1)
+    const registration = useRef<HTMLElement>(null)
 
-    const loginMethods = useForm<LoginFormValues>({
-        defaultValues: {
-            username: "",
-            password: "",
-        },
-        mode: "onChange",
-        reValidateMode: "onChange",
-        resolver: loginFormValidationSchema(t)
-    })
-    const changePwdOrNameMethods = useForm({
-        defaultValues: {
-            email: ""
-        },
-        mode: "onChange",
-        reValidateMode: "onChange",
-        resolver: changePwdOrNameFormValidationSchema(t)
-    })
 
-    const { control: loginControl, reset: loginReset, handleSubmit: loginHandleSubmit, formState: { errors: loginErrors } } = loginMethods
-    const { control: changeControl, reset: changeReset, handleSubmit: changeHandleSubmit, formState: { errors: changeErrors } } = changePwdOrNameMethods
 
-    const loginSubmit = (values: LoginFormValues) => {
-        //loginReset
-        //popup
-    }
-
-    const changePasswordOrNameSubmit = (values: ForgetPasswordFormValues) => {
-        //changeReset
-        //popup
-    }
-
-    const handleBack = () => setFormType(1)
-    const handleForward = () => setFormType(2)
-
-    useEffect(() => {
-        switch (formType) {
-            case 1:
-                login.current && changePwdOrName.current && handleFirstState(login.current, changePwdOrName.current)
-                return
-            case 2:
-                login.current && changePwdOrName.current && handleSecondState(login.current, changePwdOrName.current)
-                return
+    const toLogin = (from: 2 | 3) => {
+        if (from === 2 && changePwdOrName.current && login.current) {
+            slideFromLeft(login.current, changePwdOrName.current)
         }
-    }, [formType])
-
+        if (from === 3 && registration.current && login.current) {
+            slideFromLeft(login.current, registration.current)
+        }
+    }
+    const toChange = (from: 1 | 3) => {
+        if (from === 1 && login.current && changePwdOrName.current) {
+            slideFromRight(login.current, changePwdOrName.current)
+        }
+        if (from === 3 && registration.current && changePwdOrName.current) {
+            slideFromLeft(changePwdOrName.current, registration.current)
+        }
+    }
+    const toRegister = (from: 1 | 2) => {
+        if (from === 1 && login.current && registration.current) {
+            slideFromRight(login.current, registration.current)
+        }
+        if (from === 2 && changePwdOrName.current && registration.current) {
+            slideFromRight(changePwdOrName.current, registration.current)
+        }
+    }
 
     return (
         <>
@@ -65,49 +45,13 @@ const Login: FC = () => {
                 <img src={register} alt="LoginBckgImg" />
                 <Layer className={clsx(["stretchY", "stretchX"])}>
                     <section ref={login} className={"loginFormWrapper"}>
-                        <form onSubmit={loginHandleSubmit(loginSubmit)}>
-                            <div className={"headerWrapper"}>
-                                <h1 className={"loginHeader"}>{t("loginPage.header")}</h1>
-                                <Underliner width={"80%"} />
-                            </div>
-                            <StringInput
-                                className={"usernameInput"}
-                                label={t("common.username")}
-                                control={loginControl}
-                                errorText={loginErrors.username?.message}
-                                isError={loginErrors.username !== undefined}
-                                name={"username"}
-                            />
-                            <StringInput
-                                className={"passwordInput"}
-                                label={t("common.password")}
-                                control={loginControl}
-                                errorText={loginErrors.password?.message}
-                                isError={loginErrors.password !== undefined}
-                                name={"password"}
-                            />
-                            <button className={clsx(["submitButton", "loginFormButton"])} type="submit" >{t("loginPage.loginButton")}</button>
-                            <p className='changeLink' onClick={handleForward}>{t("loginPage.changeLink")}</p>
-                        </form>
+                        <LoginForm toChange={() => toChange(1)} toRegister={() => toRegister(1)} />
                     </section>
                     <section ref={changePwdOrName} className={"changeFormWrapper"}>
-                        <form onSubmit={changeHandleSubmit(changePasswordOrNameSubmit)}>
-                            <div className={"headerWrapper"}>
-                                <h1 className={"changeHeader"}>{t("loginPage.header2")}</h1>
-                                <Underliner width={"80%"} />
-                            </div>
-                            <StringInput
-                                className={"changeInput"}
-                                label={t("common.email")}
-                                control={changeControl}
-                                errorText={changeErrors.email?.message}
-                                isError={changeErrors.email !== undefined}
-                                name={"email"}
-                            />
-
-                            <button className={clsx(["submitButton", "changeSubmitFormButton"])} type="submit" >{t("loginPage.changeButton")}</button>
-                            <button className={clsx(["submitButton", "changeBackFormButton"])} type="button" onClick={handleBack} >{t("loginPage.changeBackButton")}</button>
-                        </form>
+                        <ChangeForm toLogin={() => toLogin(2)} toRegister={() => toRegister(2)} />
+                    </section>
+                    <section ref={registration} className={"registrationFormWrapper"}>
+                        <RegisterForm toLogin={() => toLogin(3)} toChange={() => toChange(3)} />
                     </section>
                 </Layer>
             </section>

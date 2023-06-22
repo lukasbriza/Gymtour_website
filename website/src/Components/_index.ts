@@ -12,7 +12,7 @@ export * from "./Card/Card";
 export * from "./FilteredContent/FilteredContent";
 export * from "./Tooltip/Tooltip";
 
-export * from "./Forms/RegisterPage/RegisterPage";
+export * from "./Forms/RegistrationForm/RegistrationForm";
 export * from "./Forms/StringInput/StringInput";
 export * from "./Forms/Checkbox/Checkbox";
 export * from "./Forms/Bullet/Bullet";

@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import clsx from 'clsx'
-import { Layer, Button, Footer, RegisterPage } from "src/components/_index";
+import { Layer, Button, Footer, RegistrationForm, Underliner } from "src/components/_index";
 import { useTranslation } from 'react-i18next'
 import { routes } from 'src/config/_index';
 import fitness from "../assets/fitness.webp";
 import trainer from "../assets/trainer.webp";
+import registerImg from '../assets/register.webp'
 
 
 const Crossroad: FC = () => {
@@ -84,5 +85,28 @@ const FitnessPage: FC = () => {
         </section>
     );
 };
+
+
+export const RegisterPage: FC = () => {
+    const { t } = useTranslation();
+    return (
+        <section
+            id="RegisterSection"
+            className={clsx(["stretchX", "stretchVH", "relative", "RegisterSection"])}
+        >
+            <img src={registerImg} alt="RegisterBckgImg" />
+            <Layer className={clsx(["stretchY", "stretchX"])}>
+                <div className={clsx(["centerX", "relative", "registerHeaderWrapper"])}>
+                    <h2>{t("registerPage.registerHeader")}</h2>
+                    <Underliner width={"80%"} />
+                </div>
+                <div className={clsx(["registerParagraph", "relative", "centerX"])}>
+                    {t("registerPage.registerParagraph")}
+                </div>
+                <RegistrationForm />
+            </Layer >
+        </section >
+    )
+}
 
 export default Crossroad
