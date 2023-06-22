@@ -39,22 +39,10 @@
     grid-area: mainHeader;
   }
 
-  .homeHeader {
+  #homeHeader {
     display: flex;
     align-items: center;
     justify-content: center;
-    grid-area: mainHeader;
-
-    font-size: clamp(35px, 7vmin, 75px);
-    margin: clamp(15px, 5vh, 100px);
-    text-transform: uppercase;
-    cursor: pointer;
-    //default state
-    opacity: 0;
-
-    transition-property: text-shadow;
-    transition-duration: 1s;
-    transition-timing-function: "ease-out";
 
     div {
       .headerWrapper {
@@ -103,6 +91,20 @@
         }
       }
     }
+  }
+
+  .homeHeader {
+    grid-area: mainHeader;
+
+    font-size: clamp(35px, 7vmin, 75px);
+    margin: clamp(15px, 5vh, 100px);
+    text-transform: uppercase;
+    cursor: pointer;
+    //default state
+
+    transition-property: text-shadow;
+    transition-duration: 1s;
+    transition-timing-function: "ease-out";
   }
 
   .homeHeader:hover {

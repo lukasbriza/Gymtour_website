@@ -29,18 +29,20 @@
 
     display: grid;
 
-    grid-template-rows: min-content min-content min-content min-content min-content;
+    grid-template-rows: min-content min-content min-content min-content min-content min-content min-content;
     grid-template-columns: 1fr;
-    grid-template-areas: "header" "username" "password" "button" "link";
+    grid-template-areas: "header" "subtitle" "username" "password" "button" "link" "link2";
 
     @include mq($from: tablet) {
-      grid-template-rows: min-content min-content min-content min-content;
+      grid-template-rows: min-content min-content min-content min-content min-content;
       grid-template-columns: min-content min-content;
       grid-template-areas:
         "header header"
+        "subtitle subtitle"
         "username password"
         "button button"
-        "link link";
+        "link link"
+        "link2 link2";
     }
     align-items: center;
     justify-items: center;
@@ -51,7 +53,6 @@
 .changeFormWrapper {
   position: absolute;
   display: none;
-  left: 100%;
   opacity: 0;
   width: 100%;
   height: 100%;
@@ -65,9 +66,9 @@
     width: min-content;
     display: grid;
 
-    grid-template-rows: min-content min-content min-content;
-    grid-template-columns: min-content min-content;
-    grid-template-areas: "header header" "email email" "button backButton";
+    grid-template-rows: min-content min-content min-content min-content min-content min-content;
+    grid-template-columns: min-content;
+    grid-template-areas: "header" "subtitle" "email" "button" "link1" "link2";
 
     align-items: center;
     justify-items: center;
@@ -75,13 +76,56 @@
   }
 }
 
+.registrationFormWrapper {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .registerFormWrapper {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content min-content min-content min-content;
+    grid-template-areas: "header" "subtitle" "registerForm" "link1" "link2";
+
+    max-width: 660px;
+
+    .headerWrapper {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .loginRegisterForm {
+      grid-area: registerForm;
+      width: unset;
+    }
+
+    .loginLink {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
 //
 
 .headerWrapper {
   color: $textContrastColor;
   white-space: nowrap;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   grid-area: header;
+}
+
+.subtitle {
+  grid-area: subtitle;
+  color: $textContrastColor;
+  margin-bottom: 30px;
+  font-size: 17px;
+  justify-self: center;
 }
 
 .usernameInput {
@@ -109,16 +153,33 @@
   grid-area: password;
 }
 
-.changeLink {
+.loginLink {
   color: $textContrastColor;
   cursor: pointer;
   text-decoration: underline;
   font-size: 15px;
+
   @include mq($from: 470px) {
     font-size: 17px;
   }
   margin-top: 30px;
   grid-area: link;
+  transition: color 150ms ease-out;
+}
+
+.loginLink:hover {
+  color: $linkAlternativeHover;
+}
+
+.changeLink {
+  grid-area: link;
+}
+
+.loginRedirectLink {
+  grid-area: link1;
+}
+.registerLink {
+  grid-area: link2;
 }
 
 .loginFormButton {
@@ -142,32 +203,5 @@
 
 .changeSubmitFormButton {
   margin-top: 0px !important;
-  width: 165px !important;
-
-  @include mq($until: 430px) {
-    width: 150px !important;
-  }
-
-  @include mq($from: 490px) {
-    width: 190px !important;
-  }
-
   grid-area: button;
-  justify-self: end;
-}
-
-.changeBackFormButton {
-  margin-top: 0px !important;
-  width: 165px !important;
-
-  @include mq($until: 430px) {
-    width: 150px !important;
-  }
-
-  @include mq($from: 490px) {
-    width: 190px !important;
-  }
-
-  grid-area: backButton;
-  justify-self: start;
 }

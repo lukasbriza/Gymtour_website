@@ -12,13 +12,20 @@ import { useTranslation } from 'react-i18next'
 //TODO! - change link for button
 const Home: FC = () => {
     const { bigLogoPlayed } = useAnimationContext()
+    const { t } = useTranslation()
+
     return (
         <div
             id="Home"
             className={clsx(["relative", "stretch", "minorColor2", "stretchVH", "minHeightWidth"])}
         >
             <img src={main} alt="homepageImage" />
-            <PageHeader />
+            <div
+                className={clsx(["stretchX", "relative", "minorColor1Text"])}
+                id="pageHeader"
+            >
+                {t("homePage.pageHeader")}
+            </div>
             <MainSection />
             {
                 bigLogoPlayed &&
@@ -27,21 +34,10 @@ const Home: FC = () => {
                     id="homeButton"
                     className={clsx(["link", "absolute", "centerX"])}
                 >
-                    {text.home.Button.cz}
+                    {t("homePage.continueLink")}
                 </Link>
             }
 
-        </div>
-    )
-}
-
-const PageHeader: FC = () => {
-    return (
-        <div
-            className={clsx(["stretchX", "relative", "minorColor1Text"])}
-            id="pageHeader"
-        >
-            {text.home.PageHeader.cz}
         </div>
     )
 }
@@ -130,13 +126,13 @@ const MainSection: FC = () => {
             >
                 <div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{t("home.header.part1")}</h1>
+                        <h1 className={"homeHeader"}>{t("homePage.header.part1")}</h1>
                     </div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{t("home.header.part2")}</h1>
+                        <h1 className={"homeHeader"}>{t("homePage.header.part2")}</h1>
                     </div>
                     <div className={"headerWrapper"}>
-                        <h1 className={"homeHeader"}>{t("home.header.part3")}</h1>
+                        <h1 className={"homeHeader"}>{t("homePage.header.part3")}</h1>
                     </div>
                 </div>
             </div>

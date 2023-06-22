@@ -270,66 +270,67 @@ body {
   justify-content: center;
   grid-area: mainHeader;
 }
-#Home .homeHeader {
+#Home #homeHeader {
   display: flex;
   align-items: center;
   justify-content: center;
-  grid-area: mainHeader;
-  font-size: clamp(35px, 7vmin, 75px);
-  margin: clamp(15px, 5vh, 100px);
-  text-transform: uppercase;
-  cursor: pointer;
-  opacity: 0;
-  transition-property: text-shadow;
-  transition-duration: 1s;
-  transition-timing-function: "ease-out";
 }
-#Home .homeHeader div .headerWrapper {
+#Home #homeHeader div .headerWrapper {
   width: -moz-min-content;
   width: min-content;
   margin-left: 30px;
 }
-#Home .homeHeader div .headerWrapper:nth-child(1) {
+#Home #homeHeader div .headerWrapper:nth-child(1) {
   margin-right: auto;
 }
-#Home .homeHeader div .headerWrapper:nth-child(2) {
+#Home #homeHeader div .headerWrapper:nth-child(2) {
   margin-top: 25px;
   margin-bottom: 25px;
   margin-right: auto;
 }
-#Home .homeHeader div .headerWrapper:nth-child(3) {
+#Home #homeHeader div .headerWrapper:nth-child(3) {
   margin-right: auto;
 }
 @media (min-width: 47.5em) {
-  #Home .homeHeader div {
+  #Home #homeHeader div {
     width: 90%;
   }
-  #Home .homeHeader div .headerWrapper {
+  #Home #homeHeader div .headerWrapper {
     width: -moz-min-content;
     width: min-content;
   }
-  #Home .homeHeader div .headerWrapper:nth-child(1) {
+  #Home #homeHeader div .headerWrapper:nth-child(1) {
     margin-right: auto;
   }
-  #Home .homeHeader div .headerWrapper:nth-child(2) {
+  #Home #homeHeader div .headerWrapper:nth-child(2) {
     margin-top: 50px;
     margin-bottom: 50px;
     margin-right: auto;
     margin-left: calc(50vw - 280px);
   }
-  #Home .homeHeader div .headerWrapper:nth-child(3) {
+  #Home #homeHeader div .headerWrapper:nth-child(3) {
     margin-left: auto;
     margin-right: 0px;
   }
 }
 @media (min-width: 81.25em) {
-  #Home .homeHeader div {
+  #Home #homeHeader div {
     width: 1170px;
   }
-  #Home .homeHeader div .headerWrapper:nth-child(2) {
+  #Home #homeHeader div .headerWrapper:nth-child(2) {
     margin-right: auto;
     margin-left: 370px;
   }
+}
+#Home .homeHeader {
+  grid-area: mainHeader;
+  font-size: clamp(35px, 7vmin, 75px);
+  margin: clamp(15px, 5vh, 100px);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition-property: text-shadow;
+  transition-duration: 1s;
+  transition-timing-function: "ease-out";
 }
 #Home .homeHeader:hover {
   text-shadow: 5.5rem 0px 0px rgba(255, 255, 255, 0.3);
@@ -585,58 +586,6 @@ body {
   grid-area: paragraph;
 }
 
-.registerFormWrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-self: center;
-  width: 70%;
-  grid-area: form;
-}
-@media (min-width: 47.5em) {
-  .registerFormWrapper {
-    width: 85%;
-    max-width: 900px;
-  }
-  .registerFormWrapper #registerForm {
-    display: grid;
-    -moz-column-gap: 15px;
-         column-gap: 15px;
-    row-gap: 10px;
-    grid-template-rows: 1fr 1fr min-content 1fr min-content;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "input1 input2" "input3 input3" "formTerms formTerms" "button button" "loginLink loginLink";
-  }
-  .registerFormWrapper .input1 {
-    grid-area: input1;
-  }
-  .registerFormWrapper .input2 {
-    grid-area: input2;
-  }
-  .registerFormWrapper .input3 {
-    grid-area: input3;
-  }
-  .registerFormWrapper .hadAccount {
-    grid-area: loginLink;
-  }
-}
-
-.formTerms {
-  grid-area: formTerms;
-}
-@media (min-width: 47.5em) {
-  .formTerms {
-    width: 320px;
-    font-size: 15px;
-  }
-}
-
-@media (min-width: 47.5em) {
-  .registerFormButton {
-    grid-area: button;
-  }
-}
-
 .hadAccount {
   margin-left: auto;
   margin-right: auto;
@@ -725,9 +674,9 @@ body {
   width: -moz-min-content;
   width: min-content;
   display: grid;
-  grid-template-rows: min-content min-content min-content min-content min-content;
+  grid-template-rows: min-content min-content min-content min-content min-content min-content min-content;
   grid-template-columns: 1fr;
-  grid-template-areas: "header" "username" "password" "button" "link";
+  grid-template-areas: "header" "subtitle" "username" "password" "button" "link" "link2";
   align-items: center;
   justify-items: center;
   -moz-column-gap: 20px;
@@ -735,16 +684,15 @@ body {
 }
 @media (min-width: 47.5em) {
   .loginFormWrapper form {
-    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-rows: min-content min-content min-content min-content min-content;
     grid-template-columns: min-content min-content;
-    grid-template-areas: "header header" "username password" "button button" "link link";
+    grid-template-areas: "header header" "subtitle subtitle" "username password" "button button" "link link" "link2 link2";
   }
 }
 
 .changeFormWrapper {
   position: absolute;
   display: none;
-  left: 100%;
   opacity: 0;
   width: 100%;
   height: 100%;
@@ -757,20 +705,59 @@ body {
   width: -moz-min-content;
   width: min-content;
   display: grid;
-  grid-template-rows: min-content min-content min-content;
-  grid-template-columns: min-content min-content;
-  grid-template-areas: "header header" "email email" "button backButton";
+  grid-template-rows: min-content min-content min-content min-content min-content min-content;
+  grid-template-columns: min-content;
+  grid-template-areas: "header" "subtitle" "email" "button" "link1" "link2";
   align-items: center;
   justify-items: center;
   -moz-column-gap: 20px;
        column-gap: 20px;
 }
 
+.registrationFormWrapper {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.registrationFormWrapper .registerFormWrapper {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content min-content min-content min-content;
+  grid-template-areas: "header" "subtitle" "registerForm" "link1" "link2";
+  max-width: 660px;
+}
+.registrationFormWrapper .registerFormWrapper .headerWrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+.registrationFormWrapper .registerFormWrapper .loginRegisterForm {
+  grid-area: registerForm;
+  width: unset;
+}
+.registrationFormWrapper .registerFormWrapper .loginLink {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .headerWrapper {
   color: white;
   white-space: nowrap;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   grid-area: header;
+}
+
+.subtitle {
+  grid-area: subtitle;
+  color: white;
+  margin-bottom: 30px;
+  font-size: 17px;
+  justify-self: center;
 }
 
 .usernameInput {
@@ -803,18 +790,35 @@ body {
   }
 }
 
-.changeLink {
+.loginLink {
   color: white;
   cursor: pointer;
   text-decoration: underline;
   font-size: 15px;
   margin-top: 30px;
   grid-area: link;
+  transition: color 150ms ease-out;
 }
 @media (min-width: 29.375em) {
-  .changeLink {
+  .loginLink {
     font-size: 17px;
   }
+}
+
+.loginLink:hover {
+  color: rgb(86, 130, 213);
+}
+
+.changeLink {
+  grid-area: link;
+}
+
+.loginRedirectLink {
+  grid-area: link1;
+}
+
+.registerLink {
+  grid-area: link2;
 }
 
 .loginFormButton {
@@ -839,36 +843,7 @@ body {
 
 .changeSubmitFormButton {
   margin-top: 0px !important;
-  width: 165px !important;
   grid-area: button;
-  justify-self: end;
-}
-@media (max-width: 26.875em) {
-  .changeSubmitFormButton {
-    width: 150px !important;
-  }
-}
-@media (min-width: 30.625em) {
-  .changeSubmitFormButton {
-    width: 190px !important;
-  }
-}
-
-.changeBackFormButton {
-  margin-top: 0px !important;
-  width: 165px !important;
-  grid-area: backButton;
-  justify-self: start;
-}
-@media (max-width: 26.875em) {
-  .changeBackFormButton {
-    width: 150px !important;
-  }
-}
-@media (min-width: 30.625em) {
-  .changeBackFormButton {
-    width: 190px !important;
-  }
 }
 
 #EmailUpdate img {
@@ -3094,4 +3069,57 @@ body {
 }
 .popupBase .lbui-PopUp-header {
   padding-bottom: 8px;
+}
+
+.registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-self: center;
+  width: 70%;
+  grid-area: form;
+}
+@media (min-width: 47.5em) {
+  .registerFormWrapper {
+    width: 85%;
+    max-width: 900px;
+  }
+  .registerFormWrapper #registerForm {
+    display: grid;
+    -moz-column-gap: 15px;
+         column-gap: 15px;
+    row-gap: 10px;
+    grid-template-rows: 1fr 1fr min-content 1fr min-content;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "input1 input2" "input3 input3" "formTerms formTerms" "button button" "loginLink loginLink";
+  }
+  .registerFormWrapper .input1 {
+    grid-area: input1;
+  }
+  .registerFormWrapper .input2 {
+    grid-area: input2;
+  }
+  .registerFormWrapper .input3 {
+    grid-area: input3;
+  }
+  .registerFormWrapper .hadAccount {
+    grid-area: loginLink;
+  }
+}
+
+.formTerms {
+  color: white;
+  grid-area: formTerms;
+}
+@media (min-width: 47.5em) {
+  .formTerms {
+    width: 320px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 47.5em) {
+  .registerFormButton {
+    grid-area: button;
+  }
 }/*# sourceMappingURL=index.css.map */

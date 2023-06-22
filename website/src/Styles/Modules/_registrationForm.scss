@@ -1,0 +1,57 @@
+.registerFormWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-self: center;
+
+  width: 70%;
+  grid-area: form;
+
+  @include mq($from: tablet) {
+    #registerForm {
+      display: grid;
+      column-gap: 15px;
+      row-gap: 10px;
+      grid-template-rows: 1fr 1fr min-content 1fr min-content;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "input1 input2"
+        "input3 input3"
+        "formTerms formTerms"
+        "button button"
+        "loginLink loginLink";
+    }
+    width: 85%;
+    max-width: 900px;
+
+    .input1 {
+      grid-area: input1;
+    }
+    .input2 {
+      grid-area: input2;
+    }
+    .input3 {
+      grid-area: input3;
+    }
+
+    .hadAccount {
+      grid-area: loginLink;
+    }
+  }
+}
+
+.formTerms {
+  color: $minorColor1;
+  grid-area: formTerms;
+
+  @include mq($from: tablet) {
+    width: 320px;
+    font-size: 15px;
+  }
+}
+
+.registerFormButton {
+  @include mq($from: tablet) {
+    grid-area: button;
+  }
+}

@@ -32,3 +32,7 @@ user
     const result = await addUser(req.body);
     return res.status(getStatus(result.errorMap)).send(result);
   });
+
+user.route("/change").post(async (req: Request, res: Response) => {
+  return res.status(200);
+});

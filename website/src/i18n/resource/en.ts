@@ -11,6 +11,7 @@ export const enTranslation = {
     username: "Uživatelské jméno",
     password: "Heslo",
     login: "Přihlásit",
+    register: "Registrovat",
     businessTermsAgreement: "Souhlas s obchodními podmínkami",
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
   },
@@ -34,7 +35,9 @@ export const enTranslation = {
     other: "Ostatní",
     gymtour: "Gymtour",
   },
-  home: {
+  homePage: {
+    pageHeader: "Fitness / Welness katalog.",
+    continueLink: "Klikni pro pokračování",
     header: {
       part1: "Choose",
       part2: "Your",
@@ -103,8 +106,14 @@ export const enTranslation = {
     header2: "Obnova údajů",
     loginButton: "Příhlásit",
     changeButton: "Odeslat",
-    changeBackButton: "Zpět",
-    changeLink: "Zapomněl jsem jméno nebo heslo.",
+    changeLink: "Zapomenuté přihlašovací údaje?",
+    registerLink: "Ještě nemáte účet?",
+    loginLink: "Jste již registrováni?",
+    loginSubtitle: "Po přihlášení budete moci využívat rozšířené funkce webu.",
+    changeSubtitle: "Na email Vám bude zaslán odkaz s instrukcemi pro změnu přihlašovacích údajů.",
+    registerHeader: "Zaregistrovat se",
+    registerSubtitle:
+      "Pro využívání pokročilejších funkcí webu, jako “lajkování„  přidávání příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
   },
   detailPage: {},
 };
