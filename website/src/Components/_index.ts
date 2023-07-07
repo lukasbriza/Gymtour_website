@@ -1,16 +1,18 @@
 export * from "./Menu/Menu";
 export * from "./Footer/Footer";
-export * from "./Layer";
+export * from "./Layer/Layer";
 export * from "./Button/Button";
 export * from "./Underliner/Underliner";
-export * from "./ModalHeader/ModalHeader";
 export * from "./ContentHeader/ContentHeader";
 export * from "./Filter/Filter";
 export * from "./Filter/_types";
 export * from "./Loading/Loading";
 export * from "./Card/Card";
 export * from "./FilteredContent/FilteredContent";
-export * from "./Tooltip/Tooltip";
+
+export * from "./Tooltips/Tooltip/Tooltip";
+export * from "./Tooltips/HelperTooltip/HelperTooltip";
+export * from "./Tooltips/OverflowTextTooltip/OverflowTextTooltip";
 
 export * from "./Forms/RegistrationForm/RegistrationForm";
 export * from "./Forms/StringInput/StringInput";
@@ -23,3 +25,13 @@ export * from "./Forms/SearchBar/SearchBar";
 export * from "./Forms/Select/Select";
 export * from "./Forms/Bolt/Bolt";
 export * from "./Forms/Bolt/_types";
+
+export * from "./Tables/EditableTableRow/EditableTableRow";
+export * from "./Tables/EditableTableData/EditableTableData";
+export * from "./Tables/EditableTable/EditableTable";
+export * from "./Tables/TableButtons/CancelButton";
+export * from "./Tables/TableButtons/EditButton";
+export * from "./Tables/TableButtons/SucessButton";
+
+export * from "./Modals/ModalHeader/ModalHeader";
+export * from "./Modals/ModalButtonRow/ModalButtonRow";

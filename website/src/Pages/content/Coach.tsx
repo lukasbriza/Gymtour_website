@@ -15,9 +15,7 @@ const Coach: FC = () => {
         className={clsx([
           "relative",
           "stretch",
-          "minorColor2",
           "contentPage",
-          "relative",
         ])}
       >
         <ContentHeader text={t("coachContentPage.header1")} />

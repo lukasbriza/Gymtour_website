@@ -1,0 +1,36 @@
+.modalButtonRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  column-gap: 10px;
+
+  button {
+    color: $minorColor1;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    height: 45px;
+  }
+}
+
+.modalSubmitButton {
+  background: $modalBtn;
+  transition: background 0.2s ease-out;
+}
+.modalSubmitButton:hover {
+  background: $modalBtnHover;
+}
+
+.modalBackButton {
+  background: $modalBackBtn;
+  color: $buttonColor !important;
+  transition: background 0.2s ease-out;
+}
+
+.modalBackButton:hover {
+  background: $modalBackBtnHover;
+}

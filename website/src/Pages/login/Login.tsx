@@ -41,7 +41,7 @@ const Login: FC = () => {
 
     return (
         <>
-            <section className={clsx(["stretchX", "stretchVH", "Login"])}>
+            <section className={clsx(["stretchX", "stretchVH", "page", "Login"])}>
                 <img src={register} alt="LoginBckgImg" />
                 <Layer className={clsx(["stretchY", "stretchX"])}>
                     <section ref={login} className={"loginFormWrapper"}>

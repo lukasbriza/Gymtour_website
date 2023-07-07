@@ -49,6 +49,9 @@
 .modalHeader {
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .successHeader {
@@ -98,4 +101,15 @@
     stroke-dasharray: 36.53257369995117;
     stroke-dashoffset: 36.53257369995117;
   }
+}
+
+.questionMarkContainer {
+  .modalCircle {
+    stroke-dasharray: 2088.922607421875;
+    stroke-dashoffset: 2088.922607421875;
+  }
+}
+
+.questionHeader {
+  margin-top: 15px;
 }

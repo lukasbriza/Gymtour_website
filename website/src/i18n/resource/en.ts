@@ -6,14 +6,23 @@ export const enTranslation = {
     noBoolean: "Nesprávná hodnota.",
   },
   common: {
+    add: "Přidat",
     email: "Email",
     name: "Jméno",
+    town: "Město",
+    region: "Region",
+    watched: "Shlédnutí",
+    popularity: "Popularita",
     username: "Uživatelské jméno",
     password: "Heslo",
     login: "Přihlásit",
     register: "Registrovat",
     businessTermsAgreement: "Souhlas s obchodními podmínkami",
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
+    fitness: "Fitness",
+    coach: "Coach",
+    continue: "Pokračovat",
+    back: "Zpět",
   },
   routes: {
     mainPage: "Hlavní stránka",
@@ -116,4 +125,35 @@ export const enTranslation = {
       "Pro využívání pokročilejších funkcí webu, jako “lajkování„  přidávání příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
   },
   detailPage: {},
+  dashboardPage: {
+    userSection: {
+      general: "Obecné",
+      username: "Uživatel:",
+      email: "Email:",
+      role: "Oprávnění:",
+      roleTypes: {
+        admin: "Administrátor",
+        user: "Uživatel",
+      },
+      agreements: "Souhlasy",
+      agreementsTypes: {
+        dataProcessing: "Obchodní podmínky:",
+        terms: "Zpracování osobních údajů:",
+      },
+      agreementState: {
+        granted: "Udělen",
+        notGranted: "Neudělen",
+      },
+    },
+    recordList: {
+      modal: {
+        questionHeader: "Nevratná akce",
+        questionContent: "Opravdu chcete smazat záznam? Pokud ano pokračujte, nebo se vraťte zpět.",
+      },
+    },
+    userLikesList: {
+      favoriteFitnessHeader: "Oblíbená Fitness",
+      favoriteCoachesHeader: "Oblíbení Trenéři",
+    },
+  },
 };

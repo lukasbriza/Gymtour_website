@@ -12,8 +12,7 @@ const BusinessConditions = ReactLazyPreload(() => import("../pages/BusinessCondi
 const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"));
 
 const Login = ReactLazyPreload(() => import("../pages/login/Login"));
-const Dashboard = ReactLazyPreload(() => import("../pages/Dashboard"));
-const EmailUpdate = ReactLazyPreload(() => import("../pages/EmailUpdate"));
+const Dashboard = ReactLazyPreload(() => import("../pages/protected/Dashboard/Dashboard"));
 const Detail = ReactLazyPreload(() => import("../pages/content/Detail"));
 
 export const card = {
@@ -52,7 +51,7 @@ export const routes = {
   login: { name: "routes.login", path: "/login", component: Login },
   dashboard: {
     name: "routes.dashboard",
-    path: "/dashboard",
+    path: "/auth/dashboard",
     component: Dashboard,
   },
   businessConditions: {
@@ -64,11 +63,6 @@ export const routes = {
     name: "routes.dataProcessing",
     path: "/dataprocessing",
     component: DataProcessing,
-  },
-  emailUpdate: {
-    name: "routes.emailUpdate",
-    path: "/emailUpdate",
-    component: EmailUpdate,
   },
   notFound: { name: "404", path: "*", component: NotFound },
 } as const;

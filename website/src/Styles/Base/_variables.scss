@@ -2,7 +2,7 @@
 $mainColor: black;
 $minorColor1: white;
 $minorColor2: #707070;
-$dashboardColor: rgb(240, 240, 240);
+$standardBackground: rgb(29, 29, 29);
 $textContrastColor: white;
 $error: rgb(233, 91, 106);
 
@@ -13,10 +13,12 @@ $checkBoxBorder: rgb(186, 186, 186);
 $checkBackground: rgb(60, 97, 164);
 $bolt: #111111;
 
+//BUTTONS
 $modalBtn: rgb(38, 62, 105);
 $modalBtnHover: rgb(10, 21, 88);
+$modalBackBtn: rgb(224, 215, 215);
+$modalBackBtnHover: rgb(255, 255, 255);
 
-//BUTTONS
 $buttonColor: #292727;
 $submitButton: rgb(38, 62, 105);
 $buttonDisabled: rgb(83, 83, 83);

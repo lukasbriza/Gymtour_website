@@ -1,5 +1,5 @@
 import { gsap, Power3 } from "gsap";
-import { fadeIn, fadeOff } from "./effects";
+import { fadeIn, fadeOff, stroke } from "./effects";
 
 export const showFormModal = (modal: HTMLElement) => {
   const tl = gsap.timeline();
@@ -117,6 +117,18 @@ export const showMessageButton = (section: HTMLDivElement) => {
   tl.add(
     fadeIn(section.children, { stagger: 0.3, duration: 0.5, displayInitial: "initial", displayAfter: "initial" })
   ).add(fadeIn(".modalButton", { duration: 0.5, delay: 0.25, displayInitial: "initial", displayAfter: "initial" }));
+
+  return tl;
+};
+
+export const questionAnimation = (path1: string, classes: string[]) => {
+  const tl = gsap.timeline();
+  tl.addLabel("start")
+    .add(stroke(path1, { strokeDasharrayInitial: 2089, strokeDashoffsetInitial: 2089, duration: 2 }), "start")
+    .add(
+      fadeIn(classes, { displayInitial: "block", displayAfter: "block", stagger: 0, delay: 0.25, duration: 1 }),
+      "start"
+    );
 
   return tl;
 };

@@ -17,7 +17,7 @@ const Contact: FC = () => {
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="Contact" className={clsx(["relative", "stretch", "minorColor2"])}>
+        <div id="Contact" className={clsx(["relative", "stretch", "minorColor2", "page"])}>
 
         </div>
     )

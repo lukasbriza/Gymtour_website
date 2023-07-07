@@ -5,8 +5,6 @@ import { smallLogoShow } from 'src/animations/_index'
 import clsx from 'clsx'
 
 const CoOp: FC = () => {
-    console.log("loaded")
-
     const appContext = useAppContext()
     const anContext = useAnimationContext()
 
@@ -20,7 +18,7 @@ const CoOp: FC = () => {
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="CoOp" className={clsx(["relative", "stretch", "minorColor2"])}>
+        <div id="CoOp" className={clsx(["relative", "stretch", "minorColor2", "page"])}>
 
         </div>
     )

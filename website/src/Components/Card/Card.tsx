@@ -9,10 +9,9 @@ import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, u
 import { Coach, Fitness, addCoachLike, addFitnessLike, getCoaches, getFitnesses, getImage, updateViews } from "src/fetcher/_index"
 import { Heart, Topped, Viewed } from "../SVG/_index"
 import { card } from "src/config/_index"
-import { Tooltip } from "react-tooltip"
+import { OverflowTextTooltip } from "../_index"
 
 export const Card: FC<CardProps> = (props) => {
-    const nameref = useRef<HTMLDivElement>(null)
     const heart = useRef<SVGSVGElement>(null)
     const { t } = useTranslation()
     const navigate = useNavigate()
@@ -43,7 +42,6 @@ export const Card: FC<CardProps> = (props) => {
         pictures,
     } = props
 
-    const allowTooltip = nameref.current && (nameref.current.scrollWidth > nameref.current.clientWidth)
     const isLoading = loading || getImageLoading
 
     const handleClick = async (e: React.BaseSyntheticEvent) => {
@@ -126,10 +124,9 @@ export const Card: FC<CardProps> = (props) => {
                 }
             </div>
             <div className="infoSection">
-                <InfoElement className="cardNameWrapper" data-tooltip-id="nameTooltip" ref={nameref}>
+                <OverflowTextTooltip tooltipId="nameTooltip" className="cardNameWrapper" content={name}>
                     {name}
-                </InfoElement>
-                <Tooltip id="nameTooltip" content={name} hidden={!allowTooltip} />
+                </OverflowTextTooltip>
                 <InfoElement className="heartWrapper">
                     <Heart
                         ref={heart}

@@ -45,7 +45,12 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 const header = <ModalHeader header={t("registerPage.modalHeader")} />
                 const text = t("registerPage.modalText", { email: values.email })
                 const button = t("registerPage.modalButton")
-                showModal(header, text, button, clearForm)
+                showModal({
+                    headerComp: header,
+                    text: text,
+                    button: button,
+                    onClick: clearForm
+                })
                 return
             }
             onSuccessModal?.()
@@ -56,7 +61,12 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 const errorHeader = <ErrorModalHeader header={t("registerPage.modalErrorHeader")} />
                 const errorText = t("registerPage.modalErrorText")
                 const button = t("registerPage.modalButton")
-                showModal(errorHeader, errorText, button, clearForm)
+                showModal({
+                    headerComp: errorHeader,
+                    text: errorText,
+                    button: button,
+                    onClick: clearForm
+                })
                 return
             }
             onErrorModal?.()

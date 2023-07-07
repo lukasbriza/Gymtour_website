@@ -17,7 +17,7 @@ const About = () => {
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="About" className={clsx(["relative", "stretch", "minorColor2"])}>
+        <div id="About" className={clsx(["relative", "stretch", "minorColor2", "page"])}>
 
         </div>
     )

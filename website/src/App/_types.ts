@@ -7,9 +7,13 @@ export type LayoutProps = {
 export type ErrorHandlerProps = {
   children: React.ReactNode;
 };
-export type routeArrayType = routeType[];
-export type routeType = {
-  name: string;
-  path: string;
-  component: React.ReactNode;
+
+export enum Permissions {
+  AUTHORIZED = "AUTHORIZED",
+}
+
+export type ProtectedRouteProps = {
+  children: React.ReactNode;
+  expectedPermission: Permissions;
+  redirect?: string;
 };

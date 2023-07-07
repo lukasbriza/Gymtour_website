@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-export const useServerData = <T>(fetcher: () => Promise<T | undefined>) => {
+export const useServerData = <E, T>(fetcher: (props?: T) => () => Promise<E>, props?: T) => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState<T | undefined>(undefined);
+  const [data, setData] = useState<E | undefined>(undefined);
 
   useEffect(() => {
     setLoading(true);
-    fetcher()
+    const call = props ? fetcher(props) : fetcher();
+    call()
       .then((value) => {
         setData(value);
       })
@@ -18,7 +19,8 @@ export const useServerData = <T>(fetcher: () => Promise<T | undefined>) => {
 
   const reFetch = async () => {
     setLoading(true);
-    const response = await fetcher();
+    const call = props ? fetcher(props) : fetcher();
+    const response = await call();
     setData(response);
     setLoading(false);
     return response;

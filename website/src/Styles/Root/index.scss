@@ -32,11 +32,7 @@
 @import "../Modules/Pages/ContentPage";
 @import "../Modules/Pages/NotFound";
 @import "../Modules//Pages/Login";
-@import "../Modules/Pages/EmailUpdate";
 @import "../Modules/Pages/Dashboard/Dashboard";
-@import "../Modules/Pages/Dashboard/Overview";
-@import "../Modules/Pages/Dashboard/Settings";
-@import "../Modules/Pages/Dashboard/AddItem";
 
 @import "../Modules/menu";
 @import "../Modules/logo";
@@ -46,13 +42,10 @@
 @import "../Modules/underliner";
 @import "../Modules/submitButton";
 @import "../Modules/modal";
+@import "../Modules/modalButtonRow";
 @import "../Modules/loading";
-@import "../Modules/filterIcon";
 @import "../Modules/searchItem";
-@import "../Modules/errorModal";
-@import "../Modules/priceLevelSection";
 @import "../Modules/checkBox";
-@import "../Modules/stringInput";
 @import "../Modules/contentHeader";
 @import "../Modules/bullet";
 @import "../Modules/multipleSelect";
@@ -63,3 +56,8 @@
 @import "../Modules/card";
 @import "../Modules/popUp";
 @import "../Modules/registrationForm";
+@import "../Modules/helperTooltip";
+
+@import "../Modules/tables/editableTableRow";
+@import "../Modules/tables/editableTableData";
+@import "../Modules/tables/tableButtons";

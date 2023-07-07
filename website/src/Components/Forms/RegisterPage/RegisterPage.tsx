@@ -46,7 +46,12 @@ export const RegisterPage: FC = () => {
             const header = <ModalHeader header={t("registerPage.modalHeader")} />
             const text: string = t("registerPage.modalText", { email: values.email })
             const button: string = t("registerPage.modalButton")
-            showModal(header, text, button, clearForm)
+            showModal({
+                headerComp: header,
+                text: text,
+                button: button,
+                onClick: clearForm
+            })
         }
     }
 

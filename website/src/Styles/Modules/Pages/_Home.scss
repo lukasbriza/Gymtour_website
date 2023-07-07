@@ -95,6 +95,7 @@
 
   .homeHeader {
     grid-area: mainHeader;
+    display: none;
 
     font-size: clamp(35px, 7vmin, 75px);
     margin: clamp(15px, 5vh, 100px);

@@ -1,0 +1,66 @@
+.sucessButtonIcon {
+  position: unset;
+  left: unset;
+  top: unset;
+  transform: unset;
+  path {
+    stroke-dasharray: none;
+    stroke-dashoffset: unset;
+  }
+}
+
+.editButton,
+.succesButton {
+  position: relative;
+  display: flex;
+  width: 18px;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  cursor: pointer;
+  border: none;
+  border-radius: unset;
+  background: none;
+  @include glassMorphism;
+  border-radius: 3px;
+  background: white;
+}
+
+.editButton {
+  transition: opacity 150ms ease-in, background 100ms ease-in, fill 100ms ease-in;
+  transition-delay: 150ms;
+}
+
+.editButton:hover {
+  background: $buttonBackground;
+  fill: $textContrastColor;
+}
+
+.editIcon {
+  position: relative;
+}
+
+.cancelButtonIcon {
+  line {
+    stroke-dasharray: none;
+    stroke-dashoffset: unset;
+  }
+}
+
+.editCrossButton {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: unset;
+  background: none;
+  margin: 0px;
+  @include glassMorphism;
+  border-radius: 3px;
+  background: white;
+}
