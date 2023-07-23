@@ -1038,6 +1038,218 @@ body {
   padding-top: 25px !important;
 }
 
+#Modify {
+  position: relative;
+  display: block;
+  height: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
+  background: rgb(29, 29, 29);
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+@media (max-width: 32.5em) {
+  #Modify {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.modify {
+  color: white;
+}
+.modify .sectionHeader {
+  font-size: 25px;
+  margin: 0px 0px 10px 0px;
+  text-transform: uppercase;
+}
+.modify .sectionSubHeader {
+  font-size: 20px;
+  margin: 0px 0px 10px 0px;
+  text-transform: uppercase;
+}
+
+.modifySection {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  position: relative;
+  padding: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+}
+@media (max-width: 53.125em) {
+  .modifySection {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media (max-width: 32.5em) {
+  .modifySection {
+    width: 100%;
+  }
+}
+@media (max-width: 32.5em) {
+  .modifySection {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.disabledModifySelect .selectWrapper {
+  cursor: default;
+  background: rgb(43, 43, 43) !important;
+  border: 1px solid rgb(175, 175, 175);
+}
+
+.contactSection {
+  padding-top: 60px;
+}
+
+.contactInputs {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  -moz-column-gap: 35px;
+       column-gap: 35px;
+  row-gap: 5px;
+}
+@media (max-width: 53.125em) {
+  .contactInputs {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.socialNetworks {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  -moz-column-gap: 35px;
+       column-gap: 35px;
+  row-gap: 5px;
+}
+@media (max-width: 53.125em) {
+  .socialNetworks {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+.termsSection {
+  padding-top: 60px;
+}
+.termsSection .termsInputs {
+  margin-top: 20px;
+}
+.termsSection .termsLinks {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: min-content min-content;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  margin-top: 5px;
+}
+.termsSection .termsLinks * {
+  white-space: nowrap;
+  text-decoration: none;
+  color: rgb(68, 106, 177);
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+.termsSection .termsLinks *:hover {
+  color: rgb(86, 130, 213);
+  text-decoration: underline;
+}
+
+.coachInformationSection {
+  padding-top: 60px;
+}
+
+.filterInformationInputs {
+  margin-top: 20px;
+}
+
+.coachInformationInputs {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1r 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "coachName coachSurname" "alias alias" "workPlace workPlace" "regionSelect regionSelect" "townSelect townSelect" "street houseNumber";
+  -moz-column-gap: 35px;
+       column-gap: 35px;
+}
+.coachInformationInputs .coachName {
+  grid-area: coachName;
+}
+.coachInformationInputs .coachSurname {
+  grid-area: coachSurname;
+}
+.coachInformationInputs .alias {
+  grid-area: alias;
+}
+.coachInformationInputs .workPlace {
+  grid-area: workPlace;
+}
+.coachInformationInputs .regionSelect {
+  grid-area: regionSelect;
+}
+.coachInformationInputs .townSelect {
+  grid-area: townSelect;
+}
+.coachInformationInputs .street {
+  grid-area: street;
+}
+.coachInformationInputs .houseNumber {
+  grid-area: houseNumber;
+}
+
+.inputWithText p {
+  margin-bottom: 10px;
+}
+
+.infoSelect .selectWrapper {
+  min-width: unset;
+  box-shadow: none;
+  width: 100%;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.253);
+}
+.infoSelect .selectAllWrapper {
+  width: 100%;
+  height: 60px;
+}
+.infoSelect .selectLabel {
+  height: 60px;
+  font-size: 18px;
+  align-items: center;
+}
+.infoSelect .selectWrapperHovered {
+  background: rgb(75, 75, 75) !important;
+}
+.infoSelect .optionsWrapper {
+  background: rgb(75, 75, 75) !important;
+}
+
+.aboutSection {
+  padding-top: 60px;
+}
+.aboutSection .aboutWrapperClass {
+  margin-top: 20px;
+}
+
+.picturesSection .pictureInputs,
+.picturesSection .otherInput,
+.picturesSection .cardInput {
+  margin-top: 20px;
+}
+.picturesSection .cardInput {
+  margin-bottom: 20px;
+}
+
 .menu {
   max-width: 2500px;
   display: grid;
@@ -2501,6 +2713,226 @@ body {
   fill: rgb(228, 228, 228);
   stroke-width: 1px;
   stroke: black;
+}
+
+.requiredStar {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: rgb(233, 91, 106);
+  font-size: 22px;
+}
+
+.inputWrapper {
+  width: 100%;
+}
+
+.stringInputHelperRoot {
+  position: relative;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.stringInputRoot {
+  position: relative;
+  width: inherit;
+}
+.stringInputRoot input {
+  caret-color: white;
+  color: white;
+  cursor: pointer;
+  height: 60px;
+  width: inherit;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.253);
+}
+
+.stringInputRoot:hover label {
+  color: white;
+}
+.stringInputRoot:hover .stringInputLabelError {
+  color: red;
+}
+
+.stringInputRootFocused label {
+  background: rgba(123, 123, 123, 0.128);
+}
+.stringInputRootFocused input {
+  outline-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.stringInputLabel {
+  cursor: pointer;
+  color: white;
+  background: rgba(255, 255, 255, 0);
+}
+
+.stringInputHelper {
+  font-size: 0.8em;
+  height: 23px;
+}
+
+.stringFocusRootError input {
+  outline-color: red !important;
+  outline-width: 1px !important;
+}
+.stringFocusRootError label {
+  font-size: 14px !important;
+  color: white !important;
+}
+
+.stringInputLabelError {
+  color: red;
+  font-size: 16px;
+}
+
+.stringInputError {
+  border: 1px solid red;
+}
+
+.priceLevelWrapper {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-flow: row;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+}
+.priceLevelWrapper .dollar {
+  cursor: pointer;
+}
+.priceLevelWrapper .dollar path {
+  fill: rgb(92, 92, 92);
+  transition: fill 0.15s ease-out;
+}
+.priceLevelWrapper .dollarActive path {
+  fill: white;
+}
+
+.textAreaInput {
+  padding: 10px;
+  width: 100%;
+  position: relative;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.253);
+  color: white;
+  outline: 1px solid rgba(0, 0, 0, 0.541);
+  transition: outline 0.15s ease-out;
+}
+
+.textAreaInputActive {
+  outline-color: rgba(255, 255, 255, 0.5);
+  outline-width: 2px;
+}
+
+.textAreaInput::-moz-placeholder {
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.textAreaInput::placeholder {
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.disableResize {
+  resize: none;
+}
+
+.imageBtnWrapper {
+  position: relative;
+  width: -moz-min-content;
+  width: min-content;
+}
+.imageBtnWrapper .imageInput {
+  border: unset;
+  margin: unset;
+  padding: unset;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgb(61, 61, 61);
+  cursor: pointer;
+  position: relative;
+}
+.imageBtnWrapper .imageInput .imgLine {
+  width: 50%;
+  height: 5px;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 3px;
+  transform: translate(-50%, -50%);
+}
+.imageBtnWrapper .imageInput .imgLine:first-of-type {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.imageBtnWrapper .preview {
+  cursor: pointer;
+  opacity: 0;
+  top: calc(100% - 22px);
+  left: calc(100% - 22px);
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgb(38, 62, 105);
+  transition: background 0.15s ease-in, opacity 0.15s ease-in;
+}
+.imageBtnWrapper .preview .search {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+.imageBtnWrapper .preview:hover {
+  background: rgb(52, 84, 143);
+}
+.imageBtnWrapper .hidden {
+  display: none;
+}
+
+.imagePreview {
+  opacity: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.885);
+  z-index: 1000;
+  top: 0px;
+}
+.imagePreview .image {
+  aspect-ratio: 1/1;
+  z-index: 1000;
+  max-height: 80%;
+  max-width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.imagePreview .previewCancel {
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  margin: 0px;
+  width: 45px;
+  height: 45px;
+}
+.imagePreview .previewCancel line {
+  stroke-dasharray: none !important;
+  stroke-dashoffset: unset !important;
+}
+
+.multipleImageInput {
+  display: flex;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
 }
 
 .showEditButton {

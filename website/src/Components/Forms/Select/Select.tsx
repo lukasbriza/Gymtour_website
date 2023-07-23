@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { ArrowProps, SelectProps, SelectTypes } from "./_types";
-import { useClickOutside } from "@lukasbriza/lbui-lib";
+import { ArrowProps, SelectProps, SelectTypes, SelectWithHelperProps } from "./_types";
+import { HelperText, useClickOutside } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ import { selectShowAnimation } from "../../../animations/_index"
 
 
 export const Select: FC<SelectProps> = (props) => {
-    const { label, options, name, selectClick, ...otherProps } = props;
+    const { label, options, name, selectClick, disabled = false, disabledClass, ...otherProps } = props;
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState<boolean>(false);
     const [hovered, setHovered] = useState(false);
@@ -20,8 +20,8 @@ export const Select: FC<SelectProps> = (props) => {
 
     const clearTranslation = t("contentPage.filter.orderSelect.clear")
 
-    const handleMouseLeave = () => !open && setHovered(false);
-    const handleMouseEnter = () => !open && setHovered(true);
+    const handleMouseLeave = () => !disabled && !open && setHovered(false);
+    const handleMouseEnter = () => !disabled && !open && setHovered(true);
 
     useEffect(() => {
         open && setHovered(true);
@@ -34,7 +34,7 @@ export const Select: FC<SelectProps> = (props) => {
     }, [outside]);
 
     const handleClick = () => {
-        setOpen(!open);
+        !disabled && setOpen(!open);
     };
 
     const handleSelect = (nameValue: string, code: string) => () => {
@@ -57,7 +57,7 @@ export const Select: FC<SelectProps> = (props) => {
     return (
         <div
             {...otherProps}
-            className={"selectAllWrapper"}
+            className={clsx(["selectAllWrapper", disabled && disabledClass])}
             ref={ref}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -108,3 +108,21 @@ const Arrow: FC<ArrowProps> = (props) => {
         </div>
     );
 };
+
+export const SelectWithHelper: FC<SelectWithHelperProps> = (props) => {
+    const { requiredStar = false, helperText = "", isError, errorText, className, helperClass, ...otherProps } = props
+    return (
+        <HelperText
+            className={clsx(["stringInputHelperRoot", className])}
+            helperClass={clsx(["stringInputHelper", helperClass])}
+            position={"bottom"}
+            text={helperText}
+            errorText={errorText}
+            error={isError}
+            show={true}
+        >
+            <Select {...otherProps} />
+            {requiredStar && <div className="requiredStar">*</div>}
+        </HelperText>
+    )
+}

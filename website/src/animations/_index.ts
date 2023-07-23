@@ -13,3 +13,4 @@ export * from "./multipleSelect";
 export * from "./bolt";
 export * from "./tooltip";
 export * from "./loginPage";
+export * from "./imageInput";

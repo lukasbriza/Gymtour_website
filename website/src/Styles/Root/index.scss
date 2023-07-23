@@ -31,8 +31,9 @@
 @import "../Modules/Pages/Crossroad";
 @import "../Modules/Pages/ContentPage";
 @import "../Modules/Pages/NotFound";
-@import "../Modules//Pages/Login";
+@import "../Modules/Pages/Login";
 @import "../Modules/Pages/Dashboard/Dashboard";
+@import "../Modules/Pages/Modify/Modify";
 
 @import "../Modules/menu";
 @import "../Modules/logo";
@@ -57,6 +58,10 @@
 @import "../Modules/popUp";
 @import "../Modules/registrationForm";
 @import "../Modules/helperTooltip";
+@import "../Modules/stringInput";
+@import "../Modules/priceLevel";
+@import "../Modules/textArea";
+@import "../Modules/imageInput";
 
 @import "../Modules/tables/editableTableRow";
 @import "../Modules/tables/editableTableData";

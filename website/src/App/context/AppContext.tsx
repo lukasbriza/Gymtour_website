@@ -1,4 +1,4 @@
-import { FC, createContext, useMemo, useState } from "react";
+import { FC, createContext, useCallback, useMemo, useState } from "react";
 import { AppStateContext, BreakPoints, ContextProviderProps } from "./_types";
 import { getBreakPoint, preloadImg } from 'src/utils/_index'
 
@@ -46,23 +46,27 @@ export const AppContextProvider: FC<ContextProviderProps> = (props) => {
     const location = useLocation()
     const { children } = props
 
+    const handler = useCallback(() => {
+        setWidth(window.innerWidth)
+        const compute = getBreakPoint(window.innerWidth)
+        if (compute !== breakPoint) {
+            setBreakPoint(compute)
+        }
+    }, [breakPoint])
+
     useEffect(() => {
         setWidth(window.innerWidth)
         setBreakPoint(getBreakPoint(window.innerWidth))
     }, [])
 
     useEffect(() => {
-        const handler = () => {
-            setWidth(window.innerWidth)
-            const compute = getBreakPoint(window.innerWidth)
-            if (compute !== breakPoint) {
-                setBreakPoint(compute)
-            }
+        if (window) {
+            window.addEventListener('resize', handler)
         }
-
-        window.addEventListener('resize', handler)
         return () => {
-            window.removeEventListener('resize', handler)
+            if (window) {
+                window.removeEventListener('resize', handler)
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

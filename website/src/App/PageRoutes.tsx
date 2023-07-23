@@ -17,6 +17,7 @@ export const PageRoutes: FC = () => {
             <Route path={routes.login.path} element={<routes.login.component />} />
             {/*PROTECTED ROUTES*/}
             <Route path={routes.dashboard.path} element={<routes.dashboard.component />} />
+            <Route path={routes.modify.path} element={<routes.modify.component />} />
         </Routes>
     )
 }

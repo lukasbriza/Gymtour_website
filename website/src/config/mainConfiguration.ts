@@ -8,17 +8,13 @@ const NotFound = ReactLazyPreload(() => import("../pages/NotFound"));
 const About = ReactLazyPreload(() => import("../pages/About"));
 const CoOp = ReactLazyPreload(() => import("../pages/CoOp"));
 const Contact = ReactLazyPreload(() => import("../pages/Contact"));
-const BusinessConditions = ReactLazyPreload(
-  () => import("../pages/BusinessConditions")
-);
-const DataProcessing = ReactLazyPreload(
-  () => import("../pages/DataProcessing")
-);
+const BusinessConditions = ReactLazyPreload(() => import("../pages/BusinessConditions"));
+const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"));
 
 const Login = ReactLazyPreload(() => import("../pages/login/Login"));
-const Dashboard = ReactLazyPreload(
-  () => import("../pages/protected/dashboard/Dashboard")
-);
+const Dashboard = ReactLazyPreload(() => import("../pages/protected/dashboard/Dashboard"));
+const Modify = ReactLazyPreload(() => import("../pages/protected/modify/Modify"));
+
 const Detail = ReactLazyPreload(() => import("../pages/content/Detail"));
 
 export const card = {
@@ -59,6 +55,11 @@ export const routes = {
     name: "routes.dashboard",
     path: "/auth/dashboard",
     component: Dashboard,
+  },
+  modify: {
+    name: "routes.modify",
+    path: "/auth/modify/:type",
+    component: Modify,
   },
   businessConditions: {
     name: "routes.businessConditions",

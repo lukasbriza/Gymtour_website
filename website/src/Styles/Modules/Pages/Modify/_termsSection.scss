@@ -1,0 +1,29 @@
+.termsSection {
+  padding-top: 60px;
+
+  .termsInputs {
+    margin-top: 20px;
+  }
+
+  .termsLinks {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: min-content min-content;
+    column-gap: 15px;
+    margin-top: 5px;
+
+    * {
+      white-space: nowrap;
+      text-decoration: none;
+      color: $linkAlternative;
+      font-weight: 600;
+
+      transition: color 0.25s ease;
+    }
+
+    *:hover {
+      color: $linkAlternativeHover;
+      text-decoration: underline;
+    }
+  }
+}

@@ -15,7 +15,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
     const { t } = useTranslation()
     const { showModal } = useModal()
     const { fetchCall: registerUser } = useServerdataLazy(addUser)
-    const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormValues>({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormValues>({
         defaultValues: {
             name: "",
             password: "",
@@ -83,7 +83,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 <StringInput
                     className={"input1"}
                     label={t("common.name")}
-                    control={control}
+                    register={register}
                     errorText={errors.name?.message}
                     isError={errors.name !== undefined}
                     name={"name"}
@@ -91,7 +91,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 <StringInput
                     className={"input2"}
                     label={t("common.password")}
-                    control={control}
+                    register={register}
                     errorText={errors.password?.message}
                     isError={errors.password !== undefined}
                     name={"password"}
@@ -99,7 +99,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 <StringInput
                     className={"input3"}
                     label={t("common.email")}
-                    control={control}
+                    register={register}
                     errorText={errors.email?.message}
                     isError={errors.email !== undefined}
                     name={"email"}
@@ -107,7 +107,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 <div className={clsx(["formTerms relative centerX"])}>
                     <Checkbox
                         className={"termsCheckbox"}
-                        control={control}
+                        register={register}
                         isError={errors.terms !== undefined}
                         errorText={errors.terms?.message}
                         label={t("common.businessTermsAgreement")}
@@ -116,7 +116,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                     <Checkbox
                         className={"termsCheckbox"}
                         errorText={errors.dataProcessing?.message}
-                        control={control}
+                        register={register}
                         isError={errors.dataProcessing !== undefined}
                         label={t("common.dataProcessingAgreement")}
                         name={"dataProcessing"}

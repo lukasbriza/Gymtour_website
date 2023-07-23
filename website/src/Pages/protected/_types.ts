@@ -1,20 +1,22 @@
 import { ReactNode } from "react";
-import { Coach, Fitness } from "src/fetcher/_index";
+import { Coach, FilterObject, Fitness, Region } from "src/fetcher/_index";
 
 export type UserSectionEditableData = {
   username: string;
   email: string;
 };
 
-export type CoachFormProps = Partial<Coach>;
-export type ModifyCoachFormProps = CoachFormProps & { children: ReactNode };
-export type FitnessFormProps = Partial<Fitness>;
-export type ModifyFitnessFormProps = FitnessFormProps & { children: ReactNode };
+export type ModifyCoachFormProviderProps = Partial<Coach> & { children: ReactNode };
+export type ModifyFitnessFormProviderProps = Partial<Fitness> & { children: ReactNode };
 
 export type MappedCoachValues = {
-  cardPicture?: string;
-  mainPicture?: string;
-  othersPictures?: string[];
+  coachName?: string;
+  coachSurname?: string;
+  houseNumber?: string;
+
+  cardPicture?: File;
+  mainPicture?: File;
+  othersPictures?: File[];
 
   tel?: number;
   mobile?: number;
@@ -35,13 +37,49 @@ export type MappedCoachValues = {
 } & Partial<
   Omit<
     Coach,
-    | "contact"
-    | "filters"
-    | "pictures"
-    | "agreement"
-    | "topped"
-    | "approved"
-    | "views"
-    | "popularity"
+    "name" | "contact" | "filters" | "pictures" | "agreement" | "topped" | "approved" | "views" | "popularity"
   >
 >;
+
+export type MappedFitnessValues = {
+  cardPicture?: File;
+  mainPicture?: File;
+  othersPictures?: File[];
+
+  tel?: number;
+  mobile?: number;
+  email?: string;
+  web?: string;
+  facebook?: string;
+  twitter?: string;
+  google?: string;
+  instagram?: string;
+  youtube?: string;
+
+  terms?: boolean;
+  dataProcessingForPropagation?: boolean;
+
+  equipment?: string[];
+  general?: string[];
+  others?: string[];
+} & Partial<
+  Omit<Fitness, "contact" | "filters" | "pictures" | "agreement" | "topped" | "approved" | "views" | "popularity">
+>;
+
+export type CoachInformationSectionProps = {
+  loading: boolean;
+  regionOptions: Region[];
+  othersOptions: FilterObject[];
+  genderOptions: FilterObject[];
+  specializationOptions: FilterObject[];
+};
+
+export type ModifyCoachFormProps = { type: "coach" } & CoachInformationSectionProps;
+
+export type ModifyFitnessFrormProps = { type: "fitness" };
+
+export type ContactSectionProps = {};
+
+export type TermsSectionProps = {};
+
+export type AboutSectionProps = {};

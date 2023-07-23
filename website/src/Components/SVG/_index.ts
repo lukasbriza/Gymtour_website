@@ -16,3 +16,4 @@ export * from "./Viewed/Viewed";
 export * from "./Info/Info";
 export * from "./Edit/Edit";
 export * from "./QuestionMark/QuestionMark";
+export * from "./Dollar/Dollar";

@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { ArrowProps, SelectProps } from "./_types";
+import { ArrowProps, MultipleSelectWithHelperProps, SelectProps } from "./_types";
 import { useFormContext } from "react-hook-form";
-import { CheckboxSquared, useClickOutside } from "@lukasbriza/lbui-lib";
+import { CheckboxSquared, HelperText, useClickOutside } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
 import { selectShowAnimation } from "src/animations/_index";
 
@@ -69,7 +69,7 @@ export const MultipleSelect: FC<SelectProps> = (props) => {
         </div>
       </div>
       <div className={clsx(["optionsWrapper", open && "show"])}>
-        {options.map((option, i) => {
+        {options.length > 0 && options.map((option, i) => {
           const sync = syncWithWatch ? { checked: watchedValue.includes(option.code) } : {}
           return (
             <div className={"optionWrapper"} key={i + "t"}>
@@ -100,3 +100,22 @@ const Arrow: FC<ArrowProps> = (props) => {
     </div>
   );
 };
+
+export const MultipleSelectWithHelper: FC<MultipleSelectWithHelperProps> = (props) => {
+  const { requiredStar = false, helperText = "", isError, errorText, className, helperClass, ...otherProps } = props
+
+  return (
+    <HelperText
+      className={clsx(["stringInputHelperRoot", className])}
+      helperClass={clsx(["stringInputHelper", helperClass])}
+      position={"bottom"}
+      text={helperText}
+      errorText={errorText}
+      error={isError}
+      show={true}
+    >
+      <MultipleSelect {...otherProps} />
+      {requiredStar && <div className="requiredStar">*</div>}
+    </HelperText>
+  )
+}

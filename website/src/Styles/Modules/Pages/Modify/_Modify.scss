@@ -1,0 +1,65 @@
+#Modify {
+  @include standarPage;
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  @include mq($until: 520px) {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.modify {
+  color: $textContrastColor;
+
+  .sectionHeader {
+    font-size: 25px;
+    margin: 0px 0px 10px 0px;
+    text-transform: uppercase;
+  }
+
+  .sectionSubHeader {
+    font-size: 20px;
+    margin: 0px 0px 10px 0px;
+    text-transform: uppercase;
+  }
+}
+
+.modifySection {
+  margin-top: 35px;
+  margin-bottom: 35px;
+
+  position: relative;
+  padding: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+
+  @include mq($until: 850px) {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  @include mq($until: 520px) {
+    width: 100%;
+  }
+
+  @include mq($until: 520px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.disabledModifySelect {
+  .selectWrapper {
+    cursor: default;
+    background: rgb(43, 43, 43) !important;
+    border: 1px solid rgb(175, 175, 175);
+  }
+}
+
+@import "./contactSection";
+@import "./termsSection";
+@import "./informationSection";
+@import "./aboutSection";
+@import "./pictureSection";

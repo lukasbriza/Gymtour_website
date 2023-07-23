@@ -15,7 +15,7 @@ export const RegisterPage: FC = () => {
     const { t } = useTranslation()
     const { showModal } = useModal()
     const { fetchCall: registerUser } = useServerdataLazy(addUser)
-    const { control, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormValues>({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<RegisterFormValues>({
         defaultValues: {
             username: "",
             password: "",
@@ -74,42 +74,42 @@ export const RegisterPage: FC = () => {
                 <div className={clsx(["registerFormWrapper", "centerX", "relative"])}>
                     <form action="#RegisterSection" id="registerForm" onSubmit={handleSubmit(onSubmit)}>
                         <StringInput
+                            register={register}
                             className={"input1"}
                             label={t("common.name")}
-                            control={control}
                             errorText={errors.username?.message}
                             isError={errors.username !== undefined}
                             name={"username"}
                         />
                         <StringInput
+                            register={register}
                             className={"input2"}
                             label={t("common.password")}
-                            control={control}
                             errorText={errors.password?.message}
                             isError={errors.password !== undefined}
                             name={"password"}
                         />
                         <StringInput
+                            register={register}
                             className={"input3"}
                             label={t("common.email")}
-                            control={control}
                             errorText={errors.email?.message}
                             isError={errors.email !== undefined}
                             name={"email"}
                         />
                         <div className={clsx(["formTerms relative centerX"])}>
                             <Checkbox
+                                register={register}
                                 className={"termsCheckbox"}
-                                control={control}
                                 isError={errors.terms !== undefined}
                                 errorText={errors.terms?.message}
                                 label={t("common.businessTermsAgreement")}
                                 name={"terms"}
                             />
                             <Checkbox
+                                register={register}
                                 className={"termsCheckbox"}
                                 errorText={errors.dataProcessing?.message}
-                                control={control}
                                 isError={errors.dataProcessing !== undefined}
                                 label={t("common.dataProcessingAgreement")}
                                 name={"dataProcessing"}
