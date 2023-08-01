@@ -71,7 +71,8 @@ export type FitnesFilterQuery = {
   others?: string[];
   projection?: string;
   search?: string;
-  id?: string;
+  id?: string | string[];
+  owner?: string;
 };
 
 export type GetFitness = Fitness[];

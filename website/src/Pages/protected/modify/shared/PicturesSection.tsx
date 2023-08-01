@@ -7,7 +7,7 @@ import { MappedCoachValues, MappedFitnessValues } from "../../_types";
 
 export const PictureSection: FC = () => {
     const { t } = useTranslation()
-    const { control } = useFormContext<MappedFitnessValues | MappedCoachValues>()
+    const { control, formState: { defaultValues } } = useFormContext<MappedFitnessValues | MappedCoachValues>()
 
     return (
         <section className={clsx(["modifySection", "picturesSection", "glassMorphism"])}>
@@ -26,7 +26,7 @@ export const PictureSection: FC = () => {
                     render={({ field: { value, onChange, ...field } }) => {
                         return (
                             <ImageInput
-                                value={(value as any)?.filename}
+                                value={value}
                                 onChange={onChange}
                                 className="cardInput"
                                 showPreview={true}
@@ -45,7 +45,7 @@ export const PictureSection: FC = () => {
                     render={({ field: { value, onChange, ...field } }) => {
                         return (
                             <ImageInput
-                                value={(value as any)?.filename}
+                                value={value}
                                 onChange={onChange}
                                 className="cardInput"
                                 showPreview={true}
@@ -55,8 +55,8 @@ export const PictureSection: FC = () => {
                     }}
                 />
                 <div>
-                    <h3 className={clsx(["modifySectionHeader", "sectionSubHeader"])}>{t("modifyPage.picturesSection.mainPictureHeader")}</h3>
-                    <p>{t("modifyPage.picturesSection.mainPictureContent")}</p>
+                    <h3 className={clsx(["modifySectionHeader", "sectionSubHeader"])}>{t("modifyPage.picturesSection.othersPicturesHeader")}</h3>
+                    <p>{t("modifyPage.picturesSection.othersPictureContent")}</p>
                 </div>
                 <Controller
                     control={control}

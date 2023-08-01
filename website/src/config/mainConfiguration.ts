@@ -58,7 +58,9 @@ export const routes = {
   },
   modify: {
     name: "routes.modify",
-    path: "/auth/modify/:type",
+    path: "/auth/modify/:type/:id?",
+    makeDynamicPath: (type: "coach" | "fitness", id?: string) =>
+      id ? `/auth/modify/${type}/${id}` : `/auth/modify/${type}`,
     component: Modify,
   },
   businessConditions: {

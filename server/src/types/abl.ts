@@ -10,7 +10,8 @@ export type GetCoachType = {
   gender?: string;
   specialization?: string;
   projection?: string;
-  id?: string;
+  id?: string | string[];
+  owner?: string;
 };
 
 export type FilterQueryParsed = {
@@ -109,7 +110,8 @@ export type GetFitnessType = {
   general?: string;
   others?: string;
   projection?: string;
-  id?: string;
+  id?: string | string[];
+  owner?: string;
 };
 
 export type FitnessFilter = {

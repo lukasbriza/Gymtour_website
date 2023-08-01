@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { ContactSectionProps, MappedCoachValues, MappedFitnessValues } from "../../_types";
+import { ContactSectionProps } from "../../_types";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { useFormContext } from "react-hook-form";
 import { StringInput } from "src/components/_index";
+import { useField } from "src/hooks/_index";
 
 export const Contactsection: FC<ContactSectionProps> = () => {
     const { t } = useTranslation()
-    const { register, formState: { errors } } = useFormContext<MappedCoachValues | MappedFitnessValues>()
+    const { buildField } = useField()
 
     return (
         <section className={clsx(["modifySection", "contactSection", "glassMorphism"])}>
@@ -17,32 +17,24 @@ export const Contactsection: FC<ContactSectionProps> = () => {
             </div>
             <section className="contactInputs">
                 <StringInput
+                    {...buildField("email")}
                     className={clsx(["email", "contactInput"])}
-                    name={"email"}
-                    isError={errors.email !== undefined}
-                    register={register}
                     label={t("common.email")}
                     requiredStar={true}
                 />
                 <StringInput
+                    {...buildField("web")}
                     className="web"
-                    name={"web"}
-                    isError={errors.web !== undefined}
-                    register={register}
                     label={t("common.web")}
                 />
                 <StringInput
+                    {...buildField("tel")}
                     className="tel"
-                    name={"tel"}
-                    isError={errors.tel !== undefined}
-                    register={register}
                     label={t("common.telephone")}
                 />
                 <StringInput
+                    {...buildField("mobile")}
                     className="mobile"
-                    name={"mobile"}
-                    isError={errors.mobile !== undefined}
-                    register={register}
                     label={t("common.mobile")}
                 />
             </section>
@@ -52,38 +44,28 @@ export const Contactsection: FC<ContactSectionProps> = () => {
             </div>
             <section className="socialNetworks">
                 <StringInput
+                    {...buildField("facebook")}
                     className="facebook"
-                    name={"facebook"}
-                    isError={errors.facebook !== undefined}
-                    register={register}
                     label={t("common.facebook")}
                 />
                 <StringInput
+                    {...buildField("instagram")}
                     className="instagram"
-                    name={"instagram"}
-                    isError={errors.instagram !== undefined}
-                    register={register}
                     label={t("common.instagram")}
                 />
                 <StringInput
+                    {...buildField("youtube")}
                     className="youtube"
-                    name={"youtube"}
-                    isError={errors.youtube !== undefined}
-                    register={register}
                     label={t("common.youtube")}
                 />
                 <StringInput
+                    {...buildField("twitter")}
                     className="twitter"
-                    name={"twitter"}
-                    isError={errors.twitter !== undefined}
-                    register={register}
                     label={t("common.twitter")}
                 />
                 <StringInput
+                    {...buildField("google")}
                     className="google"
-                    name={"google"}
-                    isError={errors.google !== undefined}
-                    register={register}
                     label={t("common.google")}
                 />
             </section>

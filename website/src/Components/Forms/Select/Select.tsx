@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowProps, SelectProps, SelectTypes, SelectWithHelperProps } from "./_types";
 import { HelperText, useClickOutside } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
@@ -9,11 +9,11 @@ import { selectShowAnimation } from "../../../animations/_index"
 
 
 export const Select: FC<SelectProps> = (props) => {
-    const { label, options, name, selectClick, disabled = false, disabledClass, ...otherProps } = props;
+    const { label, options, name, selectClick, disabled = false, disabledClass, defaultValue, ...otherProps } = props;
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState<boolean>(false);
     const [hovered, setHovered] = useState(false);
-    const [selected, setSelected] = useState<string | undefined>(undefined)
+    const [selected, setSelected] = useState<string | undefined>(defaultValue?.name ?? undefined)
     const { outside } = useClickOutside(ref);
     const { t } = useTranslation()
     const methods = useFormContext();
@@ -22,6 +22,26 @@ export const Select: FC<SelectProps> = (props) => {
 
     const handleMouseLeave = () => !disabled && !open && setHovered(false);
     const handleMouseEnter = () => !disabled && !open && setHovered(true);
+    const handleClick = () => {
+        !disabled && setOpen(!open);
+    };
+
+    const handleSelect = useCallback((nameValue: string, code: string) => () => {
+        setOpen(false)
+        if (code === SelectTypes.Clear) {
+            selectClick?.(false, `${code}-${name}`, nameValue, name)
+            methods.setValue(name, undefined)
+            setSelected(undefined)
+            return
+        }
+
+        if (nameValue !== selected) {
+            selectClick?.(true, `${code}-${name}`, nameValue, name)
+        }
+        methods.setValue(name, code)
+        setSelected(nameValue)
+
+    }, [methods, name, selectClick, selected])
 
     useEffect(() => {
         open && setHovered(true);
@@ -33,25 +53,9 @@ export const Select: FC<SelectProps> = (props) => {
         outside && setHovered(false);
     }, [outside]);
 
-    const handleClick = () => {
-        !disabled && setOpen(!open);
-    };
-
-    const handleSelect = (nameValue: string, code: string) => () => {
-        setOpen(false)
-        if (code === SelectTypes.Clear) {
-            selectClick?.(false, `${code}-${name}`, nameValue, name)
-            methods.setValue(name, undefined)
-            setSelected(undefined)
-            return
-        }
-        if (nameValue !== selected) {
-            selectClick?.(true, `${code}-${name}`, nameValue, name)
-        }
-        methods.setValue(name, code)
-        setSelected(nameValue)
-
-    }
+    useEffect(() => {
+        defaultValue && handleSelect(defaultValue?.name, defaultValue?.code)
+    }, [defaultValue, handleSelect])
 
 
     return (

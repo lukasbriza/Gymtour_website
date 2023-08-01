@@ -8,6 +8,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     const {
         register,
         className,
+        defaultValue,
         helperClass,
         helperText = "",
         errorText,
@@ -27,6 +28,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             error={isError}
         >
             <CheckboxSquared
+                defaultChecked={defaultValue}
                 labelClass={"checkboxLabel"}
                 checkboxClass={"checkboxClass"}
                 checkerClass={clsx(["checkerClass"])}

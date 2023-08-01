@@ -4,6 +4,7 @@ export const errorMessages = {
   },
   getCoach: {
     databaseError: "Get operation failed. Please contact administrator.",
+    invalidObjectId: "Passing invalid ObjectId",
   },
   addCoach: {
     databaseError: "Add operation failed. Please contact administrator.",
@@ -26,6 +27,7 @@ export const errorMessages = {
   },
   getFitness: {
     databaseError: "Get operation failed. Please contact administrator.",
+    invalidObjectId: "Passing invalid ObjectId",
   },
   addFitnessLike: {
     databaseError: "Get operation failed. Please contact administrator.",

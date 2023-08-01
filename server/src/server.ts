@@ -27,7 +27,9 @@ app.use(cors());
 app.use(express.json({ limit: config.jsonLimit }));
 
 //RATE LIMITS
-app.use("/api", rateLimit({ ...rateLimitConfig }));
+if (process.env.DEVELOPMENT_STATE !== "true") {
+  app.use("/api", rateLimit({ ...rateLimitConfig }));
+}
 
 //ROUTES
 app.use("/api", router);

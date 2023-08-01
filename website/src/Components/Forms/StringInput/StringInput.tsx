@@ -6,6 +6,7 @@ import { StringInputProps } from "./_types";
 export const StringInput: FC<StringInputProps> = (props) => {
     const {
         register,
+        defaultValue,
         errorText,
         isError,
         label,
@@ -23,9 +24,9 @@ export const StringInput: FC<StringInputProps> = (props) => {
         requiredStar = false
     } = props
     const [focused, setFocused] = useState<boolean>(false)
-
     const focusOut = () => setFocused(false)
     const focusIn = () => setFocused(true)
+
     return (
         <HelperText
             className={clsx(["stringInputHelperRoot", className])}
@@ -38,6 +39,7 @@ export const StringInput: FC<StringInputProps> = (props) => {
         >
             <>
                 <BasicTextField
+                    defaultValue={defaultValue}
                     password={password}
                     label={label}
                     errorLabelClass={"stringInputLabelError"}

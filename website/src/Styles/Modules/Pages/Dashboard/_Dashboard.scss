@@ -77,6 +77,11 @@
   background: rgba(255, 255, 255, 0.266);
 }
 
+.loading {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
 @import "./userCard";
 @import "./userLikesList";
 @import "./userRecordList";

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, ReactElement, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { FC, ReactElement, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { ImperativeMultipleImageInput, MultipleImageInputProps } from "./_types";
 import { ImageInput } from "./ImageInput";
 import clsx from "clsx";

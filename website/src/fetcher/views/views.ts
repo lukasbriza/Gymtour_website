@@ -4,7 +4,8 @@ import { UpdateViews, UpdateViewsResponse } from "./_types";
 import { Api } from "src/config/_index";
 import { handleFetchError } from "../handleFetchError";
 
-export const updateViews = ({ fitness, coach }: UpdateViews) => {
+export const updateViews = (props?: UpdateViews) => {
+  const { fitness, coach } = props ?? {};
   const instance = getAxiosInstance();
   return async () => {
     try {

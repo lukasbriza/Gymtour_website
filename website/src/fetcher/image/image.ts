@@ -5,11 +5,12 @@ import { Api } from "src/config/_index";
 import { AxiosResponse } from "axios";
 import { handleFetchError } from "src/fetcher/_index";
 
-export const getImage = ({ id }: GetImage) => {
+export const getImage = (props?: GetImage) => {
+  const { id } = props ?? {};
   const instance = getAxiosInstance();
   return async () => {
     try {
-      const response = await instance.get<any, AxiosResponse<any>>(getFetchAdress() + Api.ApiImages + `?id=${id}`, {
+      const response = await instance.get<any, AxiosResponse<Blob>>(getFetchAdress() + Api.ApiImages + `?id=${id}`, {
         responseType: "blob",
         timeout: 30000,
       });

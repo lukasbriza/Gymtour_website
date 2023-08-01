@@ -4,7 +4,7 @@ export type ImageInputProps = {
   id?: string;
   onBlur?: Noop;
   className?: string;
-  value?: any;
+  value?: File;
   name: string;
   allowedFileTypes?: string;
   showPreview?: boolean;

@@ -18,12 +18,12 @@ import { handleFetchError } from "../handleFetchError";
 import { AxiosResponse } from "axios";
 import { querySerialize } from "../querySerialize";
 
-export const getCoaches = (query: CoachFilterQuery) => {
+export const getCoaches = (query?: CoachFilterQuery) => {
   const instance = getAxiosInstance();
   return async () => {
     try {
       const response = await instance.get<any, AxiosResponse<GetCoachesResponse>>(
-        `${Api.ApiCoach}?${querySerialize(query)}`
+        `${Api.ApiCoach}?${querySerialize(query ?? {})}`
       );
       return response.data;
     } catch (error: unknown) {
@@ -32,7 +32,7 @@ export const getCoaches = (query: CoachFilterQuery) => {
   };
 };
 
-export const removeCoaches = (id: RemoveCoachesBody) => {
+export const removeCoaches = (id?: RemoveCoachesBody) => {
   const instance = getAxiosInstance();
   return async () => {
     try {
@@ -68,12 +68,12 @@ export const updateCoach = (body: UpdateCoachBody) => {
   };
 };
 
-export const addCoachLike = (query: AddCoachLikeQuery) => {
+export const addCoachLike = (query?: AddCoachLikeQuery) => {
   const instance = getAxiosInstance();
   return async () => {
     try {
       const response = await instance.get<any, AxiosResponse<AddCoachLikeResponse>>(
-        `${Api.ApiCoachLike}?${querySerialize(query)}`
+        `${Api.ApiCoachLike}?${querySerialize(query ?? {})}`
       );
       return response.data;
     } catch (error: unknown) {

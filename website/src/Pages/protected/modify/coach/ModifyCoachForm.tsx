@@ -1,6 +1,5 @@
 import { FC } from "react"
 import { ModifyCoachFormProps } from "../../_types"
-import { useTranslation } from "react-i18next"
 import { Contactsection } from "../shared/ContactSection"
 import { TermsSection } from "../shared/TermsSection"
 import { CoachInformationSection } from "./CoachInformationSection"
@@ -8,13 +7,12 @@ import { AboutSection } from "../shared/AboutSection"
 import { PictureSection } from "../shared/PicturesSection"
 
 export const ModifyCoachForm: FC<ModifyCoachFormProps> = (props) => {
-    const { type, loading, regionOptions, othersOptions, genderOptions, specializationOptions } = props
-    const { t } = useTranslation()
+    const { type, regionOptions, othersOptions, genderOptions, specializationOptions } = props
+
 
     return (
         <section style={{ marginTop: "80px" }}>
             <CoachInformationSection
-                loading={loading}
                 regionOptions={regionOptions}
                 othersOptions={othersOptions}
                 genderOptions={genderOptions}

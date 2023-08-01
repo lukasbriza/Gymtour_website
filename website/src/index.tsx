@@ -10,11 +10,10 @@ const container = document.getElementById('root');
 
 if (container) {
   const root = createRoot(container)
-  const app = process.env.REACT_APP_STRICT_MODE === "FALSE" ?
-    <App /> :
-    (<React.StrictMode>
+  root.render(
+    <React.StrictMode>
       <App />
-    </React.StrictMode>)
-  root.render(app)
+    </React.StrictMode>
+  )
 }
 

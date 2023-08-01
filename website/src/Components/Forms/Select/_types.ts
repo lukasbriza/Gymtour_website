@@ -1,4 +1,5 @@
 export type SelectProps = {
+  defaultValue?: { name: string; code: string };
   name: string;
   label: string;
   options: { name: string; code: string }[];

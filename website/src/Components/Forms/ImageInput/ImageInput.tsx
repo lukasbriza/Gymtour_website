@@ -9,7 +9,23 @@ import { Tooltip } from "src/components/_index";
 
 
 export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((props, ref) => {
-    const { id, tooltipPlace = "right", onChange, onFileRemove, onBlur, className, name, onStart, onUnsupportedFileType, onSuccess, onNoFile, allowedFileTypes, showPreview = false, ...otherProps } = props
+    const {
+        onChange,
+        onFileRemove,
+        onBlur,
+        onStart,
+        onUnsupportedFileType,
+        onSuccess,
+        onNoFile,
+        id,
+        tooltipPlace = "right",
+        className,
+        name,
+        value,
+        allowedFileTypes,
+        showPreview = false,
+        ...otherProps
+    } = props
 
     const inputRef = useRef<HTMLInputElement>(null)
     const searchRef = useRef<HTMLDivElement>(null)
@@ -19,7 +35,7 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
 
     const reader = useMemo(() => new FileReader(), [])
 
-    const [actualFile, setActualFile] = useState<File | null>(null)
+    const [actualFile, setActualFile] = useState<File | null>(value ?? null)
     const [url, setUrl] = useState<string | null | ArrayBuffer>(null)
     const [open, setOpen] = useState<boolean>(false)
 
@@ -77,12 +93,21 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
         }
     }, [actualFile, handleFileRemove])
 
+
     useEffect(() => {
         reader.addEventListener("load", () => setUrl(reader.result))
         return () => {
             reader.removeEventListener("load", () => setUrl(reader.result))
         }
     }, [reader])
+
+    useEffect(() => {
+        if (inputRef.current && value) {
+            const list = new DataTransfer()
+            list.items.add(value)
+            inputRef.current.files = list.files
+        }
+    }, [value])
 
     return (
         <>

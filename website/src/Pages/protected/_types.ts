@@ -1,13 +1,38 @@
 import { ReactNode } from "react";
-import { Coach, FilterObject, Fitness, Region } from "src/fetcher/_index";
+import { Coach, FilterObject, FilterType, Fitness, Region } from "src/fetcher/_index";
+
+export type UserRecordListProps = {
+  loading: boolean;
+  fitnesses: Fitness[];
+  coaches: Coach[];
+};
+
+export type LikedObject = { _id: string; name: string; town: number; region: number };
+
+export type UserLikesListProps = {
+  filter?: FilterType;
+  loading: boolean;
+  coachLiked: LikedObject[];
+  fitnessLiked: LikedObject[];
+};
 
 export type UserSectionEditableData = {
   username: string;
   email: string;
 };
 
-export type ModifyCoachFormProviderProps = Partial<Coach> & { children: ReactNode };
-export type ModifyFitnessFormProviderProps = Partial<Fitness> & { children: ReactNode };
+export type ModifyCoachFormProviderProps = {
+  defaultValues?: TransformedProviderObject<Coach>;
+  children: ReactNode;
+};
+export type ModifyFitnessFormProviderProps = {
+  defaultValues?: TransformedProviderObject<Fitness>;
+  children: ReactNode;
+};
+
+export type TransformedProviderObject<T> = Omit<Partial<T>, "pictures"> & {
+  pictures: { card: File; detail: { main: File; others: File[] } };
+};
 
 export type MappedCoachValues = {
   coachName?: string;
@@ -67,7 +92,6 @@ export type MappedFitnessValues = {
 >;
 
 export type CoachInformationSectionProps = {
-  loading: boolean;
   regionOptions: Region[];
   othersOptions: FilterObject[];
   genderOptions: FilterObject[];

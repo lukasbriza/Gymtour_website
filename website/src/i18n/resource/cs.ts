@@ -40,6 +40,8 @@ export const csTranslation = {
     web: "Web",
     workPlace: "Podnik",
     youtube: "Youtube",
+    sucess: "Úspěch",
+    failure: "Neúspěch",
   },
   routes: {
     mainPage: "Hlavní stránka",
@@ -167,6 +169,12 @@ export const csTranslation = {
         questionHeader: "Nevratná akce",
         questionContent: "Opravdu chcete smazat záznam? Pokud ano pokračujte, nebo se vraťte zpět.",
       },
+      popup: {
+        removeFitness: "Fitness s {{id}} bylo odstraněno.",
+        removeCoach: "Coach s {{id}} byl odstraněn.",
+        removeCoachFailure: "Coache se nepodařilo odstranit. Kontaktujte podporu.",
+        removeFitnessFailure: "Fitness se nepodařilo odstranit. Kontaktujte podporu.",
+      },
     },
     userLikesList: {
       favoriteFitnessHeader: "Oblíbená Fitness",
@@ -218,6 +226,9 @@ export const csTranslation = {
       mainPictureHeader: "Hlavní fotka profilu",
       mainPictureContent:
         "Fotka bude transformována do formátu 1:2 (300px x 600px).  Doporučujeme tedy nahrát fotku již v tomto formátu.",
+      othersPicturesHeader: "Ostatní fotky",
+      othersPictureContent:
+        "Přidejte další fotky, které si budou moci potenciální klienti prohlédnout v galerii profilu. Obrázek bude transformován do poměru 1:2 (300px x 600px).  Doporučujeme tedy nahrát fotku již v tomto formátu.",
     },
   },
 };

@@ -17,4 +17,5 @@ export type StringInputProps = {
   password?: boolean;
   autoComplete?: "on" | "off";
   requiredStar?: boolean;
+  defaultValue?: string;
 };

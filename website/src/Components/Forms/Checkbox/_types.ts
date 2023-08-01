@@ -1,6 +1,7 @@
 import { UseFormRegister } from "react-hook-form";
 
 export type CheckboxProps = {
+  defaultValue?: boolean;
   register: UseFormRegister<any>;
   className?: string;
   helperClass?: string;

@@ -5,7 +5,7 @@ import clsx from "clsx"
 import { Loading } from "../Loading/Loading"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, usePopUpContext, useServerdataLazy, useUsercontext } from "src/hooks/_index"
+import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, usePopUpContext, useServerdataLazy, useUserContext } from "src/hooks/_index"
 import { Coach, Fitness, addCoachLike, addFitnessLike, getCoaches, getFitnesses, getImage, updateViews } from "src/fetcher/_index"
 import { Heart, Topped, Viewed } from "../SVG/_index"
 import { card } from "src/config/_index"
@@ -29,7 +29,7 @@ export const Card: FC<CardProps> = (props) => {
 
     const { updateFitness } = useFitnessFilterContext()
     const { updateCoach } = useCoachFilterContext()
-    const { userId, logged } = useUsercontext()
+    const { userId, logged } = useUserContext()
     const { warning } = usePopUpContext()
 
     const {

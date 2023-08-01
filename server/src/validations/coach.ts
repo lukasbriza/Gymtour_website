@@ -26,6 +26,7 @@ const getCoachSchema = object({
   gender: optionalString(),
   specialization: optionalString(),
   projection: optionalString(),
+  id: optionalString(),
 });
 
 //POST

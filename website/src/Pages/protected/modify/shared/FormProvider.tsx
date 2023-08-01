@@ -9,9 +9,9 @@ import {
 } from "../../_types";
 
 export const ModifyCoachFormProvider: FC<ModifyCoachFormProviderProps> = (props) => {
-  const { children, ...defaultProps } = props;
+  const { children, defaultValues } = props;
   const methods = useForm<MappedCoachValues>({
-    defaultValues: { ...mapDefaultCoachValues(defaultProps) },
+    defaultValues: { ...mapDefaultCoachValues(defaultValues) },
   });
   const { handleSubmit } = methods;
 
@@ -25,9 +25,9 @@ export const ModifyCoachFormProvider: FC<ModifyCoachFormProviderProps> = (props)
 };
 
 export const ModifyFitnessFormProvider: FC<ModifyFitnessFormProviderProps> = (props) => {
-  const { children, ...defaultProps } = props;
+  const { children, defaultValues } = props;
   const methods = useForm<MappedFitnessValues>({
-    defaultValues: { ...mapDefaultFitnessValues(defaultProps) },
+    defaultValues: { ...mapDefaultFitnessValues(defaultValues) },
   });
   const { handleSubmit } = methods;
 

@@ -12,6 +12,7 @@ export const UserCard: FC = () => {
     const handleUserSectionChange = (data: UserSectionEditableData) => {
         console.log(data)
         //SERVER USER CHANGE CALL
+        //TODO: implement call
     }
 
     const dataProcessingDate = new Date(user.agreement.dataProcessingForPropagation.awarded.$date).toLocaleString()

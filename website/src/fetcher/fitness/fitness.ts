@@ -18,12 +18,12 @@ import { querySerialize } from "../querySerialize";
 import { getAxiosInstance } from "src/libs/_index";
 import { Api } from "src/config/_index";
 
-export const getFitnesses = (query: FitnesFilterQuery) => {
+export const getFitnesses = (query?: FitnesFilterQuery) => {
   const instance = getAxiosInstance();
   return async () => {
     try {
       const response = await instance.get<any, AxiosResponse<GetFitnessResponse>>(
-        `${Api.ApiFitness}?${querySerialize(query)}`
+        `${Api.ApiFitness}?${querySerialize(query ?? {})}`
       );
       return response.data;
     } catch (error: unknown) {
@@ -32,7 +32,7 @@ export const getFitnesses = (query: FitnesFilterQuery) => {
   };
 };
 
-export const removeFitnesses = (id: RemoveFitnessesBody) => {
+export const removeFitnesses = (id?: RemoveFitnessesBody) => {
   const instance = getAxiosInstance();
   return async () => {
     try {
@@ -68,12 +68,12 @@ export const addFitness = (body: AddFitnessBody) => {
   };
 };
 
-export const addFitnessLike = (query: AddFitnessLikeQuery) => {
+export const addFitnessLike = (query?: AddFitnessLikeQuery) => {
   const instance = getAxiosInstance();
   return async () => {
     try {
       const response = await instance.get<any, AxiosResponse<AddFitnessLikeResponse>>(
-        `${Api.ApiFitnessLike}?${querySerialize(query)}`
+        `${Api.ApiFitnessLike}?${querySerialize(query ?? {})}`
       );
       return response.data;
     } catch (error: unknown) {

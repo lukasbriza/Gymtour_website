@@ -4,9 +4,11 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { TextArea } from "src/components/_index";
+import { useField } from "src/hooks/_index";
 
 export const AboutSection: FC<AboutSectionProps> = (props) => {
     const { t } = useTranslation()
+    const { buildField } = useField()
     const { formState: { errors } } = useFormContext<MappedCoachValues | MappedFitnessValues>()
 
     return (
@@ -16,8 +18,7 @@ export const AboutSection: FC<AboutSectionProps> = (props) => {
                 <p>{t("modifyPage.aboutSection.aboutContent")}</p>
             </div>
             <TextArea
-                name="descriptionFull"
-                isError={errors.descriptionFull !== undefined}
+                {...buildField("descriptionFull")}
                 errorText={errors.descriptionFull?.message}
                 label={t("common.about")}
                 helperRootClass="aboutWrapperClass"
