@@ -13,24 +13,40 @@ import { LikedObject } from "../_types";
 
 const Dashboard: FC = () => {
   const { t } = useTranslation();
-  const { userId, userObject } = useUserContext()
+  const { userId, userObject } = useUserContext();
   const { data: filterData, loading: filterLoading } = useServerData(getFilter);
-  const { data: coaches, loading: coachesLoading } = useServerData(getCoaches, { owner: "64288f2967746143ec840e34" })
-  const { data: fitnesses, loading: fitnessesLoading } = useServerData(getFitnesses, { owner: "64288f2967746143ec840e34" })
-  const { fetchCall: getLikedCoaches, data: likedCoaches } = useServerdataLazy(getCoaches)
-  const { fetchCall: getLikedFitnesses, data: likedFitnessess } = useServerdataLazy(getFitnesses)
+  const { data: coaches, loading: coachesLoading } = useServerData(getCoaches, {
+    owner: "6424943ae3311ac1446d21ce",
+  });
+  const { data: fitnesses, loading: fitnessesLoading } = useServerData(
+    getFitnesses,
+    { owner: "6424943ae3311ac1446d21ce" }
+  );
+  const { fetchCall: getLikedCoaches, data: likedCoaches } =
+    useServerdataLazy(getCoaches);
+  const { fetchCall: getLikedFitnesses, data: likedFitnessess } =
+    useServerdataLazy(getFitnesses);
 
-  const isLoading = coachesLoading || fitnessesLoading || filterLoading
+  const isLoading = coachesLoading || fitnessesLoading || filterLoading;
 
   useEffect(() => {
     if (userObject?.coachOwned.length && userObject?.coachOwned.length > 0) {
-      getLikedCoaches({ id: userObject?.coachOwned, projection: "name region town" })
+      getLikedCoaches({
+        id: userObject?.coachOwned,
+        projection: "name region town",
+      });
     }
-    if (userObject?.fitnessOwned.length && userObject?.fitnessOwned.length > 0) {
-      getLikedFitnesses({ id: userObject?.fitnessOwned, projection: "name region town" })
+    if (
+      userObject?.fitnessOwned.length &&
+      userObject?.fitnessOwned.length > 0
+    ) {
+      getLikedFitnesses({
+        id: userObject?.fitnessOwned,
+        projection: "name region town",
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <ProtectedRoute

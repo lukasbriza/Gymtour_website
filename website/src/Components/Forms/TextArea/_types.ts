@@ -1,6 +1,8 @@
 import { Props } from "@lukasbriza/lbui-lib";
+import { UseFormRegister } from "react-hook-form";
 
 export type TextAreaProps = {
+  defaultValue?: string;
   name: string;
   requiredStar?: boolean;
   cols?: number;

@@ -8,12 +8,20 @@ const NotFound = ReactLazyPreload(() => import("../pages/NotFound"));
 const About = ReactLazyPreload(() => import("../pages/About"));
 const CoOp = ReactLazyPreload(() => import("../pages/CoOp"));
 const Contact = ReactLazyPreload(() => import("../pages/Contact"));
-const BusinessConditions = ReactLazyPreload(() => import("../pages/BusinessConditions"));
-const DataProcessing = ReactLazyPreload(() => import("../pages/DataProcessing"));
+const BusinessConditions = ReactLazyPreload(
+  () => import("../pages/BusinessConditions")
+);
+const DataProcessing = ReactLazyPreload(
+  () => import("../pages/DataProcessing")
+);
 
 const Login = ReactLazyPreload(() => import("../pages/login/Login"));
-const Dashboard = ReactLazyPreload(() => import("../pages/protected/dashboard/Dashboard"));
-const Modify = ReactLazyPreload(() => import("../pages/protected/modify/Modify"));
+const Dashboard = ReactLazyPreload(
+  () => import("../pages/protected/dashboard/Dashboard")
+);
+const Modify = ReactLazyPreload(
+  () => import("../pages/protected/modify/Modify")
+);
 
 const Detail = ReactLazyPreload(() => import("../pages/content/Detail"));
 
