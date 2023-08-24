@@ -16,7 +16,7 @@ export const useServerData = <E, T>(fetcher: (props?: T) => () => Promise<E>, pr
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const reFetch = async () => {
     setLoading(true);

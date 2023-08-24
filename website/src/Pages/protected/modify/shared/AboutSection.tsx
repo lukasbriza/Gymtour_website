@@ -1,6 +1,5 @@
 import { FC } from "react";
 import {
-  AboutSectionProps,
   MappedCoachValues,
   MappedFitnessValues,
 } from "../../_types";
@@ -10,7 +9,7 @@ import { useFormContext } from "react-hook-form";
 import { TextArea } from "src/components/_index";
 import { useField } from "src/hooks/_index";
 
-export const AboutSection: FC<AboutSectionProps> = (props) => {
+export const AboutSection: FC = () => {
   const { t } = useTranslation();
   const { buildField } = useField();
   const {

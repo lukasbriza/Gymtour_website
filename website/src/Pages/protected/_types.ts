@@ -98,12 +98,17 @@ export type CoachInformationSectionProps = {
   specializationOptions: FilterObject[];
 };
 
+export type FitnessInformationSectionProps = {
+  regionOptions: Region[];
+  generalOptions: FilterObject[];
+  othersOptions: FilterObject[];
+  equipmentOptions: FilterObject[];
+}
+
 export type ModifyCoachFormProps = { type: "coach" } & CoachInformationSectionProps;
 
-export type ModifyFitnessFrormProps = { type: "fitness" };
+export type ModifyFitnessFrormProps = { type: "fitness" } & FitnessInformationSectionProps;
 
-export type ContactSectionProps = {};
-
-export type TermsSectionProps = {};
-
-export type AboutSectionProps = {};
+export type HeaderSectionProps = {
+  type: "create" | "modify"
+}

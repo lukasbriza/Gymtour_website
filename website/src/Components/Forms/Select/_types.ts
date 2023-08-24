@@ -1,3 +1,5 @@
+import { UseFormRegister } from "react-hook-form";
+
 export type SelectProps = {
   defaultValue?: { name: string; code: string };
   name: string;
@@ -17,6 +19,7 @@ export enum SelectTypes {
 }
 
 export type SelectWithHelperProps = SelectProps & {
+  register: UseFormRegister<any>;
   requiredStar?: boolean;
   className?: string;
   helperClass?: string;

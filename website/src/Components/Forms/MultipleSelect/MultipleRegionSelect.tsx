@@ -81,13 +81,15 @@ export const MultipleRegionSelect: FC<RegionSelectProps> = (props) => {
                     <div className={"optionWrapper"} key={i + "t"}>
                       <CheckboxSquared
                         {...sync}
+                        styleClass={{
+                          root: "optionCheckboxRoot",
+                          checkBox: "multipleOptionInputWrapper",
+                          text: "multipleOptionLabel",
+                          checker: "multipleOptionChecker"
+                        }}
                         onChange={(e) => handleCheckboxClick(e, town.code, town.name)}
                         label={town.name}
                         name={town.code}
-                        className={"optionCheckboxRoot"}
-                        checkboxClass={"multipleOptionInputWrapper"}
-                        labelClass={"multipleOptionLabel"}
-                        checkerClass={"multipleOptionChecker"}
                       />
                     </div>
                   );

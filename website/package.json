@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "private": true,
   "dependencies": {
-    "@lukasbriza/lbui-lib": "./lukasbriza-lbui-lib-1.0.66.tgz",
+    "@lukasbriza/lbui-lib": "./lukasbriza-lbui-lib-1.0.68.tgz",
     "axios": "^1.2.6",
     "clsx": "^1.2.1",
     "gsap": "^3.11.4",
@@ -21,7 +21,8 @@
     "react-scripts": "^5.0.1",
     "react-tooltip": "^5.14.0",
     "react-transition-group": "^4.4.5",
-    "sass-mq": "^6.0.0"
+    "sass-mq": "^6.0.0",
+    "use-mask-input": "^3.3.3"
   },
   "devDependencies": {
     "@hookform/resolvers": "^2.9.10",

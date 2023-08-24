@@ -34,6 +34,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
+  z-index: 0;
 
   @include mq($until: 850px) {
     padding-left: 60px;
@@ -56,6 +57,58 @@
     background: rgb(43, 43, 43) !important;
     border: 1px solid rgb(175, 175, 175);
   }
+}
+
+.modifySubmitButton {
+  margin-top: 0px !important;
+}
+
+.modifyButton {
+  position: relative;
+  flex-basis: 50% !important;
+  @include mq($until: tablet) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.modifyBackButton {
+  background: $modalBackBtn;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px 0px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease-out;
+}
+.modifyBackButton:hover {
+  background: $modalBackBtnHover;
+}
+
+.submitSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  column-gap: 25px;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @include mq($from: tablet) {
+    flex-direction: row;
+  }
+}
+
+.headerSection {
+  position: relative;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-left: 38px;
+  padding-right: 38px;
 }
 
 @import "./contactSection";

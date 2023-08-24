@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowProps, SelectProps, SelectTypes, SelectWithHelperProps } from "./_types";
 import { HelperText, useClickOutside } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
@@ -8,7 +8,7 @@ import { selectShowAnimation } from "../../../animations/_index"
 
 
 
-export const Select: FC<SelectProps> = (props) => {
+export const Select = forwardRef<HTMLInputElement, SelectProps>((props, selectRef) => {
     const { label, options, name, selectClick, disabled = false, disabledClass, defaultValue, ...otherProps } = props;
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState<boolean>(false);
@@ -59,49 +59,53 @@ export const Select: FC<SelectProps> = (props) => {
 
 
     return (
-        <div
-            {...otherProps}
-            className={clsx(["selectAllWrapper", disabled && disabledClass])}
-            ref={ref}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
+        <>
+            <input ref={selectRef} style={{ visibility: "hidden", display: "none", position: "absolute" }} />
             <div
-                className={clsx([
-                    "selectWrapper",
-                    open && "selectCornerSharp",
-                    hovered && "selectWrapperHovered",
-                ])}
-                onClick={handleClick}
+                {...otherProps}
+                className={clsx(["selectAllWrapper", disabled && disabledClass])}
+                ref={ref}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
             >
-                <div className={"selectLabel"}>
-                    <p>{selected ? selected : label}</p>
-                    <div className={"selectLine"}></div>
-                    <Arrow className={clsx([hovered && "arrowWrapperHover"])} />
+                <div
+                    className={clsx([
+                        "selectWrapper",
+                        open && "selectCornerSharp",
+                        hovered && "selectWrapperHovered",
+                    ])}
+                    onClick={handleClick}
+                >
+                    <div className={"selectLabel"}>
+                        <p>{selected ? selected : label}</p>
+                        <div className={"selectLine"}></div>
+                        <Arrow className={clsx([hovered && "arrowWrapperHover"])} />
+                    </div>
                 </div>
-            </div>
-            <div className={clsx(["optionsWrapper", open && "show"])}>
-                {
-                    options.map((option, i) => {
-                        if (selected !== option.name) {
-                            return (
-                                <div className={clsx(["optionWrapper", "selectOption"])} key={i + "t"} onClick={handleSelect(option.name, option.code)}>
-                                    {option.name}
-                                </div>
-                            )
-                        }
-                        return <></>
-                    })
-                }
-                {
-                    selected && (<div className={clsx(["optionWrapper", "selectOption"])} key={Math.random()} onClick={handleSelect(clearTranslation, SelectTypes.Clear)}>
-                        {clearTranslation}
-                    </div>)
-                }
-            </div>
+                <div className={clsx(["optionsWrapper", open && "show"])}>
+                    {
+                        options.map((option, i) => {
+                            if (selected !== option.name) {
+                                return (
+                                    <div className={clsx(["optionWrapper", "selectOption"])} key={i + "t"} onClick={handleSelect(option.name, option.code)}>
+                                        {option.name}
+                                    </div>
+                                )
+                            }
+                            return <></>
+                        })
+                    }
+                    {
+                        selected && (<div className={clsx(["optionWrapper", "selectOption"])} key={Math.random()} onClick={handleSelect(clearTranslation, SelectTypes.Clear)}>
+                            {clearTranslation}
+                        </div>)
+                    }
+                </div>
 
-        </div>);
-}
+            </div>
+        </>
+    );
+})
 
 const Arrow: FC<ArrowProps> = (props) => {
     const { className } = props;
@@ -114,18 +118,20 @@ const Arrow: FC<ArrowProps> = (props) => {
 };
 
 export const SelectWithHelper: FC<SelectWithHelperProps> = (props) => {
-    const { requiredStar = false, helperText = "", isError, errorText, className, helperClass, ...otherProps } = props
+    const { register, name, requiredStar = false, helperText = "", isError, errorText, className, helperClass, ...otherProps } = props
     return (
         <HelperText
-            className={clsx(["stringInputHelperRoot", className])}
-            helperClass={clsx(["stringInputHelper", helperClass])}
+            styleClass={{
+                root: clsx(["stringInputHelperRoot", className]),
+                text: clsx(["stringInputHelper", helperClass])
+            }}
             position={"bottom"}
             text={helperText}
             errorText={errorText}
-            error={isError}
+            isError={isError}
             show={true}
         >
-            <Select {...otherProps} />
+            <Select {...otherProps} {...register(name)} />
             {requiredStar && <div className="requiredStar">*</div>}
         </HelperText>
     )

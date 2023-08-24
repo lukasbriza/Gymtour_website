@@ -88,14 +88,16 @@ export const MultipleSelect: FC<SelectProps> = (props) => {
             <div className={"optionWrapper"} key={i + "t"}>
               <CheckboxSquared
                 {...sync}
-                defaultChecked={defaultChecked ? true : false}
+                checked={defaultChecked ? true : false}
                 onChange={(e: BaseSyntheticEvent) => handleCheckboxClick(e.target.checked, option.code, option.name)}
                 label={option.name}
                 name={option.code}
-                className={"optionCheckboxRoot"}
-                checkboxClass={"multipleOptionInputWrapper"}
-                labelClass={"multipleOptionLabel"}
-                checkerClass={"multipleOptionChecker"}
+                styleClass={{
+                  root: "optionCheckboxRoot",
+                  checkBox: "multipleOptionInputWrapper",
+                  text: "multipleOptionLabel",
+                  checker: "multipleOptionChecker"
+                }}
               />
             </div>
           );
@@ -120,12 +122,14 @@ export const MultipleSelectWithHelper: FC<MultipleSelectWithHelperProps> = (prop
 
   return (
     <HelperText
-      className={clsx(["stringInputHelperRoot", className])}
-      helperClass={clsx(["stringInputHelper", helperClass])}
+      styleClass={{
+        root: clsx(["stringInputHelperRoot", className]),
+        text: clsx(["stringInputHelper", helperClass])
+      }}
       position={"bottom"}
       text={helperText}
       errorText={errorText}
-      error={isError}
+      isError={isError}
       show={true}
     >
       <MultipleSelect {...otherProps} />

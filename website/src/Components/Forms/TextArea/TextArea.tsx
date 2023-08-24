@@ -1,9 +1,9 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, forwardRef, useState } from "react";
 import { TextAreaProps } from "./_types";
 import clsx from "clsx";
 import { HelperText } from "@lukasbriza/lbui-lib";
 
-export const TextArea: FC<TextAreaProps> = (props) => {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
   const {
     requiredStar = false,
     name,
@@ -30,15 +30,18 @@ export const TextArea: FC<TextAreaProps> = (props) => {
 
   return (
     <HelperText
-      className={clsx(["stringInputHelperRoot", helperRootClass])}
-      helperClass={clsx(["stringInputHelper", helperClass])}
+      styleClass={{
+        root: clsx(["stringInputHelperRoot", helperRootClass]),
+        text: clsx(["stringInputHelper", helperClass])
+      }}
       position={"bottom"}
       text={helperText}
       errorText={errorText}
-      error={isError}
+      isError={isError}
       show={show}
     >
       <textarea
+        ref={ref}
         onFocus={() => setFocused(true)}
         onBlur={(e) => {
           onBlur?.(e);
@@ -60,4 +63,4 @@ export const TextArea: FC<TextAreaProps> = (props) => {
       {requiredStar && <div className="requiredStar">*</div>}
     </HelperText>
   );
-};
+});

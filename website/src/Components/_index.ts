@@ -31,6 +31,7 @@ export * from "./Forms/PriceLevel/PriceLevel";
 export * from "./Forms/TextArea/TextArea";
 export * from "./Forms/ImageInput/ImageInput";
 export * from "./Forms/ImageInput/MultipleImageInput";
+export * from "./Forms/TimeInput/TimeInput";
 
 export * from "./Tables/EditableTableRow/EditableTableRow";
 export * from "./Tables/EditableTableData/EditableTableData";

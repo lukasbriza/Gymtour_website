@@ -10,18 +10,14 @@ import { useUserContext } from "src/hooks/useUserContext";
 import { useServerData, useServerdataLazy } from "src/hooks/useServerData";
 import { getCoaches, getFilter, getFitnesses } from "src/fetcher/_index";
 import { LikedObject } from "../_types";
+import { useEffectOnce } from "@lukasbriza/lbui-lib";
 
 const Dashboard: FC = () => {
   const { t } = useTranslation();
   const { userId, userObject } = useUserContext();
   const { data: filterData, loading: filterLoading } = useServerData(getFilter);
-  const { data: coaches, loading: coachesLoading } = useServerData(getCoaches, {
-    owner: "6424943ae3311ac1446d21ce",
-  });
-  const { data: fitnesses, loading: fitnessesLoading } = useServerData(
-    getFitnesses,
-    { owner: "6424943ae3311ac1446d21ce" }
-  );
+  const { data: coaches, loading: coachesLoading } = useServerData(getCoaches, { owner: "64288f2967746143ec840e34", });
+  const { data: fitnesses, loading: fitnessesLoading } = useServerData(getFitnesses, { owner: "64288f2967746143ec840e34" });
   const { fetchCall: getLikedCoaches, data: likedCoaches } =
     useServerdataLazy(getCoaches);
   const { fetchCall: getLikedFitnesses, data: likedFitnessess } =
@@ -29,7 +25,7 @@ const Dashboard: FC = () => {
 
   const isLoading = coachesLoading || fitnessesLoading || filterLoading;
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (userObject?.coachOwned.length && userObject?.coachOwned.length > 0) {
       getLikedCoaches({
         id: userObject?.coachOwned,
@@ -46,7 +42,7 @@ const Dashboard: FC = () => {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <ProtectedRoute

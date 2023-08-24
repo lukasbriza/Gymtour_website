@@ -14,7 +14,7 @@ export const getImage = (props?: GetImage) => {
         responseType: "blob",
         timeout: 30000,
       });
-      return response.data;
+      return { blob: response.data, fileName: response.headers["x-file-name"] };
     } catch (error: unknown) {
       handleFetchError<boolean>(error as GetImageResponse);
     }

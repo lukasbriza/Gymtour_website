@@ -8,6 +8,7 @@ import { MappedCoachValues, MappedFitnessValues } from "../../_types";
 export const PictureSection: FC = () => {
     const { t } = useTranslation()
     const { control, formState: { defaultValues } } = useFormContext<MappedFitnessValues | MappedCoachValues>()
+    const otherPictures = defaultValues?.othersPictures && (defaultValues?.othersPictures?.length > 0 ? defaultValues?.othersPictures as File[] : [])
 
     return (
         <section className={clsx(["modifySection", "picturesSection", "glassMorphism"])}>
@@ -21,6 +22,7 @@ export const PictureSection: FC = () => {
                     <p>{t("modifyPage.picturesSection.cardPuctureContent")}</p>
                 </div>
                 <Controller
+                    defaultValue={defaultValues?.cardPicture}
                     control={control}
                     name={"cardPicture"}
                     render={({ field: { value, onChange, ...field } }) => {
@@ -40,6 +42,7 @@ export const PictureSection: FC = () => {
                     <p>{t("modifyPage.picturesSection.mainPictureContent")}</p>
                 </div>
                 <Controller
+                    defaultValue={defaultValues?.mainPicture}
                     control={control}
                     name={"mainPicture"}
                     render={({ field: { value, onChange, ...field } }) => {
@@ -59,6 +62,7 @@ export const PictureSection: FC = () => {
                     <p>{t("modifyPage.picturesSection.othersPictureContent")}</p>
                 </div>
                 <Controller
+                    defaultValue={otherPictures}
                     control={control}
                     name={"othersPictures"}
                     render={({ field: { value, onChange, ...field } }) => {

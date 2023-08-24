@@ -1,11 +1,10 @@
 import { FC } from "react";
-import { ContactSectionProps } from "../../_types";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { StringInput } from "src/components/_index";
 import { useField } from "src/hooks/_index";
 
-export const Contactsection: FC<ContactSectionProps> = () => {
+export const Contactsection: FC = () => {
     const { t } = useTranslation()
     const { buildField } = useField()
 

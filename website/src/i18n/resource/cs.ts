@@ -16,6 +16,9 @@ export const csTranslation = {
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
     email: "Email",
     gender: "Pohlaví",
+    general: "Hlavní",
+    equipment: "Vybavení",
+    others: "Ostatní",
     houseNumber: "Č.p.",
     facebook: "Facebook",
     fitness: "Fitness",
@@ -42,6 +45,8 @@ export const csTranslation = {
     youtube: "Youtube",
     sucess: "Úspěch",
     failure: "Neúspěch",
+    send: "Odeslat",
+    modify: "Upravit"
   },
   routes: {
     mainPage: "Hlavní stránka",
@@ -186,6 +191,12 @@ export const csTranslation = {
     },
   },
   modifyPage: {
+    headerSection: {
+      headerModify: "Upravit záznam",
+      headerCreate: "Vytvořit záznam",
+      text: "Do zobrazených polí vyplňte požadované informace. Povinné informace jsou označeny znakem *. Pokud bude zadána nevalidní informace, zobrazí se vám pod daným polem upozornění.",
+      taxtApprove: "Po odeslání formuláře se bude Váš záznam zobrazovat v nabídce až po schválení žádosti administrátorem. Pokud Vaše žádost nebyla schválena, nebo její schválení trvá dlouho. neváhejte nás kontaktovat."
+    },
     contactsSection: {
       contactHeader: "Kontakty",
       contactContent: "Uveďte kontakty přes které se s vámi mohou uživatelé spojit. Povinné kontakty jsou označeny *.",
@@ -210,6 +221,8 @@ export const csTranslation = {
       filterHeader: "Kategorie",
       filterContent:
         "Z následujících možností zaškrtněte ty, které nejlépe vystihují vaše podnikání. Dle těchto kategorií Vás budou moci uživatelé filtrovat. Povinné položky jsou označeny *.",
+      openingHeader: "Otevírací doba",
+      openingContent: ""
     },
     aboutSection: {
       aboutHeader: "Popis",

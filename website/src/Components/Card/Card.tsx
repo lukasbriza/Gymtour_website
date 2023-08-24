@@ -85,7 +85,7 @@ export const Card: FC<CardProps> = (props) => {
             setLoading(true)
             const result = await getImageCall({ id: pictures.card })
             if (result) {
-                return addToStore(pictures.card, result)
+                return addToStore(pictures.card, result.blob)
             }
         }
         const storedImage = getFromStore(pictures.card)
@@ -104,6 +104,7 @@ export const Card: FC<CardProps> = (props) => {
     useEffect(() => {
         console.log(popularity?.length)
     }, [popularity])
+
     return (
         <div className="contentCard" id={_id} onClick={handleClick} style={{ width: card.width, height: card.height }}>
             <InfoElement className="viewed">

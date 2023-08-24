@@ -14,11 +14,8 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { useField } from "src/hooks/_index";
 
-export const CoachInformationSection: FC<CoachInformationSectionProps> = (
-  props
-) => {
-  const { regionOptions, othersOptions, genderOptions, specializationOptions } =
-    props;
+export const CoachInformationSection: FC<CoachInformationSectionProps> = (props) => {
+  const { regionOptions, othersOptions, genderOptions, specializationOptions } = props;
 
   const { t, i18n } = useTranslation();
   const { buildField } = useField();
@@ -99,24 +96,20 @@ export const CoachInformationSection: FC<CoachInformationSectionProps> = (
           />
         </div>
         <SelectWithHelper
-          defaultValue={defaultRegion}
+          {...buildField("region", defaultRegion)}
           disabledClass="disabledModifySelect"
           disabled={regionsOptions.length === 0}
           className={clsx(["regionSelect", "infoSelect"])}
-          name={"region"}
           label={t("common.region")}
-          isError={errors.region !== undefined}
           options={regionsOptions}
           requiredStar={true}
         />
         <SelectWithHelper
-          defaultValue={defaultTown}
+          {...buildField("town", defaultTown)}
           disabledClass="disabledModifySelect"
           disabled={townOptions.length === 0}
           className={clsx(["townSelect", "infoSelect"])}
-          name={"town"}
           label={t("common.town")}
-          isError={errors.town !== undefined}
           options={formvalues.region ? townOptions : []}
           requiredStar={true}
         />
@@ -155,31 +148,25 @@ export const CoachInformationSection: FC<CoachInformationSectionProps> = (
         </div>
         <section className="filterInformationInputs">
           <SelectWithHelper
+            {...buildField("gender", defaultGender)}
             disabledClass="disabledModifySelect"
             disabled={genderOptions.length === 0}
-            defaultValue={defaultGender}
             className={clsx(["genderSelect", "infoSelect"])}
-            name={"gender"}
             label={t("common.gender")}
-            isError={errors.gender !== undefined}
             options={mappedGenderOptions}
             requiredStar={true}
           />
           <MultipleSelectWithHelper
-            defaultValue={defaultSpecialization}
-            name="specialization"
+            {...buildField("specialization", defaultSpecialization)}
             label={t("common.specialization")}
-            className={clsx(["regionSelect", "infoSelect"])}
-            isError={errors.specialization !== undefined}
+            className={clsx(["specializationSelect", "infoSelect"])}
             options={mappedSpecializationOptions}
             requiredStar={true}
           />
           <MultipleSelectWithHelper
-            defaultValue={defaultOthers}
-            name="others"
+            {...buildField("others", defaultOthers)}
             label={t("contentPage.filter.others")}
-            className={clsx(["regionSelect", "infoSelect"])}
-            isError={errors.others !== undefined}
+            className={clsx(["othersSelect", "infoSelect"])}
             options={mappedOthersOptions}
             requiredStar={true}
           />

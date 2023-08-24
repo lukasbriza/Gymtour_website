@@ -1082,6 +1082,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
+  z-index: 0;
 }
 @media (max-width: 53.125em) {
   .modifySection {
@@ -1105,6 +1106,63 @@ body {
   cursor: default;
   background: rgb(43, 43, 43) !important;
   border: 1px solid rgb(175, 175, 175);
+}
+
+.modifySubmitButton {
+  margin-top: 0px !important;
+}
+
+.modifyButton {
+  position: relative;
+  flex-basis: 50% !important;
+}
+@media (max-width: 47.49em) {
+  .modifyButton {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.modifyBackButton {
+  background: rgb(224, 215, 215);
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px 0px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease-out;
+}
+
+.modifyBackButton:hover {
+  background: rgb(255, 255, 255);
+}
+
+.submitSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  -moz-column-gap: 25px;
+       column-gap: 25px;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (min-width: 47.5em) {
+  .submitSection {
+    flex-direction: row;
+  }
+}
+
+.headerSection {
+  position: relative;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-left: 38px;
+  padding-right: 38px;
 }
 
 .contactSection {
@@ -1237,6 +1295,8 @@ body {
 }
 .infoSelect .optionsWrapper {
   background: rgb(75, 75, 75) !important;
+  max-height: 130px;
+  overflow-y: auto;
 }
 
 .aboutSection {

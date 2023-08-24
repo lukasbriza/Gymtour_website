@@ -38,8 +38,9 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
     const [actualFile, setActualFile] = useState<File | null>(value ?? null)
     const [url, setUrl] = useState<string | null | ArrayBuffer>(null)
     const [open, setOpen] = useState<boolean>(false)
+    const [hasFiles, setHasFiles] = useState<boolean | undefined | null>()
 
-    const hasFiles = inputRef.current?.files && inputRef.current?.files.length > 0
+    //const hasFiles = inputRef.current?.files && inputRef.current?.files.length > 0
 
     const handleFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
         onStart?.()
@@ -93,6 +94,9 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
         }
     }, [actualFile, handleFileRemove])
 
+    useEffect(() => {
+        setHasFiles(inputRef.current?.files && inputRef.current?.files.length > 0)
+    }, [inputRef])
 
     useEffect(() => {
         reader.addEventListener("load", () => setUrl(reader.result))
@@ -108,6 +112,14 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
             inputRef.current.files = list.files
         }
     }, [value])
+
+    useEffect(() => {
+        if (value) {
+            hasLoaded(line1.current, line2.current)
+            showPreview && fadeIn(searchRef.current)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>

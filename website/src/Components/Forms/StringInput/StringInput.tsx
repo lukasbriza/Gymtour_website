@@ -1,5 +1,5 @@
 import { BasicTextField, HelperText } from "@lukasbriza/lbui-lib";
-import { FC, useState } from "react";
+import { FC } from "react";
 import clsx from "clsx"
 import { StringInputProps } from "./_types";
 
@@ -23,18 +23,17 @@ export const StringInput: FC<StringInputProps> = (props) => {
         show = true,
         requiredStar = false
     } = props
-    const [focused, setFocused] = useState<boolean>(false)
-    const focusOut = () => setFocused(false)
-    const focusIn = () => setFocused(true)
 
     return (
         <HelperText
-            className={clsx(["stringInputHelperRoot", className])}
-            helperClass={clsx(["stringInputHelper", helperClass])}
+            styleClass={{
+                root: clsx(["stringInputHelperRoot", className]),
+                text: clsx(["stringInputHelper", helperClass])
+            }}
             position={"bottom"}
             text={helperText}
             errorText={errorText}
-            error={isError}
+            isError={isError}
             show={show}
         >
             <>
@@ -42,21 +41,17 @@ export const StringInput: FC<StringInputProps> = (props) => {
                     defaultValue={defaultValue}
                     password={password}
                     label={label}
-                    errorLabelClass={"stringInputLabelError"}
-                    error={isError}
-                    errorInputClass={"stringInputError"}
+                    styleClass={{
+                        label: clsx(["stringInputLabel", labelClass]),
+                        fillLabel: labelFilleClass,
+                        focusLabel: labelFocusClass,
+                        errorLabel: "stringInputLabelError",
+                        errorInput: "stringInputError",
+                        root: clsx(["stringInputRoot", inputClass]),
+                        focusRoot: clsx([!isError && "stringInputRootFocused", isError && "stringFocusRootError"])
+                    }}
+                    isError={isError}
                     autoComplete={autoComplete}
-                    focusIn={focusIn}
-                    focusOut={focusOut}
-                    rootClass={clsx([
-                        "stringInputRoot",
-                        inputClass,
-                        focused && !isError && "stringInputRootFocused",
-                        isError && focused && "stringFocusRootError"
-                    ])}
-                    labelClass={clsx(["stringInputLabel", labelClass])}
-                    labelFocusClass={clsx([labelFocusClass])}
-                    labelFilledClass={clsx([labelFilleClass])}
                     {...register(name)}
                 />
                 {requiredStar && <div className="requiredStar">*</div>}

@@ -76,6 +76,8 @@
   }
   .optionsWrapper {
     background: rgb(75, 75, 75) !important;
+    max-height: 130px;
+    overflow-y: auto;
   }
 }
 

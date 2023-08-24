@@ -34,10 +34,12 @@ export const useModal = () => {
       transition: true,
       closeOnOutsideClick: true,
       headerComponent: headerComp,
-      rootClass: "rootModalClass",
-      modalClass: "modalClass",
-      buttonClass: "buttonClass",
-      textClass: "modalTextClass",
+      styleClass: {
+        root: "rootModalClass",
+        modal: "modalClass",
+        button: "buttonClass",
+        text: "modalTextClass"
+      }
     });
   };
   return { showModal, closeModal, isActive };

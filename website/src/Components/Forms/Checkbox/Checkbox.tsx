@@ -19,22 +19,25 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     } = props;
     return (
         <HelperText
-            className={clsx(["checkboxHelperRoot", className])}
-            helperClass={clsx(["checkboxHelper", helperClass])}
+            styleClass={{
+                root: clsx(["checkboxHelperRoot", className]),
+                text: clsx(["checkboxHelper", helperClass])
+            }}
             position={"bottom"}
             text={helperText}
             errorText={errorText}
             show={show}
-            error={isError}
+            isError={isError}
         >
             <CheckboxSquared
                 defaultChecked={defaultValue}
-                labelClass={"checkboxLabel"}
-                checkboxClass={"checkboxClass"}
-                checkerClass={clsx(["checkerClass"])}
+                styleClass={{
+                    text: "checkboxLabel",
+                    checkBox: "checkboxClass",
+                    checker: "checkerClass",
+                }}
                 label={label}
-                {...register(name)}
-            />
+                {...register(name)} />
         </HelperText>
     )
 }
