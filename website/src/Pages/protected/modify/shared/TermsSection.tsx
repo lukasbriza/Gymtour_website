@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { MappedCoachValues, MappedFitnessValues } from "../../_types";
 import { Checkbox } from "src/components/_index"
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
@@ -7,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { routes } from "src/config/_index";
 import { useField } from "src/hooks/_index";
+import { MappedCoachValues, MappedFitnessValues } from "src/utils/_index";
 
 export const TermsSection: FC = () => {
     const { t } = useTranslation()

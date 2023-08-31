@@ -116,12 +116,12 @@ export const getFitnesses = async (query: GetFitnessType): GetFitnessResponsePro
     findQuery: OWNER
       ? { owner: new mongoose.Types.ObjectId(OWNER) }
       : ID
-      ? {
+        ? {
           _id: Array.isArray(ID)
             ? { $in: ID.map((id) => new mongoose.Types.ObjectId(id)) }
             : new mongoose.Types.ObjectId(ID),
         }
-      : getFitnessFilter(parsedQuery),
+        : getFitnessFilter(parsedQuery),
     projection: PROJECTION,
     order: order,
     limit: LIMIT,

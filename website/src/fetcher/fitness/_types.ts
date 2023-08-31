@@ -1,13 +1,13 @@
 import { CustomErrorResponseObject } from "src/utils/_index";
 
 type OpenHours = {
-  mon: { from: number | null; to: number | null };
-  tue: { from: number | null; to: number | null };
-  wed: { from: number | null; to: number | null };
-  thu: { from: number | null; to: number | null };
-  fri: { from: number | null; to: number | null };
-  sat: { from: number | null; to: number | null };
-  sun: { from: number | null; to: number | null };
+  mon: { from: string | null; to: string | null };
+  tue: { from: string | null; to: string | null };
+  wed: { from: string | null; to: string | null };
+  thu: { from: string | null; to: string | null };
+  fri: { from: string | null; to: string | null };
+  sat: { from: string | null; to: string | null };
+  sun: { from: string | null; to: string | null };
 };
 
 export type Contact = {

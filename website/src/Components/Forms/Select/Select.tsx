@@ -107,7 +107,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>((props, selectRe
     );
 })
 
-const Arrow: FC<ArrowProps> = (props) => {
+export const Arrow: FC<ArrowProps> = (props) => {
     const { className } = props;
     return (
         <div className={clsx(["arrowWrapper", className])}>

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
-import { CoachInformationSectionProps, MappedCoachValues } from "../../_types";
+import { CoachInformationSectionProps } from "../../_types";
 import {
   MultipleSelectWithHelper,
   PriceLevel,
@@ -13,6 +13,7 @@ import {
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { useField } from "src/hooks/_index";
+import { MappedCoachValues } from "src/utils/_index";
 
 export const CoachInformationSection: FC<CoachInformationSectionProps> = (props) => {
   const { regionOptions, othersOptions, genderOptions, specializationOptions } = props;
@@ -21,7 +22,7 @@ export const CoachInformationSection: FC<CoachInformationSectionProps> = (props)
   const { buildField } = useField();
   const {
     watch,
-    formState: { errors, defaultValues },
+    formState: { defaultValues },
   } = useFormContext<MappedCoachValues>();
   const formvalues = watch();
   const regionsOptions = mapOnlyRegions(regionOptions, i18n.language);

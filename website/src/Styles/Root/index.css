@@ -644,12 +644,10 @@ body {
 
 .filteredContent {
   grid-area: content;
-  position: relative;
   width: 100%;
   padding-top: 25px;
   padding-left: 4px;
   padding-right: 4px;
-  z-index: 1;
 }
 
 .Login {
@@ -1297,6 +1295,17 @@ body {
   background: rgb(75, 75, 75) !important;
   max-height: 130px;
   overflow-y: auto;
+}
+
+.openingSection {
+  margin-bottom: 30px;
+}
+
+.openingInputWrappers {
+  display: flex;
+  flex-wrap: wrap;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
 }
 
 .aboutSection {
@@ -3002,6 +3011,116 @@ body {
   display: flex;
   -moz-column-gap: 20px;
        column-gap: 20px;
+}
+
+.timeInputWrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.timeInputLabel {
+  position: relative;
+  display: flex;
+  font-weight: 700;
+}
+
+.timeInputRequiredStar {
+  position: relative;
+  top: unset;
+  right: unset;
+  margin-left: 8px;
+}
+
+.timeInputInputsWrapper {
+  display: flex;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  margin-top: 10px;
+}
+
+.timeInputOptions {
+  z-index: -1;
+  border: none;
+  margin-top: 4px;
+  background: rgb(75, 75, 75);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.timeInputOptionsFocused {
+  z-index: 2;
+}
+
+.timeInputSelect {
+  border: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.253);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  transition: background 0.25s ease-out;
+  min-width: 150px;
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 5px;
+  height: 60px;
+}
+
+.timeInputSelect:hover {
+  background: rgb(75, 75, 75);
+}
+
+.timeInputArrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.timeInputRoot:hover .timeInputArrow .line1 {
+  transform: translateX(-2px) rotate(-130deg);
+}
+.timeInputRoot:hover .timeInputArrow .line2 {
+  transform: translateX(2px) rotate(130deg);
+}
+
+.timeInputActive {
+  background: rgb(75, 75, 75);
+}
+
+.arrowActiveState .timeInputArrow .line1 {
+  transform: translateX(-2px) rotate(-130deg);
+}
+.arrowActiveState .timeInputArrow .line2 {
+  transform: translateX(2px) rotate(130deg);
+}
+
+.timeInputValue {
+  position: absolute;
+  height: -moz-min-content;
+  height: min-content;
+  line-height: unset;
+  width: calc(100% - 30px);
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  left: 0px;
+}
+
+.timeInputRootDisabled:hover .timeInputSelect {
+  background: rgba(52, 52, 52, 0.629);
+}
+.timeInputRootDisabled:hover .timeInputArrow .line1 {
+  transform: translateX(-2px) rotate(-50deg);
+}
+.timeInputRootDisabled:hover .timeInputArrow .line2 {
+  transform: translateX(2px) rotate(50deg);
+}
+
+.timeInputRootDisabled .timeInputSelect {
+  background: rgba(52, 52, 52, 0.629);
 }
 
 .showEditButton {

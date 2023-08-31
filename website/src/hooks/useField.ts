@@ -13,5 +13,6 @@ export const useField = () => {
       defaultValue: customDefaults ? customDefaults : defaultValues && defaultValues[name],
     };
   };
+
   return { buildField };
 };

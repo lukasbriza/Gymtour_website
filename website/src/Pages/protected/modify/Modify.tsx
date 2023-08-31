@@ -20,7 +20,7 @@ import {
     getFitnesses,
     getImage,
 } from "src/fetcher/_index";
-import { TransformedProviderObject } from "../_types";
+import { TransformedProviderObject } from "src/utils/_index";
 import { useEffectOnce } from "@lukasbriza/lbui-lib";
 
 const Modify: FC = () => {

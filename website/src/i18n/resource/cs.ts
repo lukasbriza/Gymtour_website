@@ -11,6 +11,7 @@ export const csTranslation = {
     alias: "Přezdívka",
     back: "Zpět",
     businessTermsAgreement: "Souhlas s obchodními podmínkami",
+    closed: "Zavřeno",
     coach: "Coach",
     continue: "Pokračovat",
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
@@ -46,7 +47,17 @@ export const csTranslation = {
     sucess: "Úspěch",
     failure: "Neúspěch",
     send: "Odeslat",
-    modify: "Upravit"
+    modify: "Upravit",
+    days: {
+      mon: "Pondělí",
+      tue: "Úterý",
+      wed: "Středa",
+      thu: "Čtvrtek",
+      fri: "Pátek",
+      sat: "Sobota",
+      sun: "Neděle"
+    },
+    fromTo: "(od-do)"
   },
   routes: {
     mainPage: "Hlavní stránka",
@@ -217,7 +228,7 @@ export const csTranslation = {
       workplaceInfo: "Zde uveďte adresu místa, nebo podniku, ve kterém poskytujete své služby.",
       priceLevelHeader: "Cena služeb",
       priceLevelContent:
-        "V následují části vyberte cenu vašich služeb. Jedná se o relativní vyjádření ceny na stupnici od 1 do 3, kde první stupeň vyjadřuje níckou cenu a poslední stupeň vysokou cenu.",
+        "V následují části vyberte cenu vašich služeb. Jedná se o relativní vyjádření ceny na stupnici od 1 do 3, kde první stupeň vyjadřuje nízkou cenu a poslední stupeň vysokou cenu.",
       filterHeader: "Kategorie",
       filterContent:
         "Z následujících možností zaškrtněte ty, které nejlépe vystihují vaše podnikání. Dle těchto kategorií Vás budou moci uživatelé filtrovat. Povinné položky jsou označeny *.",

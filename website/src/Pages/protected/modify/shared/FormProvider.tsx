@@ -1,12 +1,10 @@
 import { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { mapDefaultCoachValues, mapDefaultFitnessValues } from "./mapDefaultValues";
 import {
-  MappedCoachValues,
-  MappedFitnessValues,
   ModifyCoachFormProviderProps,
   ModifyFitnessFormProviderProps,
 } from "../../_types";
+import { MappedCoachValues, MappedFitnessValues, mapDefaultCoachValues, mapDefaultFitnessValues } from "src/utils/_index";
 
 export const ModifyCoachFormProvider: FC<ModifyCoachFormProviderProps> = (props) => {
   const { children, defaultValues } = props;

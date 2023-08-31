@@ -1,10 +1,11 @@
 import { FC } from "react";
-import { FitnessInformationSectionProps, MappedFitnessValues } from "../../_types";
+import { FitnessInformationSectionProps } from "../../_types";
 import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { MultipleSelectWithHelper, PriceLevel, SelectWithHelper, StringInput, TimeInput, mapOnlyRegions, mapTownsAccordingToRegion, standardMapper } from "src/components/_index";
 import clsx from "clsx";
 import { useField } from "src/hooks/_index";
+import { MappedFitnessValues } from "src/utils/_index";
 
 export const FitnessInformationSection: FC<FitnessInformationSectionProps> = (props) => {
     const { regionOptions, generalOptions, othersOptions, equipmentOptions } = props
@@ -47,7 +48,17 @@ export const FitnessInformationSection: FC<FitnessInformationSectionProps> = (pr
         return false
     })
 
-    console.log({ defaultValues })
+    const openInputProps = (day: string) => {
+        const dayLabel = `common.days.${day}`
+        return {
+            name: `open.${day}`,
+            label: `${t(dayLabel as any)} ${t("common.fromTo")}:`,
+            checkboxLabel: t("common.closed"),
+            requiredStar: true,
+            defaultValue: defaultValues?.open ? defaultValues?.open[day as keyof typeof defaultValues.open] : undefined,
+            isError: errors.open && errors.open[day as keyof typeof errors.open] !== undefined
+        }
+    }
 
     return (
         <section
@@ -124,7 +135,15 @@ export const FitnessInformationSection: FC<FitnessInformationSectionProps> = (pr
                     </h2>
                     <p>{t("modifyPage.informationSection.openingContent")}</p>
                 </div>
-                <TimeInput label={"test"} name={"x"} />
+                <div className="openingInputWrappers">
+                    <TimeInput {...openInputProps("mon")} />
+                    <TimeInput {...openInputProps("tue")} />
+                    <TimeInput {...openInputProps("wed")} />
+                    <TimeInput {...openInputProps("thu")} />
+                    <TimeInput {...openInputProps("fri")} />
+                    <TimeInput {...openInputProps("sat")} />
+                    <TimeInput {...openInputProps("sun")} />
+                </div>
             </section>
             <section className={clsx(["filterSection"])}>
                 <div>

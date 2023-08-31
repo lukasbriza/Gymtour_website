@@ -81,6 +81,16 @@
   }
 }
 
+.openingSection {
+  margin-bottom: 30px;
+}
+
+.openingInputWrappers {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 30px;
+}
+
 .priceLevelSection {
 }
 

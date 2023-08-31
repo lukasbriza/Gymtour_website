@@ -16,32 +16,32 @@ const contactSchema = {
 
 const openHoursSchema = {
   mon: {
-    from: { type: Number, required: true, default: null },
-    to: { type: Number, required: true, default: null },
+    from: { type: String, required: true, default: null },
+    to: { type: String, required: true, default: null },
   },
   tue: {
-    from: { type: Number, required: true, default: null },
-    to: { type: Number, required: true, default: null },
+    from: { type: String, required: true, default: null },
+    to: { type: String, required: true, default: null },
   },
   wed: {
-    from: { type: Number, required: true, default: null },
-    to: { type: Number, required: true, default: null },
+    from: { type: String, required: true, default: null },
+    to: { type: String, required: true, default: null },
   },
   thu: {
-    from: { type: Number, required: true, default: null },
-    to: { type: Number, required: true, default: null },
+    from: { type: String, required: true, default: null },
+    to: { type: String, required: true, default: null },
   },
   fri: {
-    from: { type: Number, required: true, default: null },
-    to: { type: Number, required: true, default: null },
+    from: { type: String, required: true, default: null },
+    to: { type: String, required: true, default: null },
   },
   sat: {
-    from: { type: Number, required: true, default: null },
-    to: { type: Number, required: true, default: null },
+    from: { type: String, required: true, default: null },
+    to: { type: String, required: true, default: null },
   },
   sun: {
-    from: { type: Number, required: true, default: null },
-    to: { type: Number, required: true, default: null },
+    from: { type: String, required: true, default: null },
+    to: { type: String, required: true, default: null },
   },
 };
 

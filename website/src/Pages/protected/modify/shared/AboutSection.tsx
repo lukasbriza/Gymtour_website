@@ -1,13 +1,10 @@
 import { FC } from "react";
-import {
-  MappedCoachValues,
-  MappedFitnessValues,
-} from "../../_types";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { TextArea } from "src/components/_index";
 import { useField } from "src/hooks/_index";
+import { MappedCoachValues, MappedFitnessValues } from "src/utils/_index";
 
 export const AboutSection: FC = () => {
   const { t } = useTranslation();
