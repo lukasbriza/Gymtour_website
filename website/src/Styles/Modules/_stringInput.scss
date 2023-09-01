@@ -1,13 +1,23 @@
+.requiredStar {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: $error;
+  font-size: 22px;
+}
+
 .inputWrapper {
   width: 100%;
 }
 
 .stringInputHelperRoot {
+  position: relative;
   width: 100%;
   margin-bottom: 5px;
 }
 
 .stringInputRoot {
+  position: relative;
   width: inherit;
   input {
     caret-color: white;

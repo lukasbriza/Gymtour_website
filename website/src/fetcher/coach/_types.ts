@@ -10,7 +10,8 @@ export type CoachFilterQuery = {
   specialization?: string[];
   projection?: string;
   search?: string;
-  id?: string;
+  id?: string | string[];
+  owner?: string;
 };
 
 export type CoachFilter = {

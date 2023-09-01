@@ -161,3 +161,13 @@ export const coachFormToApi = (value: CoachFilter, rawFilter: GetFilterResponse)
 
   return cleanedFilter;
 };
+
+export const mapOnlyRegions = (regions: Region[], lng: string) => {
+  const regionsMapped = regions.filter((region) => region.towns.length > 0);
+  return regionsMapped.map((region) => ({ name: region.name[lng === "cs" ? "cz" : "eng"], code: region.code }));
+};
+
+export const mapTownsAccordingToRegion = (regionCode: string, rawFilter: Region[], lng: string) => {
+  const region = rawFilter.find((item) => item.code === regionCode);
+  return region?.towns.map((town) => ({ name: town.name[lng === "cs" ? "cz" : "eng"], code: town.code })) ?? [];
+};

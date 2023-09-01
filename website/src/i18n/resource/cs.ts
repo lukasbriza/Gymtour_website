@@ -6,14 +6,58 @@ export const csTranslation = {
     noBoolean: "Nesprávná hodnota.",
   },
   common: {
-    email: "Email",
-    name: "Jméno",
-    username: "Uživatelské jméno",
-    password: "Heslo",
-    login: "Přihlásit",
-    register: "Registrovat",
+    about: "O vás",
+    add: "Přidat",
+    alias: "Přezdívka",
+    back: "Zpět",
     businessTermsAgreement: "Souhlas s obchodními podmínkami",
+    closed: "Zavřeno",
+    coach: "Coach",
+    continue: "Pokračovat",
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
+    email: "Email",
+    gender: "Pohlaví",
+    general: "Hlavní",
+    equipment: "Vybavení",
+    others: "Ostatní",
+    houseNumber: "Č.p.",
+    facebook: "Facebook",
+    fitness: "Fitness",
+    google: "Google",
+    instagram: "Instagram",
+    login: "Přihlásit",
+    mobile: "Mobil",
+    name: "Jméno",
+    password: "Heslo",
+    popularity: "Popularita",
+    remove: "Odstranit",
+    register: "Registrovat",
+    region: "Region",
+    specialization: "Specializace",
+    surname: "Příjmení",
+    street: "Ulice",
+    town: "Město",
+    twitter: "Twitter",
+    telephone: "Telefon",
+    username: "Uživatelské jméno",
+    watched: "Shlédnutí",
+    web: "Web",
+    workPlace: "Podnik",
+    youtube: "Youtube",
+    sucess: "Úspěch",
+    failure: "Neúspěch",
+    send: "Odeslat",
+    modify: "Upravit",
+    days: {
+      mon: "Pondělí",
+      tue: "Úterý",
+      wed: "Středa",
+      thu: "Čtvrtek",
+      fri: "Pátek",
+      sat: "Sobota",
+      sun: "Neděle"
+    },
+    fromTo: "(od-do)"
   },
   routes: {
     mainPage: "Hlavní stránka",
@@ -116,6 +160,101 @@ export const csTranslation = {
       "Pro využívání pokročilejších funkcí webu, jako “lajkování„  přidávání příspěvků a vkládání hodnocení je třeba si u nás založit účet.",
   },
   detailPage: {},
+  dashboardPage: {
+    userSection: {
+      general: "Obecné",
+      username: "Uživatel:",
+      email: "Email:",
+      role: "Oprávnění:",
+      roleTypes: {
+        admin: "Administrátor",
+        user: "Uživatel",
+      },
+      agreements: "Souhlasy",
+      agreementsTypes: {
+        dataProcessing: "Obchodní podmínky:",
+        terms: "Zpracování osobních údajů:",
+      },
+      agreementState: {
+        granted: "Udělen",
+        notGranted: "Neudělen",
+      },
+    },
+    recordList: {
+      modal: {
+        questionHeader: "Nevratná akce",
+        questionContent: "Opravdu chcete smazat záznam? Pokud ano pokračujte, nebo se vraťte zpět.",
+      },
+      popup: {
+        removeFitness: "Fitness s {{id}} bylo odstraněno.",
+        removeCoach: "Coach s {{id}} byl odstraněn.",
+        removeCoachFailure: "Coache se nepodařilo odstranit. Kontaktujte podporu.",
+        removeFitnessFailure: "Fitness se nepodařilo odstranit. Kontaktujte podporu.",
+      },
+    },
+    userLikesList: {
+      favoriteFitnessHeader: "Oblíbená Fitness",
+      favoriteCoachesHeader: "Oblíbení Trenéři",
+      modal: {
+        questionHeader: "Nevratná akce",
+        questionContent: `Opravdu chcete odstranit svůj "lajk" od tohoto příspěvku? Pokud ano pokračujte, nebo se vraťte zpět.`,
+      },
+    },
+  },
+  modifyPage: {
+    headerSection: {
+      headerModify: "Upravit záznam",
+      headerCreate: "Vytvořit záznam",
+      text: "Do zobrazených polí vyplňte požadované informace. Povinné informace jsou označeny znakem *. Pokud bude zadána nevalidní informace, zobrazí se vám pod daným polem upozornění.",
+      taxtApprove: "Po odeslání formuláře se bude Váš záznam zobrazovat v nabídce až po schválení žádosti administrátorem. Pokud Vaše žádost nebyla schválena, nebo její schválení trvá dlouho. neváhejte nás kontaktovat."
+    },
+    contactsSection: {
+      contactHeader: "Kontakty",
+      contactContent: "Uveďte kontakty přes které se s vámi mohou uživatelé spojit. Povinné kontakty jsou označeny *.",
+      socialHeader: "Sociální sítě",
+      socialContent: "Uveďte odkazy na Vaše sociální profily, aby tak měli další možnost jak se s Váma spojit.",
+    },
+    termsSection: {
+      termsHeader: "Souhlas se zpracováním údajů",
+      termsContent:
+        "Pro přesměrování na obchodní podmínky a pravidla, jakým způsobem zpracováváme Vaše údaje klikněte zde:",
+      termsLinkDataProcessing: "Zpracování údajů",
+      termsBusinessConditions: "Obchodní podmínky",
+    },
+    informationSection: {
+      informationHeader: "Základní informace",
+      informationSection:
+        "Prosíme o vyplnění stěžejních informací, na kterých bude založena celá stránka. Povinné položky jsou označeny *.",
+      workplaceInfo: "Zde uveďte adresu místa, nebo podniku, ve kterém poskytujete své služby.",
+      priceLevelHeader: "Cena služeb",
+      priceLevelContent:
+        "V následují části vyberte cenu vašich služeb. Jedná se o relativní vyjádření ceny na stupnici od 1 do 3, kde první stupeň vyjadřuje nízkou cenu a poslední stupeň vysokou cenu.",
+      filterHeader: "Kategorie",
+      filterContent:
+        "Z následujících možností zaškrtněte ty, které nejlépe vystihují vaše podnikání. Dle těchto kategorií Vás budou moci uživatelé filtrovat. Povinné položky jsou označeny *.",
+      openingHeader: "Otevírací doba",
+      openingContent: ""
+    },
+    aboutSection: {
+      aboutHeader: "Popis",
+      aboutContent:
+        "Informace z následujícího pole představují hlavní náplň příspěvku. Popište své podnikání, čím se zabýváte a co můžete svým zákazníkum poskytnout. Povinné položky jsou označeny *.",
+    },
+    picturesSection: {
+      picturesHeader: "Fotky",
+      picturesContent:
+        "V následující sekci přidejte fotky, které reprezentují vaše podnikání. Fotky budou zobrazeny v rámci vytvářeného profilu. Hlavní fotka profilu a fotka pro úvodní kartu je povinná.",
+      cardPictureHeader: "Fotka úvodní karty",
+      cardPuctureContent:
+        "Fotka bude transformování do formátu 1:1 (250px x 250px). Doporučujeme tedy nahrát fotku již v tomto formátu.",
+      mainPictureHeader: "Hlavní fotka profilu",
+      mainPictureContent:
+        "Fotka bude transformována do formátu 1:2 (300px x 600px).  Doporučujeme tedy nahrát fotku již v tomto formátu.",
+      othersPicturesHeader: "Ostatní fotky",
+      othersPictureContent:
+        "Přidejte další fotky, které si budou moci potenciální klienti prohlédnout v galerii profilu. Obrázek bude transformován do poměru 1:2 (300px x 600px).  Doporučujeme tedy nahrát fotku již v tomto formátu.",
+    },
+  },
 };
 
 export type AppTranslationType = typeof csTranslation;

@@ -1,0 +1,98 @@
+.coachInformationSection {
+  padding-top: 60px;
+}
+
+.filterInformationInputs {
+  margin-top: 20px;
+}
+
+.coachInformationInputs {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1r 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "coachName coachSurname"
+    "alias alias"
+    "workPlace workPlace"
+    "regionSelect regionSelect"
+    "townSelect townSelect"
+    "street houseNumber";
+
+  column-gap: 35px;
+  .coachName {
+    grid-area: coachName;
+  }
+  .coachSurname {
+    grid-area: coachSurname;
+  }
+  .alias {
+    grid-area: alias;
+  }
+  .workPlace {
+    grid-area: workPlace;
+  }
+  .regionSelect {
+    grid-area: regionSelect;
+  }
+  .townSelect {
+    grid-area: townSelect;
+  }
+  .street {
+    grid-area: street;
+  }
+  .houseNumber {
+    grid-area: houseNumber;
+  }
+}
+
+.inputWithText {
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+.infoSelect {
+  .selectWrapper {
+    min-width: unset;
+    box-shadow: none;
+    width: 100%;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.253);
+  }
+  .selectAllWrapper {
+    width: 100%;
+    height: 60px;
+  }
+  .selectLabel {
+    height: 60px;
+    font-size: 18px;
+    align-items: center;
+  }
+  .selectWrapperHovered {
+    background: rgb(75, 75, 75) !important;
+  }
+  .optionsWrapper {
+    background: rgb(75, 75, 75) !important;
+    max-height: 130px;
+    overflow-y: auto;
+  }
+}
+
+.openingSection {
+  margin-bottom: 30px;
+}
+
+.openingInputWrappers {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 30px;
+}
+
+.priceLevelSection {
+}
+
+.filterSection {
+}

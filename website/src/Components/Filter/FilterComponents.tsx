@@ -7,7 +7,7 @@ import { useCoachFilterContext, useFitnessFilterContext } from "src/hooks/_index
 import { filter } from "src/config/_index";
 import { Bullet, Button, Loading, MultipleRegionSelectControled, MultipleSelect, SearchBar, Select } from "../_index";
 
-const filterAvoided = (
+export const filterAvoided = (
     rawFilter: FilterType,
     avoid: string[]
 ): AvoidedFilterType => {

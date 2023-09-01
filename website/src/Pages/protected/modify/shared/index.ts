@@ -1,0 +1,6 @@
+export * from "./AboutSection"
+export * from "./ContactSection"
+export * from "./FormProvider"
+export * from "./HeaderSection"
+export * from "./PicturesSection"
+export * from "./TermsSection"

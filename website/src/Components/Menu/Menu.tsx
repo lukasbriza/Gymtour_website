@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, FC } from "react";
 import { Link } from "react-router-dom";
-import { useAppContext } from "../../hooks/_index"
+import { useAnimationContext, useAppContext } from "../../hooks/_index"
 import { menuItems, breakpoints, routes } from "../../config/_index"
 import { showMenu, hideMenu, showMenuOffer, hideMenuOffer, crossOn, showLayer, hideLayer, crossOff, showHamburger, hideHamburger } from "../../animations/_index"
-import { SmallLogo, SmallText, LoginButton } from "../../components/SVG/_index"
+import { SmallLogo, SmallText, LoginIcon } from "../../components/SVG/_index"
 import { HamburgerProps, MenuLayerProps, MenuOfferProps } from "./_types";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
@@ -17,6 +17,7 @@ export const Menu: FC = () => {
   const [showOffer, setShowOffer] = useState<boolean | undefined>();
   const [showHamburger, setShowHamburger] = useState<boolean>(false);
   const { width = 0, actualLocation } = useAppContext();
+  const { } = useAnimationContext()
 
   let logoScale: number = 0.1;
   let textScale: number = 0.15;
@@ -26,7 +27,6 @@ export const Menu: FC = () => {
   const isMainPage = actualLocation === "/"
   const biggerThanTablet = width > breakpoints.tablet
   const smallerOrEqualThenTablet = width <= breakpoints.tablet
-  const isDashboard = actualLocation?.startsWith(routes.dashboard.path)
 
   const handleIsActive = () => setHamburger(!hamburger);
   //MENU BACKGROUND//
@@ -57,19 +57,17 @@ export const Menu: FC = () => {
   //SHOW MENU LOGIC//
   useEffect(() => {
     const { current } = menuRef
-    if (!isDashboard && !showMenuComp) {
-      setShowMenuComp(true)
+    if (showMenuComp) {
       current && showMenu(current)
       return
     }
-    if (isDashboard && showMenuComp) {
-      setShowMenuComp(false)
+    if (!showMenuComp) {
       current && hideMenu(current)
       return
     }
-  }, [isDashboard, showMenuComp])
+  }, [showMenuComp])
 
-  //ROUTE CHANGE MENULAYER SE OFF//
+  //ROUTE CHANGE MENULAYER SET OFF//
   useEffect(() => {
     if (hamburger) {
       setHamburger(false)
@@ -139,7 +137,7 @@ const MenuOffer: FC<MenuOfferProps> = (props) => {
     >
       {menuItems}
       <Link to={routes.login.path} className={clsx(["stretchX", "relative", "offerItem", "loginButton"])}>
-        <LoginButton />
+        <LoginIcon />
       </Link>
     </div>
   );
@@ -172,7 +170,7 @@ const MenuLayer: FC<MenuLayerProps> = (props) => {
       <section id="menuOfferItems-wrapper">
         {menuItems}
         <Link to={routes.login.path} className={clsx(["relative", "offerItem", "offerItem-layer", "loginButton"])}>
-          <LoginButton />
+          <LoginIcon />
         </Link>
       </section>
     </div>

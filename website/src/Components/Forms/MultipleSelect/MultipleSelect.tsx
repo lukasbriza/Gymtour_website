@@ -1,18 +1,52 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { ArrowProps, SelectProps } from "./_types";
+import { BaseSyntheticEvent, FC, useCallback, useEffect, useRef, useState } from "react";
+import { ArrowProps, MultipleSelectWithHelperProps, SelectProps } from "./_types";
 import { useFormContext } from "react-hook-form";
-import { CheckboxSquared, useClickOutside } from "@lukasbriza/lbui-lib";
+import { CheckboxSquared, HelperText, useClickOutside } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
 import { selectShowAnimation } from "src/animations/_index";
 
 export const MultipleSelect: FC<SelectProps> = (props) => {
-  const { label, options, name, checkboxClick, syncWithWatch = false } = props;
+  const { label, options, name, checkboxClick, syncWithWatch = false, defaultValue } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState<boolean>(false);
   const [hovered, setHovered] = useState(false);
   const { outside } = useClickOutside(ref);
   const { getValues, setValue, watch } = useFormContext();
   const watchedValue: string[] = watch(name)
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  const handleCheckboxClick = useCallback((checked: boolean, code: string, boxName: string) => {
+    const fieldValue: string[] = getValues(name);
+
+    checkboxClick?.(checked, `${code}-${name}`, boxName, name)
+
+    if (checked === true && fieldValue.includes(code)) {
+      return
+    }
+
+
+    if (checked === true) {
+      fieldValue.push(code);
+      setValue(name, fieldValue);
+      return;
+    }
+    const filteredArray = fieldValue.filter((value) => value !== code);
+    setValue(name, filteredArray);
+
+    return;
+  }, [checkboxClick, getValues, name, setValue]);
+
+  const handleMouseLeave = () => !open && setHovered(false);
+  const handleMouseEnter = () => !open && setHovered(true);
+
+  useEffect(() => {
+    defaultValue?.forEach((value) => {
+      handleCheckboxClick(true, value.code, value.name)
+    })
+  }, [defaultValue, handleCheckboxClick])
 
   useEffect(() => {
     open && setHovered(true);
@@ -23,29 +57,6 @@ export const MultipleSelect: FC<SelectProps> = (props) => {
     outside && setOpen(false);
     outside && setHovered(false);
   }, [outside]);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
-  const handleCheckboxClick = (e: React.BaseSyntheticEvent, code: string, boxName: string) => {
-    const fieldValue: string[] = getValues(name);
-
-    checkboxClick?.(e.target.checked, `${code}-${name}`, boxName, name)
-
-    if (e.target.checked === true) {
-      fieldValue.push(code);
-      setValue(name, fieldValue);
-      return;
-    }
-    const filteredArray = fieldValue.filter((value) => value !== code);
-    setValue(name, filteredArray);
-
-    return;
-  };
-
-  const handleMouseLeave = () => !open && setHovered(false);
-  const handleMouseEnter = () => !open && setHovered(true);
 
   return (
     <div
@@ -69,19 +80,24 @@ export const MultipleSelect: FC<SelectProps> = (props) => {
         </div>
       </div>
       <div className={clsx(["optionsWrapper", open && "show"])}>
-        {options.map((option, i) => {
+        {options.length > 0 && options.map((option, i) => {
           const sync = syncWithWatch ? { checked: watchedValue.includes(option.code) } : {}
+          const defaultChecked = defaultValue?.find((value) => value.code === option.code)
+
           return (
             <div className={"optionWrapper"} key={i + "t"}>
               <CheckboxSquared
                 {...sync}
-                onChange={(e) => handleCheckboxClick(e, option.code, option.name)}
+                checked={defaultChecked ? true : false}
+                onChange={(e: BaseSyntheticEvent) => handleCheckboxClick(e.target.checked, option.code, option.name)}
                 label={option.name}
                 name={option.code}
-                className={"optionCheckboxRoot"}
-                checkboxClass={"multipleOptionInputWrapper"}
-                labelClass={"multipleOptionLabel"}
-                checkerClass={"multipleOptionChecker"}
+                styleClass={{
+                  root: "optionCheckboxRoot",
+                  checkBox: "multipleOptionInputWrapper",
+                  text: "multipleOptionLabel",
+                  checker: "multipleOptionChecker"
+                }}
               />
             </div>
           );
@@ -100,3 +116,24 @@ const Arrow: FC<ArrowProps> = (props) => {
     </div>
   );
 };
+
+export const MultipleSelectWithHelper: FC<MultipleSelectWithHelperProps> = (props) => {
+  const { requiredStar = false, helperText = "", isError, errorText, className, helperClass, ...otherProps } = props
+
+  return (
+    <HelperText
+      styleClass={{
+        root: clsx(["stringInputHelperRoot", className]),
+        text: clsx(["stringInputHelper", helperClass])
+      }}
+      position={"bottom"}
+      text={helperText}
+      errorText={errorText}
+      isError={isError}
+      show={true}
+    >
+      <MultipleSelect {...otherProps} />
+      {requiredStar && <div className="requiredStar">*</div>}
+    </HelperText>
+  )
+}

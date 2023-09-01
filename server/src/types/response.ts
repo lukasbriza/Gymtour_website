@@ -1,5 +1,5 @@
-import { GridFSFile, UpdateResult } from "mongodb";
-import { Coach, Filter, Fitness, ImageFieldsObject, UpdateUserType, User } from "./abl";
+import { GridFSFile } from "mongodb";
+import { Coach, Filter, Fitness, ImageFieldsObject, User } from "./abl";
 import { ErrorType } from "./error";
 
 export type CustomResponse<T = unknown> = {

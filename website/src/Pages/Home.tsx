@@ -2,7 +2,6 @@ import { useEffect, useState, useRef, FC } from 'react'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import main from '../assets/main.webp'
-import { text } from '../config/textSource'
 import { bigLogoAnimation, showHeader, smallLogoShow } from 'src/animations/_index'
 import { BigLogo, BigText } from 'src/components/SVG/_index'
 import { routes } from 'src/config/_index'
@@ -17,7 +16,7 @@ const Home: FC = () => {
     return (
         <div
             id="Home"
-            className={clsx(["relative", "stretch", "minorColor2", "stretchVH", "minHeightWidth"])}
+            className={clsx(["relative", "stretch", "minorColor2", "stretchVH", "minHeightWidth", "page"])}
         >
             <img src={main} alt="homepageImage" />
             <div

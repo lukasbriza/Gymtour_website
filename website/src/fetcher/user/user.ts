@@ -42,7 +42,7 @@ export const removeUser = (id: string) => {
   };
 };
 
-export const addUser = (user: AddUser) => {
+export const addUser = (user?: AddUser) => {
   const instance = getAxiosInstance();
   return async () => {
     try {

@@ -31,7 +31,6 @@ export const AnimationContextProvider: FC<ContextProviderProps> = (props) => {
             setBigLogoPlayed(true);
             smallLogoShow();
             setSmallLogoPlayed(true);
-
         }
     }, [location, smallLogoPlayed])
 

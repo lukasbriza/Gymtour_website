@@ -1,6 +1,6 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { ArrowProps, SelectProps, SelectTypes } from "./_types";
-import { useClickOutside } from "@lukasbriza/lbui-lib";
+import { FC, forwardRef, useCallback, useEffect, useRef, useState } from "react";
+import { ArrowProps, SelectProps, SelectTypes, SelectWithHelperProps } from "./_types";
+import { HelperText, useClickOutside } from "@lukasbriza/lbui-lib";
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -8,20 +8,40 @@ import { selectShowAnimation } from "../../../animations/_index"
 
 
 
-export const Select: FC<SelectProps> = (props) => {
-    const { label, options, name, selectClick, ...otherProps } = props;
+export const Select = forwardRef<HTMLInputElement, SelectProps>((props, selectRef) => {
+    const { label, options, name, selectClick, disabled = false, disabledClass, defaultValue, ...otherProps } = props;
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState<boolean>(false);
     const [hovered, setHovered] = useState(false);
-    const [selected, setSelected] = useState<string | undefined>(undefined)
+    const [selected, setSelected] = useState<string | undefined>(defaultValue?.name ?? undefined)
     const { outside } = useClickOutside(ref);
     const { t } = useTranslation()
     const methods = useFormContext();
 
     const clearTranslation = t("contentPage.filter.orderSelect.clear")
 
-    const handleMouseLeave = () => !open && setHovered(false);
-    const handleMouseEnter = () => !open && setHovered(true);
+    const handleMouseLeave = () => !disabled && !open && setHovered(false);
+    const handleMouseEnter = () => !disabled && !open && setHovered(true);
+    const handleClick = () => {
+        !disabled && setOpen(!open);
+    };
+
+    const handleSelect = useCallback((nameValue: string, code: string) => () => {
+        setOpen(false)
+        if (code === SelectTypes.Clear) {
+            selectClick?.(false, `${code}-${name}`, nameValue, name)
+            methods.setValue(name, undefined)
+            setSelected(undefined)
+            return
+        }
+
+        if (nameValue !== selected) {
+            selectClick?.(true, `${code}-${name}`, nameValue, name)
+        }
+        methods.setValue(name, code)
+        setSelected(nameValue)
+
+    }, [methods, name, selectClick, selected])
 
     useEffect(() => {
         open && setHovered(true);
@@ -33,73 +53,61 @@ export const Select: FC<SelectProps> = (props) => {
         outside && setHovered(false);
     }, [outside]);
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
-
-    const handleSelect = (nameValue: string, code: string) => () => {
-        setOpen(false)
-        if (code === SelectTypes.Clear) {
-            selectClick?.(false, `${code}-${name}`, nameValue, name)
-            methods.setValue(name, undefined)
-            setSelected(undefined)
-            return
-        }
-        if (nameValue !== selected) {
-            selectClick?.(true, `${code}-${name}`, nameValue, name)
-        }
-        methods.setValue(name, code)
-        setSelected(nameValue)
-
-    }
+    useEffect(() => {
+        defaultValue && handleSelect(defaultValue?.name, defaultValue?.code)
+    }, [defaultValue, handleSelect])
 
 
     return (
-        <div
-            {...otherProps}
-            className={"selectAllWrapper"}
-            ref={ref}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
+        <>
+            <input ref={selectRef} style={{ visibility: "hidden", display: "none", position: "absolute" }} />
             <div
-                className={clsx([
-                    "selectWrapper",
-                    open && "selectCornerSharp",
-                    hovered && "selectWrapperHovered",
-                ])}
-                onClick={handleClick}
+                {...otherProps}
+                className={clsx(["selectAllWrapper", disabled && disabledClass])}
+                ref={ref}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
             >
-                <div className={"selectLabel"}>
-                    <p>{selected ? selected : label}</p>
-                    <div className={"selectLine"}></div>
-                    <Arrow className={clsx([hovered && "arrowWrapperHover"])} />
+                <div
+                    className={clsx([
+                        "selectWrapper",
+                        open && "selectCornerSharp",
+                        hovered && "selectWrapperHovered",
+                    ])}
+                    onClick={handleClick}
+                >
+                    <div className={"selectLabel"}>
+                        <p>{selected ? selected : label}</p>
+                        <div className={"selectLine"}></div>
+                        <Arrow className={clsx([hovered && "arrowWrapperHover"])} />
+                    </div>
                 </div>
-            </div>
-            <div className={clsx(["optionsWrapper", open && "show"])}>
-                {
-                    options.map((option, i) => {
-                        if (selected !== option.name) {
-                            return (
-                                <div className={clsx(["optionWrapper", "selectOption"])} key={i + "t"} onClick={handleSelect(option.name, option.code)}>
-                                    {option.name}
-                                </div>
-                            )
-                        }
-                        return <></>
-                    })
-                }
-                {
-                    selected && (<div className={clsx(["optionWrapper", "selectOption"])} key={Math.random()} onClick={handleSelect(clearTranslation, SelectTypes.Clear)}>
-                        {clearTranslation}
-                    </div>)
-                }
-            </div>
+                <div className={clsx(["optionsWrapper", open && "show"])}>
+                    {
+                        options.map((option, i) => {
+                            if (selected !== option.name) {
+                                return (
+                                    <div className={clsx(["optionWrapper", "selectOption"])} key={i + "t"} onClick={handleSelect(option.name, option.code)}>
+                                        {option.name}
+                                    </div>
+                                )
+                            }
+                            return <></>
+                        })
+                    }
+                    {
+                        selected && (<div className={clsx(["optionWrapper", "selectOption"])} key={Math.random()} onClick={handleSelect(clearTranslation, SelectTypes.Clear)}>
+                            {clearTranslation}
+                        </div>)
+                    }
+                </div>
 
-        </div>);
-}
+            </div>
+        </>
+    );
+})
 
-const Arrow: FC<ArrowProps> = (props) => {
+export const Arrow: FC<ArrowProps> = (props) => {
     const { className } = props;
     return (
         <div className={clsx(["arrowWrapper", className])}>
@@ -108,3 +116,23 @@ const Arrow: FC<ArrowProps> = (props) => {
         </div>
     );
 };
+
+export const SelectWithHelper: FC<SelectWithHelperProps> = (props) => {
+    const { register, name, requiredStar = false, helperText = "", isError, errorText, className, helperClass, ...otherProps } = props
+    return (
+        <HelperText
+            styleClass={{
+                root: clsx(["stringInputHelperRoot", className]),
+                text: clsx(["stringInputHelper", helperClass])
+            }}
+            position={"bottom"}
+            text={helperText}
+            errorText={errorText}
+            isError={isError}
+            show={true}
+        >
+            <Select {...otherProps} {...register(name)} />
+            {requiredStar && <div className="requiredStar">*</div>}
+        </HelperText>
+    )
+}

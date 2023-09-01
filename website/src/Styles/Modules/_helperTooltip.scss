@@ -1,0 +1,17 @@
+.helperTooltip {
+  display: grid;
+  grid-template-rows: min-content;
+  grid-template-columns: min-content min-content;
+}
+
+.infoIcon {
+  align-self: center;
+  margin-left: 5px;
+  cursor: pointer;
+
+  path {
+    fill: rgb(228, 228, 228);
+    stroke-width: 1px;
+    stroke: $mainColor;
+  }
+}

@@ -20,7 +20,7 @@ export const ChangeForm: FC<ChangeFormProps> = ({ toLogin, toRegister }) => {
         resolver: changePwdOrNameFormValidationSchema(t)
     })
 
-    const { control: changeControl, reset: changeReset, handleSubmit: changeHandleSubmit, formState: { errors: changeErrors } } = changePwdOrNameMethods
+    const { register, reset: changeReset, handleSubmit: changeHandleSubmit, formState: { errors: changeErrors } } = changePwdOrNameMethods
 
     const changePasswordOrNameSubmit = (values: ForgetPasswordFormValues) => {
         //TODO call
@@ -36,9 +36,9 @@ export const ChangeForm: FC<ChangeFormProps> = ({ toLogin, toRegister }) => {
             </div>
             <div className={"subtitle"}>{t("loginPage.changeSubtitle")}</div>
             <StringInput
+                register={register}
                 className={"changeInput"}
                 label={t("common.email")}
-                control={changeControl}
                 errorText={changeErrors.email?.message}
                 isError={changeErrors.email !== undefined}
                 name={"email"}

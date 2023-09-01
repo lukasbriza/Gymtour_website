@@ -15,7 +15,7 @@ export const Filter: FC<FilterProps> = (props) => {
   const { limit: coachLimit, setLoading: setCoachLoading, setContent: setCoaches } = useCoachFilterContext()
   const { limit: fitnessLimit, setLoading: setFitnessLoading, setContent: setFitnesses } = useFitnessFilterContext()
 
-  const { data: rawFilter, loading: filterLoading } = useServerData(getFilter())
+  const { data: rawFilter, loading: filterLoading } = useServerData(getFilter)
   const { fetchCall: getFitnessCall, loading: fitnessFetchLoading } = useServerdataLazy(getFitnesses)
   const { fetchCall: getCoachCall, loading: coachFetchLoading } = useServerdataLazy(getCoaches)
 

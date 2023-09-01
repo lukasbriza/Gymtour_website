@@ -1,38 +1,43 @@
 import { FC } from "react";
-import { CheckboxSquaredHF, HelperText } from "@lukasbriza/lbui-lib";
+
 import clsx from "clsx";
 import { CheckboxProps } from "./_types";
+import { CheckboxSquared, HelperText } from "@lukasbriza/lbui-lib";
 
 export const Checkbox: FC<CheckboxProps> = (props) => {
     const {
+        register,
         className,
+        defaultValue,
         helperClass,
         helperText = "",
         errorText,
         show = true,
         isError,
-        control,
         name,
         label
     } = props;
     return (
         <HelperText
-            className={clsx(["checkboxHelperRoot", className])}
-            helperClass={clsx(["checkboxHelper", helperClass])}
+            styleClass={{
+                root: clsx(["checkboxHelperRoot", className]),
+                text: clsx(["checkboxHelper", helperClass])
+            }}
             position={"bottom"}
             text={helperText}
             errorText={errorText}
             show={show}
-            error={isError}
+            isError={isError}
         >
-            <CheckboxSquaredHF
-                labelClass={"checkboxLabel"}
-                checkboxClass={"checkboxClass"}
-                checkerClass={clsx(["checkerClass"])}
-                control={control}
-                name={name}
+            <CheckboxSquared
+                defaultChecked={defaultValue}
+                styleClass={{
+                    text: "checkboxLabel",
+                    checkBox: "checkboxClass",
+                    checker: "checkerClass",
+                }}
                 label={label}
-            />
+                {...register(name)} />
         </HelperText>
     )
 }

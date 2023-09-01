@@ -1,8 +1,8 @@
 import { gsap, Sine, Power2, Power3 } from "gsap";
 
 type strokeConfig = {
-  strokeDasharrayInitial?: string;
-  strokeDashoffsetInitial?: string;
+  strokeDasharrayInitial?: string | number;
+  strokeDashoffsetInitial?: string | number;
   strokeDashoffset?: number;
   duration?: number;
 };

@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { text } from '../config/textSource'
 import { useAnimationContext } from 'src/hooks/_index'
 import { smallLogoShow } from 'src/animations/_index'
 import clsx from 'clsx'
@@ -17,7 +16,7 @@ const About = () => {
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="About" className={clsx(["relative", "stretch", "minorColor2"])}>
+        <div id="About" className={clsx(["relative", "stretch", "minorColor2", "page"])}>
 
         </div>
     )

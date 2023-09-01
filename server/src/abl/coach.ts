@@ -19,6 +19,7 @@ import { errorMessages, config } from "../config";
 import {
   APIError,
   DatabaseError,
+  ValidationError,
   assignError,
   buildResponse,
   orderQuery,
@@ -27,7 +28,7 @@ import {
 } from "../utils";
 import { getMeta } from "./image";
 import { constructUpdatePath } from "../utils/constructUpdatePath";
-import mongoose from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 
 const getCoachFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -64,6 +65,7 @@ const getCoachFilter = (query: FilterQueryParsed) => {
 
 export const getCoaches = async (query: GetCoachType): GetCoachResponsePromise => {
   const response = buildResponse<Coach[]>();
+  const OWNER = query.owner ? query.owner : undefined;
   const ID = query.id ? query.id : undefined;
   const LIMIT = query.limit ? Number(query.limit) : config.dbUnitLimit;
   const ORDER = query.order ? Number(query.order) : 1;
@@ -78,13 +80,48 @@ export const getCoaches = async (query: GetCoachType): GetCoachResponsePromise =
   };
 
   const order = orderQuery(ORDER);
+
+  if (OWNER) {
+    const isValid = isValidObjectId(OWNER);
+    if (!isValid) {
+      const error = new ValidationError(errorMessages.getCoach.invalidObjectId);
+      return assignError<Coach[]>(null, error, response);
+    }
+  }
+
+  if (ID) {
+    if (Array.isArray(ID)) {
+      const results: boolean[] = [];
+      ID.forEach((id) => {
+        results.push(isValidObjectId(id));
+      });
+      if (results.includes(false)) {
+        const error = new ValidationError(errorMessages.getCoach.invalidObjectId);
+        return assignError<Coach[]>(null, error, response);
+      }
+    } else {
+      const isValid = isValidObjectId(ID);
+      if (!isValid) {
+        const error = new ValidationError(errorMessages.getCoach.invalidObjectId);
+        return assignError<Coach[]>(null, error, response);
+      }
+    }
+  }
+
   const option: Option<Coach> = {
-    findQuery: ID ? { _id: new mongoose.Types.ObjectId(ID) } : getCoachFilter(parsedQuery),
+    findQuery: OWNER
+      ? { owner: new mongoose.Types.ObjectId(OWNER) }
+      : ID
+      ? {
+          _id: Array.isArray(ID)
+            ? { $in: ID.map((id) => new mongoose.Types.ObjectId(id)) }
+            : new mongoose.Types.ObjectId(ID),
+        }
+      : getCoachFilter(parsedQuery),
     projection: PROJECTION,
     order: order,
     limit: LIMIT,
   };
-
   const data = await get<Coach>(CoachModel, errorMessages.getCoach.databaseError, option);
   if (data instanceof DatabaseError) {
     return assignError<Coach[]>(null, data, response);

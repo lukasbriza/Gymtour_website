@@ -1,6 +1,7 @@
 import React from "react";
 import { BoltProps } from "src/components/_index";
 import { Coach, Fitness } from "src/fetcher/_index";
+import { Permissions } from "../_types";
 
 export type ContextProviderProps = {
   children: React.ReactNode;
@@ -38,11 +39,10 @@ export type UserStateContext = {
   logged: boolean;
   userId: string;
   userObject: userObjectType | undefined;
-  fn: {
-    setLogged: setState<boolean>;
-    setUserId: setState<string>;
-    setUserObject: setState<userObjectType | undefined>;
-  };
+  setLogged: setState<boolean>;
+  setUserId: setState<string>;
+  setUserObject: setState<userObjectType | undefined>;
+  hasPermission: (permission: Permissions) => boolean;
 };
 
 export type CoachFilterContext = {

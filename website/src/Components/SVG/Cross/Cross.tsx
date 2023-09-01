@@ -1,41 +1,44 @@
 import React from "react"
 import { CrossProps } from "./_types"
+import clsx from "clsx"
 
 export const Cross = React.forwardRef<SVGSVGElement, CrossProps>((
     props,
     ref
 ) => {
-    const viewBox = "0 0 " + (45.422 * props.scale) + " " + (42.03 * props.scale)
+    const { scale, strokeWidth, stroke, className, ...otherProps } = props
+    const viewBox = "0 0 " + (45.422 * scale) + " " + (42.03 * scale)
 
     return (
         <svg
-            width={45.422 * props.scale}
-            height={42.03 * props.scale}
+            width={45.422 * scale}
+            height={42.03 * scale}
             viewBox={viewBox}
-            className="errorCrossContainer"
+            className={clsx(["errorCrossContainer", className])}
             ref={ref}
+            {...otherProps}
         >
             <line
                 id="Line_1"
                 data-name="Line 1"
-                x2={44.744 * props.scale}
-                y2={41.295 * props.scale}
+                x2={44.744 * scale}
+                y2={41.295 * scale}
                 transform="translate(0.339 0.367)"
                 fill="none"
                 strokeLinecap="round"
-                stroke={props.stroke}
-                strokeWidth={props.strokeWidth}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
             />
             <line
                 id="Line_2"
                 data-name="Line 2"
-                y1={41.295 * props.scale}
-                x2={44.744 * props.scale}
+                y1={41.295 * scale}
+                x2={44.744 * scale}
                 transform="translate(0.339 0.367)"
                 fill="none"
                 strokeLinecap="round"
-                stroke={props.stroke}
-                strokeWidth={props.strokeWidth}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
             />
         </svg>
     )

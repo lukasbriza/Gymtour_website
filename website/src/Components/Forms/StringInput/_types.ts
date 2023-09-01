@@ -1,9 +1,9 @@
-import { Control } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 
 export type StringInputProps = {
+  register: UseFormRegister<any>;
   errorText?: string;
   isError: boolean;
-  control: Control<any, any>;
   inputClass?: string;
   labelClass?: string;
   labelFilleClass?: string;
@@ -16,4 +16,6 @@ export type StringInputProps = {
   helperText?: string;
   password?: boolean;
   autoComplete?: "on" | "off";
+  requiredStar?: boolean;
+  defaultValue?: string;
 };

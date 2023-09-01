@@ -1,0 +1,102 @@
+$size: 60px;
+
+.imageBtnWrapper {
+  position: relative;
+  width: min-content;
+
+  .imageInput {
+    border: unset;
+    margin: unset;
+    padding: unset;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background: rgb(61, 61, 61);
+    cursor: pointer;
+    position: relative;
+
+    .imgLine {
+      width: 50%;
+      height: 5px;
+      background: $modalBackBtnHover;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 3px;
+      transform: translate(-50%, -50%);
+    }
+    .imgLine:first-of-type {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+
+  .preview {
+    cursor: pointer;
+    opacity: 0;
+
+    top: calc(100% - 22px);
+    left: calc(100% - 22px);
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: $buttonBackground;
+    transition: background 0.15s ease-in, opacity 0.15s ease-in;
+    .search {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+  }
+
+  .preview:hover {
+    background: $buttonBackgroundHover2;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+.imagePreview {
+  opacity: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.885);
+  z-index: 1000;
+  top: 0px;
+
+  .image {
+    aspect-ratio: 1/1;
+    z-index: 1000;
+
+    max-height: 80%;
+    max-width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .previewCancel {
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    margin: 0px;
+    width: 45px;
+    height: 45px;
+
+    line {
+      stroke-dasharray: none !important;
+      stroke-dashoffset: unset !important;
+    }
+  }
+}
+
+.multipleImageInput {
+  display: flex;
+  column-gap: 20px;
+}

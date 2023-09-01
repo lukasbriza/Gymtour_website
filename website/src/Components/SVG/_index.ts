@@ -1,6 +1,6 @@
 export * from "./SmallLogo/SmallLogo";
 export * from "./SmallText/SmallText";
-export * from "./LoginButton";
+export * from "./LoginIcon/LoginIcon";
 export * from "./BigLogo/BigLogo";
 export * from "./FacebookLogo/FacebookLogo";
 export * from "./InstagramLogo/InstagramLogo";
@@ -13,4 +13,7 @@ export * from "./SearchIcon/SearchIcon";
 export * from "./Heart/Heart";
 export * from "./Topped/Topped";
 export * from "./Viewed/Viewed";
-export * from "./LoginButton";
+export * from "./Info/Info";
+export * from "./Edit/Edit";
+export * from "./QuestionMark/QuestionMark";
+export * from "./Dollar/Dollar";

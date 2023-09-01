@@ -23,12 +23,13 @@ import {
   isValidIn,
   orderQuery,
   updateOwnerFlow,
+  ValidationError,
 } from "../utils";
 import { add, get, Option, remove, update } from "../database";
 import { FitnessModel, UserModel } from "../model";
 import { getMeta } from "./image";
 import { constructUpdatePath } from "../utils/constructUpdatePath";
-import mongoose from "mongoose";
+import mongoose, { isValidObjectId } from "mongoose";
 
 const getFitnessFilter = (query: FilterQueryParsed) => {
   const findQuery = { region: { $in: [] }, town: { $in: [] } };
@@ -67,6 +68,7 @@ const getFitnessFilter = (query: FilterQueryParsed) => {
 export const getFitnesses = async (query: GetFitnessType): GetFitnessResponsePromise => {
   const response = buildResponse<Fitness[]>();
   const ID = query.id ? query.id : undefined;
+  const OWNER = query.owner ? query.owner : undefined;
   const LIMIT = query.limit ? Number(query.limit) : config.dbUnitLimit;
   const ORDER = query.order ? Number(query.order) : 1;
   const PROJECTION = query.projection ? query.projection : undefined;
@@ -82,8 +84,44 @@ export const getFitnesses = async (query: GetFitnessType): GetFitnessResponsePro
   };
 
   const order = orderQuery(ORDER);
+
+  if (OWNER) {
+    const isValid = isValidObjectId(OWNER);
+    if (!isValid) {
+      const error = new ValidationError(errorMessages.getFitness.invalidObjectId);
+      return assignError<Fitness[]>(null, error, response);
+    }
+  }
+
+  if (ID) {
+    if (Array.isArray(ID)) {
+      const results: boolean[] = [];
+      ID.forEach((id) => {
+        results.push(isValidObjectId(id));
+      });
+      if (results.includes(false)) {
+        const error = new ValidationError(errorMessages.getCoach.invalidObjectId);
+        return assignError<Fitness[]>(null, error, response);
+      }
+    } else {
+      const isValid = isValidObjectId(ID);
+      if (!isValid) {
+        const error = new ValidationError(errorMessages.getFitness.invalidObjectId);
+        return assignError<Fitness[]>(null, error, response);
+      }
+    }
+  }
+
   const option: Option<Fitness> = {
-    findQuery: ID ? { _id: new mongoose.Types.ObjectId(ID) } : getFitnessFilter(parsedQuery),
+    findQuery: OWNER
+      ? { owner: new mongoose.Types.ObjectId(OWNER) }
+      : ID
+        ? {
+          _id: Array.isArray(ID)
+            ? { $in: ID.map((id) => new mongoose.Types.ObjectId(id)) }
+            : new mongoose.Types.ObjectId(ID),
+        }
+        : getFitnessFilter(parsedQuery),
     projection: PROJECTION,
     order: order,
     limit: LIMIT,

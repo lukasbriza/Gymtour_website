@@ -20,7 +20,7 @@ export const LoginForm: FC<LoginFormProps> = ({ toChange, toRegister }) => {
         reValidateMode: "onChange",
         resolver: loginFormValidationSchema(t)
     })
-    const { control: loginControl, reset: loginReset, handleSubmit: loginHandleSubmit, formState: { errors: loginErrors } } = loginMethods
+    const { register, reset: loginReset, handleSubmit: loginHandleSubmit, formState: { errors: loginErrors } } = loginMethods
 
     const loginSubmit = (values: LoginFormValues) => {
         //TODO call
@@ -36,17 +36,17 @@ export const LoginForm: FC<LoginFormProps> = ({ toChange, toRegister }) => {
             </div>
             <div className={"subtitle"}>{t("loginPage.loginSubtitle")}</div>
             <StringInput
+                register={register}
                 className={"usernameInput"}
                 label={t("common.username")}
-                control={loginControl}
                 errorText={loginErrors.username?.message}
                 isError={loginErrors.username !== undefined}
                 name={"username"}
             />
             <StringInput
+                register={register}
                 className={"passwordInput"}
                 label={t("common.password")}
-                control={loginControl}
                 errorText={loginErrors.password?.message}
                 isError={loginErrors.password !== undefined}
                 password={true}

@@ -1,0 +1,22 @@
+.priceLevelWrapper {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-flow: row;
+  column-gap: 5px;
+
+  .dollar {
+    cursor: pointer;
+    path {
+      fill: rgb(92, 92, 92);
+      transition: fill 0.15s ease-out;
+    }
+  }
+
+  .dollarActive {
+    path {
+      fill: white;
+    }
+  }
+}

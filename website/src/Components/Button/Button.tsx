@@ -13,10 +13,12 @@ type ButtonProps = {
     path?: string,
     text: string,
     disabled?: boolean,
+    icon?: React.ReactNode,
+    iconClass?: string
 } & Props<HTMLButtonElement>
 
 export const Button: FC<ButtonProps> = (props) => {
-    const { onClick, initialClass, hoverClass, transitionClass, modificationClass, text, disabled = false, path, ...otherProps } = props
+    const { onClick, initialClass, hoverClass, transitionClass, modificationClass, text, icon, iconClass, disabled = false, path, ...otherProps } = props
     const [isActive, setActive] = useState(false)
     const navigate = useNavigate()
 
@@ -54,6 +56,7 @@ export const Button: FC<ButtonProps> = (props) => {
             <div
                 className={clsx([initialClass, isActive && hoverClass, transitionClass])}
             >
+                {icon && <div className={clsx(['buttonIcon', iconClass])}>{icon}</div>}
                 {text}
             </div>
         </button>

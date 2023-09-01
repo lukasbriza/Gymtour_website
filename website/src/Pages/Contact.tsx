@@ -1,5 +1,4 @@
 import { useEffect, FC } from 'react'
-import { text } from '../config/textSource'
 import { useAnimationContext, useAppContext } from 'src/hooks/_index';
 import { smallLogoShow } from 'src/animations/_index';
 import clsx from 'clsx';
@@ -17,7 +16,7 @@ const Contact: FC = () => {
     //////////////////////////////////////////////////
     //SETUP//
     return (
-        <div id="Contact" className={clsx(["relative", "stretch", "minorColor2"])}>
+        <div id="Contact" className={clsx(["relative", "stretch", "minorColor2", "page"])}>
 
         </div>
     )

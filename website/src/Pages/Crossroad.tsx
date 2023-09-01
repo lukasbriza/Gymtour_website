@@ -10,7 +10,7 @@ import registerImg from '../assets/register.webp'
 
 const Crossroad: FC = () => {
     return (
-        <div id="Crossroad" className={clsx(["relative", "stretch", "minorColor2"])}>
+        <div id="Crossroad" className={clsx(["relative", "stretch", "minorColor2", "page"])}>
             <div id="crossroadSectionWrapper">
                 <FitnessPage />
                 <div id="crossroadDivider" className="divider"></div>
