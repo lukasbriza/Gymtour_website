@@ -1,6 +1,6 @@
 import { FC, createContext, useCallback, useMemo, useState } from "react";
 import { AppStateContext, BreakPoints, ContextProviderProps } from "./_types";
-import { getBreakPoint, preloadImg } from 'src/utils/_index'
+import { getBreakPoint, preloadImg } from 'src/utils'
 
 //IMAGES//
 import main from '../../assets/main.webp'

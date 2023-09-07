@@ -37,7 +37,7 @@ const postCoachSchema = object({
   workPlace: requiredString(),
   street: requiredString(),
   town: requiredNumber(99),
-  region: requiredNumber(99),
+  region: requiredNumber(14),
   priceLevel: requiredNumber(3),
   contact: contactValidation(),
   filters: object({

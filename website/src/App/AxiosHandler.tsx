@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ErrorHandlerProps } from "./_types";
-import { getAxiosInstance } from "src/libs/_index";
-import { usePopUpContext } from "src/hooks/_index";
+import { usePopUpContext } from "src/hooks";
+import { getAxiosInstance } from "src/config";
 
 export const AxiosHandler: FC<ErrorHandlerProps> = ({ children }) => {
   const { error: showError } = usePopUpContext()

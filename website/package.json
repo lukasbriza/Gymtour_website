@@ -3,13 +3,12 @@
   "version": "0.5.0",
   "private": true,
   "dependencies": {
-    "@lukasbriza/lbui-lib": "./lukasbriza-lbui-lib-1.0.68.tgz",
+    "@lukasbriza/lbui-lib": "./lukasbriza-lbui-lib-1.0.69.tgz",
     "axios": "^1.2.6",
     "clsx": "^1.2.1",
     "gsap": "^3.11.4",
     "i18next": "^23.1.0",
     "i18next-browser-languagedetector": "^7.0.2",
-    "joi": "^17.7.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -22,7 +21,8 @@
     "react-tooltip": "^5.14.0",
     "react-transition-group": "^4.4.5",
     "sass-mq": "^6.0.0",
-    "use-mask-input": "^3.3.3"
+    "use-mask-input": "^3.3.3",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@hookform/resolvers": "^2.9.10",

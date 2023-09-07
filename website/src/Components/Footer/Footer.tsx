@@ -2,8 +2,8 @@ import { Link } from "react-router-dom"
 import { FC } from "react"
 import clsx from "clsx"
 import { useTranslation } from "react-i18next"
-import { footerLinks, links } from "src/config/_index"
-import { Underliner } from "../_index"
+import { footerLinks, links } from "src/config"
+import { Underliner } from ".."
 import { FacebookLogo, InstagramLogo, YoutubeLogo } from "../SVG/_index"
 
 const Footer: FC = () => {

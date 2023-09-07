@@ -15,12 +15,12 @@ const DataProcessing = ReactLazyPreload(
   () => import("../pages/DataProcessing")
 );
 
-const Login = ReactLazyPreload(() => import("../pages/login/Login"));
+const Login = ReactLazyPreload(() => import("../pages/Login"));
 const Dashboard = ReactLazyPreload(
   () => import("../pages/protected/dashboard/Dashboard")
 );
 const Modify = ReactLazyPreload(
-  () => import("../pages/protected/modify/Modify")
+  () => import("../pages/protected/Modify")
 );
 
 const Detail = ReactLazyPreload(() => import("../pages/content/Detail"));

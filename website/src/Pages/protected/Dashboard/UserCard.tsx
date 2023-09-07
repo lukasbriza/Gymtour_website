@@ -1,6 +1,6 @@
 import { LoginIcon } from "src/components/SVG/_index"
-import { EditableTable, EditableTableData, EditableTableRow, HelperTooltip } from "src/components/_index"
-import { UserSectionEditableData } from "../_types"
+import { EditableTable, EditableTableData, EditableTableRow, HelperTooltip } from "src/components"
+import { UserSectionEditableData } from "./_types"
 import clsx from "clsx"
 import { useTranslation } from "react-i18next"
 import { FC } from "react"

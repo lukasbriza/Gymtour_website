@@ -1,5 +1,6 @@
 import { ContextProviderProps, Permissions, UserStateContext } from "src/app/_index";
 import { FC, createContext, useCallback, useMemo, useState } from "react";
+import { User } from "src/fetcher";
 
 const initialstate: UserStateContext = {
     logged: false,
@@ -17,7 +18,7 @@ UserContext.displayName = 'UserContext'
 export const UserContextProvider: FC<ContextProviderProps> = (props) => {
     const [logged, setLogged] = useState<boolean>(initialstate.logged)
     const [userId, setUserId] = useState<string>(initialstate.userId)
-    const [userObject, setUserObject] = useState<userObjectType | undefined>(initialstate.userObject)
+    const [userObject, setUserObject] = useState<User | undefined>(initialstate.userObject)
 
     const hasPermission = useCallback((permission: Permissions) => {
         switch (permission) {

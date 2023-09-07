@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { HelperTooltipProps } from "./_types";
 import clsx from "clsx";
-import { Tooltip } from "../../_index";
+import { Tooltip } from "../..";
 import { Info } from "../../SVG/_index";
 
 export const HelperTooltip: FC<HelperTooltipProps> = (props) => {

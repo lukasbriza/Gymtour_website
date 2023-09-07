@@ -15,8 +15,7 @@ import {
   UpdateFitnessResponse,
 } from "./_types";
 import { querySerialize } from "../querySerialize";
-import { getAxiosInstance } from "src/libs/_index";
-import { Api } from "src/config/_index";
+import { Api, getAxiosInstance } from "src/config";
 
 export const getFitnesses = (query?: FitnesFilterQuery) => {
   const instance = getAxiosInstance();
@@ -44,7 +43,7 @@ export const removeFitnesses = (id?: RemoveFitnessesBody) => {
   };
 };
 
-export const updateFitness = (body: UpdateFitnessBody) => {
+export const updateFitness = (body?: UpdateFitnessBody) => {
   const instance = getAxiosInstance();
   return async () => {
     try {
@@ -56,7 +55,7 @@ export const updateFitness = (body: UpdateFitnessBody) => {
   };
 };
 
-export const addFitness = (body: AddFitnessBody) => {
+export const addFitness = (body?: AddFitnessBody) => {
   const instance = getAxiosInstance();
   return async () => {
     try {

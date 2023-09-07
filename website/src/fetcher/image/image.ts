@@ -1,9 +1,8 @@
-import { getAxiosInstance } from "src/libs/_index";
-import { GetImage, GetImageResponse } from "./_types";
-import { getFetchAdress } from "src/utils/_index";
-import { Api } from "src/config/_index";
+import { GetImage, GetImageResponse, PostImage } from "./_types";
+import { getFetchAdress } from "src/utils";
+import { Api, getAxiosInstance } from "src/config";
 import { AxiosResponse } from "axios";
-import { handleFetchError } from "src/fetcher/_index";
+import { handleFetchError } from "src/fetcher";
 
 export const getImage = (props?: GetImage) => {
   const { id } = props ?? {};
@@ -20,3 +19,22 @@ export const getImage = (props?: GetImage) => {
     }
   };
 };
+
+export const postImage = (props?: PostImage) => {
+  const { image, key } = props ?? {}
+  const instance = getAxiosInstance();
+  return async () => {
+    try {
+
+      const data = new FormData()
+
+      const response = await instance.post(getFetchAdress() + Api.ApiImages, {}, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+    } catch (error: unknown) {
+
+    }
+  }
+}

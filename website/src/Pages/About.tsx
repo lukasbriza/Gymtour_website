@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAnimationContext } from 'src/hooks/_index'
+import { useAnimationContext } from 'src/hooks'
 import { smallLogoShow } from 'src/animations/_index'
 import clsx from 'clsx'
 

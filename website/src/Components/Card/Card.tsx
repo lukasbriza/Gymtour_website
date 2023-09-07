@@ -5,11 +5,11 @@ import clsx from "clsx"
 import { Loading } from "../Loading/Loading"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, usePopUpContext, useServerdataLazy, useUserContext } from "src/hooks/_index"
-import { Coach, Fitness, addCoachLike, addFitnessLike, getCoaches, getFitnesses, getImage, updateViews } from "src/fetcher/_index"
+import { useCoachFilterContext, useFitnessFilterContext, useImageStoreContext, usePopUpContext, useServerdataLazy, useUserContext } from "src/hooks"
+import { Coach, Fitness, addCoachLike, addFitnessLike, getCoaches, getFitnesses, getImage, updateViews } from "src/fetcher"
 import { Heart, Topped, Viewed } from "../SVG/_index"
-import { card } from "src/config/_index"
-import { OverflowTextTooltip } from "../_index"
+import { card } from "src/config"
+import { OverflowTextTooltip } from ".."
 
 export const Card: FC<CardProps> = (props) => {
     const heart = useRef<SVGSVGElement>(null)

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, FC } from "react";
 import { Link } from "react-router-dom";
-import { useAnimationContext, useAppContext } from "../../hooks/_index"
-import { menuItems, breakpoints, routes } from "../../config/_index"
+import { useAnimationContext, useAppContext } from "../../hooks"
+import { menuItems, breakpoints, routes } from "../../config"
 import { showMenu, hideMenu, showMenuOffer, hideMenuOffer, crossOn, showLayer, hideLayer, crossOff, showHamburger, hideHamburger } from "../../animations/_index"
 import { SmallLogo, SmallText, LoginIcon } from "../../components/SVG/_index"
 import { HamburgerProps, MenuLayerProps, MenuOfferProps } from "./_types";

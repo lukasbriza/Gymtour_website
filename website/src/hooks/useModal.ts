@@ -1,7 +1,7 @@
 import { hideMenu, showMenu } from "src/animations/_index";
 import { ModalContext } from "@lukasbriza/lbui-lib";
 import { ReactNode, useContext } from "react";
-import { ModalButtonRow } from "src/components/_index";
+import { ModalButtonRow } from "src/components";
 
 type ShowModalProps = {
   headerComp: ReactNode;

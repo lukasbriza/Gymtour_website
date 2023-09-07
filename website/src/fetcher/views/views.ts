@@ -1,7 +1,6 @@
-import { getAxiosInstance } from "src/libs/_index";
 import { AxiosResponse } from "axios";
 import { UpdateViews, UpdateViewsResponse } from "./_types";
-import { Api } from "src/config/_index";
+import { Api, getAxiosInstance } from "src/config";
 import { handleFetchError } from "../handleFetchError";
 
 export const updateViews = (props?: UpdateViews) => {

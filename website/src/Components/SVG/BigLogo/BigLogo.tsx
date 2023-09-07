@@ -1,4 +1,4 @@
-import { useAppContext } from "src/hooks/_index"
+import { useAppContext } from "src/hooks"
 import { Props } from "@lukasbriza/lbui-lib"
 import React, { useEffect, useState } from "react"
 import { BigLogoProps } from "./_types"

@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { CancelButton, Loading, QuestionHeader } from "src/components/_index";
-import { useModal } from "src/hooks/_index";
-import { UserLikesListProps } from "../_types";
+import { CancelButton, LoadingWrapper, QuestionHeader } from "src/components";
+import { useModal } from "src/hooks";
+import { UserLikesListProps } from "./_types";
 
 export const UserLikesList: FC<UserLikesListProps> = (props) => {
   const { loading, coachLiked, fitnessLiked, filter } = props
@@ -52,8 +52,9 @@ export const UserLikesList: FC<UserLikesListProps> = (props) => {
       backText: t("common.back"),
       text: t("dashboardPage.userLikesList.modal.questionContent"),
       button: t("common.remove"),
-      onClick: () => console.log("clicked"), //REMOVE CALL
-      //TODO: imlement call
+      onClick: () => console.log("clicked"),
+      //REMOVE CALL
+      //TODO: implement call
     });
   };
 
@@ -82,33 +83,29 @@ export const UserLikesList: FC<UserLikesListProps> = (props) => {
                 <h2>{t("dashboardPage.userLikesList.favoriteFitnessHeader")}</h2>
               </td>
             </tr>
-            {
-              (loading) ?
-                <Loading scale={1.5} className="loading" /> :
-                <>
-                  <tr className="rowHeader">
-                    <td>{t("common.name")}</td>
-                    <td>{t("common.town")}</td>
-                    <td>{t("common.region")}</td>
-                  </tr>
-                  {
-                    fitnessLiked.map((item, index) => {
-                      return (
-                        <tr className="record" key={index}>
-                          <td>{item.name}</td>
-                          <td>{translateTown(item.region, item.town)}</td>
-                          <td>{transalteRegion(item.region)}</td>
-                          <td className="actionData">
-                            <CancelButton
-                              onClick={handleRecordCancel(item._id, "fitness")}
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })
-                  }
-                </>
-            }
+            <LoadingWrapper loading={loading} scale={1.5} className="loading">
+              <tr className="rowHeader">
+                <td>{t("common.name")}</td>
+                <td>{t("common.town")}</td>
+                <td>{t("common.region")}</td>
+              </tr>
+              {
+                fitnessLiked.map((item, index) => {
+                  return (
+                    <tr className="record" key={index}>
+                      <td>{item.name}</td>
+                      <td>{translateTown(item.region, item.town)}</td>
+                      <td>{transalteRegion(item.region)}</td>
+                      <td className="actionData">
+                        <CancelButton
+                          onClick={handleRecordCancel(item._id, "fitness")}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })
+              }
+            </LoadingWrapper>
           </tbody>
         }
         {
@@ -119,33 +116,29 @@ export const UserLikesList: FC<UserLikesListProps> = (props) => {
                 <h2>{t("dashboardPage.userLikesList.favoriteCoachesHeader")}</h2>
               </td>
             </tr>
-            {
-              (loading) ?
-                <Loading scale={1.5} className="loading" /> :
-                <>
-                  <tr className="rowHeader">
-                    <td>{t("common.name")}</td>
-                    <td>{t("common.town")}</td>
-                    <td>{t("common.region")}</td>
-                  </tr>
-                  {
-                    coachLiked.map((item, index) => {
-                      return (
-                        <tr className="record" key={index}>
-                          <td>{item.name}</td>
-                          <td>{translateTown(item.region, item.town)}</td>
-                          <td>{transalteRegion(item.region)}</td>
-                          <td className="actionData">
-                            <CancelButton
-                              onClick={handleRecordCancel(item._id, "coach")}
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })
-                  }
-                </>
-            }
+            <LoadingWrapper loading={loading} scale={1.5} className="loading">
+              <tr className="rowHeader">
+                <td>{t("common.name")}</td>
+                <td>{t("common.town")}</td>
+                <td>{t("common.region")}</td>
+              </tr>
+              {
+                coachLiked.map((item, index) => {
+                  return (
+                    <tr className="record" key={index}>
+                      <td>{item.name}</td>
+                      <td>{translateTown(item.region, item.town)}</td>
+                      <td>{transalteRegion(item.region)}</td>
+                      <td className="actionData">
+                        <CancelButton
+                          onClick={handleRecordCancel(item._id, "coach")}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })
+              }
+            </LoadingWrapper>
           </tbody>
         }
       </table>

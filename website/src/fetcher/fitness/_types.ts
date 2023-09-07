@@ -1,4 +1,4 @@
-import { CustomErrorResponseObject } from "src/utils/_index";
+import { CustomErrorResponseObject } from "src/utils";
 
 type OpenHours = {
   mon: { from: string | null; to: string | null };
@@ -39,7 +39,6 @@ export type Fitness = {
   contact: Contact;
   filters: FitnessFilterType;
   open: OpenHours;
-  descriptionBasic: string;
   descriptionFull?: string | null;
   pictures: {
     card: string;
@@ -87,7 +86,7 @@ export type RemoveFitnessesResponse = CustomErrorResponseObject<RemoveFitnesses>
 export type UpdateFitnessBody = Partial<Fitness> & { _id: string };
 export type UpdateFitnessResponse = CustomErrorResponseObject<boolean>;
 
-export type AddFitnessBody = Fitness;
+export type AddFitnessBody = Partial<Fitness> & { owner: string };
 export type AddFitnessResponse = CustomErrorResponseObject<boolean>;
 
 export type AddFitnessLikeQuery = {

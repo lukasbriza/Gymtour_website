@@ -1,4 +1,3 @@
-import { getAxiosInstance } from "src/libs/_index";
 import {
   AddCoachBody,
   AddCoachLikeQuery,
@@ -13,7 +12,7 @@ import {
   UpdateCoachBody,
   UpdateCoachResponse,
 } from "./_types";
-import { Api } from "src/config/_index";
+import { Api, getAxiosInstance } from "src/config";
 import { handleFetchError } from "../handleFetchError";
 import { AxiosResponse } from "axios";
 import { querySerialize } from "../querySerialize";

@@ -1,6 +1,6 @@
 import React from "react";
-import { BoltProps } from "src/components/_index";
-import { Coach, Fitness } from "src/fetcher/_index";
+import { BoltProps } from "src/components";
+import { Coach, Fitness, User } from "src/fetcher";
 import { Permissions } from "../_types";
 
 export type ContextProviderProps = {
@@ -38,10 +38,10 @@ export type AnimationStateContext = {
 export type UserStateContext = {
   logged: boolean;
   userId: string;
-  userObject: userObjectType | undefined;
+  userObject: User | undefined;
   setLogged: setState<boolean>;
   setUserId: setState<string>;
-  setUserObject: setState<userObjectType | undefined>;
+  setUserObject: setState<User | undefined>;
   hasPermission: (permission: Permissions) => boolean;
 };
 

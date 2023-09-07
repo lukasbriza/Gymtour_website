@@ -1,8 +1,9 @@
 import { FC } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { ContentHeader, Filter, FilteredContent } from "src/components/_index";
+import { ContentHeader, FilteredContent } from "src/components";
 import { FilterContexProvider } from "src/app/_index";
+import { Filter } from "src/forms";
 
 const Fitness: FC = () => {
   const { t } = useTranslation();

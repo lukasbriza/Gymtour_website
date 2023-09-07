@@ -3,7 +3,7 @@ import { BoltProps } from "./_types";
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { gsap } from "gsap";
-import { useCoachFilterContext, useFitnessFilterContext } from "src/hooks/_index";
+import { useCoachFilterContext, useFitnessFilterContext } from "src/hooks";
 import { fadeInBolt, fadeOffBolt, hideBoltCross, showBoltCross } from "src/animations/_index";
 
 export const Bolt: FC<BoltProps> = (props) => {

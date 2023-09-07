@@ -1,4 +1,4 @@
-import { CustomErrorResponseObject } from "src/utils/_index";
+import { CustomErrorResponseObject } from "src/utils";
 
 export type GetFilterRequest = {};
 export type GetFilterResponse = CustomErrorResponseObject<FilterType>;

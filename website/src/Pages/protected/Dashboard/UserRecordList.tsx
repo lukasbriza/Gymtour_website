@@ -1,12 +1,12 @@
 import clsx from "clsx"
 import { BaseSyntheticEvent, FC } from "react"
 import { useTranslation } from "react-i18next"
-import { Button, CancelButton, EditButton, Loading, QuestionHeader } from "src/components/_index"
-import { useModal, usePopUpContext, useServerdataLazy, useUserContext } from "src/hooks/_index"
-import { removeCoaches, removeFitnesses } from "src/fetcher/_index"
+import { Button, CancelButton, EditButton, LoadingWrapper, QuestionHeader } from "src/components"
+import { useModal, usePopUpContext, useServerdataLazy, useUserContext } from "src/hooks"
+import { removeCoaches, removeFitnesses } from "src/fetcher"
 import { useNavigate } from "react-router"
-import { routes } from "src/config/_index"
-import { UserRecordListProps } from "../_types"
+import { routes } from "src/config"
+import { UserRecordListProps } from "./_types"
 
 export const UserRecordList: FC<UserRecordListProps> = (props) => {
     const { loading, fitnesses, coaches } = props
@@ -19,7 +19,6 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
     const { fetchCall: removeFitness } = useServerdataLazy(removeFitnesses)
 
     const handleRecordClick = (id: string, type: "fitness" | "coach") => () => {
-        console.log("called")
         navigate(routes.modify.makeDynamicPath(type, id))
     }
 
@@ -59,6 +58,7 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
 
     const noCoaches = coaches.length === 0
     const noFitnesses = fitnesses.length === 0
+    const showAddCoachButton = coaches.length < 1
 
     if (noCoaches && noFitnesses) {
         return null
@@ -74,35 +74,31 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
                             <tr>
                                 <td colSpan={5}><h2>{t("common.fitness")}</h2></td>
                             </tr>
-                            {
-                                loading ?
-                                    <Loading scale={1.5} className="loading" /> :
-                                    <>
-                                        <tr className="rowHeader">
-                                            <td>{t("common.name")}</td>
-                                            <td>ID</td>
-                                            <td className="numberData">{t("common.watched")}</td>
-                                            <td className="numberData">{t("common.popularity")}</td>
+                            <LoadingWrapper loading={loading} scale={1.5} className="loading">
+                                <tr className="rowHeader">
+                                    <td>{t("common.name")}</td>
+                                    <td>ID</td>
+                                    <td className="numberData">{t("common.watched")}</td>
+                                    <td className="numberData">{t("common.popularity")}</td>
 
-                                        </tr>
-                                        {
-                                            fitnesses.map((item, index) => {
-                                                return (
-                                                    <tr className="record" key={index}>
-                                                        <td>{item.name}</td>
-                                                        <td>{item._id}</td>
-                                                        <td className="numberData">{item.views}</td>
-                                                        <td className="numberData">{item.popularity?.length}</td>
-                                                        <td className="actionData">
-                                                            <EditButton onClick={handleRecordClick(item._id ?? "", "fitness")} />
-                                                            <CancelButton onClick={handleRecordCancel(item._id ?? "", "fitness")} />
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </>
-                            }
+                                </tr>
+                                {
+                                    fitnesses.map((item, index) => {
+                                        return (
+                                            <tr className="record" key={index}>
+                                                <td>{item.name}</td>
+                                                <td>{item._id}</td>
+                                                <td className="numberData">{item.views}</td>
+                                                <td className="numberData">{item.popularity?.length}</td>
+                                                <td className="actionData">
+                                                    <EditButton onClick={handleRecordClick(item._id ?? "", "fitness")} />
+                                                    <CancelButton onClick={handleRecordCancel(item._id ?? "", "fitness")} />
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </LoadingWrapper>
                             <tr>
                                 <td colSpan={5} className={"addButtonRow"} align="center">
                                     <Button
@@ -127,46 +123,43 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
                             <tr>
                                 <td colSpan={5}><h2>{t("common.coach")}</h2></td>
                             </tr>
-                            {
-                                loading ?
-                                    <Loading scale={1.5} className="loading" /> :
-                                    <>
-                                        <tr className="rowHeader">
-                                            <td>{t("common.name")}</td>
-                                            <td>ID</td>
-                                            <td className="numberData">{t("common.watched")}</td>
-                                            <td className="numberData">{t("common.popularity")}</td>
-                                        </tr>
-                                        {
-                                            coaches.map((item, index) => {
-                                                return (
-                                                    <tr className="record" key={index}>
-                                                        <td>{item.name}</td>
-                                                        <td>{item._id}</td>
-                                                        <td className="numberData">{item.views}</td>
-                                                        <td className="numberData">{item.popularity?.length}</td>
-                                                        <td className="actionData">
-                                                            <EditButton onClick={handleRecordClick(item._id ?? "", "coach")} />
-                                                            <CancelButton onClick={handleRecordCancel(item._id ?? "", "coach")} />
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </>
-
+                            <LoadingWrapper loading={loading} scale={1.5} className="loading">
+                                <tr className="rowHeader">
+                                    <td>{t("common.name")}</td>
+                                    <td>ID</td>
+                                    <td className="numberData">{t("common.watched")}</td>
+                                    <td className="numberData">{t("common.popularity")}</td>
+                                </tr>
+                                {
+                                    coaches.map((item, index) => {
+                                        return (
+                                            <tr className="record" key={index}>
+                                                <td>{item.name}</td>
+                                                <td>{item._id}</td>
+                                                <td className="numberData">{item.views}</td>
+                                                <td className="numberData">{item.popularity?.length}</td>
+                                                <td className="actionData">
+                                                    <EditButton onClick={handleRecordClick(item._id ?? "", "coach")} />
+                                                    <CancelButton onClick={handleRecordCancel(item._id ?? "", "coach")} />
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </LoadingWrapper>
+                            {showAddCoachButton &&
+                                <tr>
+                                    <td colSpan={5} className={"addButtonRow"} align="center">
+                                        <Button
+                                            modificationClass={"dashBoardTablecoach"}
+                                            initialClass={"buttonInitial"}
+                                            hoverClass={"buttonHover"}
+                                            text={t("common.add")}
+                                            onClick={handleAddButton("coach")}
+                                        />
+                                    </td>
+                                </tr>
                             }
-                            <tr>
-                                <td colSpan={5} className={"addButtonRow"} align="center">
-                                    <Button
-                                        modificationClass={"dashBoardTablecoach"}
-                                        initialClass={"buttonInitial"}
-                                        hoverClass={"buttonHover"}
-                                        text={t("common.add")}
-                                        onClick={handleAddButton("coach")}
-                                    />
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </section >

@@ -1,7 +1,6 @@
-import { Api } from "src/config/_index";
-import { getAxiosInstance } from "src/libs/_index";
+import { Api, getAxiosInstance } from "src/config";
 import { FilterType, GetFilterResponse } from "./_types";
-import { hasCustomErrorObject } from "src/utils/_index";
+import { hasCustomErrorObject } from "src/utils";
 import { AxiosResponse } from "axios";
 import { handleFetchError } from "../handleFetchError";
 

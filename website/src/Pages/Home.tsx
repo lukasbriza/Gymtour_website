@@ -4,8 +4,8 @@ import clsx from 'clsx'
 import main from '../assets/main.webp'
 import { bigLogoAnimation, showHeader, smallLogoShow } from 'src/animations/_index'
 import { BigLogo, BigText } from 'src/components/SVG/_index'
-import { routes } from 'src/config/_index'
-import { useAnimationContext } from 'src/hooks/_index'
+import { routes } from 'src/config'
+import { useAnimationContext } from 'src/hooks'
 import { useTranslation } from 'react-i18next'
 
 //TODO! - change link for button

@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { fadeIn, fadeOff, hasLoaded, hasUnloaded } from "src/animations/_index";
 import { SearchIcon } from "src/components/SVG/_index";
 import { ImagePreview } from "./ImagePreview";
-import { Tooltip } from "src/components/_index";
+import { Tooltip } from "src/components";
 
 
 export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((props, ref) => {

@@ -1,3 +1,3 @@
-import { Coach, Fitness } from "src/fetcher/_index";
+import { Coach, Fitness } from "src/fetcher";
 
 export type CardProps = (Coach | Fitness) & { type: "coach" | "fitness" };

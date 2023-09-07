@@ -2856,7 +2856,8 @@ body {
 }
 .stringFocusRootError label {
   font-size: 14px !important;
-  color: white !important;
+  font-weight: 700;
+  color: red !important;
 }
 
 .stringInputLabelError {
@@ -2918,6 +2919,10 @@ body {
 
 .disableResize {
   resize: none;
+}
+
+.textAreaError {
+  outline: red 2px solid;
 }
 
 .imageBtnWrapper {
@@ -3121,6 +3126,14 @@ body {
 
 .timeInputRootDisabled .timeInputSelect {
   background: rgba(52, 52, 52, 0.629);
+}
+
+.checkBoxRoot {
+  margin-left: 10px;
+}
+
+.timeInputErrorText {
+  min-height: 30px;
 }
 
 .showEditButton {

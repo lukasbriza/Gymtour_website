@@ -1,9 +1,21 @@
 export const csTranslation = {
   validation: {
-    min: "Minimální délka je {{min}} znaků.",
+    min: "Nesplňuje minimální délku.",
     max: "Je povoleno maximálně {{max}} znaků.",
+    requiredLenght: "Předpokládaná délka znaků je {{lenght}}.",
     required: "Pole je povinné.",
     noBoolean: "Nesprávná hodnota.",
+    noAgreement: "Bez potvrzeného souhlasu nelze aplikaci využívat.",
+    outOfRange: "Ukazatel je mimo povolené rozpětí hodnot.",
+    wrongFormat: "Nesprávný formát.",
+    webFormat: "Nesprávný formát URL. Zkontrolujte zda je formát ve tvaru https://www.nazevstranky.cz.",
+    unAuthorizedCharacter: "Obsahuje nepovolený znak.",
+    textRequired: "Je požadován text.",
+    booleanRequired: "Boolean je požadován",
+    numberRequired: "Je vyžadováno čislo",
+    invalidIN: "Nevalidní IČO",
+    fromBiggerThanTo: "Otevírací doba je později než zavírací doba.",
+    fromToFilled: "Musí být vyplněna obě pole."
   },
   common: {
     about: "O vás",

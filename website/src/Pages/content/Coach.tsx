@@ -1,8 +1,9 @@
 import { FilterContexProvider } from "src/app/_index";
-import { ContentHeader, Filter, FilteredContent } from "src/components/_index";
+import { ContentHeader, FilteredContent } from "src/components";
 import clsx from "clsx";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Filter } from "src/forms";
 
 const Coach: FC = () => {
   const { t } = useTranslation();

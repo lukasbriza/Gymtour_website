@@ -1,9 +1,21 @@
 export const enTranslation = {
   validation: {
-    min: "Minimální délka je {{min}} znaků.",
+    min: "Nesplňuje minimální délku.",
     max: "Je povoleno maximálně {{max}} znaků.",
+    requiredLenght: "Předpokládaná délka znaků je {{lenght}}.",
     required: "Pole je povinné.",
     noBoolean: "Nesprávná hodnota.",
+    noAgreement: "Bez potvrzeného souhlasu nelze aplikaci využívat.",
+    outOfRange: "Ukazatel je mimo povolené rozpětí hodnot.",
+    wrongFormat: "Nesprávný formát.",
+    webFormat: "Nesprávný formát URL. Zkontrolujte zda je formát ve tvaru https://www.nazevstranky.cz.",
+    unAuthorizedCharacter: "Obsahuje nepovolený znak.",
+    textRequired: "Je požadován text.",
+    booleanRequired: "Boolean je požadován",
+    numberRequired: "Je vyžadováno čislo",
+    invalidIN: "Nevalidní IČO",
+    fromBiggerThanTo: "Otevírací doba je později než zavírací doba.",
+    toSmallerThanFrom: "Zavírací doba je dříve jak doba otevírací."
   },
   common: {
     about: "O vás",
@@ -17,6 +29,9 @@ export const enTranslation = {
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
     email: "Email",
     gender: "Pohlaví",
+    general: "Hlavní",
+    equipment: "Vybavení",
+    others: "Ostatní",
     houseNumber: "Č.p.",
     facebook: "Facebook",
     fitness: "Fitness",
@@ -229,6 +244,8 @@ export const enTranslation = {
       filterHeader: "Kategorie",
       filterContent:
         "Z následujících možností zaškrtněte ty, které nejlépe vystihují vaše podnikání. Dle těchto kategorií Vás budou moci uživatelé filtrovat. Povinné položky jsou označeny *.",
+      openingHeader: "Otevírací doba",
+      openingContent: ""
     },
     aboutSection: {
       aboutHeader: "Popis",

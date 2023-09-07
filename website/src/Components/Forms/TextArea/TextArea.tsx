@@ -55,6 +55,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
           "textAreaInput",
           focused && "textAreaInputActive",
           !resize && "disableResize",
+          isError && "textAreaError",
           className,
         ])}
         placeholder={label}

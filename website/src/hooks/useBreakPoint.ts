@@ -1,4 +1,4 @@
-import { useAppContext } from "src/hooks/_index";
+import { useAppContext } from "src/hooks";
 
 export type Breakpoints = ReturnType<typeof useBreakpoint>;
 

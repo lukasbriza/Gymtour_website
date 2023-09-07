@@ -1,4 +1,4 @@
-import { Coach, Fitness } from "src/fetcher/_index";
+import { Coach, Fitness } from "src/fetcher";
 
 export type TransformedProviderObject<T> = Omit<Partial<T>, "pictures"> & {
     pictures: { card: File; detail: { main: File; others: File[] } };
@@ -14,8 +14,8 @@ export type MappedFitnessValues = {
     mainPicture?: File;
     othersPictures?: File[];
 
-    tel?: number;
-    mobile?: number;
+    tel?: string;
+    mobile?: string;
     email?: string;
     web?: string;
     facebook?: string;
@@ -31,8 +31,18 @@ export type MappedFitnessValues = {
     general?: string[];
     others?: string[];
 
+    open: {
+        mon: { from?: string, to?: string },
+        tue: { from?: string, to?: string },
+        wed: { from?: string, to?: string },
+        thu: { from?: string, to?: string },
+        fri: { from?: string, to?: string },
+        sat: { from?: string, to?: string },
+        sun: { from?: string, to?: string }
+    },
+
 } & Partial<
-    Omit<Fitness, "contact" | "filters" | "pictures" | "agreement" | "topped" | "approved" | "views" | "popularity">
+    Omit<Fitness, "contact" | "filters" | "pictures" | "agreement" | "topped" | "approved" | "views" | "popularity" | "open" | "owner">
 >;
 
 export type MappedCoachValues = {
@@ -44,8 +54,8 @@ export type MappedCoachValues = {
     mainPicture?: File;
     othersPictures?: File[];
 
-    tel?: number;
-    mobile?: number;
+    tel?: string;
+    mobile?: string;
     email?: string;
     web?: string;
     facebook?: string;

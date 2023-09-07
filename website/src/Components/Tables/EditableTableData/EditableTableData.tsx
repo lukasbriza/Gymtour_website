@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { EditableTableDataProps } from "./_types";
 import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
-import { OverflowTextTooltip } from "src/components/_index";
+import { OverflowTextTooltip } from "src/components";
 
 export const EditableTableData: FC<EditableTableDataProps> = (props) => {
     const { children, name, editInputClass, ...otherProps } = props

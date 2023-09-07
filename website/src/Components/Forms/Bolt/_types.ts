@@ -1,4 +1,5 @@
-import { FilterVariants } from "src/components/_index";
+import { FilterVariants } from "src/forms";
+
 
 export type BoltProps = {
   text: string;

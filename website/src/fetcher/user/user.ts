@@ -1,4 +1,3 @@
-import { getAxiosInstance } from "src/libs/_index";
 import {
   AddUser,
   AddUserResponse,
@@ -10,7 +9,7 @@ import {
   User,
 } from "./_types";
 import { AxiosResponse } from "axios";
-import { Api } from "src/config/_index";
+import { Api, getAxiosInstance } from "src/config";
 import { handleFetchError } from "../handleFetchError";
 import { querySerialize } from "../querySerialize";
 

@@ -1,6 +1,6 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import { TimeInputProps, Option } from "./_types";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { BasicSelect, CheckboxSquared, HelperText } from "@lukasbriza/lbui-lib";
 import { Arrow } from "../Select/Select";
 import clsx from "clsx";
@@ -12,7 +12,7 @@ const generateHours = () => {
     )
 }
 
-const getMinutes = () => {
+const generateMinutes = () => {
     const options = Array(60).fill({ value: "", key: "" })
     return options.map((_, index) => ({ value: formateOnMinTwoDigits(index), key: `${String(index)}minute` }))
 }
@@ -24,11 +24,20 @@ const formateOnMinTwoDigits = (number: number): string => {
     return `0${number}`
 }
 
+const getMinutesHoursOption = (value: string, options: Option[], type: "minutes" | "hours"): Option | undefined => {
+    if (value === "") {
+        return undefined
+    }
+    const targetValue = value.split(":")[type === "minutes" ? 1 : 0]
+    const option = options.find(({ value }) => value === targetValue)
+    return option
+}
+
+
 const maskValue = (value: Option | (Option | undefined)[] | undefined) => {
     if (value && Array.isArray(value)) {
         const innerValue: (Option | undefined)[] = value
         const transformedValue: (string | null)[] = Array(2).fill(null)
-
         if (innerValue[0]?.value !== null) {
             transformedValue[0] = innerValue[0]?.value ?? ""
         }
@@ -37,10 +46,10 @@ const maskValue = (value: Option | (Option | undefined)[] | undefined) => {
         }
 
         if (innerValue[0] === undefined || innerValue[0].value === null) {
-            transformedValue[0] = null//"01"
+            transformedValue[0] = null
         }
         if (innerValue[1] === undefined || innerValue[1].value === null) {
-            transformedValue[1] = null//"00"
+            transformedValue[1] = null
         }
         if (innerValue[0]?.value?.length === 1) {
             transformedValue[0] = `0${innerValue[0].value}`
@@ -57,8 +66,8 @@ const maskValue = (value: Option | (Option | undefined)[] | undefined) => {
     return ""
 }
 
-const transformValue = (maskeDvalue: string | null, disable?: boolean): ReactNode => {
-    return <div className="timeInputValue">{(disable || maskeDvalue === "") ? "--:--" : maskeDvalue}</div>
+const transformValue = (maskedValue: string | null, disable?: boolean): ReactNode => {
+    return <div className="timeInputValue">{(disable || maskedValue === "") ? "--:--" : maskedValue}</div>
 }
 
 const optionsFromDefaultValue = (options: Option[][], defaultValue: string | null | undefined) => {
@@ -91,20 +100,20 @@ export const TimeInput: FC<TimeInputProps> = (props) => {
 
     const nameFrom = `${name}.from`
     const nameTo = `${name}.to`
-    const hourOptions = generateHours()
-    const minutesOptions = getMinutes()
+    const hourOptions = useMemo(() => generateHours(), [])
+    const minutesOptions = useMemo(() => generateMinutes(), [])
     const { register, setValue } = useFormContext()
 
     const handleDisable = () => {
         const newValue = !disable
         setDisabled(newValue)
-        if (newValue) {
-            setValue(nameFrom, "")
-            setValue(nameTo, "")
+        if (!newValue) {
+            setValue(nameFrom, "08:00")
+            setValue(nameTo, "16:00")
         }
     }
 
-    const selectOptions = {
+    const selectOptions = (path: "from" | "to") => ({
         icon: () => {
             return (
                 <div className="timeInputIcon">
@@ -118,7 +127,16 @@ export const TimeInput: FC<TimeInputProps> = (props) => {
             closeOnSelect: false,
             clearable: false
         },
-        valueTransform: (value: Option | (Option | undefined)[] | undefined) => transformValue(maskValue(value), disable),
+        valueTransform: (value: Option | (Option | undefined)[] | undefined) => {
+
+            if (Array.isArray(value) && value.filter((val) => val === undefined).length === 2) {
+                const vlaueToMask = path === "from" ?
+                    [getMinutesHoursOption("08:00", hourOptions, "hours"), getMinutesHoursOption("08:00", minutesOptions, "minutes")] :
+                    [getMinutesHoursOption("16:00", hourOptions, "hours"), getMinutesHoursOption("16:00", minutesOptions, "minutes")]
+                return transformValue(maskValue(vlaueToMask), disable)
+            }
+            return transformValue(maskValue(value), disable)
+        },
         styleClass: {
             root: clsx(["timeInputRoot", disable && "timeInputRootDisabled"]),
             focusRoot: "arrowActiveState",
@@ -130,10 +148,10 @@ export const TimeInput: FC<TimeInputProps> = (props) => {
             icon: "icon"
         },
         disable: disable
-    }
+    })
 
     useEffect(() => {
-        if (defaultValue?.from === null && defaultValue?.to === null) {
+        if (defaultValue?.from === undefined && defaultValue?.to === undefined) {
             setDisabled(true)
         }
     }, [defaultValue?.from, defaultValue?.to])
@@ -142,26 +160,31 @@ export const TimeInput: FC<TimeInputProps> = (props) => {
         <div className={"timeInputWrapper"}>
             <div className={"timeInputLabel"}>
                 {label}
-                {requiredStar && <div className={clsx("requiredStar", "timeInputRequiredStar")}>*</div>}
+                {requiredStar && <div className={clsx(["requiredStar", "timeInputRequiredStar"])}>*</div>}
             </div>
             <HelperText
                 position={"bottom"}
                 text={helperText}
                 errorText={errorText}
                 isError={isError}
-                show={true}
+                show
+                styleClass={{
+                    text: "timeInputErrorText"
+                }}
             >
                 <div className={"timeInputInputsWrapper"}>
                     <BasicSelect
                         defaultValue={defaultValue?.from ? optionsFromDefaultValue([hourOptions, minutesOptions], defaultValue.from) : undefined}
-                        {...selectOptions}
+                        {...selectOptions("from")}
                         {...register(nameFrom)}
+
                         options={[hourOptions, minutesOptions]}
                     />
                     <BasicSelect
                         defaultValue={defaultValue?.to ? optionsFromDefaultValue([hourOptions, minutesOptions], defaultValue.to) : undefined}
-                        {...selectOptions}
+                        {...selectOptions("to")}
                         {...register(nameTo)}
+
                         options={[hourOptions, minutesOptions]}
                     />
                 </div>
@@ -170,6 +193,7 @@ export const TimeInput: FC<TimeInputProps> = (props) => {
                 <CheckboxSquared
                     checked={disable}
                     styleClass={{
+                        root: "checkBoxRoot",
                         text: "checkboxLabel",
                         checkBox: "checkboxClass",
                         checker: "checkerClass",

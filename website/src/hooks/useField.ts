@@ -9,6 +9,7 @@ export const useField = () => {
     return {
       register: register,
       isError: errors[name] !== undefined,
+      errorText: errors[name]?.message ? errors[name]?.message?.toString() : undefined,
       name: name,
       defaultValue: customDefaults ? customDefaults : defaultValues && defaultValues[name],
     };
