@@ -17,7 +17,7 @@ export const MultipleImageInput: FC<MultipleImageInputProps> = forwardRef<Impera
 
     const [components, setComponents] = useState<ReactElement[]>([])
 
-    const handleChange = (file: File) => {
+    const handleChange = (file?: File) => {
         if (file && inputRef.current) {
             const newFile = file
             const id = Math.random()

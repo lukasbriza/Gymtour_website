@@ -5,6 +5,7 @@ import { routes } from "src/config"
 import { AboutSection, Contactsection, HeaderSection, PictureSection, SubmitSection, TermsSection } from "../shared/modify"
 import { FitnessInformationSection } from "./fitness/FitnessInformationSection"
 import { ModifyFitnessFrormProps } from "../_types"
+import { onPictureRemove } from "../shared/modify/utils"
 
 export const ModifyFitnessForm: FC<ModifyFitnessFrormProps> = (props) => {
     const { generalOptions, othersOptions, regionOptions, equipmentOptions } = props
@@ -13,6 +14,7 @@ export const ModifyFitnessForm: FC<ModifyFitnessFrormProps> = (props) => {
     const { id } = useParams<{ id: string }>();
 
     const handleBackClick = () => navigate(routes.dashboard.path)
+
 
     return (
         <section>
@@ -25,7 +27,7 @@ export const ModifyFitnessForm: FC<ModifyFitnessFrormProps> = (props) => {
             />
             <Contactsection />
             <AboutSection />
-            <PictureSection />
+            <PictureSection onPictureRemove={onPictureRemove} />
             <TermsSection />
             <SubmitSection onBackClick={handleBackClick} submitText={t(id ? "common.modify" : "common.send")} />
         </section>

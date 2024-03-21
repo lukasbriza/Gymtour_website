@@ -5,6 +5,7 @@ import { routes } from "src/config/mainConfiguration"
 import { ModifyCoachFormProps } from "../_types"
 import { AboutSection, Contactsection, HeaderSection, PictureSection, SubmitSection, TermsSection } from "../shared/modify"
 import { CoachInformationSection } from "./coach/CoachInformationSection"
+import { onPictureRemove } from "../shared/modify/utils"
 
 export const ModifyCoachForm: FC<ModifyCoachFormProps> = (props) => {
     const { type, regionOptions, othersOptions, genderOptions, specializationOptions } = props
@@ -25,7 +26,7 @@ export const ModifyCoachForm: FC<ModifyCoachFormProps> = (props) => {
             />
             <Contactsection />
             <AboutSection />
-            <PictureSection />
+            <PictureSection onPictureRemove={onPictureRemove} />
             <TermsSection />
             <SubmitSection onBackClick={handleBackClick} submitText={t(id ? "common.modify" : "common.send")} />
         </section>

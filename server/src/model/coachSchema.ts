@@ -39,10 +39,6 @@ const coachSchema = new Schema<Coach>({
   priceLevel: { type: Number, required: true },
   contact: contactSchema,
   filters: filtersSchema,
-  descriptionBasic: {
-    type: String,
-    required: true,
-  },
   descriptionFull: {
     type: String,
     required: false,

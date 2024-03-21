@@ -20,6 +20,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
     resize = false,
     onChange,
     onBlur,
+    defaultValue,
     ...otherProps
   } = props;
   const [focused, setFocused] = useState<boolean>();
@@ -27,7 +28,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange?.(e);
   };
-
   return (
     <HelperText
       styleClass={{

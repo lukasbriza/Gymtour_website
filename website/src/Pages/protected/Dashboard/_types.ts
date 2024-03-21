@@ -4,6 +4,7 @@ export type UserRecordListProps = {
   loading: boolean;
   fitnesses: Fitness[];
   coaches: Coach[];
+  refetch: () => void
 };
 
 export type LikedObject = { _id: string; name: string; town: number; region: number };

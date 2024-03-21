@@ -15,7 +15,8 @@ export const csTranslation = {
     numberRequired: "Je vyžadováno čislo",
     invalidIN: "Nevalidní IČO",
     fromBiggerThanTo: "Otevírací doba je později než zavírací doba.",
-    fromToFilled: "Musí být vyplněna obě pole."
+    fromToFilled: "Musí být vyplněna obě pole.",
+    invalidFileFormat: "Nevalidní formát souboru"
   },
   common: {
     about: "O vás",
@@ -28,8 +29,10 @@ export const csTranslation = {
     continue: "Pokračovat",
     dataProcessingAgreement: "Souhlas se zpracováním osobních údajů",
     email: "Email",
+    error: "Chyba",
     gender: "Pohlaví",
     general: "Hlavní",
+    IN: "Identifikační číslo",
     equipment: "Vybavení",
     others: "Ostatní",
     houseNumber: "Č.p.",
@@ -40,12 +43,14 @@ export const csTranslation = {
     login: "Přihlásit",
     mobile: "Mobil",
     name: "Jméno",
+    fitnessName: "Jméno fitness",
     password: "Heslo",
     popularity: "Popularita",
     remove: "Odstranit",
     register: "Registrovat",
     region: "Region",
     specialization: "Specializace",
+    success: "Úspěch",
     surname: "Příjmení",
     street: "Ulice",
     town: "Město",
@@ -198,8 +203,8 @@ export const csTranslation = {
         questionContent: "Opravdu chcete smazat záznam? Pokud ano pokračujte, nebo se vraťte zpět.",
       },
       popup: {
-        removeFitness: "Fitness s {{id}} bylo odstraněno.",
-        removeCoach: "Coach s {{id}} byl odstraněn.",
+        removeFitness: "Fitness s ID: {{id}} bylo odstraněno.",
+        removeCoach: "Coach s ID: {{id}} byl odstraněn.",
         removeCoachFailure: "Coache se nepodařilo odstranit. Kontaktujte podporu.",
         removeFitnessFailure: "Fitness se nepodařilo odstranit. Kontaktujte podporu.",
       },
@@ -266,6 +271,11 @@ export const csTranslation = {
       othersPictureContent:
         "Přidejte další fotky, které si budou moci potenciální klienti prohlédnout v galerii profilu. Obrázek bude transformován do poměru 1:2 (300px x 600px).  Doporučujeme tedy nahrát fotku již v tomto formátu.",
     },
+    popUp: {
+      successTextFitness: "Vaše fitness bylo přidáno.",
+      successTextCoach: "Coach byl přidán.",
+      errorUserIdText: "nebylo nalezeno žádné uživatelské ID."
+    }
   },
 };
 

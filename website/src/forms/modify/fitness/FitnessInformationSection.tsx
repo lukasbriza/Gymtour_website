@@ -37,7 +37,7 @@ export const FitnessInformationSection: FC<FitnessInformationSectionProps> = (pr
             name: `open.${day}`,
             label: `${t(dayLabel as any)} ${t("common.fromTo")}:`,
             checkboxLabel: t("common.closed"),
-            requiredStar: true,
+            requiredStar: false,
             defaultValue: open ? open[day as keyof typeof open] : undefined,
             isError: errors.open && errors.open[day as keyof typeof errors.open] !== undefined,
         }
@@ -60,7 +60,13 @@ export const FitnessInformationSection: FC<FitnessInformationSectionProps> = (pr
                 <StringInput
                     {...buildField("name")}
                     className="fitnessName"
-                    label={t("common.name")}
+                    label={t("common.fitnessName")}
+                    requiredStar
+                />
+                <StringInput
+                    {...buildField("IN")}
+                    className="IN"
+                    label={t("common.IN")}
                     requiredStar
                 />
                 <SelectWithHelper
@@ -130,13 +136,6 @@ export const FitnessInformationSection: FC<FitnessInformationSectionProps> = (pr
                 />
                 <section className="filterInformationInputs">
                     <MultipleSelectWithHelper
-                        {...buildField("general", defaultGenerals)}
-                        label={t("common.general")}
-                        className={clsx(["generalsSelect", "infoSelect"])}
-                        options={mappedGeneralOptions}
-                        requiredStar
-                    />
-                    <MultipleSelectWithHelper
                         {...buildField("equipment", defaultEquipment)}
                         label={t("common.equipment")}
                         className={clsx(["equipmentSelect", "infoSelect"])}
@@ -144,11 +143,18 @@ export const FitnessInformationSection: FC<FitnessInformationSectionProps> = (pr
                         requiredStar
                     />
                     <MultipleSelectWithHelper
+                        {...buildField("general", defaultGenerals)}
+                        label={t("common.general")}
+                        className={clsx(["generalsSelect", "infoSelect"])}
+                        options={mappedGeneralOptions}
+
+                    />
+                    <MultipleSelectWithHelper
                         {...buildField("others", defaultOthers)}
                         label={t("common.others")}
                         className={clsx(["othersSelect", "infoSelect"])}
                         options={mappedOthersOptions}
-                        requiredStar
+
                     />
                 </section>
             </section>

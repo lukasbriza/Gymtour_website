@@ -3,7 +3,7 @@ import { requiredString, requiredStringArray } from "./validators";
 
 //DELETE
 const deleteImagesSchema = object({
-  id: requiredStringArray(),
+  ids: requiredStringArray(),
 });
 
 //GET

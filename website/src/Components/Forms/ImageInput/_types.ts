@@ -1,26 +1,22 @@
-import { Noop } from "react-hook-form";
+import { FocusEvent } from "react";
 
 export type ImageInputProps = {
   id?: string;
-  onBlur?: Noop;
   className?: string;
   value?: File;
   name: string;
   allowedFileTypes?: string;
   showPreview?: boolean;
   tooltipPlace?: "top" | "left" | "right" | "bottom";
+  errorText?: string;
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: File | undefined) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   onStart?: () => void;
   onSuccess?: (file: File) => void;
   onUnsupportedFileType?: () => void;
   onNoFile?: () => void;
-  onChange?: (file: File) => void;
   onFileRemove?: (file: File) => void;
-};
-
-export type ImperativeImageInput = {
-  current: HTMLInputElement | null;
-  file: File | null;
-  removeFile: () => void;
 };
 
 export type ImagePreviewProps = {
@@ -31,7 +27,7 @@ export type ImagePreviewProps = {
 
 export type MultipleImageInputProps = {
   name: string;
-  onBlur: Noop;
+  onBlur: () => void;
   value?: File[];
   onChange?: (files: File[]) => void;
   className?: string;

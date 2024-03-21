@@ -1,4 +1,4 @@
-import { GetImage, GetImageResponse, PostImage } from "./_types";
+import { GetImage, GetImageResponse, PostImage, PostImages, PostImagesResponse, RemoveImages, RemoveImagesResponse } from "./_types";
 import { getFetchAdress } from "src/utils";
 import { Api, getAxiosInstance } from "src/config";
 import { AxiosResponse } from "axios";
@@ -20,21 +20,49 @@ export const getImage = (props?: GetImage) => {
   };
 };
 
-export const postImage = (props?: PostImage) => {
-  const { image, key } = props ?? {}
+export const postImage = (props?: PostImages) => {
+  const { card, main, others } = props ?? {}
   const instance = getAxiosInstance();
+
   return async () => {
     try {
-
       const data = new FormData()
-
-      const response = await instance.post(getFetchAdress() + Api.ApiImages, {}, {
+      card && data.append("card", card)
+      main && data.append("main", main)
+      if (others) {
+        others.forEach((file) => {
+          data.append("others", file)
+        })
+      }
+      const response = await instance.post<any, AxiosResponse<PostImagesResponse>>(getFetchAdress() + Api.ApiImages, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-    } catch (error: unknown) {
+      const { card: cardResult, main: mainResult, others: othersResult } = response.data.data ?? {}
 
+      return {
+        card: cardResult?.[0].id,
+        detail: {
+          main: mainResult?.[0].id,
+          others: othersResult?.map((res) => res.id) ?? []
+        }
+      }
+    } catch (error: unknown) {
+      handleFetchError<PostImage>(error as PostImagesResponse)
+    }
+  }
+}
+
+export const removeImage = (props?: RemoveImages) => {
+  const instance = getAxiosInstance();
+
+  return async () => {
+    try {
+      const response = await instance.delete<any, AxiosResponse<RemoveImagesResponse>>(getFetchAdress() + Api.ApiImages, { data: { ids: props?.ids } })
+      return response.data
+    } catch (error) {
+      handleFetchError<boolean>(error as RemoveImagesResponse);
     }
   }
 }

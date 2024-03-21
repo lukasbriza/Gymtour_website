@@ -136,7 +136,7 @@ export type Fitness = {
   street: string;
   town: number;
   region: number;
-  IN: number;
+  IN: string;
   priceLevel: number;
   contact: Contact;
   filters: FitnessFilter;

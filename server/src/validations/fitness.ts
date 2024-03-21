@@ -1,5 +1,6 @@
 import { InferType, object, ValidationError, lazy, array } from "yup";
 import {
+  INValidation,
   agreementValidation,
   contactValidation,
   descriptionValidation,
@@ -16,9 +17,6 @@ import {
   requiredString,
   requiredStringArray,
 } from "./validators";
-import { validationConfig } from "../config";
-
-const maxLB = validationConfig.maxLengthBase;
 
 //GET
 const getFitnessSchema = object({
@@ -37,7 +35,7 @@ const postFitnessShema = object({
   street: requiredString(),
   town: requiredNumber(99),
   region: requiredNumber(99),
-  IN: requiredNumber(),
+  IN: INValidation(true),
   priceLevel: requiredNumber(3),
   contact: contactValidation(),
   filters: object({
@@ -46,8 +44,7 @@ const postFitnessShema = object({
     others: optionalStringArray(),
   }),
   open: openHoursValidation(),
-  descriptionBasic: requiredString(maxLB),
-  descriptionFull: descriptionValidation(false),
+  descriptionFull: descriptionValidation(true),
   pictures: object({
     card: requiredString(),
     detail: object({
@@ -76,7 +73,7 @@ const putFitnessSchema = object({
   street: optionalString(),
   town: optionalNumber(99),
   region: optionalNumber(99),
-  IN: optionalNumber(),
+  IN: INValidation(false),
   priceLevel: optionalNumber(3),
   contact: optionalContactValidation(),
   filters: object({
@@ -85,7 +82,6 @@ const putFitnessSchema = object({
     others: optionalStringArray(),
   }).optional(),
   open: optionalOpenHoursValidation(),
-  descriptionBasic: optionalString(maxLB),
   descriptionFull: descriptionValidation(false),
   pictures: object({
     card: optionalString(),

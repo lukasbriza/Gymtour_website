@@ -198,8 +198,8 @@ export const enTranslation = {
         questionContent: "Opravdu chcete smazat záznam? Pokud ano pokračujte, nebo se vraťte zpět.",
       },
       popup: {
-        removeFitness: "Fitness s {{id}} bylo odstraněno.",
-        removeCoach: "Coach s {{id}} byl odstraněn.",
+        removeFitness: "Fitness s ID: {{id}} bylo odstraněno.",
+        removeCoach: "Coach s ID: {{id}} byl odstraněn.",
         removeCoachFailure: "Coache se nepodařilo odstranit. Kontaktujte podporu.",
         removeFitnessFailure: "Fitness se nepodařilo odstranit. Kontaktujte podporu.",
       },

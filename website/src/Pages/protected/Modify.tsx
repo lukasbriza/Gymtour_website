@@ -68,8 +68,17 @@ const Modify: FC = () => {
                         },
                     };
 
+                    let pictureIds = {
+                        [pictureObject.card.name]: pics.card,
+                        [pictureObject.detail.main.name]: pics.detail.main,
+                    }
+
+                    others.forEach((file, i) => {
+                        pictureIds[file.name] = pics.detail.others[i]
+                    })
+
                     const { pictures, ...othervalues } = value.data[0];
-                    setProviderObject({ ...othervalues, pictures: pictureObject });
+                    setProviderObject({ ...othervalues, pictures: pictureObject, pictureIds });
                 }
             });
         }

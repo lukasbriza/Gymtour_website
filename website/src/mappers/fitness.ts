@@ -17,13 +17,14 @@ const mapDefaultFitnessValues = (data?: TransformedProviderObject<Fitness>): Map
         delete dataCopy.topped;
     }
 
-    const { agreement, contact, filters, pictures, _id, name, street, town, region, IN, priceLevel, open } =
+    const { agreement, contact, filters, pictures, _id, name, street, town, region, IN, priceLevel, open, descriptionFull, pictureIds } =
         dataCopy ?? {};
 
     return {
         _id: _id ?? "",
         name: name ?? "",
-        street: street ?? "",
+        street: street?.split(" ")[0] ?? "",
+        houseNumber: street?.split(" ")[1] ?? "",
         town: town ?? undefined,
         region: region ?? undefined,
         IN: IN ?? undefined,
@@ -32,6 +33,7 @@ const mapDefaultFitnessValues = (data?: TransformedProviderObject<Fitness>): Map
         cardPicture: pictures?.card ? pictures?.card : undefined,
         mainPicture: pictures?.detail.main ? pictures?.detail.main : undefined,
         othersPictures: pictures?.detail.others ? pictures?.detail.others : [],
+        pictureIds,
 
         tel: contact?.tel ? String(contact?.tel) : "",
         mobile: contact?.mobile ? String(contact?.mobile) : "",
@@ -42,6 +44,7 @@ const mapDefaultFitnessValues = (data?: TransformedProviderObject<Fitness>): Map
         google: contact?.google ?? "",
         instagram: contact?.instagram ?? "",
         youtube: contact?.youtube ?? "",
+
         open: {
             mon: { from: open?.mon.from ?? undefined, to: open?.mon.to ?? undefined },
             tue: { from: open?.tue.from ?? undefined, to: open?.tue.to ?? undefined },
@@ -56,6 +59,8 @@ const mapDefaultFitnessValues = (data?: TransformedProviderObject<Fitness>): Map
         general: filters?.general ?? [],
         others: filters?.others ?? [],
 
+        descriptionFull,
+
         terms: agreement?.terms.status ?? false,
         dataProcessingForPropagation: agreement?.dataProcessingForPropagation.status ?? false,
     };
@@ -63,12 +68,12 @@ const mapDefaultFitnessValues = (data?: TransformedProviderObject<Fitness>): Map
 
 const mapFitnessValuesToApi = (
     fitness: Omit<MappedFitnessValues, "cardPicture" | "mainPicture" | "othersPictures"> &
-    { owner: string } &
     { pictures: Fitness["pictures"] }
 ): AddFitnessBody => {
     const {
         name,
         street,
+        houseNumber,
         town,
         region,
         IN,
@@ -89,26 +94,30 @@ const mapFitnessValuesToApi = (
         descriptionFull,
         terms,
         dataProcessingForPropagation,
-        owner
+        pictures,
+        owner,
+        _id
     } = fitness
-
     return {
+        _id: emptyStringToNull(_id) ?? undefined,
+        owner: emptyStringToNull(owner) ?? undefined,
         name,
-        street,
+        street: houseNumber && street ? `${street} ${houseNumber}` : street,
         town,
         region,
-        IN,
+        IN: emptyStringToNull(IN) ?? undefined,
         priceLevel,
+        pictures,
         contact: {
             email: email ?? "",
-            tel: Number(tel) ?? undefined,
-            mobile: Number(mobile) ?? undefined,
-            web,
-            facebook,
-            twitter,
-            google,
-            instagram,
-            youtube
+            tel: typeof emptyStringToNull(tel) === "string" ? Number(tel) : null,
+            mobile: typeof emptyStringToNull(mobile) === "string" ? Number(tel) : null,
+            web: emptyStringToNull(web),
+            facebook: emptyStringToNull(facebook),
+            twitter: emptyStringToNull(twitter),
+            google: emptyStringToNull(google),
+            instagram: emptyStringToNull(instagram),
+            youtube: emptyStringToNull(youtube)
         },
         filters: {
             equipment: equipment ?? [],
@@ -129,12 +138,10 @@ const mapFitnessValuesToApi = (
             terms: { status: terms ?? false, awarded: new Date() },
             dataProcessingForPropagation: { status: dataProcessingForPropagation ?? false, awarded: new Date() }
         },
-        owner: owner,
-        approved: false,
     }
 }
 
 export const fitnessMapper = {
     apiToForm: mapDefaultFitnessValues,
-    formToApiNew: mapFitnessValuesToApi
+    formToApi: mapFitnessValuesToApi
 }

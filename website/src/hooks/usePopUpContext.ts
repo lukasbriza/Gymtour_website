@@ -24,6 +24,7 @@ export const usePopUpContext = () => {
       enterDirection: "up",
       leaveDirection: "up",
       className: clsx(["popupBase", className]),
+      timeoutOption: { enable: false },
       ...otherProps,
     });
   };

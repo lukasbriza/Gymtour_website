@@ -24,9 +24,10 @@ export const requiredMinMaxValidation = (t: TFunction, min: number, max: number)
 };
 
 export const requiredBooleanValidation = (t: TFunction, message?: string) => {
-  return boolean().equals([true], message ?? t("validation.required"))
-    .required(t("validation.required")).typeError(t("validation.booleanRequired"))
-};
+  return boolean().test("requiredValidation", message ?? t("validation.required"), (value) => {
+    return value
+  })
+}
 
 export const optionalBooleanValidation = (t: TFunction, message?: string) => {
   return boolean().optional().typeError(t("validation.booleanRequired"))
@@ -43,8 +44,8 @@ export const houseNumberValidation = (t: TFunction, maxLenght: number) => {
   }).max(maxLenght, t("validation.max", { max: maxLenght }))
 }
 
-export const multipleChoiceFilterValidation = () => {
-  return array().of(string()).min(0)
+export const multipleChoiceFilterValidation = (t: TFunction, required = false) => {
+  return required ? array().of(string()).min(1, t("validation.required")).required(t("validation.required")) : array().of(string()).min(0).optional()
 }
 
 export const emailValidation = (t: TFunction) => {
@@ -72,7 +73,7 @@ export const telValidation = (t: TFunction) => {
       return reg.test(value)
     }
     return true
-  }).length(9, t("validation.requiredLenght", { lenght: 9 })).optional()
+  }).max(9, t("validation.requiredLenght", { lenght: 9 })).optional()
 }
 
 export const fullDescriptionValidation = (t: TFunction) => {
@@ -137,7 +138,7 @@ export const OpenObject = (t: TFunction) => {
 }
 
 export const inValidation = (t: TFunction) => {
-  return number().required(t("validation.required"))
+  return string().required(t("validation.required"))
     .test("inValidation", t("validation.invalidIN"), (value) => {
       const stringValue = String(value)
       const parsed = stringValue.split("")
@@ -155,7 +156,6 @@ export const inValidation = (t: TFunction) => {
       })
 
       let rest = temp % 11
-
       if (lastNumber) {
         if (rest === 0 && Number(lastNumber) === 1) {
           return true

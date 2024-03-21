@@ -16,6 +16,7 @@ import {
 } from "./_types";
 import { querySerialize } from "../querySerialize";
 import { Api, getAxiosInstance } from "src/config";
+import { removeImage } from "../image/image";
 
 export const getFitnesses = (query?: FitnesFilterQuery) => {
   const instance = getAxiosInstance();
@@ -60,8 +61,20 @@ export const addFitness = (body?: AddFitnessBody) => {
   return async () => {
     try {
       const response = await instance.post<any, AxiosResponse<AddFitnessResponse>>(Api.ApiFitness, { ...body });
+
+      if (response.data.errorMap.length > 0) {
+        throw response.data
+      }
+
       return response.data;
     } catch (error: unknown) {
+      const { card, detail } = body?.pictures ?? {}
+      const { main, others } = detail ?? {}
+      let removeArray: string[] = []
+      card && removeArray.push(card)
+      main && removeArray.push(main)
+      others && others.length > 0 && others.forEach((el) => removeArray.push(el))
+      await removeImage({ ids: removeArray })()
       handleFetchError<boolean>(error as AddFitnessResponse);
     }
   };

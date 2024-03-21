@@ -4,7 +4,7 @@ import { User } from "src/fetcher";
 
 const initialstate: UserStateContext = {
     logged: false,
-    userId: "",
+    userId: "64288f2967746143ec840e34",
     userObject: undefined,
     setLogged: () => { throw new Error('Context does not have a matching provider!') },
     setUserId: () => { throw new Error('Context does not have a matching provider!') },

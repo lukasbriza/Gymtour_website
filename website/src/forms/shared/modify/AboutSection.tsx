@@ -10,7 +10,6 @@ export const AboutSection: FC = () => {
   const { t } = useTranslation();
   const { buildField } = useField();
   const {
-    formState: { errors },
   } = useFormContext<MappedCoachValues | MappedFitnessValues>();
   const { register, ...otherProps } = buildField("descriptionFull");
 

@@ -45,8 +45,7 @@ const postCoachSchema = object({
     specialization: requiredStringArray(),
     others: optionalStringArray(),
   }),
-  descriptionBasic: requiredString(maxLB),
-  descriptionFull: descriptionValidation(false),
+  descriptionFull: descriptionValidation(true),
   pictures: object({
     card: requiredString(),
     detail: object({
@@ -83,7 +82,6 @@ const putCoachSchema = object({
     specialization: optionalStringArray(),
     others: optionalStringArray(),
   }).optional(),
-  descriptionBasic: optionalString(maxLB),
   descriptionFull: descriptionValidation(false),
   pictures: object({
     card: optionalString(),

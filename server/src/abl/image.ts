@@ -27,6 +27,7 @@ export const getMeta = async (id: string): Promise<CustomResponse<GridFSFile[]>>
 
 export const uploadImage = async (req: Request, res: Response): UploadImageResponsePromise => {
   const response = buildResponse<ImageFieldsObject>();
+  console.log(req)
   try {
     const upload = uploadFilesMiddleware([...uploadFields]);
     await upload(req, res);

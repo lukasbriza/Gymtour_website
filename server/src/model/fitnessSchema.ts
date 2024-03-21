@@ -16,32 +16,32 @@ const contactSchema = {
 
 const openHoursSchema = {
   mon: {
-    from: { type: String, required: true, default: null },
-    to: { type: String, required: true, default: null },
+    from: { type: String, default: null },
+    to: { type: String, default: null },
   },
   tue: {
-    from: { type: String, required: true, default: null },
-    to: { type: String, required: true, default: null },
+    from: { type: String, default: null },
+    to: { type: String, default: null },
   },
   wed: {
-    from: { type: String, required: true, default: null },
-    to: { type: String, required: true, default: null },
+    from: { type: String, default: null },
+    to: { type: String, default: null },
   },
   thu: {
-    from: { type: String, required: true, default: null },
-    to: { type: String, required: true, default: null },
+    from: { type: String, default: null },
+    to: { type: String, default: null },
   },
   fri: {
-    from: { type: String, required: true, default: null },
-    to: { type: String, required: true, default: null },
+    from: { type: String, default: null },
+    to: { type: String, default: null },
   },
   sat: {
-    from: { type: String, required: true, default: null },
-    to: { type: String, required: true, default: null },
+    from: { type: String, default: null },
+    to: { type: String, default: null },
   },
   sun: {
-    from: { type: String, required: true, default: null },
-    to: { type: String, required: true, default: null },
+    from: { type: String, default: null },
+    to: { type: String, default: null },
   },
 };
 
@@ -65,15 +65,11 @@ const fitnessSchema = new Schema<Fitness>({
   street: { type: String, required: true },
   town: { type: Number, required: true },
   region: { type: Number, required: true },
-  IN: { type: Number, required: true },
+  IN: { type: String, required: true },
   priceLevel: { type: Number, required: true },
   contact: contactSchema,
   filters: filtersSchema,
   open: openHoursSchema,
-  descriptionBasic: {
-    type: String,
-    required: true,
-  },
   descriptionFull: {
     type: String,
     required: false,

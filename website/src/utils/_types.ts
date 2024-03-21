@@ -2,6 +2,9 @@ import { Coach, Fitness } from "src/fetcher";
 
 export type TransformedProviderObject<T> = Omit<Partial<T>, "pictures"> & {
     pictures: { card: File; detail: { main: File; others: File[] } };
+    pictureIds: {
+        [name: string]: string
+    }
 };
 
 export type CustomErrorResponseObject<T> = {
@@ -31,6 +34,8 @@ export type MappedFitnessValues = {
     general?: string[];
     others?: string[];
 
+    houseNumber?: string;
+
     open: {
         mon: { from?: string, to?: string },
         tue: { from?: string, to?: string },
@@ -40,6 +45,10 @@ export type MappedFitnessValues = {
         sat: { from?: string, to?: string },
         sun: { from?: string, to?: string }
     },
+    owner?: string;
+    _id?: string;
+
+    pictureIds?: { [name: string]: string }
 
 } & Partial<
     Omit<Fitness, "contact" | "filters" | "pictures" | "agreement" | "topped" | "approved" | "views" | "popularity" | "open" | "owner">

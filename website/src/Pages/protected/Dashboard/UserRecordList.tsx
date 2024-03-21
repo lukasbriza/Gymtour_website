@@ -9,10 +9,10 @@ import { routes } from "src/config"
 import { UserRecordListProps } from "./_types"
 
 export const UserRecordList: FC<UserRecordListProps> = (props) => {
-    const { loading, fitnesses, coaches } = props
+    const { loading, fitnesses, coaches, refetch } = props
     const { t } = useTranslation()
     const navigate = useNavigate()
-    const { showModal } = useModal()
+    const { showModal, closeModal } = useModal()
     const { success, error } = usePopUpContext()
     const { userId } = useUserContext()
     const { fetchCall: removeCoach } = useServerdataLazy(removeCoaches)
@@ -39,6 +39,8 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
                             "dashboardPage.recordList.popup.removeCoach" :
                             "dashboardPage.recordList.popup.removeFitness", { id: id })
                     })
+                    closeModal()
+                    refetch()
                     return
                 }
                 error({
@@ -47,6 +49,7 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
                         "dashboardPage.recordList.popup.removeCoachFailure" :
                         "dashboardPage.recordList.popup.removeFitnessFailure")
                 })
+                closeModal()
             }
         })
     }
@@ -66,14 +69,13 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
 
     return (
         <>
-            {
-                !noFitnesses &&
-                <section className={clsx(["userRecordList", "dashBoardTable", "dashBoardSection", "glassMorphism"])}>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td colSpan={5}><h2>{t("common.fitness")}</h2></td>
-                            </tr>
+            <section className={clsx(["userRecordList", "dashBoardTable", "dashBoardSection", "glassMorphism"])}>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colSpan={5}><h2>{t("common.fitness")}</h2></td>
+                        </tr>
+                        {!noFitnesses &&
                             <LoadingWrapper loading={loading} scale={1.5} className="loading">
                                 <tr className="rowHeader">
                                     <td>{t("common.name")}</td>
@@ -99,30 +101,28 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
                                     })
                                 }
                             </LoadingWrapper>
-                            <tr>
-                                <td colSpan={5} className={"addButtonRow"} align="center">
-                                    <Button
-                                        modificationClass={"dashBoardTableFitness"}
-                                        initialClass={"buttonInitial"}
-                                        hoverClass={"buttonHover"}
-                                        text={t("common.add")}
-                                        onClick={handleAddButton("fitness")}
-                                    />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-            }
-
-            {
-                !noCoaches &&
-                <section className={clsx(["userRecordList", "dashBoardTable", "dashBoardSection", "glassMorphism"])}>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td colSpan={5}><h2>{t("common.coach")}</h2></td>
-                            </tr>
+                        }
+                        <tr>
+                            <td colSpan={5} className={"addButtonRow"} align="center">
+                                <Button
+                                    modificationClass={"dashBoardTableFitness"}
+                                    initialClass={"buttonInitial"}
+                                    hoverClass={"buttonHover"}
+                                    text={t("common.add")}
+                                    onClick={handleAddButton("fitness")}
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section className={clsx(["userRecordList", "dashBoardTable", "dashBoardSection", "glassMorphism"])}>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colSpan={5}><h2>{t("common.coach")}</h2></td>
+                        </tr>
+                        {!noCoaches &&
                             <LoadingWrapper loading={loading} scale={1.5} className="loading">
                                 <tr className="rowHeader">
                                     <td>{t("common.name")}</td>
@@ -147,23 +147,23 @@ export const UserRecordList: FC<UserRecordListProps> = (props) => {
                                     })
                                 }
                             </LoadingWrapper>
-                            {showAddCoachButton &&
-                                <tr>
-                                    <td colSpan={5} className={"addButtonRow"} align="center">
-                                        <Button
-                                            modificationClass={"dashBoardTablecoach"}
-                                            initialClass={"buttonInitial"}
-                                            hoverClass={"buttonHover"}
-                                            text={t("common.add")}
-                                            onClick={handleAddButton("coach")}
-                                        />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </section >
-            }
+                        }
+                        {showAddCoachButton &&
+                            <tr>
+                                <td colSpan={5} className={"addButtonRow"} align="center">
+                                    <Button
+                                        modificationClass={"dashBoardTablecoach"}
+                                        initialClass={"buttonInitial"}
+                                        hoverClass={"buttonHover"}
+                                        text={t("common.add")}
+                                        onClick={handleAddButton("coach")}
+                                    />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </section >
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { object, number, date, string, array } from "yup"
+import { object, number, date, string, array, mixed } from "yup"
 import { TFunction } from "i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -18,14 +18,17 @@ import {
     webValidation
 } from "./common";
 
-const pictureYup = object({
-    lastModified: number(),
-    lastModifiedDate: date(),
-    name: string(),
-    size: number(),
-    type: string().optional(),
-    webkitRelativPath: string().optional()
+const pictureYup = (t: TFunction) => mixed().test("file-test", t("validation.invalidFileFormat"), (value) => {
+    if (typeof value === "object") {
+        const file = value as File
+        const resolver = !!(file.name &&
+            file.size &&
+            file.type)
+        return resolver
+    }
+    return false
 })
+
 
 const contactValidation = (t: TFunction) => {
     return {
@@ -44,9 +47,9 @@ const contactValidation = (t: TFunction) => {
 
 const picturesValidation = (t: TFunction) => {
     return {
-        mainPicture: pictureYup.required(t("validation.required")),
-        cardPicture: pictureYup.required(t("validation.required")),
-        othersPictures: array().of(pictureYup).optional()
+        mainPicture: pictureYup(t).required(t("validation.required")),
+        cardPicture: pictureYup(t).required(t("validation.required")),
+        othersPictures: array().of(pictureYup(t)).optional()
     }
 }
 
@@ -67,8 +70,8 @@ const coachSchema = (t: TFunction) => {
         priceLevel: requiredNumberValidation(t),
 
         gender: string().required(t("validation.required")),
-        specialization: multipleChoiceFilterValidation(),
-        others: multipleChoiceFilterValidation(),
+        specialization: multipleChoiceFilterValidation(t),
+        others: multipleChoiceFilterValidation(t),
 
         ...contactValidation(t),
         descriptionFull: fullDescriptionValidation(t),
@@ -79,7 +82,7 @@ const coachSchema = (t: TFunction) => {
 const fitnessSchema = (t: TFunction) => {
     return object({
         terms: requiredBooleanValidation(t, t("validation.noAgreement")),
-        dataProcessingForPropagation: optionalBooleanValidation(t),
+        dataProcessingForPropagation: requiredBooleanValidation(t, t("validation.noAgreement")),
 
         name: noSpecialCharactersValidation(requiredMinMaxValidation(t, 1, 200), t),
         IN: inValidation(t),
@@ -100,18 +103,18 @@ const fitnessSchema = (t: TFunction) => {
             wed: OpenObject(t)
         }),
 
-        general: multipleChoiceFilterValidation(),
-        equipment: multipleChoiceFilterValidation(),
-        others: multipleChoiceFilterValidation(),
+        general: multipleChoiceFilterValidation(t),
+        equipment: multipleChoiceFilterValidation(t, true),
+        others: multipleChoiceFilterValidation(t),
 
-        ...contactValidation(t),
         descriptionFull: fullDescriptionValidation(t),
+        ...contactValidation(t),
         ...picturesValidation(t)
     })
 }
 
 export const modifyCoachFormValidationSchema = (t: TFunction) => {
-    return yupResolver(coachSchema(t))
+    return yupResolver<any>(coachSchema(t))
 }
 
 export const modifyFitnessFormValidationSchema = (t: TFunction) => {

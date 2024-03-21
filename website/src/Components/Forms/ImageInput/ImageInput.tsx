@@ -1,14 +1,15 @@
 import { createPortal } from "react-dom";
-import { ChangeEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { ImageInputProps, ImperativeImageInput } from "./_types";
+import { ChangeEvent, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ImageInputProps } from "./_types";
 import clsx from "clsx";
 import { fadeIn, fadeOff, hasLoaded, hasUnloaded } from "src/animations/_index";
 import { SearchIcon } from "src/components/SVG/_index";
 import { ImagePreview } from "./ImagePreview";
 import { Tooltip } from "src/components";
+import { mergeRefs } from "@lukasbriza/lbui-lib";
 
 
-export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((props, ref) => {
+export const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>((props, ref) => {
     const {
         onChange,
         onFileRemove,
@@ -24,6 +25,7 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
         value,
         allowedFileTypes,
         showPreview = false,
+        errorText = "",
         ...otherProps
     } = props
 
@@ -38,44 +40,51 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
     const [actualFile, setActualFile] = useState<File | null>(value ?? null)
     const [url, setUrl] = useState<string | null | ArrayBuffer>(null)
     const [open, setOpen] = useState<boolean>(false)
-    const [hasFiles, setHasFiles] = useState<boolean | undefined | null>()
 
-    //const hasFiles = inputRef.current?.files && inputRef.current?.files.length > 0
+    const isSupportedType = (fileType?: string) => {
+        if (allowedFileTypes && !allowedFileTypes.includes(fileType ?? "")) {
+            onUnsupportedFileType?.()
+            return false
+        }
+        return true
+    }
 
-    const handleFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
-        onStart?.()
-        const target = event.target as HTMLInputElement
-        const file = target.files && target.files[0]
+    const removeFile = useCallback(() => {
+        if (inputRef.current && actualFile) {
+            onFileRemove?.(actualFile)
+            setActualFile(null)
+            inputRef.current.value = ""
+        }
+    }, [actualFile, onFileRemove])
+
+
+    const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = (event.target as HTMLInputElement).files?.[0] ?? null
         const fileType = file?.type
-        if (file) {
-            if (allowedFileTypes && !allowedFileTypes.includes(fileType ?? "")) {
-                onUnsupportedFileType?.()
-                return
-            }
-            setActualFile(file)
-            onSuccess?.(file)
+        const hasFile = file && isSupportedType(fileType) && event.target.files?.length && event.target.files?.length > 0
+        if (hasFile) {
             onChange?.(file)
+            setActualFile(file)
             hasLoaded(line1.current, line2.current)
             showPreview && fadeIn(searchRef.current)
             return
         }
+        onChange?.(undefined)
         onNoFile?.()
     }
 
-    const handleFileRemove = useCallback(() => {
-        if (inputRef.current?.files) {
+    const handleFileRemove = () => {
+        if (inputRef.current && actualFile) {
             hasUnloaded(line1.current, line2.current)
-            if (showPreview) {
-                fadeOff(searchRef.current).set(searchRef.current, { clearProps: "all" }).then(() => {
-                    setTimeout(() => {
-                        setActualFile(null)
-                    }, 500)
-                })
-            }
-            onFileRemove?.(inputRef.current?.files[0])
-            inputRef.current.value = ""
+            showPreview && fadeOff(searchRef.current).set(searchRef.current, { clearProps: "all" }).then(() => {
+                setTimeout(() => {
+                    removeFile()
+                    const ev = new Event("change", { bubbles: true })
+                    inputRef.current?.dispatchEvent(ev)
+                }, 500)
+            })
         }
-    }, [onFileRemove, showPreview])
+    }
 
     const handleButtonClick = () => inputRef.current && inputRef.current.click()
 
@@ -85,18 +94,6 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
         }
         setOpen((value) => !value)
     }
-
-    useImperativeHandle(ref, () => {
-        return {
-            current: inputRef.current,
-            file: actualFile,
-            removeFile: handleFileRemove
-        }
-    }, [actualFile, handleFileRemove])
-
-    useEffect(() => {
-        setHasFiles(inputRef.current?.files && inputRef.current?.files.length > 0)
-    }, [inputRef])
 
     useEffect(() => {
         reader.addEventListener("load", () => setUrl(reader.result))
@@ -126,7 +123,7 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
             <div className={clsx(["imageBtnWrapper", className])} {...otherProps} id={id}>
                 <button
                     data-tooltip-id={tooltipId}
-                    onClick={() => hasFiles ? handleFileRemove() : handleButtonClick()}
+                    onClick={() => actualFile ? handleFileRemove() : handleButtonClick()}
                     type="button"
                     className={clsx(["imageInput", "glassMorphism"])}
                 >
@@ -151,7 +148,7 @@ export const ImageInput = forwardRef<ImperativeImageInput, ImageInputProps>((pro
                     type="file"
                     name={name}
                     style={{ display: "none" }}
-                    ref={inputRef}
+                    ref={mergeRefs(ref, inputRef)}
                 />
             </div>
             {showPreview && open && createPortal(<ImagePreview url={url} open={open} handleClose={() => setOpen(false)} />, document.body)}

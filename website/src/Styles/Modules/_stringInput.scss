@@ -26,11 +26,15 @@
     height: 60px;
     width: inherit;
     border-radius: 3px;
+    transition: background 0.25s ease-out;
     background: rgba(255, 255, 255, 0.253);
   }
 }
 
 .stringInputRoot:hover {
+  input {
+    background: rgb(75, 75, 75);
+  }
   label {
     color: white;
   }

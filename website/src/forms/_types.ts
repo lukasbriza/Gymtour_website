@@ -48,6 +48,7 @@ export type HeaderSectionProps = {
 type ModifyForProviderBase = {
     children: ReactNode;
     newRecord: boolean;
+    owner?: string;
 }
 
 export type ModifyCoachFormProviderProps = ModifyForProviderBase & {
@@ -78,6 +79,10 @@ export type ModifyFitnessFrormProps = { type: "fitness" } & FitnessInformationSe
 export type SubmitSectionProps = {
     onBackClick: () => void
     submitText: string
+}
+
+export type PictureSectionProps = {
+    onPictureRemove: (id: string) => void
 }
 
 export type ModifySubHeaderProps = {

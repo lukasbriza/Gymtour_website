@@ -34,7 +34,7 @@ export type Fitness = {
   street: string;
   town: number;
   region: number;
-  IN: number;
+  IN: string;
   priceLevel: number;
   contact: Contact;
   filters: FitnessFilterType;
@@ -86,7 +86,7 @@ export type RemoveFitnessesResponse = CustomErrorResponseObject<RemoveFitnesses>
 export type UpdateFitnessBody = Partial<Fitness> & { _id: string };
 export type UpdateFitnessResponse = CustomErrorResponseObject<boolean>;
 
-export type AddFitnessBody = Partial<Fitness> & { owner: string };
+export type AddFitnessBody = Partial<Fitness> & { owner?: string };
 export type AddFitnessResponse = CustomErrorResponseObject<boolean>;
 
 export type AddFitnessLikeQuery = {

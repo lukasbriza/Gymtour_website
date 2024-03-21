@@ -1233,6 +1233,10 @@ body {
   margin-top: 20px;
 }
 
+.fitnessInformationInputs {
+  margin-top: 30px;
+}
+
 .coachInformationInputs {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -2822,9 +2826,13 @@ body {
   height: 60px;
   width: inherit;
   border-radius: 3px;
+  transition: background 0.25s ease-out;
   background: rgba(255, 255, 255, 0.253);
 }
 
+.stringInputRoot:hover input {
+  background: rgb(75, 75, 75);
+}
 .stringInputRoot:hover label {
   color: white;
 }
@@ -3016,6 +3024,10 @@ body {
   display: flex;
   -moz-column-gap: 20px;
        column-gap: 20px;
+}
+
+.pictureError {
+  padding-left: 0px;
 }
 
 .timeInputWrapper {

@@ -16,30 +16,36 @@ const Dashboard: FC = () => {
   const { t } = useTranslation();
   const { userId, userObject } = useUserContext();
   const { data: filterData, loading: filterLoading } = useServerData(getFilter);
-  const { data: coaches, loading: coachesLoading } = useServerData(getCoaches, { owner: "64288f2967746143ec840e34", });
-  const { data: fitnesses, loading: fitnessesLoading } = useServerData(getFitnesses, { owner: "64288f2967746143ec840e34" });
+  const { reFetch: refetchCoaches, data: coaches, loading: coachesLoading } = useServerData(getCoaches, { owner: userId, });
+  const { reFetch: refetchFitnessess, data: fitnesses, loading: fitnessesLoading } = useServerData(getFitnesses, { owner: userId });
   const { fetchCall: getLikedCoaches, data: likedCoaches } =
     useServerdataLazy(getCoaches);
   const { fetchCall: getLikedFitnesses, data: likedFitnessess } =
     useServerdataLazy(getFitnesses);
 
+  const handleRefetch = () => {
+    refetchCoaches()
+    refetchFitnessess()
+  }
+
   const isLoading = coachesLoading || fitnessesLoading || filterLoading;
 
   useEffectOnce(() => {
     if (userObject?.coachOwned?.length && userObject?.coachOwned.length > 0) {
-      getLikedCoaches({
-        id: userObject?.coachOwned,
-        projection: "name region town",
-      });
+      /* getLikedCoaches({
+         id: userObject?.coachOwned,
+         projection: "name region town",
+       });*/
     }
     if (
       userObject?.fitnessOwned?.length &&
       userObject?.fitnessOwned.length > 0
     ) {
-      getLikedFitnesses({
-        id: userObject?.fitnessOwned,
-        projection: "name region town",
-      });
+      //TODO: doimplementovat
+      /* getLikedFitnesses({
+         id: userObject?.fitnessOwned,
+         projection: "name region town",
+       });*/
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   });
@@ -61,6 +67,7 @@ const Dashboard: FC = () => {
           fitnesses={fitnesses?.data ?? []}
           coaches={coaches?.data ?? []}
           loading={isLoading}
+          refetch={handleRefetch}
         />
         <UserLikesList
           filter={filterData?.data ?? undefined}

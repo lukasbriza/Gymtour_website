@@ -4,7 +4,7 @@ window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "AMDRMPATH": "C:\\Program Files\\AMD\\RyzenMaster\\",
   "APPDATA": "C:\\Users\\lukas\\AppData\\Roaming",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_20280_SDMLPBYXEGMINUDA",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\LOCAL\\crashpad_21188_TYFYSUNMLMYORFOF",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",

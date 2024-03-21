@@ -10,27 +10,27 @@ export const requiredString = (max = maxLB) => string().max(max).required();
 export const numberValidation = (opt = false, limit?: number) =>
   opt
     ? string()
-        .optional()
-        .test((value: string) => {
-          const number = Number(value);
-          if (isNaN(number) && value !== undefined) {
-            return false;
-          }
-          if (limit && value !== undefined) {
-            return !(number > limit);
-          }
-          return true;
-        })
-    : string().test((value: string) => {
+      .optional()
+      .test((value: string) => {
         const number = Number(value);
-        if (isNaN(number)) {
+        if (isNaN(number) && value !== undefined) {
           return false;
         }
-        if (limit) {
+        if (limit && value !== undefined) {
           return !(number > limit);
         }
         return true;
-      });
+      })
+    : string().test((value: string) => {
+      const number = Number(value);
+      if (isNaN(number)) {
+        return false;
+      }
+      if (limit) {
+        return !(number > limit);
+      }
+      return true;
+    });
 export const optionalNumber = (limit?: number) => numberValidation(true, limit);
 
 export const requiredNumber = (limit?: number) => numberValidation(false, limit);
@@ -40,13 +40,14 @@ export const descriptionValidation = (required = true) =>
 
 export const telValidation = () =>
   number().test((value) => {
-    if (value.toString().length > 9 || value.toString().length < 9) {
+
+    if (value && (value.toString().length > 9 || value.toString().length < 9)) {
       return false;
     }
     return true;
   });
 
-export const optionalTelValidation = () => telValidation().optional();
+export const optionalTelValidation = () => telValidation().optional().nullable();
 
 export const optionalStringArray = () => array(optionalString()).optional();
 export const requiredStringArray = () => array(requiredString()).required();
@@ -57,11 +58,11 @@ export const urlValidation = () =>
     "Enter correct url!"
   );
 
-export const optionalUrlValidation = () => urlValidation().optional();
+export const optionalUrlValidation = () => urlValidation().optional().nullable();
 
 export const emailValidation = () => string().email();
 export const requiredEmailvalidaion = () => emailValidation().required();
-export const optionalEmailvalidation = () => emailValidation().optional();
+export const optionalEmailvalidation = () => emailValidation().optional().nullable();
 
 export const contactValidation = () =>
   object({
@@ -89,68 +90,69 @@ export const optionalContactValidation = () =>
     youtube: optionalUrlValidation(),
   }).optional();
 
+const OpenObject = () => {
+  const getHours = (val: string) => Number(val.split(":")[0])
+  const getMinutes = (val: string) => Number(val.split(":")[1])
+
+  return object({
+    from: string().test("openHourValidation-from", (value, context) => {
+      console.log("from:", value)
+      if (value === null || context.parent.to === null) {
+        return true
+      }
+      const fromValue = new Date(2000, 10, 10, getHours(value), getMinutes(value), 0, 0)
+      const toValue = new Date(2000, 10, 10, getHours(context.parent.to), getMinutes(context.parent.to), 0, 0)
+      if (fromValue > toValue) {
+        return false
+      }
+      return true
+    }).test("fromToFilled-from", (value, context) => {
+      if (value !== null && context.parent.to === null) {
+        return false
+      }
+      return true
+    }).nullable(),
+    to: string().test("openHourValidation-to", (value, context) => {
+      console.log("to:", value)
+      if (value === null || context.parent.from === null) {
+        return true
+      }
+
+      const fromValue = new Date(2000, 10, 10, getHours(context.parent.from), getMinutes(context.parent.from), 0, 0)
+      const toValue = new Date(2000, 10, 10, getHours(value), getMinutes(value), 0, 0)
+      if (toValue < fromValue) {
+        return false
+      }
+      return true
+    }).test("fromToFilled-to", (value, context) => {
+      if (value !== null && context.parent.from === null) {
+        return false
+      }
+      return true
+    }).nullable()
+  })
+}
+
 export const openHoursValidation = () =>
   object({
-    mon: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }),
-    tue: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }),
-    wed: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }),
-    thu: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }),
-    fri: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }),
-    sat: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }),
-    sun: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }),
+    mon: OpenObject(),
+    tue: OpenObject(),
+    wed: OpenObject(),
+    thu: OpenObject(),
+    fri: OpenObject(),
+    sat: OpenObject(),
+    sun: OpenObject(),
   });
 
 export const optionalOpenHoursValidation = () =>
   object({
-    mon: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }).optional(),
-    tue: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }).optional(),
-    wed: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }).optional(),
-    thu: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }).optional(),
-    fri: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }).optional(),
-    sat: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }).optional(),
-    sun: object({
-      from: requiredNumber(24).nullable(),
-      to: requiredNumber(24).nullable(),
-    }).optional(),
+    mon: OpenObject().optional(),
+    tue: OpenObject().optional(),
+    wed: OpenObject().optional(),
+    thu: OpenObject().optional(),
+    fri: OpenObject().optional(),
+    sat: OpenObject().optional(),
+    sun: OpenObject().optional(),
   }).optional();
 
 export const agreementValidation = () =>
@@ -166,3 +168,11 @@ export const optionalAgreementValidation = () =>
   }).optional();
 export const optionalBoolean = () => boolean().optional();
 export const optionalDate = () => date().optional();
+
+const inValidationFn = (value: string): boolean => {
+  const arr = value.split("")
+  const validationArr = arr.map((val) => !isNaN(Number(val)))
+  return !validationArr.includes(false)
+}
+
+export const INValidation = (required = true) => required ? string().test("wrong_IN_format", inValidationFn).required() : string().test("wrong_IN_format", inValidationFn).optional()
